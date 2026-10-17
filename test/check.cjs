@@ -79,7 +79,7 @@ async function targets(){try{return await(await fetch(`http://127.0.0.1:${PORT}/
     if(!L.img||L.href!=='hanh-trinh.html')fail(`${where}: thiếu ảnh có alt hoặc nút không trỏ tới hanh-trinh.html`);
     if(L.gone.length)fail(`${where}: còn phần đã xoá: ${L.gone}`);
     if(L.oldTokens.length||L.three)fail(`${where}: còn token/mã của bản cũ: ${L.oldTokens} ${L.three}`);
-    if(L.fams.some(f=>!['Newsreader','Be Vietnam Pro','Space Mono'].includes(f)))fail(`${where}: font ngoài 3 họ: ${L.fams}`);
+    if(L.fams.some(f=>!['Playfair Display','Lora'].includes(f)))fail(`${where}: font ngoài 3 họ: ${L.fams}`);
     if(!L.italics.includes('em'))fail(`${where}: "tháng" phải nghiêng`);
     if(L.cta.height<48)fail(`${where}: nút < 48px`);
     if(L.ctaBg!=='rgb(138, 36, 22)'||L.ctaRadius>2)fail(`${where}: nút phải đỏ son, bo ≤ 2px: ${L.ctaBg} ${L.ctaRadius}px`);
@@ -90,55 +90,104 @@ async function targets(){try{return await(await fetch(`http://127.0.0.1:${PORT}/
   }
   await size(1280,900);
 
-  // 4) TRANG GAME (hanh-trinh.html): vào thẳng màn mở chương 1, không đọc/ghi tiến độ
+  // 4) TRANG GAME (hanh-trinh.html): ghép tình huống – sự kiện. Vào thẳng màn mở chương 1, không đọc/ghi tiến độ.
   await call('Page.navigate',{url:GAME});await wait(700);
   await rules('màn mở chương');
   if(await ev("!!document.querySelector('.sheet')"))fail('Màn mở chương chưa có tờ bản đồ');
-  if(!await ev("!!document.querySelector('.chapter-intro')"))fail('Thiếu màn mở chương 1');
+  if(!await ev("!!document.querySelector('.chapter-intro')&&!!document.getElementById('mode-class')"))fail('Thiếu màn mở chương 1 hoặc công tắc Lớp học');
+  await ev("window.__go=async(i)=>{const D=GAME_DATA,q=s=>document.querySelector(s),w=ms=>new Promise(r=>setTimeout(r,ms));const st=GameDebug.state().stages[i];for(const sl of D.scenes[i].slots){if(st[sl.id].locked)continue;q('.ev[data-card=\"'+sl.correct+'\"]').click();await w(40);q('.slot-drop[data-place=\"'+sl.id+'\"]').click();await w(40);}};window.__put=async(slot,card)=>{const q=s=>document.querySelector(s),w=ms=>new Promise(r=>setTimeout(r,ms));q('.ev[data-card=\"'+card+'\"]').click();await w(40);q('.slot-drop[data-place=\"'+slot+'\"]').click();await w(40);}");
   await click('#chapter-go');
 
   for(let i=0;i<9;i++){
-    if(i===2||i===4){await click('[data-good="false"]');if(!await ev("document.querySelector('.check .stamp')?.textContent==='Chưa đúng'"))fail('Thiếu dấu CHƯA ĐÚNG');await click('#next');await wait(100);await click('#chapter-go');}
+    if(i===2||i===4){await click('#next');await wait(150);await click('#chapter-go');}
     await wait(1100); // chờ hiệu ứng trượt vào xong
-    if(i===0){await rules('màn chơi');if(!await ev("!!document.querySelector('.sheet')&&!document.getElementById('strip').hidden"))fail('Màn chơi thiếu tờ bản đồ hoặc dải lực lượng');const comp=await ev("document.getElementById('compass-btn').getAttribute('aria-label')");if(!/trên 4 điều kiện/.test(comp))fail('La bàn thiếu aria-label: '+comp);await click('#compass-btn');if(await ev("document.getElementById('compass-panel').hidden"))fail('Bấm la bàn không mở bảng 4 hướng');await click('#compass-btn');if(await ev("document.querySelectorAll('.route-item.is-now').length")!==1)fail('Tuyến phải có đúng 1 mốc đang ở');}
-    await click('[data-card="0"]');await click('[data-card="1"]');
-    // Thẻ thứ 3 không được làm mờ khi đã chọn đủ 2 thẻ
-    if(await ev("getComputedStyle(document.querySelector('[data-card=\"2\"]')).opacity")!=='1')fail('Thẻ thứ 3 bị làm mờ');
-    if(i===7){
-      await click('[data-card="1"]');await click('[data-card="2"]');
-      if(await ev("!!document.querySelector('.stamp')"))fail('Thẻ bẫy bị lộ trước khi triển khai');
-      await click('#commit');await wait(400);
-      if(!await ev("document.querySelector('[data-card=\"2\"] .stamp')?.textContent.includes('Sai lầm')"))fail('Thiếu dấu SAI LẦM LỊCH SỬ');
-      if(!await ev("document.getElementById('feedback').textContent.includes('Đảng đã chọn khác')"))fail('Thiếu phản hồi chọn sai');
-      await size(360,780);await shot(path.join(__dirname,'..','archive','mobile-check.png'));await size(1280,900);
-      await click('#commit'); // Xem lại và chọn lại
-      await click('[data-card="0"]');await click('[data-card="1"]');
-    }
-    await click('#commit');await wait(150);
+    if(process.env.DBG)console.log('loop',i,await ev("GameDebug.state().index+' '+document.querySelectorAll('.ev').length+' '+!!document.querySelector('.chapter-break')"));
+    const st=()=>ev("JSON.parse(JSON.stringify(GameDebug.state().stages["+i+"]))");
     if(i===0){
-      if(!await ev("!!document.querySelector('.deltas .delta')"))fail('Thiếu nhãn thay đổi chỉ số');
+      await rules('màn chơi');
+      await click('#more');if(await ev("document.querySelectorAll('#archive details').length")!==1)fail('Hồ sơ giai đoạn phải chỉ có hồ sơ của chặng hiện tại');
+      await ev("document.getElementById('archive').close()");
+      await click('#records');if(await ev("document.querySelectorAll('#archive details').length")!==1)fail('Chặng 1: hồ sơ lịch sử không được lộ các giai đoạn sau');
+      await ev("document.getElementById('archive').close()");
+      if(!await ev("!!document.querySelector('.sheet')&&!document.getElementById('strip').hidden"))fail('Màn chơi thiếu tờ bản đồ hoặc dải album');
+      if(await ev("document.querySelectorAll('.ev').length")!==4||await ev("document.querySelectorAll('.slot[data-slot]').length")!==2||await ev("document.querySelectorAll('button.spot').length")!==2)fail('Chặng phải có 4 thẻ, 2 ô, 2 điểm nóng');
+      if(await ev("document.getElementById('commit').disabled")!==true)fail('Triển khai phải tắt khi chưa đặt đủ thẻ');
+      // sai ở ô A bằng thẻ nhiễu (đặt bằng chạm chọn rồi chạm ô), đúng ở ô B
+      await ev("(async()=>{const s=GAME_DATA.scenes[0];await __put('A',s.cards.find(c=>!c.slot).id);await __put('B',s.slots[1].correct);})()");await wait(400);
+      await click('#commit');await wait(300);
+      const t1=await ev("document.querySelector('.slot[data-slot=\"A\"]').innerText+' '+(document.querySelector('#hints [data-hint-row=\"A\"]')?.innerText||'')");
+      if(!/Chưa phù hợp/i.test(t1)||!/năm/.test(t1))fail('Gợi ý nấc 1 thiếu: '+t1);
+      if(!await ev("document.querySelector('.slot[data-slot=\"B\"]').classList.contains('is-locked')"))fail('Ô đúng phải khóa');
+      if(await ev("document.querySelectorAll('.tray .ev').length")!==3)fail('Thẻ nhiễu phải quay về rổ');
+      await ev("document.querySelector('[data-retry=\"A\"]').click()");
+      await ev("__put('A',GAME_DATA.scenes[0].slots[0].correct)");await wait(200);
+    }else if(i===1){
+      await click('#skip');await wait(300);
+    }else if(i===2){ // sai 3 lần bằng cách đặt chéo hai thẻ đúng → nấc 1, nấc 2, nấc 3 (hiện đáp án)
+      for(let k=0;k<3;k++){
+        await ev("(async()=>{const s=GAME_DATA.scenes[2];const open=['A','B'].filter(id=>!GameDebug.state().stages[2][id].locked);const d=s.cards.filter(c=>!c.slot&&!document.querySelector('.tray .ev[data-card=\""+"'+c.id+'"+"\"]')?.classList.contains('is-faded'));for(const id of open){const c=(d.shift()||s.cards.find(c=>c.slot&&c.slot!==id));await __put(id,c.id);}})()");await wait(300);
+        await click('#commit');await wait(300);
+        if(k===1&&!await ev("document.querySelectorAll('.tray .ev.is-faded').length>=1"))fail('Nấc 2 phải làm mờ thẻ nhiễu');
+      }
+      const s2=await st();
+      if(s2.A.how!=='revealed'||s2.A.pts!==0)fail('Nấc 3 phải hiện đáp án 0 điểm: '+JSON.stringify(s2.A));
+      if(!await ev("!!document.querySelector('[data-why=\"A\"]')"))fail('Thiếu nút Vì sao?');
+    }else{
+      await ev("__go("+i+")");await wait(700);
+    }
+    if(!await ev("GameDebug.state().stages["+i+"].A.locked&&GameDebug.state().stages["+i+"].B.locked")){await click('#commit');await wait(1300);}
+    if(process.env.DBG)console.log('after',i,await ev("JSON.stringify(GameDebug.state().stages["+i+"])"));
+    if(i===0){
+      await wait(900);
+      if(!await ev("!!document.querySelector('.spot.is-lit')"))fail('Đúng mà cảnh không đổi (thiếu điểm nóng sáng)');
+      if(await ev("document.querySelector('.ab--ok,.ab--weak')===null"))fail('Thẻ đúng chưa vào album');
       // Ở 360px: không cuộn ngang, vùng bấm ≥ 44px, chữ thân ≥ 16px
-      await size(360,780);await wait(200);
+      await size(360,780);await wait(300);
       if(await ev('document.documentElement.scrollWidth>innerWidth'))fail('Cuộn ngang ở 360px');
       const small=await ev("[...document.querySelectorAll('button')].filter(b=>b.offsetParent&&(b.getBoundingClientRect().height<44||b.getBoundingClientRect().width<44)).map(b=>b.id||b.className||b.textContent.trim().slice(0,20))");
       if(small.length)fail('Vùng bấm < 44px: '+small.join(', '));
-      const tiny=await ev("[...document.querySelectorAll('.briefing p,.feedback p:not(.deltas)')].filter(p=>parseFloat(getComputedStyle(p).fontSize)<16).length");
-      if(tiny)fail('Chữ thân < 16px');
-      await size(1280,900);
+      const tiny=await ev("[...document.querySelectorAll('.brief,.slot-situation,.feedback p,.hint-text p')].filter(p=>p.offsetParent&&parseFloat(getComputedStyle(p).fontSize)<16).map(p=>p.className)");
+      if(tiny.length)fail('Chữ thân < 16px: '+tiny.join(','));
+      await shot(path.join(__dirname,'..','archive','mobile-check.png'));await size(1280,900);await wait(200);
     }
-    await click('#commit');await wait(150); // tiếp tục
+    await click('#commit');await wait(150); // tiếp tục (khi đã xong chặng)
   }
-  const progress=await ev("JSON.parse(JSON.stringify(GameDebug.state()))");
+  await wait(1700);
+  const run=await ev("JSON.parse(JSON.stringify(GameDebug.state()))");
   if(await ev('localStorage.length'))fail('Trang game không được ghi localStorage');
-  if(progress.history.length!==9||!progress.finished)fail('Chưa đi hết hành trình');
-  if(JSON.stringify(progress.mistakes)!=='["7-2"]')fail('state.mistakes sai: '+JSON.stringify(progress.mistakes));
-  await wait(400);await altCheck('màn kết');await rules('màn kết');
+  if(!run.finished)fail('Chưa đi hết hành trình');
+  const shown=await ev("document.getElementById('final-score').textContent");
+  if(shown!=='135')fail('Điểm cuối phải 135 (5 + 10 + 0 + 0 + 120), thấy '+shown);
+  if(await ev("document.querySelectorAll('.review li').length")!==5)fail('Danh sách cần ôn phải có 5 mục');
+  if(await ev("document.querySelectorAll('.tl-list--full li').length")!==18)fail('Album cuối phải có 18 thẻ');
+  await altCheck('màn kết');await rules('màn kết');
   if(await ev("document.querySelectorAll('.route-item.is-done').length")!==9)fail('Màn kết: tuyến 9 chặng phải sáng đủ');
-  if(!await ev("!!document.querySelector('.compass-label')"))fail('Màn kết: la bàn phải chỉ Tháng Tám');
   await shot(path.join(__dirname,'..','archive','end-check.png'));
-  await click('#records');if(!await ev("document.getElementById('archive').open"))fail('Không mở được hồ sơ');
+  await click('#end-records');if(!await ev("document.getElementById('archive').open&&document.querySelectorAll('#archive details').length===9"))fail('Màn kết: phải mở đủ 9 hồ sơ');
   await ev("document.querySelectorAll('#archive details').forEach(d=>d.open=true)");await altCheck('hồ sơ');
+  await ev("document.getElementById('archive').close()");
+
+  // 5) CHẾ ĐỘ LỚP HỌC (?mode=class): thẻ đánh số 1–4, sai không tự gợi ý (MC bấm), phiếu ghi điểm
+  await call('Page.navigate',{url:GAME+'?mode=class'});await wait(900);
+  if(await ev("document.body.dataset.mode")!=='class')fail('?mode=class không bật chế độ Lớp học');
+  await ev("window.__put=async(slot,card)=>{const q=s=>document.querySelector(s),w=ms=>new Promise(r=>setTimeout(r,ms));q('.ev[data-card=\"'+card+'\"]').click();await w(40);q('.slot-drop[data-place=\"'+slot+'\"]').click();await w(40);}");
+  await click('#chapter-go');await wait(1300);
+  const nums=await ev("[...document.querySelectorAll('.tray .ev-n')].map(e=>e.textContent).join('')");
+  if(nums!=='1234')fail('Thẻ phải đánh số 1–4: '+nums);
+  await ev("(async()=>{const s=GAME_DATA.scenes[0];await __put('A',s.cards.find(c=>!c.slot).id);await __put('B',s.slots[1].correct);})()");await wait(400);
+  await click('#commit');await wait(400);
+  const cm=await ev("document.querySelector('.slot[data-slot=\"A\"]').innerText+' '+(document.querySelector('#hints [data-hint-row=\"A\"]')?.innerText||'')");
+  if(!/Chưa phù hợp/i.test(cm)||/năm \d{4}/.test(cm))fail('Lớp học: không được tự hiện gợi ý: '+cm);
+  if(!await ev("!!document.querySelector('[data-hint=\"A\"]')&&!!document.querySelector('[data-reveal=\"A\"]')"))fail('Lớp học: thiếu nút Đọc gợi ý / Hiện đáp án cho MC');
+  await click('[data-hint="A"]');await wait(200);
+  if(!/năm/.test(await ev("document.querySelector('#hints [data-hint-row=\"A\"]').innerText")))fail('MC bấm Đọc gợi ý mà không có gợi ý thời điểm');
+  await click('#sheet-btn');await wait(300);
+  if(!await ev("document.getElementById('scoresheet').open&&document.querySelectorAll('.scoretable tbody tr').length===9"))fail('Phiếu ghi điểm phải mở với 9 hàng chặng');
+  await ev("(()=>{const i=document.querySelector('input[data-team=\"0\"]');i.value='10';i.dispatchEvent(new Event('input',{bubbles:true}));})()");
+  if(await ev("document.querySelector('[data-sum=\"0\"]').textContent")!=='10')fail('Phiếu ghi điểm không tự cộng tổng');
+  await ev("document.getElementById('scoresheet').close()");
+  await altCheck('lớp học');
   if(errors.length)fail(errors.join(';'));
-  console.log('PASS: landing intro.pptx (nội dung đúng, không còn cờ/WebGL/hiệu ứng cũ, 3 họ font, nút đỏ son ≥ 48px, vừa 1 màn hình ở 1440×900/1366×768/390×844, 2 nút điều khiển 40px có aria, không localStorage); game vào thẳng chương 1, không lưu tiến độ; 2 lớp vật liệu (không chữ đỏ son trên nền phòng, không --lamp trên tờ bản đồ, chữ uốn cung có bản chữ thường); tuyến 9 chặng; la bàn; ảnh trong content.js có thật và có alt; mọi <img> có alt; không có transition trên thuộc tính bố cục; 9 chặng, màn mở chương, thẻ bẫy chỉ lộ sau khi triển khai, chọn lại ở chặng 8, mistakes, dấu CHƯA ĐÚNG, nhãn chỉ số, 360px (không cuộn ngang, vùng bấm ≥ 44px, chữ thân ≥ 16px), hồ sơ, không lỗi runtime');
+  console.log('PASS: landing; game ghép tình huống – sự kiện: 4 thẻ/2 ô/2 điểm nóng, gợi ý nấc 1–3, làm mờ, khóa ô, bỏ qua, album, cảnh đổi khi đúng, điểm cuối và danh sách ôn, 360px không cuộn ngang; chế độ Lớp học (thẻ 1–4, MC tự bấm gợi ý, phiếu ghi điểm); không localStorage; quy tắc màu.');
   ws.close();if(chrome)chrome.kill();else await call('Browser.close').catch(()=>{});
 })().catch(e=>{console.error(e);process.exit(1);});

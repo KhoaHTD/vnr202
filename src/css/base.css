@@ -19,7 +19,7 @@ body {
 /* --- Quầng đèn bàn ---
    Nằm sau mọi nội dung. Tâm quầng được game.js đặt (--ly) vào chỗ cần đọc: khu chọn thẻ ở màn chơi,
    khối kết quả ở màn tiết lộ, ảnh ở trang chủ / màn mở chương. Dịch bằng transform trong 600ms.
-   Cả 4 hướng la bàn sáng: data-bright nâng quầng lên một nấc. */
+   Màn kết: data-bright nâng quầng lên một nấc. */
 #lamp-wrap { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
 #lamp {
   position: absolute;
@@ -59,7 +59,7 @@ a { color: var(--lamp); }
 
 /* --- Nút: vùng bấm tối thiểu 44px. Mặc định cho nền phòng; trên tờ bản đồ đổi màu ở dưới --- */
 button { font: inherit; color: inherit; cursor: pointer; touch-action: manipulation; }
-button:where(:not(.card)) {
+button:where(:not(.card,.ev)) {
   min-height: 44px;
   padding: var(--s2) 20px;
   background: transparent;
@@ -67,9 +67,9 @@ button:where(:not(.card)) {
   border-radius: var(--radius);
   transition: transform var(--dur-1) var(--ease);
 }
-button:where(:not(.card)):hover:not(:disabled) { background: color-mix(in srgb, var(--parchment) 10%, transparent); }
-button:where(:not(.card)):active:not(:disabled) { transform: translateY(1px); }
-button:where(:not(.card)):disabled { cursor: default; opacity: .55; }
+button:where(:not(.card,.ev)):hover:not(:disabled) { background: color-mix(in srgb, var(--parchment) 10%, transparent); }
+button:where(:not(.card,.ev)):active:not(:disabled) { transform: translateY(1px); }
+button:where(:not(.card,.ev)):disabled { cursor: default; opacity: .55; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 
 /* Nút chính trên NỀN PHÒNG (trang chủ, màn mở chương): nền --lamp, chữ --room (8,2:1). Đỏ son không dùng ở đây. */
@@ -87,12 +87,12 @@ button:where(:not(.card)):disabled { cursor: default; opacity: .55; }
 .primary:disabled { background: transparent; border-color: color-mix(in srgb, var(--parchment-soft) 50%, transparent); color: var(--parchment-soft); opacity: 1; }
 .actions { display: flex; gap: var(--s3); flex-wrap: wrap; margin-top: var(--s4); }
 
-/* Nút chỉ có biểu tượng (nút âm thanh, la bàn): đúng 44×44px */
+/* Nút chỉ có biểu tượng (nút âm thanh): đúng 44×44px */
 .icon-btn { display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0 !important; }
 
 /* --- Đầu trang: nền phòng, chữ sans 14–15px. --- */
 .top, main { position: relative; z-index: 1; }
-.strip { position: relative; z-index: 5; } /* nằm trên tờ bản đồ để bảng la bàn không bị che */
+.strip { position: relative; z-index: 5; } /* nằm trên tờ bản đồ để chú giải ô album không bị che */
 .top {
   max-width: 1440px;
   margin: 0 auto;
@@ -128,7 +128,7 @@ main { max-width: 1440px; margin: 0 auto; padding: var(--s3) 4.5% 72px; }
 [data-reveal].is-in { opacity: 1; }
 
 /* Người dùng bật "giảm chuyển động": mọi hiệu ứng rút còn 1ms (chỉ còn hiện ra),
-   ảnh hiện ngay ở trạng thái cuối, la bàn không xoay, tờ bản đồ không trượt. */
+   ảnh hiện ngay ở trạng thái cuối, tờ bản đồ không trượt. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after, ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) {

@@ -1,3 +1,5 @@
+> **Lưu ý (cơ chế mới):** game ghép tình huống – sự kiện không còn câu hỏi cuối chương (`QUESTIONS` đã bỏ; màn cuối chương nay là tổng kết dòng thời gian). Các đề xuất dưới đây chỉ còn giá trị làm câu hỏi thưởng hoặc nội dung ôn tập, và **chưa được nhóm duyệt**.
+
 # Đề xuất câu hỏi cuối chương (chờ nhóm duyệt)
 
 Câu hỏi hiện tại nằm trong `game.js` (hằng `QUESTIONS`). File này **chỉ là đề xuất**, chưa sửa vào code.
