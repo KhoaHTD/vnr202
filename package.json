@@ -1,0 +1,12 @@
+{
+  "name": "duong-den-thang-tam",
+  "private": true,
+  "scripts": {
+    "start": "node server.cjs",
+    "vendor:gsap": "cp node_modules/gsap/{index.js,gsap-core.js,CSSPlugin.js} vendor/gsap/",
+    "test": "node test/test-logic.cjs && node test/check.cjs"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0"
+  }
+}

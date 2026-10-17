@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Space+Mono:wght@400;700&display=swap');
-
 /* ============================================================
-   TOKENS: toàn bộ màu, chữ, khoảng cách, chuyển động của game.
+   TOKENS: toàn bộ màu, chữ, khoảng cách, chuyển động. Landing (index.html) và game (hanh-trinh.html) dùng chung.
    Component KHÔNG dùng mã màu cứng, chỉ dùng biến ở đây.
 
-   Ý tưởng: người chơi ngồi trong PHÒNG TỐI (hiện đại, phẳng), trải TỜ BẢN ĐỒ cũ
-   (giấy da ngả vàng) dưới ánh đèn bàn. Chỗ sáng nhất là chỗ cần đọc.
+   Ý tưởng: người xem ngồi trong PHÒNG TỐI (hiện đại, phẳng), trải TỜ GIẤY cũ (giấy da ngả vàng) dưới ánh đèn bàn.
+   Quy tắc hai lớp vật liệu: đỏ son (--accent) CHỈ trên giấy; vàng đèn (--lamp) CHỈ trên nền phòng.
    ============================================================ */
 :root {
   /* --- Căn phòng: nền tối phẳng (viền ngoài, đầu trang, dải lực lượng) --- */
@@ -33,14 +31,26 @@
   --edge: .45;                /* độ tối của mép tờ giấy */
   --focus: var(--ink);        /* viền focus: --ink trên tờ bản đồ, --lamp trên nền phòng */
 
-  /* --- Chữ: 3 họ, mỗi họ tối đa 2 độ đậm, đều có subset tiếng Việt --- */
-  --font-body: 'Be Vietnam Pro', system-ui, sans-serif;  /* chữ thân */
-  --font-head: 'Playfair Display', Georgia, serif;        /* tiêu đề; chữ nghiêng = địa danh trên bản đồ */
-  --font-mono: 'Space Mono', 'Courier New', monospace;    /* con dấu, chú thích ảnh */
+  /* --- Hình khối --- */
+  --shadow: 0 1px 2px color-mix(in srgb, var(--stain) 25%, transparent), 0 6px 18px -8px color-mix(in srgb, var(--stain) 45%, transparent);
+
+  /* Hạt nhiễu giấy (SVG feTurbulence), chỉ dùng trên tờ bản đồ và ảnh */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .18 0 0 0 0 .06 0 0 0 -1.5 1'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.28'/%3E%3C/svg%3E");
+
+  /* Hoa gió + 16 đường la bàn tỏa ra, nét 0,5px màu --stain, opacity .18. Họa tiết duy nhất trên tờ bản đồ. */
+  --rose: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none' stroke='%237a4a1e' stroke-opacity='.18' stroke-width='.5'%3E%3Cpath d='M100 100L100.0 2.0M100 100L123.7 42.7M100 100L156.6 43.4M100 100L157.3 76.3M100 100L198.0 100.0M100 100L157.3 123.7M100 100L156.6 156.6M100 100L123.7 157.3M100 100L100.0 198.0M100 100L76.3 157.3M100 100L43.4 156.6M100 100L42.7 123.7M100 100L2.0 100.0M100 100L42.7 76.3M100 100L43.4 43.4M100 100L76.3 42.7'/%3E%3Ccircle cx='100' cy='100' r='26'/%3E%3Ccircle cx='100' cy='100' r='15'/%3E%3Cpath d='M100 66l5 29 29 5-29 5-5 29-5-29-29-5 29-5z'/%3E%3C/svg%3E");
+
+  /* --- Chữ: ĐÚNG 3 họ, mỗi họ một vai trò. Nạp bằng <link> trong index.html (Google Fonts, có subset tiếng Việt) --- */
+  --font-display: "Newsreader", Georgia, serif;          /* tiêu đề, chữ kể chuyện */
+  --font-ui: "Be Vietnam Pro", system-ui, sans-serif;    /* slogan, nút, nội dung */
+  --font-doc: "Space Mono", ui-monospace, monospace;     /* chỉ cho thông tin tư liệu: nhãn, chú thích, con dấu */
+  /* Tên cũ trỏ về vai trò mới (để các màn khác không phải sửa từng dòng) */
+  --font-head: var(--font-display);
+  --font-body: var(--font-ui);
+  --font-mono: var(--font-doc);
 
   /* --- Hình khối --- */
   --radius: 2px;
-  --shadow: 0 1px 2px color-mix(in srgb, var(--stain) 25%, transparent), 0 6px 18px -8px color-mix(in srgb, var(--stain) 45%, transparent);
 
   /* --- Chuyển động: chỉ animate transform, opacity, filter, clip-path.
      Cả game chỉ có 3 chuyển động lớn: tờ bản đồ trượt vào, la bàn xoay, tuyến đường sáng dần. --- */
@@ -52,16 +62,11 @@
   --ease-soft: cubic-bezier(.16, 1, .3, 1);
   --ease-press: cubic-bezier(.3, 1.4, .5, 1); /* nảy nhẹ, CHỈ cho con dấu */
 
-  /* Hạt nhiễu giấy (SVG feTurbulence), chỉ dùng trên tờ bản đồ và ảnh */
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .18 0 0 0 0 .06 0 0 0 -1.5 1'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.28'/%3E%3C/svg%3E");
-
-  /* Hoa gió + 16 đường la bàn tỏa ra, nét 0,5px màu --stain, opacity .18. Họa tiết duy nhất trên tờ bản đồ. */
-  --rose: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none' stroke='%237a4a1e' stroke-opacity='.18' stroke-width='.5'%3E%3Cpath d='M100 100L100.0 2.0M100 100L123.7 42.7M100 100L156.6 43.4M100 100L157.3 76.3M100 100L198.0 100.0M100 100L157.3 123.7M100 100L156.6 156.6M100 100L123.7 157.3M100 100L100.0 198.0M100 100L76.3 157.3M100 100L43.4 156.6M100 100L42.7 123.7M100 100L2.0 100.0M100 100L42.7 76.3M100 100L43.4 43.4M100 100L76.3 42.7'/%3E%3Ccircle cx='100' cy='100' r='26'/%3E%3Ccircle cx='100' cy='100' r='15'/%3E%3Cpath d='M100 66l5 29 29 5-29 5-5 29-5-29-29-5 29-5z'/%3E%3C/svg%3E");
-
   /* --- Khoảng cách --- */
   --s1: 4px;
   --s2: 8px;
   --s3: 16px;
   --s4: 24px;
   --s5: 40px;
+  --s6: 48px;
 }

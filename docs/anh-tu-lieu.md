@@ -36,7 +36,7 @@ Ba ảnh dưới đây đã nằm trong `assets/img/` và đã gắn vào game. 
 
 | File | Nội dung nhìn thấy | Đặt ở | `focus` | Chú thích đang dùng (cần xác minh) |
 |---|---|---|---|---|
-| `1945-08-19-nha-hat-lon.webp` (500×329) | Mít tinh đông người trước Nhà hát lớn, cờ sao lớn giữa mặt tiền | Bìa trang chủ (`homeImage`) và ảnh nhỏ ở kết quả chặng 9 (`scenes[8].image`) | `50% 35%` | Mít tinh tại quảng trường Nhà hát lớn Hà Nội, 19/8/1945 |
+| `1945-08-19-nha-hat-lon.webp` (500×329) | Mít tinh đông người trước Nhà hát lớn, cờ sao lớn giữa mặt tiền | Ảnh chính của landing (gắn thẳng trong `index.html`) và ảnh nhỏ ở kết quả chặng 9 (`scenes[8].image`) | `50% 35%` | Mít tinh tại quảng trường Nhà hát lớn Hà Nội, 19/8/1945 |
 | `1945-giai-phong-quan-duong-pho.webp` (500×334) | Đoàn người mang súng, đội mũ, diễu hành trên phố, người dân hai bên | Màn mở Chương 3 (`chapters[2].image`) | `35% 50%` | Lực lượng vũ trang cách mạng trên đường phố, 1945 (**chưa rõ ngày, địa điểm**) |
 | `1945-09-02-ba-dinh.webp` (500×260) | **Ảnh ghép hai khung**: biển người, lá cờ sao bên trái; Chủ tịch Hồ Chí Minh đọc Tuyên ngôn bên phải | Màn kết (`endingImage`) và hồ sơ mục 9 (`records[8]`) | `75% 40%` | Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập tại Quảng trường Ba Đình, 2/9/1945 (ảnh ghép) |
 
@@ -47,7 +47,7 @@ Ba ảnh dưới đây đã nằm trong `assets/img/` và đã gắn vào game. 
 
 | # | Vị trí trong game | Trường trong `content.js` | Khung hiển thị | Gợi ý nội dung | Trạng thái |
 |---|---|---|---|---|---|
-| 1 | Bìa trang chủ | `homeImage` | cắt 5:4, rộng ≤ 440px | Mít tinh 19/8/1945 tại Nhà hát lớn Hà Nội | **Đã gắn**, cần nguồn |
+| 1 | Ảnh chính landing | `index.html` (thẻ `<img>` trong `.photo`) | cắt 5:4, rộng ≤ 440px | Mít tinh 19/8/1945 tại Nhà hát lớn Hà Nội | **Đã gắn**, cần nguồn |
 | 2 | Màn mở chương 1 | `chapters[0].image` | tỉ lệ gốc, rộng ≤ 560px | Bản scan văn kiện hoặc trang báo bí mật đầu những năm 1930 | Khung giữ chỗ |
 | 3 | Màn mở chương 2 | `chapters[1].image` | tỉ lệ gốc, rộng ≤ 560px | Trang báo công khai 1936–1939, hoặc ảnh phong trào Đông Dương Đại hội | Khung giữ chỗ |
 | 4 | Màn mở chương 3 | `chapters[2].image` | tỉ lệ gốc, rộng ≤ 560px | Lực lượng vũ trang cách mạng 1945 (hoặc Pác Bó) | **Đã gắn**, cần nguồn |

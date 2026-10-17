@@ -1,9 +1,11 @@
-// Kiểm tra logic game bằng DOM giả lập (không cần trình duyệt). Chạy: node test-logic.cjs
-const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
-const KEY='august-game-v1';
+// Kiểm tra logic game (hanh-trinh.html) bằng DOM giả lập (không cần trình duyệt). Chạy: node test-logic.cjs
+// Game không lưu tiến độ: trạng thái đọc qua window.GameDebug.state(), localStorage phải không bị đụng tới.
+const vm=require('node:vm'),fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const ROOT=path.join(__dirname,'..');
 
 // Tạo một môi trường trình duyệt giả tối thiểu cho mỗi lần chạy.
-function boot({storage={},strip=false}={}){
+function boot({strip=false}={}){
+  const touched=[]; // mọi lần game đọc/ghi localStorage (phải rỗng)
   const elements=new Map();let cards=[],checks=[],details=[];
   class Element{
     constructor(id=''){this.id=id;this.dataset={};this.disabled=(id==='commit');this.attrs={};this.textContent='';this.html='';const cls=new Set();this.classList={add:c=>cls.add(c),remove:c=>cls.delete(c),contains:c=>cls.has(c)};}
@@ -18,23 +20,24 @@ function boot({storage={},strip=false}={}){
     focus(){} scrollIntoView(){} showModal(){this.open=true;} close(){this.open=false;}
   }
   const get=id=>{if(!elements.has(id))elements.set(id,new Element(id));return elements.get(id);};
-  const context={window:{scrollTo(){}},document:{body:{dataset:{}},getElementById:get,querySelector:()=>new Element(),createTextNode:s=>s,addEventListener(){},removeEventListener(){}},localStorage:{getItem:k=>storage[k]||null,setItem:(k,v)=>storage[k]=v},confirm:()=>true,console};
+  const context={window:{scrollTo(){}},document:{body:{dataset:{}},getElementById:get,querySelector:()=>new Element(),createTextNode:s=>s,addEventListener(){},removeEventListener(){}},localStorage:{getItem:k=>{touched.push('get '+k);return null;},setItem:k=>touched.push('set '+k)},console};
   vm.createContext(context);
-  vm.runInContext(fs.readFileSync('content.js','utf8'),context);
+  vm.runInContext(fs.readFileSync(ROOT+'/src/js/content.js','utf8'),context);
   if(strip){ // bỏ hẳn mọi trường image: game phải chạy bình thường
-    const D=context.window.GAME_DATA;delete D.homeImage;delete D.endingImage;
+    const D=context.window.GAME_DATA;delete D.endingImage;
     D.chapters.forEach(c=>delete c.image);D.scenes.forEach(s=>delete s.image);D.records.forEach(r=>r.length=2);
   }
-  vm.runInContext(fs.readFileSync('ui.js','utf8'),context);
-  vm.runInContext(fs.readFileSync('game.js','utf8'),context);
-  const saved=()=>JSON.parse(storage[KEY]);
-  return {get,saved,cards:()=>cards,checks:()=>checks,storage};
+  vm.runInContext(fs.readFileSync(ROOT+'/src/js/ui.js','utf8'),context);
+  vm.runInContext(fs.readFileSync(ROOT+'/src/js/game.js','utf8'),context);
+  const saved=()=>JSON.parse(JSON.stringify(context.window.GameDebug.state()));
+  return {get,saved,cards:()=>cards,checks:()=>checks,touched};
 }
 
 // Chơi trọn 9 chặng. Ở chặng 8 chọn thẻ bẫy trước rồi chọn lại.
 function playthrough(opts){
   const g=boot(opts),{get,saved}=g;
-  get('start').click();get('chapter-go').click();
+  assert.match(get('app').innerHTML,/chapter-intro/,'mở trang là vào thẳng màn mở chương 1');
+  get('chapter-go').click();
   for(let i=0;i<9;i++){
     if(i===2||i===4){
       g.checks()[1].click();assert.match(get('check-feedback').textContent,/Thử nghĩ/);
@@ -75,19 +78,12 @@ function playthrough(opts){
   return g;
 }
 
-// 1) Chơi đủ, có ảnh giữ chỗ
+// 1) Chơi đủ, có ảnh giữ chỗ; hồ sơ lịch sử mở được; KHÔNG đọc/ghi localStorage
 const g=playthrough();
-// Lưu và tiếp tục: chạy lại game.js với cùng storage
-const again=boot({storage:g.storage});again.get('resume').click();
-assert.match(again.get('app').innerHTML,/Độc lập là thành quả/);
-again.get('records').click();assert.equal(again.get('archive').open,true);
+g.get('records').click();assert.equal(g.get('archive').open,true);
+assert.deepEqual(g.touched,[],'game không được đọc/ghi tiến độ');
 
 // 2) Bỏ hết trường image: không lỗi
 playthrough({strip:true});
 
-// 3) Save cũ chưa có mistakes: coi như mảng rỗng
-const old=boot({storage:{[KEY]:JSON.stringify({index:3,stats:{people:4,base:4,reach:2,ready:0},history:[0,1,2].map(s=>({scene:s,picks:[0,1]})),finished:false})}});
-old.get('resume').click();old.cards()[0].click();old.cards()[1].click();old.get('commit').click();
-assert.deepEqual(old.saved().mistakes,[]);assert.equal(old.saved().index,4);
-
-console.log('PASS: 9 chặng; thẻ thứ 3 không bị làm mờ; thẻ bẫy ghi vào mistakes; chặng 8 chọn lại, không cộng điểm lần sai; nhãn thay đổi chỉ số; câu hỏi cuối chương; màn mở chương; save/resume; save cũ không có mistakes; thiếu trường image. DOM giả lập, chưa kiểm tra bằng mắt.');
+console.log('PASS: vào thẳng chương 1; 9 chặng; thẻ thứ 3 không bị làm mờ; thẻ bẫy ghi vào mistakes; chặng 8 chọn lại, không cộng điểm lần sai; nhãn thay đổi chỉ số; câu hỏi cuối chương; màn mở chương; không đọc/ghi localStorage; hồ sơ; thiếu trường image. DOM giả lập, chưa kiểm tra bằng mắt.');

@@ -21,6 +21,6 @@ Các chi tiết không đưa vào lượt chơi nằm trong hồ sơ hoặc bả
 
 ## Cấu trúc
 Giao diện "bàn bản đồ dưới ánh đèn": căn phòng tối phẳng (đầu trang, dải lực lượng, la bàn thời cơ, tuyến 9 chặng) và tờ bản đồ giấy da (màn chơi, câu hỏi cuối chương, màn kết).
-`content.js`: dữ liệu. `ui.js`: dựng HTML. `game.js`: trạng thái, sự kiện, chuyển màn, quầng đèn.
-CSS: `tokens.css` (màu, chữ, chuyển động) → `base.css` (căn phòng, nút, đầu trang) → `components.css` (từng khối) → `acts.css` (độ chìm mép tờ giấy theo hồi). `style.css`, `redesign.css`, `archive-paper.css` là bản cũ, không còn được nạp.
-Tiến độ lưu localStorage sau mỗi tình huống; âm thanh chỉ bật theo lựa chọn. Kiểm tra: `node test-logic.cjs` (logic) và `node check.cjs` (trình duyệt thật, cần `node server.cjs` đang chạy).
+Mã nguồn: `index.html` (landing) và `hanh-trinh.html` (game) nằm ở gốc để giữ nguyên URL. Trong `src/js/`: `content.js` dữ liệu, `ui.js` dựng HTML, `game.js` trạng thái và chuyển màn, `landing.js` intro và lật trang của landing. Trong `src/css/`: `tokens.css` (màu, chữ, chuyển động) → `base.css` (căn phòng, nút, đầu trang) → `components.css` (từng khối) → `acts.css` (độ chìm mép tờ giấy theo hồi); `landing.css` cho landing.
+Thư mục khác: `assets/` ảnh tư liệu, `vendor/` gsap, `docs/` tài liệu nhóm, `tools/` công cụ dev, `test/` kiểm tra, `archive/` bản cũ không còn được nạp (`style.css`, `redesign.css`, `archive-paper.css`, `duong-den-thang-tam.html`, file zip, ảnh chụp cũ).
+Tiến độ lưu localStorage sau mỗi tình huống; âm thanh chỉ bật theo lựa chọn. Kiểm tra: `npm test` (chạy `test/test-logic.cjs` và `test/check.cjs`; `check.cjs` cần `node server.cjs` đang chạy).

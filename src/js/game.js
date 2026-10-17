@@ -1,20 +1,19 @@
 /* ============================================================
-   game.js: trạng thái game, lưu/tải, xử lý bấm nút và chuyển màn.
+   game.js (trang hanh-trinh.html): trạng thái game, xử lý bấm nút và chuyển màn.
    HTML của từng màn nằm trong ui.js; dữ liệu lịch sử nằm trong content.js.
+   Trang chủ là index.html (landing riêng). Game KHÔNG lưu/đọc tiến độ: mỗi lần mở là một lượt mới từ chương 1.
    ============================================================ */
 (()=>{'use strict';
-const D=window.GAME_DATA,UI=window.GameUI,app=document.getElementById('app'),key='august-game-v1';
+const D=window.GAME_DATA,UI=window.GameUI,app=document.getElementById('app');
 // Trạng thái một lượt chơi mới. mistakes: id các thẻ sai đã chọn, dạng "<chặng>-<thẻ>", ví dụ "7-2"
 const fresh=()=>({index:0,stats:{people:0,base:0,reach:0,ready:0},history:[],mistakes:[],finished:false});
 let state=fresh(),selected=[],resolved=false,sound=false,audio;
-// Đọc save trong localStorage (key không đổi để không mất tiến độ cũ); save hỏng thì bỏ qua
-let saved=null;try{saved=JSON.parse(localStorage.getItem(key));if(!saved||!Number.isInteger(saved.index)||saved.index<0||saved.index>9||!Array.isArray(saved.history)||!saved.stats)saved=null;}catch{}
-if(saved&&!Array.isArray(saved.mistakes))saved.mistakes=[]; // save cũ (trước khi có mistakes) coi như chưa sai lần nào
+// Chỉ để test (test-logic.cjs, check.cjs) đọc trạng thái lượt chơi; game không lưu ở đâu cả
+window.GameDebug={state:()=>state};
 const labels={people:'Lực lượng quần chúng',base:'Mạng lưới tổ chức',reach:'Tuyên truyền, vận động',ready:'Chuẩn bị hành động'};
 // Tiện ích nhỏ
 const $=id=>document.getElementById(id);
 const reducedMotion=()=>!!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-function save(){try{localStorage.setItem(key,JSON.stringify(state));}catch{$('save-status')?.replaceChildren(document.createTextNode('Trình duyệt không cho lưu; hãy hoàn thành trong phiên này.'));}}
 // Âm thanh: chỉ phát khi người chơi bật nút loa. tone = tiếng "tích" ngắn, paperSound = tiếng lật giấy
 function tone(){if(!sound)return;try{audio=audio||new(window.AudioContext||window.webkitAudioContext)();const o=audio.createOscillator(),g=audio.createGain();o.connect(g);g.connect(audio.destination);o.frequency.value=440;g.gain.setValueAtTime(.035,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.15);o.start();o.stop(audio.currentTime+.15);}catch{}}
 // Đặt hồi hiện tại lên <body data-act> để acts.css đổi màu giấy
@@ -123,11 +122,6 @@ $('photo-view').addEventListener('click',e=>{const r=e.currentTarget.getBounding
 $('photo-view').addEventListener('close',()=>lastThumb?.focus?.());
 
 /* ---------- Các màn ---------- */
-// Trang chủ
-function home(){show(()=>{setAct();hideStrip();setBright(false);app.innerHTML=UI.home(D,saved);aimLamp(app.querySelector('.home-photo'));
-$('start').onclick=()=>{if(saved&&!confirm('Bắt đầu lại sẽ thay thế tiến độ đang lưu. Tiếp tục?'))return;state=fresh();save();chapterIntro(0);};
-$('resume')?.addEventListener('click',()=>{state=saved;state.finished?ending():play();});});}
-
 // Màn mở đầu chương: không tự chuyển; bấm nút, Enter hoặc phím → để vào chương
 function chapterIntro(chapter){show(()=>{
   setAct(String(chapter+1));hideStrip();setBright(false);app.innerHTML=UI.chapterIntro(D,chapter);aimLamp(app.querySelector('.intro-media'));scroll();
@@ -178,7 +172,7 @@ const omitted=s.cards.findIndex((_,i)=>!picks.includes(i));
 const better=wrong.length?(UI.kindOf(s.cards[omitted])==='good'?omitted:UI.meta(s.cards[wrong[0]]).better??null):null;
 const b=$('commit');
 if(wrong.length&&s.answer){ // scene 8 keeps the old rule: no progress, no points, try again
-  save();$('save-status').textContent='Chưa triển khai được';
+  $('save-status').textContent='Chưa triển khai được';
   showFeedback(UI.feedback({scene:s,picks,wrong,better,retry:true}));
   b.textContent='Xem lại và chọn lại';b.onclick=retry;tone();return;
 }
@@ -187,14 +181,14 @@ const before={...state.stats};
 picks.forEach(i=>{const c=s.cards[i];if(UI.kindOf(c)==='good'&&c[2]!=='none')state.stats[c[2]]+=c[3];});
 // Cộng hưởng giữa các chặng (giữ nguyên quy tắc cũ)
 let synergy='';if(idx===3&&before.base>=3){state.stats.people++;synergy='Cơ sở đã khôi phục từ chương I giúp hoạt động tập hợp quần chúng được hỗ trợ tốt hơn.';}else if(idx===6&&before.people>=7){state.stats.ready++;synergy='Mạng lưới quần chúng từ các chương trước hỗ trợ cao trào kháng Nhật.';}else if(idx===8){synergy='Các cơ sở, hoạt động vận động và lực lượng bạn xây dựng từ đầu cùng hiện diện trong nhiệm vụ cuối.';}
-state.history.push({scene:idx,picks});state.index++;save();
+state.history.push({scene:idx,picks});state.index++;
 // Chọn đúng hết: thu gọn thẻ. Có thẻ sai: giữ nguyên thẻ để thấy rõ con dấu
 if(!wrong.length)document.querySelector('.decision')?.classList.add('is-resolved');
 $('save-status').textContent='Đã hoàn thành chặng này';
 renderStrip({prev:before});
 showFeedback(UI.feedback({scene:s,picks,wrong,better,before,after:state.stats,synergy}));
 b.textContent=state.index===9?'Xem kết thúc hành trình →':'Tiếp tục hành trình →';b.disabled=false;
-b.onclick=()=>{const next=D.scenes[state.index];if(!next){state.finished=true;save();ending();}else if(next.chapter!==s.chapter)checkpoint(s.chapter);else play();};tone();}
+b.onclick=()=>{const next=D.scenes[state.index];if(!next){state.finished=true;ending();}else if(next.chapter!==s.chapter)checkpoint(s.chapter);else play();};tone();}
 
 // "Xem lại và chọn lại" (chặng 8): gỡ dấu, mở khóa thẻ, xóa phản hồi; lần sai không được cộng điểm
 function retry(){resolved=false;selected=[];
@@ -220,9 +214,27 @@ app.querySelectorAll('[data-good]').forEach(b=>b.onclick=()=>{
 $('next').onclick=()=>chapterIntro(chapter+1);scroll();});}
 
 // Màn kết
-function ending(){state.finished=true;save();show(()=>{setAct('finale');const enter=!app.querySelector('.sheet');app.innerHTML=UI.ending(D,state,{enter});
+function ending(){state.finished=true;show(()=>{setAct('finale');const enter=!app.querySelector('.sheet');app.innerHTML=UI.ending(D,state,{enter});
 // Màn kết: tuyến 9 chặng sáng đủ lần lượt, la bàn chỉ "Tháng Tám", rồi ảnh Ba Đình hiện
 renderStrip({seq:true,forceLit:true});setBright(true);aimLamp(app.querySelector('.end-hero'));
-$('end-records').onclick=()=>openRecords(8);$('replay').onclick=()=>{saved=state;home();scroll();};scroll();});}
+$('end-records').onclick=()=>openRecords(8);$('replay').onclick=()=>{location.href='index.html';}; /* "Trở về màn đầu" = landing */scroll();});}
 
-home();})();
+/* Từ landing: tấm ảnh đang bay (index.html bấm nút → sessionStorage 'enter-photo', hanh-trinh.html dựng lại ở đầu <body>) bay nốt vào ô ảnh
+   của màn mở chương. FLIP: đo ô ảnh rồi animate transform (dịch + xoay + co/giãn đều) ~0,95s; chữ và đầu trang hiện dần từ giữa chặng bay;
+   đáp xuống thì ảnh thật thế chỗ ngay (cùng khung, cùng duotone) và bỏ hiệu ứng rửa ảnh để không chớp. Không có JS/animate: ảnh thật hiện luôn. */
+function landPhoto(){
+  const h=document.documentElement,f=$('flyer'),d=window.__ep,fig=app.querySelector('.intro-media .photo');
+  if(!d)return; // không đến từ landing bằng ảnh bay
+  if(fig)fig.classList.add('no-dev');
+  let ended=false;
+  const end=()=>{if(ended)return;ended=true;f?.remove();h.classList.add('ep-in','ep-done');setTimeout(()=>h.classList.remove('ep','ep-in','ep-done'),800);};
+  if(!f||!d||!fig||reducedMotion()||!f.animate){end();return;}
+  const r=fig.getBoundingClientRect(),fh=f.offsetHeight,k=fig.offsetWidth/d.fw;
+  const at=(x,y,rot,sc)=>`translate(${x-d.fw/2}px,${y-fh/2}px) rotate(${rot}deg) scale(${sc})`;
+  const a=f.animate([{transform:at(d.cx,d.cy,d.rot,1)},{transform:at(r.left+r.width/2,r.top+r.height/2,-1,k)}],{duration:950,easing:'cubic-bezier(.65,0,.25,1)',fill:'forwards'});
+  setTimeout(()=>h.classList.add('ep-in'),350);
+  a.finished.then(end,end);
+}
+
+// Vào thẳng chương 1 (landing ở index.html đã là màn chào)
+chapterIntro(0);landPhoto();})();

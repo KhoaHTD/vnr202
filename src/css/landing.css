@@ -1,0 +1,76 @@
+/* ============================================================
+   LANDING (index.html): dựng lại chuyển cảnh Morph của intro.pptx.
+   Cảnh cuối (slide 2): ảnh mít tinh 19/8/1945 đen trắng, ngôi sao đen 70% phủ kín, cờ đỏ sao vàng + hai mảnh cờ + dải cờ đen,
+   "ĐƯỜNG ĐẾN" nhỏ giãn chữ và "THÁNG TÁM" lớn (THÁNG nghiêng, TÁM đỏ cờ) ở giữa, nút bên dưới.
+   Chỉ nạp tokens.css + file này. Mọi thành phần đứng sẵn ở vị trí cuối; landing.js chỉ animate từ ngoài vào
+   bằng transform / opacity / clip-path. Tấm ảnh bay khi rời trang (.flyer, src/css/flyer.css) do landing.js tạo ra lúc bấm nút.
+   ============================================================ */
+:root {
+  --flag-red: #e03a2e;   /* đỏ cờ, chỉ trên nền tối của landing (≥ 3:1 trên ảnh đã phủ sao đen); --accent chỉ dành cho giấy */
+  --title: clamp(3rem, min(13vw, 25vh), 15rem);
+  }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; background: var(--room); color: var(--parchment); }
+body { font: 400 16px/1.5 var(--font-ui); overflow-x: hidden; }
+::selection { background: var(--flag-red); color: #fff; }
+
+.stage { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; isolation: isolate; background: var(--room); }
+
+/* --- Nền: ảnh đen trắng, phủ kín --- */
+.backdrop { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.backdrop img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: grayscale(1) contrast(1.05); }
+
+/* --- Ngôi sao đen 70%: ở trạng thái cuối to ≈ 226% cạnh lớn của màn hình, xoay 32°, nên phủ kín (bán kính trong ≈ 64% bán kính ngoài) --- */
+.star { position: absolute; z-index: 1; left: 58%; top: 42%; width: 226vmax; height: 226vmax; margin: -113vmax 0 0 -113vmax; transform: rotate(32deg); pointer-events: none; }
+.star polygon { fill: #000; fill-opacity: .7; }
+
+/* --- Cờ: khung 900×530 lấy từ toạ độ slide 2, mọi phần tử đặt theo % --- */
+.flags { position: absolute; z-index: 2; left: 55.6%; top: 40.5%; width: min(88vw, 900px, 150vh); aspect-ratio: 900 / 530; transform: translate(-50%, -50%); pointer-events: none; }
+.flags img { display: block; }
+.flag, .shard { position: absolute; }
+.flag--red { left: 26.3%; top: 0; width: 28.9%; height: 77%; }
+.shard--1 { left: 0; top: 44.9%; width: 23.1%; height: 46.4%; }
+.shard--2 { left: 79.9%; top: 33%; width: 20%; height: 41.9%; }
+/* Cờ đen: ban đầu cao đủ 588px (có sao trắng); cuối chỉ còn dải rách ở đáy (clip-path), khớp slide 2 */
+.flag--black { left: 18.3%; top: -11.1%; width: 45.6%; height: 110.9%; overflow: hidden; clip-path: inset(84.9% 0 0 0); }
+.flag--black img { position: absolute; width: 482.6%; height: 221.5%; left: -198%; top: -21.2%; max-width: none; }
+
+/* --- Chữ: THÁNG TÁM lớn, dòng nhỏ giãn chữ ở trên --- */
+.hero { position: absolute; z-index: 3; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s4); padding: 22vh var(--s3) 6vh; text-align: center; pointer-events: none; }
+.hero > * { pointer-events: auto; }
+.title { margin: 0; font-family: var(--font-display); font-weight: 400; line-height: 1; text-shadow: 0 2px 24px rgb(0 0 0 / .55); }
+.t-lead { display: block; margin-bottom: .6em; font: 500 clamp(.8rem, 1.7vw, 1.5rem)/1.2 var(--font-ui); letter-spacing: .6em; padding-left: .6em; text-transform: uppercase; color: #fff; }
+.t-main { display: block; font-size: var(--title); line-height: .95; text-transform: uppercase; white-space: nowrap; }
+.title span span, .t-main > span { display: inline-block; }
+.t-main em { font-style: italic; font-weight: 400; color: var(--parchment-soft); }
+.t-main b { font-weight: 500; color: var(--flag-red); }
+
+/* --- Nút: nền đỏ son, chữ giấy, góc vuông (giữ nguyên) --- */
+.cta { display: inline-flex; align-items: center; gap: var(--s2); min-height: 48px; padding: 10px 24px; border-radius: var(--radius); background: var(--accent); color: var(--parchment); font: 500 1rem/1.4 var(--font-ui); text-decoration: none; transition: background-color .2s var(--ease); }
+.cta:hover { background: color-mix(in srgb, var(--accent) 80%, #000); }
+.cta:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; }
+.cta[aria-disabled=true] { pointer-events: none; }
+
+/* --- Điều khiển: góc trên phải, 40px, mờ 50%, rõ khi trỏ/focus (giữ nguyên) --- */
+.controls { position: fixed; z-index: 10; top: 12px; right: 12px; display: flex; gap: var(--s1); }
+.controls[hidden] { display: none; }
+.controls button { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--parchment); opacity: .5; cursor: pointer; transition: opacity var(--dur-1) var(--ease); }
+.controls button:hover, .controls button:focus-visible { opacity: 1; }
+.controls button:focus-visible { outline: 2px solid var(--lamp); outline-offset: 2px; }
+.controls button:disabled { cursor: default; }
+.controls [aria-pressed=false] .i-on, .controls [aria-pressed=true] .i-off { display: none; }
+
+/* Chuyển sang trang game: tấm phủ --room mờ dần lên (landing.js tạo ra lúc bấm nút) */
+.veil { position: fixed; inset: 0; z-index: 100; background: var(--room); opacity: 0; pointer-events: none; }
+
+/* Chống nháy trong lúc chờ landing.js dựng intro (xem script đầu index.html) */
+.intro-wait .stage > *, .intro-wait .controls { visibility: hidden; }
+
+/* --- Điện thoại: chữ THÁNG TÁM vừa một hàng --- */
+@media (max-width: 720px) {
+  :root { --title: min(14.5vw, 22vh); }
+  .hero { gap: var(--s3); padding-top: 26vh; }
+  .flags { left: 50%; top: 36%; width: min(120vw, 150vh); }
+}
+
+@media (prefers-reduced-motion: reduce) { .cta, .controls button { transition: none; } }

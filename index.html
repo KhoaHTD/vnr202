@@ -1,14 +1,36 @@
 <!doctype html>
-<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1a120b"><title>Đường đến tháng Tám</title><link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="base.css"><link rel="stylesheet" href="components.css"><link rel="stylesheet" href="acts.css"></head><body>
-<!-- Bộ lọc DUOTONE cho ảnh tư liệu: chuyển ảnh sang xám, rồi ánh xạ chỗ tối → --ink (#2a1b0e), chỗ sáng → --parchment (#efdfb8).
-     Đổi màu token thì sửa tableValues tương ứng (giá trị = mã màu / 255). -->
+<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1a120b">
+<title>Đường đến tháng Tám</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,400&family=Be+Vietnam+Pro:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/css/tokens.css"><link rel="stylesheet" href="src/css/landing.css"><link rel="stylesheet" href="src/css/flyer.css">
+<!-- Chống nháy: ẩn cảnh intro cho tới khi landing.js đặt trạng thái đầu của intro. JS lỗi hoặc tải chậm thì sau 3 giây tự hiện trạng thái cuối. -->
+<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var r=document.documentElement;r.classList.add('intro-wait');setTimeout(function(){r.classList.remove('intro-wait')},3000)}}catch(e){}</script>
+<script type="importmap">{"imports":{"gsap":"./vendor/gsap/index.js"}}</script>
+<script type="module" src="src/js/landing.js"></script>
+</head><body>
+<!-- Bộ lọc DUOTONE cho tấm ảnh bay (giống hanh-trinh.html): chỗ tối → --ink (#2a1b0e), chỗ sáng → --parchment (#efdfb8). -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="duotone" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="table" tableValues=".165 .937"/><feFuncG type="table" tableValues=".106 .875"/><feFuncB type="table" tableValues=".055 .722"/></feComponentTransfer></filter></svg>
-<!-- Quầng đèn bàn: nằm sau mọi nội dung, game.js dời tâm sáng tới chỗ cần đọc -->
-<div id="lamp-wrap" aria-hidden="true"><div id="lamp"></div></div>
-<header class="top"><a class="brand" href="index.html">✦ <span>ĐƯỜNG ĐẾN<br><strong>THÁNG TÁM</strong></span></a><nav><button id="records">Hồ sơ lịch sử</button><button id="sound" class="icon-btn" aria-label="Âm thanh" aria-pressed="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9zM17 9l5 6M22 9l-5 6"/></svg></button></nav></header>
-<!-- Dải lực lượng + la bàn thời cơ + tuyến 9 chặng (nền phòng tối). Chỉ hiện ở màn chơi và màn kết. -->
-<div id="strip" class="strip" hidden></div>
-<main id="app"></main><dialog id="archive" aria-labelledby="archive-title"><div class="paper-topline"><span>TỦ SÁCH · ĐƯỜNG ĐẾN THÁNG TÁM</span><span>1930 — 1945</span></div><div class="dialog-head"><div><div class="paper-kicker">NHỮNG TRANG TƯ LIỆU</div><h2 id="archive-title">Hồ sơ lịch sử</h2></div><button id="close" aria-label="Đóng hồ sơ">Đóng ×</button></div><div class="paper-rule" aria-hidden="true">✦</div><div id="archive-body"></div><footer class="paper-footer"><span>TƯ LIỆU LỊCH SỬ</span><a href="docs/noi-dung-goc.md" target="_blank" rel="noopener">Tài liệu tham khảo ↗</a></footer></dialog>
-<!-- Xem ảnh tư liệu phóng to (mở từ ảnh nhỏ trong khối "Trong lịch sử") -->
-<dialog id="photo-view" aria-label="Ảnh tư liệu phóng to"><figure><img src="" alt=""><figcaption></figcaption></figure><button id="photo-close" aria-label="Đóng ảnh">Đóng ×</button></dialog>
-<script src="content.js"></script><script src="ui.js"></script><script src="game.js"></script></body></html>
+<!-- Landing: chuyển cảnh Morph của intro.pptx dựng lại bằng web. Mọi thứ đứng sẵn ở vị trí cuối (slide 2); landing.js (GSAP) chỉ animate từ ngoài vào.
+     Không có JS: trang vẫn ở trạng thái cuối và nút vẫn là liên kết thường. -->
+<main class="stage">
+  <div class="backdrop"><img src="assets/img/1945-08-19-nha-hat-lon.webp" alt="Đông đảo quần chúng mít tinh trước Nhà hát lớn Hà Nội, lá cờ đỏ sao vàng lớn treo giữa mặt tiền" width="500" height="329" fetchpriority="high"></div>
+  <svg class="star" viewBox="-50 -50 100 100" aria-hidden="true" focusable="false"><polygon points="0.0,-50.0 18.9,-26.1 47.6,-15.5 30.6,10.0 29.4,40.5 0.0,32.2 -29.4,40.5 -30.6,10.0 -47.6,-15.5 -18.9,-26.1"/></svg>
+  <div class="flags" aria-hidden="true">
+    <img class="shard shard--1" src="assets/img/intro/manh-co-1.webp" alt="" width="44" height="52">
+    <img class="flag flag--red" src="assets/img/intro/co-do.webp" alt="" width="256" height="408">
+    <img class="shard shard--2" src="assets/img/intro/manh-co-2.webp" alt="" width="120" height="148">
+    <div class="flag flag--black"><img src="assets/img/intro/co-den.webp" alt="" width="500" height="329"></div>
+  </div>
+  <div class="hero">
+    <h1 class="title"><span class="t-lead"><span>Đường đến</span></span> <span class="t-main"><span><em>tháng</em> <b>Tám</b></span></span></h1>
+    <a class="cta" href="hanh-trinh.html">Bắt đầu hành trình <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+  </div>
+</main>
+
+<!-- Điều khiển (không phải nội dung): chỉ hiện khi có JS -->
+<div class="controls" hidden>
+  <button id="motion" type="button" aria-label="Tạm dừng chuyển động" aria-pressed="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="i-off" d="M9 5v14M15 5v14"/><path class="i-on" d="M8 5l11 7-11 7z"/></svg></button>
+  <button id="sound" type="button" aria-label="Âm thanh" aria-pressed="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="i-off" d="M17 9l5 6M22 9l-5 6"/><path class="i-on" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+</div>
+</body></html>

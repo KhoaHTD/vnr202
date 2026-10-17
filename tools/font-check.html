@@ -1,0 +1,21 @@
+<!doctype html>
+<!-- Công cụ dev: kiểm tra 3 họ font hiển thị đủ dấu tiếng Việt ở 16px và 96px. Mở: http://localhost:5173/tools/font-check.html -->
+<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=Be+Vietnam+Pro:wght@400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/css/tokens.css">
+<style>
+  body { margin: 0; padding: 24px; background: var(--room); color: var(--parchment); font: 16px/1.2 var(--font-ui); }
+  h2 { margin: 32px 0 8px; font: 400 .75rem/1.4 var(--font-doc); letter-spacing: .12em; text-transform: uppercase; opacity: .7; }
+  p { margin: 0 0 8px; overflow-wrap: anywhere; }
+  .display { font-family: var(--font-display); font-optical-sizing: auto; }
+  .ui { font-family: var(--font-ui); }
+  .doc { font-family: var(--font-doc); }
+  .s16 { font-size: 16px; line-height: 1.5; } .s96 { font-size: 96px; line-height: 1.25; }
+</style></head><body>
+<script>
+  const T = 'Đường đến tháng Tám — Quốc dân Đại hội Tân Trào. Ữ Ỗ Ặ Ậ Ế ừ ợ ỷ — 19/8/1945';
+  for (const [cls, name] of [['display', 'Newsreader (--font-display)'], ['ui', 'Be Vietnam Pro (--font-ui)'], ['doc', 'Space Mono (--font-doc)']]) {
+    document.body.insertAdjacentHTML('beforeend', `<h2>${name}</h2><p class="${cls} s16" data-f="${cls}">${T}</p><p class="${cls} s96" data-f="${cls}">${T}</p>`);
+  }
+</script></body></html>

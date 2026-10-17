@@ -46,7 +46,7 @@ a { color: var(--lamp); }
 .sheet a { color: var(--accent); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* Địa danh trên bản đồ: Playfair nghiêng, chữ giãn nhẹ. Dùng cho tên chương và tên chặng. */
+/* Địa danh trên bản đồ: Newsreader nghiêng, chữ giãn nhẹ. Dùng cho tên chương và tên chặng. */
 .place { font-style: italic; font-weight: 600; letter-spacing: .02em; }
 
 /* Nhãn nhỏ in hoa (Space Mono). Trên nền phòng dùng --parchment-soft, trên tờ bản đồ dùng --ink. */
@@ -90,7 +90,7 @@ button:where(:not(.card)):disabled { cursor: default; opacity: .55; }
 /* Nút chỉ có biểu tượng (nút âm thanh, la bàn): đúng 44×44px */
 .icon-btn { display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0 !important; }
 
-/* --- Đầu trang: nền phòng, chữ sans 14–15px --- */
+/* --- Đầu trang: nền phòng, chữ sans 14–15px. --- */
 .top, main { position: relative; z-index: 1; }
 .strip { position: relative; z-index: 5; } /* nằm trên tờ bản đồ để bảng la bàn không bị che */
 .top {
@@ -113,15 +113,15 @@ button:where(:not(.card)):disabled { cursor: default; opacity: .55; }
 
 main { max-width: 1440px; margin: 0 auto; padding: var(--s3) 4.5% 72px; }
 
-/* --- Chuyển màn ---
-   Chỉ mờ chéo 200ms (View Transitions API nếu có). Không còn hiệu ứng trượt lên ở từng khối. */
-#app { view-transition-name: screen; }
-::view-transition-old(screen) { animation: fade-out 200ms var(--ease) both; }
-::view-transition-new(screen) { animation: fade-in var(--dur-2) var(--ease) both; }
-::view-transition-old(root), ::view-transition-new(root) { animation-duration: var(--dur-2); }
-@keyframes fade-out { to { opacity: 0; } }
-@keyframes fade-in { from { opacity: 0; } }
-@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+/* Đến từ landing (màn chuyển đã mờ về --room): một tấm phủ --room toàn màn hình mờ dần trong 0,5 giây. Không có cờ thì không có gì. */
+.enter-fade::after { content: ''; position: fixed; inset: 0; z-index: 9999; background: var(--room); pointer-events: none; animation: enter-fade .5s var(--ease) both; }
+@keyframes enter-fade { to { opacity: 0; visibility: hidden; } }
+
+/* Đến từ landing bằng tấm ảnh bay (game.js landPhoto): ô ảnh thật ẩn cho tới khi ảnh bay đáp xuống; đầu trang và chữ hiện dần giữa chặng bay */
+.ep .intro-media .photo { visibility: hidden; }
+.ep.ep-done .intro-media .photo { visibility: visible; }
+.ep .top, .ep .chapter-intro-text { opacity: 0; }
+.ep.ep-in .top, .ep.ep-in .chapter-intro-text { opacity: 1; transition: opacity .7s var(--ease-soft); }
 
 /* --- Hiện khi cuộn tới (IntersectionObserver trong game.js, chạy một lần): chỉ mờ dần --- */
 [data-reveal] { opacity: 0; transition: opacity var(--dur-3) var(--ease-soft); transition-delay: calc(var(--i, 0) * 70ms); }

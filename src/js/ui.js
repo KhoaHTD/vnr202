@@ -3,7 +3,7 @@
    game.js gọi các hàm ở đây rồi gắn sự kiện vào phần tử theo id.
 
    Hai lớp vật liệu:
-   - NỀN PHÒNG (tối, hiện đại): đầu trang, dải lực lượng (strip), trang chủ, màn mở chương.
+   - NỀN PHÒNG (tối, hiện đại): đầu trang, dải lực lượng (strip), màn mở chương. (Trang chủ là index.html riêng.)
    - TỜ BẢN ĐỒ (.sheet, giấy da cổ): màn chơi, câu hỏi cuối chương, màn kết.
    ============================================================ */
 window.GameUI=(()=>{
@@ -36,8 +36,8 @@ const kindOf=card=>meta(card).kind||'good';
    enter = true: tờ bản đồ trượt vào (chỉ khi vừa vào chương). .sheet-light là ánh đèn rọi lên giấy, game.js dời tâm sáng. */
 const sheet=(inner,enter)=>`<div class="sheet${enter?' sheet--in':''}"><div class="sheet-light" aria-hidden="true"></div>${inner}</div>`;
 
-/* Chữ uốn cung theo đường cong nhẹ, như địa danh uốn theo bờ biển trên bản đồ cổ. CHỈ dùng ở 2 chỗ:
-   tên game (trang chủ) và tên chương (màn mở chương). Có bản chữ thường ẩn cho trình đọc màn hình; SVG bị aria-hidden. */
+/* Chữ uốn cung theo đường cong nhẹ, như địa danh uốn theo bờ biển trên bản đồ cổ. CHỈ dùng cho
+   tên chương (màn mở chương). Có bản chữ thường ẩn cho trình đọc màn hình; SVG bị aria-hidden. */
 function arc(text,id){
   const fs=Math.min(64,Math.floor(1500/Math.max(text.length,1)));
   return `<span class="sr-only">${esc(text)}</span><svg class="arc" viewBox="0 0 800 170" aria-hidden="true" focusable="false"><defs><path id="${id}" d="M30 140Q400 66 770 140" fill="none"/></defs><text class="place" font-size="${fs}"><textPath href="#${id}" startOffset="50%" text-anchor="middle">${esc(text)}</textPath></text></svg>`;
@@ -97,14 +97,6 @@ function strip(D,state,labels,o={}){
   const forces=FORCES.map(k=>{const v=seg(state.stats[k]),was=o.prev?seg(o.prev[k]):v;return `<li class="force f-${k}${v?' lit':''}" id="node-${k}"><span class="force-icon">${icon(k,20)}</span><span class="force-name">${SHORT[k]}</span><span class="segments" role="meter" aria-label="${labels[k]}" aria-valuemin="0" aria-valuemax="6" aria-valuenow="${v}">${Array.from({length:6},(_,i)=>`<i class="${i<v?'filled':''}${i<v&&i>=was?' new':''}"></i>`).join('')}</span></li>`;}).join('');
   const cur=state.index>=D.scenes.length?D.scenes.length:state.index;
   return `<div class="strip-inner"><ul class="forces">${forces}</ul><div class="pressure" id="pressure" hidden><b>Áp lực địch</b><div class="pressure-bar" role="meter" aria-label="Áp lực địch" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${state.pressure||0}" style="--v:${state.pressure||0}"></div></div>${compass(state,o)}</div>${route(D,cur,o)}`;
-}
-
-// Trang chủ (nền phòng): ảnh đặt trên bàn dưới đèn, tên game uốn cung, một nút, tuyến 9 chặng còn trống
-function home(D,saved){
-  return `<section class="home"><span class="eyebrow">Hành trình lịch sử tương tác</span><h1 class="home-title">${arc('Đường đến tháng Tám','arc-home')}</h1><p class="tagline place">Mỗi bước đi. Một ngày độc lập.</p>`
-  +`<div class="home-photo">${photo(D.homeImage,{w:500,h:329,cls:'photo--table',develop:'slow',priority:true})}</div>`
-  +`<div class="actions">${saved?'<button class="primary" id="resume">Tiếp tục hành trình '+icon('arrow')+'</button>':''}<button id="start" class="${saved?'secondary':'primary'}">${saved?'Bắt đầu lại':'Bắt đầu hành trình'} ${icon('arrow')}</button></div>`
-  +`<p class="hero-meta"><span>3 giai đoạn</span> · <span>9 chặng đường</span> · <span>khoảng 10 phút</span></p><div class="home-route">${route(D,-1)}</div></section>`;
 }
 
 // Màn mở đầu chương (nền phòng, chưa có tờ bản đồ): ảnh đặt trên bàn dưới đèn, tên chương uốn cung.
@@ -173,4 +165,4 @@ function records(D){
   return D.records.map(([title,body,img])=>`<details><summary>${title}</summary>${photo(img,{w:16,h:10,cls:'photo--record'})}<p>${body}</p></details>`).join('');
 }
 
-return {home,chapterIntro,strip,play,feedback,checkpoint,ending,records,icon,kindOf,meta};})();
+return {chapterIntro,strip,play,feedback,checkpoint,ending,records,icon,kindOf,meta};})();
