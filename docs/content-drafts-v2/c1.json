@@ -1,0 +1,163 @@
+{
+  "chapterId": "c1",
+  "findings": [
+    {
+      "id": "C1-01",
+      "issue": "Màn 01 cũ dùng nhiệm vụ kết nối công–nông quá rộng, nên loại Hỗ trợ đời sống sẽ không công bằng.",
+      "evidence": "D1:P013 nêu yêu cầu đời sống; D1:P031 nêu liên minh công–nông. Hai ý hỗ trợ nhau, không loại trừ nhau.",
+      "decision": "Đổi màn mở đầu thành ghép những yêu cầu tiêu biểu của công nhân và nông dân được nguồn nêu. Mỗi ô nhận một trong hai phương án phù hợp; liên hệ công–nông được trình bày sau màn và trong hồ sơ. Không nói thuế chỉ liên quan nông dân trong mọi hoàn cảnh."
+    },
+    {
+      "id": "C1-02",
+      "issue": "Báo chí công khai ở màn 02 không có căn cứ đủ cụ thể để phủ định toàn giai đoạn chỉ bằng đối lập công khai/bí mật.",
+      "evidence": "D1:P077–P078 nói về chi bộ và học tập, báo bí mật trong tù; D1:P082 nêu xây dựng tổ chức bí mật; D1:P088 nêu nhiều nhiệm vụ có giá trị.",
+      "decision": "Dùng bốn hoạt động có căn cứ: củng cố cơ sở bí mật, học và dịch sách trong tù, tập hợp quần chúng, tuyên truyền chống chiến tranh. Chấm theo hai công việc cụ thể, không coi hai thẻ chưa ghép là hoạt động vô ích."
+    },
+    {
+      "id": "C1-03",
+      "issue": "Tài liệu nguồn chưa phải giáo trình chính thức có số trang kiểm chứng; còn ghi chú biên tập và mốc cần xem lại.",
+      "evidence": "D1:P066/C0 ghi đọc lại thêm trong sgk; P081 dùng đầu năm 1932 trong khi P082 nêu ngày 15-6-1932; P083 có tên một tác phẩm cần đối chiếu trước khi sử dụng.",
+      "decision": "Nội dung gameplay không dùng ngày công bố Chương trình hành động hoặc tên tác phẩm này để chấm điểm. Đánh dấu source-supported/editorial-match, chưa tuyên bố xác minh độc lập hoặc duyệt chuyên môn."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s01",
+      "chapterId": "c1",
+      "period": "1930–1931",
+      "title": "Những yêu cầu thiết thực",
+      "contextShort": "Theo tư liệu, ghép một yêu cầu tiêu biểu với mỗi nhóm công nhân và nông dân.",
+      "learningObjective": "Nhận biết những yêu cầu đời sống tiêu biểu được tư liệu gắn với công nhân và nông dân, rồi liên hệ sự kết hợp phong trào công–nông.",
+      "sourceRefs": ["D1:P013", "D1:P031"],
+      "targets": [
+        {"id": "s01-workers", "label": "Yêu cầu công nhân", "detail": "Đặt một yêu cầu tiêu biểu của công nhân được tư liệu mô tả; một trong hai thẻ phù hợp đều được chấp nhận."},
+        {"id": "s01-farmers", "label": "Yêu cầu nông dân", "detail": "Đặt một yêu cầu tiêu biểu của nông dân được tư liệu mô tả. Đây không phải khẳng định mỗi yêu cầu chỉ có ý nghĩa với một nhóm trong mọi hoàn cảnh."}
+      ],
+      "cards": [
+        {"id": "s01-wages", "label": "Tăng lương", "detail": "Yêu cầu cải thiện tiền lương của công nhân trong phong trào được tư liệu nêu."},
+        {"id": "s01-hours", "label": "Giảm giờ làm", "detail": "Yêu cầu rút ngắn thời gian lao động của công nhân được tư liệu nêu."},
+        {"id": "s01-levies", "label": "Giảm sưu", "detail": "Một yêu cầu giảm gánh nặng đời sống được tư liệu gắn với nông dân."},
+        {"id": "s01-taxes", "label": "Giảm thuế", "detail": "Một yêu cầu kinh tế của nông dân trong phần mô tả phong trào; không có nghĩa các nhóm khác không chịu thuế."}
+      ],
+      "evaluations": [
+        {
+          "targetId": "s01-workers", "cardId": "s01-wages", "outcome": "suitable", "reasonType": null,
+          "reasonShort": "Tăng lương là yêu cầu tiêu biểu của công nhân được tư liệu nêu.",
+          "reasonDetail": "Tư liệu mô tả công nhân đấu tranh đòi tăng lương, giảm giờ làm. Đặt Tăng lương ở ô này thể hiện đúng một yêu cầu đời sống được nêu; Giảm giờ làm cũng là phương án được chấp nhận.",
+          "sourceRefs": ["D1:P013"], "suggestedCardIds": []
+        },
+        {
+          "targetId": "s01-workers", "cardId": "s01-hours", "outcome": "suitable", "reasonType": null,
+          "reasonShort": "Giảm giờ làm là yêu cầu tiêu biểu của công nhân được tư liệu nêu.",
+          "reasonDetail": "Bên cạnh tăng lương, tư liệu nêu yêu cầu giảm giờ làm của công nhân. Ô chỉ cần một yêu cầu tiêu biểu, nên lựa chọn này có giá trị tương đương Tăng lương khi tính điểm.",
+          "sourceRefs": ["D1:P013"], "suggestedCardIds": []
+        },
+        {
+          "targetId": "s01-workers", "cardId": "s01-levies", "outcome": "needs-review", "reasonType": "category-mismatch",
+          "reasonShort": "Trong phần tư liệu đang xét, giảm sưu được nêu ở nhóm yêu cầu của nông dân.",
+          "reasonDetail": "Giảm sưu là yêu cầu có ý nghĩa đối với đời sống nhân dân, nhưng đoạn tư liệu đang dùng nêu nó trong nhóm yêu cầu của nông dân. Ô này hỏi yêu cầu tiêu biểu của công nhân trong chính mô tả ấy: bạn có thể chọn Tăng lương hoặc Giảm giờ làm.",
+          "sourceRefs": ["D1:P013"], "suggestedCardIds": ["s01-wages", "s01-hours"]
+        },
+        {
+          "targetId": "s01-workers", "cardId": "s01-taxes", "outcome": "needs-review", "reasonType": "category-mismatch",
+          "reasonShort": "Tư liệu gắn giảm thuế với yêu cầu nông dân ở tình huống này.",
+          "reasonDetail": "Ô đang yêu cầu một ví dụ thuộc nhóm công nhân theo cách trình bày trong tư liệu. Đoạn này gắn giảm thuế với nông dân, còn công nhân được nêu là đòi tăng lương, giảm giờ làm; cách ghép không khẳng định công nhân không chịu thuế hoặc không có quyền đòi giảm thuế.",
+          "sourceRefs": ["D1:P013"], "suggestedCardIds": ["s01-wages", "s01-hours"]
+        },
+        {
+          "targetId": "s01-farmers", "cardId": "s01-wages", "outcome": "needs-review", "reasonType": "category-mismatch",
+          "reasonShort": "Tăng lương nằm trong nhóm yêu cầu của công nhân ở đoạn tư liệu này.",
+          "reasonDetail": "Tư liệu phân biệt ví dụ yêu cầu của công nhân là tăng lương, giảm giờ làm và của nông dân là giảm sưu, giảm thuế. Ô này hỏi nhóm nông dân theo chính mô tả đó; không dùng kết quả ghép để phủ nhận hoàn cảnh người lao động có thể đồng thời thuộc nhiều nhóm.",
+          "sourceRefs": ["D1:P013"], "suggestedCardIds": ["s01-levies", "s01-taxes"]
+        },
+        {
+          "targetId": "s01-farmers", "cardId": "s01-hours", "outcome": "needs-review", "reasonType": "category-mismatch",
+          "reasonShort": "Giảm giờ làm được tư liệu nêu ở nhóm yêu cầu của công nhân.",
+          "reasonDetail": "Giảm giờ làm là một yêu cầu đời sống hợp lý, nhưng đoạn tư liệu dùng cho màn này đặt nó ở nhóm công nhân. Để đáp ứng ô yêu cầu nông dân theo tư liệu, có thể dùng Giảm sưu hoặc Giảm thuế; cả hai đều được chấp nhận.",
+          "sourceRefs": ["D1:P013"], "suggestedCardIds": ["s01-levies", "s01-taxes"]
+        },
+        {
+          "targetId": "s01-farmers", "cardId": "s01-levies", "outcome": "suitable", "reasonType": null,
+          "reasonShort": "Giảm sưu là một yêu cầu tiêu biểu của nông dân được nguồn nêu.",
+          "reasonDetail": "Tư liệu mô tả nông dân đấu tranh đòi giảm sưu, giảm thuế. Lựa chọn này đáp ứng ô bằng một trong hai ví dụ của nhóm nông dân, không có yêu cầu phải chọn riêng thẻ Giảm thuế.",
+          "sourceRefs": ["D1:P013"], "suggestedCardIds": []
+        },
+        {
+          "targetId": "s01-farmers", "cardId": "s01-taxes", "outcome": "suitable", "reasonType": null,
+          "reasonShort": "Giảm thuế là một yêu cầu tiêu biểu của nông dân được nguồn nêu.",
+          "reasonDetail": "Tư liệu gắn yêu cầu giảm thuế với phong trào nông dân. Bạn đã chọn một ví dụ đáp ứng nhiệm vụ; Giảm sưu cũng được chấp nhận với điểm như nhau.",
+          "sourceRefs": ["D1:P013"], "suggestedCardIds": []
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "chapterId": "c1",
+      "period": "1932–1935",
+      "title": "Giữ mạch nối",
+      "contextShort": "Sau đàn áp, cần khôi phục tổ chức và duy trì việc học tập trong tù.",
+      "learningObjective": "Phân biệt khôi phục tổ chức bí mật và duy trì học tập trong tù; nhìn nhận các hoạt động tập hợp, tuyên truyền khác vẫn có giá trị.",
+      "sourceRefs": ["D1:P077", "D1:P078", "D1:P082", "D1:P085", "D1:P088"],
+      "targets": [
+        {"id": "s02-network", "label": "Khôi phục cơ sở bí mật", "detail": "Bố trí hoạt động trực tiếp củng cố lại cơ sở tổ chức bí mật bị gián đoạn; không hỏi mọi việc có thể hỗ trợ phong trào."},
+        {"id": "s02-learning", "label": "Học tập trong tù", "detail": "Bố trí hoạt động học tập và truyền đạt kiến thức của những chiến sĩ trong nhà tù. Cảnh là minh họa, không tái dựng một nhà tù có thật."}
+      ],
+      "cards": [
+        {"id": "s02-secret-network", "label": "Củng cố cơ sở bí mật", "detail": "Khôi phục các cơ sở và đầu mối tổ chức theo nhiệm vụ xây dựng tổ chức bí mật. Tuyến nối trong cảnh là ký hiệu minh họa, không phải tuyến đường lịch sử đã xác minh."},
+        {"id": "s02-study", "label": "Học và dịch sách", "detail": "Tổ chức học lý luận, dịch sách báo, trao đổi kiến thức trong tù như tư liệu mô tả."},
+        {"id": "s02-mobilize", "label": "Tập hợp quần chúng", "detail": "Một nhiệm vụ quan trọng để khôi phục và phát triển phong trào, được tư liệu nêu cùng công tác tổ chức."},
+        {"id": "s02-antiwar", "label": "Tuyên truyền chống chiến tranh", "detail": "Một nhiệm vụ được nêu ở Đại hội I, có giá trị riêng nhưng không thay mọi công việc khôi phục và học tập."}
+      ],
+      "evaluations": [
+        {
+          "targetId": "s02-network", "cardId": "s02-secret-network", "outcome": "suitable", "reasonType": null,
+          "reasonShort": "Củng cố cơ sở bí mật trực tiếp đáp ứng nhiệm vụ khôi phục tổ chức.",
+          "reasonDetail": "Chương trình hành động trong tư liệu nhấn mạnh khôi phục tổ chức và xây dựng một tổ chức bí mật có kỷ luật. Lựa chọn này đáp ứng trực tiếp công việc của ô; những tuyến được nối trong cảnh chỉ là cách minh họa quan hệ tổ chức.",
+          "sourceRefs": ["D1:P082", "D1:P085"], "suggestedCardIds": []
+        },
+        {
+          "targetId": "s02-network", "cardId": "s02-study", "outcome": "needs-review", "reasonType": "task-mismatch",
+          "reasonShort": "Học và dịch sách phục vụ bồi dưỡng; ô này cần trực tiếp khôi phục cơ sở tổ chức.",
+          "reasonDetail": "Học tập trong tù giúp giữ vững nhận thức và bồi dưỡng con người, nên có đóng góp cho phong trào. Tuy vậy, ô này yêu cầu một hoạt động trực tiếp củng cố cơ sở tổ chức, không phải toàn bộ sự chuẩn bị lâu dài; Củng cố cơ sở bí mật đáp ứng rõ hơn.",
+          "sourceRefs": ["D1:P078", "D1:P082"], "suggestedCardIds": ["s02-secret-network"]
+        },
+        {
+          "targetId": "s02-network", "cardId": "s02-mobilize", "outcome": "needs-review", "reasonType": "task-mismatch",
+          "reasonShort": "Tập hợp quần chúng không thay trực tiếp công việc củng cố cơ sở bí mật đang được hỏi.",
+          "reasonDetail": "Tư liệu nêu tập hợp quần chúng là nhiệm vụ quan trọng cùng với củng cố, phát triển tổ chức. Hai công việc hỗ trợ nhau, nhưng ô này giới hạn ở khôi phục cơ sở tổ chức bí mật; đánh giá chưa phù hợp với ô không phủ nhận ý nghĩa của vận động quần chúng.",
+          "sourceRefs": ["D1:P082", "D1:P088"], "suggestedCardIds": ["s02-secret-network"]
+        },
+        {
+          "targetId": "s02-network", "cardId": "s02-antiwar", "outcome": "needs-review", "reasonType": "task-mismatch",
+          "reasonShort": "Tuyên truyền chống chiến tranh là nhiệm vụ khác, chưa trực tiếp khôi phục cơ sở bí mật.",
+          "reasonDetail": "Đại hội I trong tư liệu có nêu tuyên truyền chống chiến tranh, bên cạnh củng cố tổ chức và tập hợp quần chúng. Thẻ có ý nghĩa trong giai đoạn, nhưng không thực hiện trực tiếp phần việc phục hồi cơ sở mà ô đang yêu cầu; hãy dùng Củng cố cơ sở bí mật.",
+          "sourceRefs": ["D1:P082", "D1:P088"], "suggestedCardIds": ["s02-secret-network"]
+        },
+        {
+          "targetId": "s02-learning", "cardId": "s02-secret-network", "outcome": "needs-review", "reasonType": "task-mismatch",
+          "reasonShort": "Củng cố tổ chức không thay nội dung học tập và dịch sách trong tù.",
+          "reasonDetail": "Trong tù có cả tổ chức chi bộ bí mật và hoạt động học tập; hai việc liên quan nhưng không đồng nhất. Ô này hỏi công việc học và truyền đạt kiến thức, nên Học và dịch sách là phương án trực tiếp, thay vì gán mọi sinh hoạt bí mật thành hoạt động học.",
+          "sourceRefs": ["D1:P077", "D1:P078"], "suggestedCardIds": ["s02-study"]
+        },
+        {
+          "targetId": "s02-learning", "cardId": "s02-study", "outcome": "suitable", "reasonType": null,
+          "reasonShort": "Tư liệu nêu học lý luận và dịch sách báo trong nhà tù.",
+          "reasonDetail": "Tư liệu mô tả việc biến nhà tù thành trường học cách mạng qua học lý luận, dịch sách báo và xuất bản báo bí mật. Thẻ Học và dịch sách đáp ứng đúng hoạt động kiến thức mà ô này yêu cầu.",
+          "sourceRefs": ["D1:P078"], "suggestedCardIds": []
+        },
+        {
+          "targetId": "s02-learning", "cardId": "s02-mobilize", "outcome": "needs-review", "reasonType": "task-mismatch",
+          "reasonShort": "Tập hợp lực lượng không trực tiếp đáp ứng nhiệm vụ học và trao đổi kiến thức trong tù.",
+          "reasonDetail": "Tập hợp quần chúng góp phần phục hồi phong trào, nhưng ô đang hỏi một công việc cụ thể trong nhà tù: duy trì học tập và truyền đạt kiến thức. Học và dịch sách phù hợp trực tiếp hơn; không cần phủ nhận nhiệm vụ tập hợp quần chúng để phân biệt hai việc.",
+          "sourceRefs": ["D1:P078", "D1:P088"], "suggestedCardIds": ["s02-study"]
+        },
+        {
+          "targetId": "s02-learning", "cardId": "s02-antiwar", "outcome": "needs-review", "reasonType": "task-mismatch",
+          "reasonShort": "Chủ đề tuyên truyền chống chiến tranh không tự thay hoạt động học và dịch sách trong tù.",
+          "reasonDetail": "Tuyên truyền chống chiến tranh là một nhiệm vụ được tư liệu nêu, nhưng tên nhiệm vụ ấy không cho biết hoạt động học tập trong tù đã được tổ chức. Ô này yêu cầu hình thức học và trao đổi kiến thức; chọn Học và dịch sách để thực hiện đúng phần việc đang xét.",
+          "sourceRefs": ["D1:P078", "D1:P088"], "suggestedCardIds": ["s02-study"]
+        }
+      ]
+    }
+  ]
+}

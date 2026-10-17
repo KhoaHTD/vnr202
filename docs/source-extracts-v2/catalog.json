@@ -1,0 +1,41 @@
+[
+  {
+    "file": "GiaiDoan1930Den1935.docx",
+    "sha256": "f97360b08b4f3ff008d73a7530c85c52f68a412c47f833601b47d8f077daa73c",
+    "extract": "GiaiDoan1930Den1935.md",
+    "extractSha256": "8fc5b10c422624de1601696dde4dd3fb8a3712506df7036e8e18081a6ca1f4e0",
+    "paragraphs": 91,
+    "nonEmptyParagraphs": 67,
+    "tables": 0,
+    "images": 0,
+    "insertions": 0,
+    "deletions": 0,
+    "comments": 1
+  },
+  {
+    "file": "GiaiDoan1936Den1939.docx",
+    "sha256": "c9623004e73e6ae06247845b062f43b80976a46b70b894a59f9cb930da50dd1e",
+    "extract": "GiaiDoan1936Den1939.md",
+    "extractSha256": "e4cb37a0f570ed00356ad3a8e912ba59e9eee17ef421dcf24a51a000c8d7797a",
+    "paragraphs": 112,
+    "nonEmptyParagraphs": 109,
+    "tables": 0,
+    "images": 0,
+    "insertions": 0,
+    "deletions": 0,
+    "comments": 7
+  },
+  {
+    "file": "GiaiDoan1939Den1945.docx",
+    "sha256": "95ba78fcd428f2ba280c6b8ea227e7a63651aae5ef04571b6344776efae233c8",
+    "extract": "GiaiDoan1939Den1945.md",
+    "extractSha256": "d1c888f54f9413a01eb8078e38c524868bf08b7ce32fd3c9e8fd7759388175cd",
+    "paragraphs": 105,
+    "nonEmptyParagraphs": 100,
+    "tables": 2,
+    "images": 0,
+    "insertions": 0,
+    "deletions": 0,
+    "comments": 2
+  }
+]
