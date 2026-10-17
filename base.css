@@ -1,0 +1,141 @@
+/* ============================================================
+   BASE: căn phòng tối, quầng đèn, chữ, nút, đầu trang, chuyển màn.
+   Nền phòng PHẲNG và tối; chỉ tờ bản đồ (.sheet) mới có chất giấy.
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+body {
+  position: relative;
+  margin: 0;
+  min-height: 100vh;
+  color: var(--parchment);
+  font: 16px/1.65 var(--font-body);
+  background: var(--room);
+  overflow-x: hidden;
+  --focus: var(--lamp); /* mặc định đang ở nền phòng; .sheet đổi lại thành --ink */
+}
+
+/* --- Quầng đèn bàn ---
+   Nằm sau mọi nội dung. Tâm quầng được game.js đặt (--ly) vào chỗ cần đọc: khu chọn thẻ ở màn chơi,
+   khối kết quả ở màn tiết lộ, ảnh ở trang chủ / màn mở chương. Dịch bằng transform trong 600ms.
+   Cả 4 hướng la bàn sáng: data-bright nâng quầng lên một nấc. */
+#lamp-wrap { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+#lamp {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1500px;
+  height: 1200px;
+  margin: -600px 0 0 -750px;
+  transform: translateY(var(--ly, 42vh));
+  transition: transform 600ms var(--ease-soft);
+  background: radial-gradient(ellipse at 50% 50%, rgba(255, 214, 150, .18), transparent 60%);
+}
+#lamp::after { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity var(--dur-4) var(--ease-soft); background: radial-gradient(ellipse at 50% 50%, rgba(255, 214, 150, .14), transparent 55%); }
+body[data-bright] #lamp::after { opacity: 1; }
+
+/* --- Chữ --- */
+h1, h2, h3 { font-family: var(--font-head); font-weight: 600; line-height: 1.2; margin: 0; }
+h1 { font-size: clamp(40px, 6vw, 72px); font-weight: 700; margin: var(--s4) 0; }
+h2 { font-size: clamp(28px, 3.6vw, 42px); }
+h3 { font-size: 22px; }
+p { margin: 0; }
+svg { vertical-align: middle; flex-shrink: 0; }
+a { color: var(--lamp); }
+.sheet a { color: var(--accent); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Địa danh trên bản đồ: Playfair nghiêng, chữ giãn nhẹ. Dùng cho tên chương và tên chặng. */
+.place { font-style: italic; font-weight: 600; letter-spacing: .02em; }
+
+/* Nhãn nhỏ in hoa (Space Mono). Trên nền phòng dùng --parchment-soft, trên tờ bản đồ dùng --ink. */
+.eyebrow {
+  font: 700 12px/1.5 var(--font-mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--parchment-soft);
+}
+
+/* --- Nút: vùng bấm tối thiểu 44px. Mặc định cho nền phòng; trên tờ bản đồ đổi màu ở dưới --- */
+button { font: inherit; color: inherit; cursor: pointer; touch-action: manipulation; }
+button:where(:not(.card)) {
+  min-height: 44px;
+  padding: var(--s2) 20px;
+  background: transparent;
+  border: 1px solid var(--parchment-soft);
+  border-radius: var(--radius);
+  transition: transform var(--dur-1) var(--ease);
+}
+button:where(:not(.card)):hover:not(:disabled) { background: color-mix(in srgb, var(--parchment) 10%, transparent); }
+button:where(:not(.card)):active:not(:disabled) { transform: translateY(1px); }
+button:where(:not(.card)):disabled { cursor: default; opacity: .55; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+/* Nút chính trên NỀN PHÒNG (trang chủ, màn mở chương): nền --lamp, chữ --room (8,2:1). Đỏ son không dùng ở đây. */
+.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  background: var(--lamp);
+  border-color: var(--lamp);
+  color: var(--room);
+  font-weight: 600;
+}
+.primary:hover:not(:disabled) { background: color-mix(in srgb, var(--lamp) 88%, var(--parchment)); }
+.primary:disabled { background: transparent; border-color: color-mix(in srgb, var(--parchment-soft) 50%, transparent); color: var(--parchment-soft); opacity: 1; }
+.actions { display: flex; gap: var(--s3); flex-wrap: wrap; margin-top: var(--s4); }
+
+/* Nút chỉ có biểu tượng (nút âm thanh, la bàn): đúng 44×44px */
+.icon-btn { display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0 !important; }
+
+/* --- Đầu trang: nền phòng, chữ sans 14–15px --- */
+.top, main { position: relative; z-index: 1; }
+.strip { position: relative; z-index: 5; } /* nằm trên tờ bản đồ để bảng la bàn không bị che */
+.top {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--s3) 4.5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s3);
+}
+.brand { display: flex; align-items: center; gap: var(--s3); color: var(--parchment); text-decoration: none; font-size: 24px; }
+.brand span { font: 400 11px/1.5 var(--font-mono); letter-spacing: .2em; color: var(--parchment-soft); }
+.brand strong { display: block; font: 700 16px/1.3 var(--font-head); letter-spacing: .1em; color: var(--parchment); }
+.top nav { display: flex; align-items: center; gap: var(--s2); }
+.top nav button { border-color: transparent; font-size: 15px; color: var(--parchment-soft); }
+.top nav button:hover:not(:disabled), .top nav button[aria-pressed=true] { color: var(--parchment); }
+.top nav button[aria-pressed=true] { border-color: var(--parchment-soft); }
+
+main { max-width: 1440px; margin: 0 auto; padding: var(--s3) 4.5% 72px; }
+
+/* --- Chuyển màn ---
+   Chỉ mờ chéo 200ms (View Transitions API nếu có). Không còn hiệu ứng trượt lên ở từng khối. */
+#app { view-transition-name: screen; }
+::view-transition-old(screen) { animation: fade-out 200ms var(--ease) both; }
+::view-transition-new(screen) { animation: fade-in var(--dur-2) var(--ease) both; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: var(--dur-2); }
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* --- Hiện khi cuộn tới (IntersectionObserver trong game.js, chạy một lần): chỉ mờ dần --- */
+[data-reveal] { opacity: 0; transition: opacity var(--dur-3) var(--ease-soft); transition-delay: calc(var(--i, 0) * 70ms); }
+[data-reveal].is-in { opacity: 1; }
+
+/* Người dùng bật "giảm chuyển động": mọi hiệu ứng rút còn 1ms (chỉ còn hiện ra),
+   ảnh hiện ngay ở trạng thái cuối, la bàn không xoay, tờ bản đồ không trượt. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after, ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) {
+    animation-duration: 1ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0s !important;
+  }
+}

@@ -1,10 +1,24 @@
+/* ============================================================
+   game.js: trạng thái game, lưu/tải, xử lý bấm nút và chuyển màn.
+   HTML của từng màn nằm trong ui.js; dữ liệu lịch sử nằm trong content.js.
+   ============================================================ */
 (()=>{'use strict';
-const D=window.GAME_DATA,app=document.getElementById('app'),key='august-game-v1';
-let state={index:0,stats:{people:0,base:0,reach:0,ready:0},history:[],finished:false},selected=[],resolved=false,sound=false,audio;
+const D=window.GAME_DATA,UI=window.GameUI,app=document.getElementById('app'),key='august-game-v1';
+// Trạng thái một lượt chơi mới. mistakes: id các thẻ sai đã chọn, dạng "<chặng>-<thẻ>", ví dụ "7-2"
+const fresh=()=>({index:0,stats:{people:0,base:0,reach:0,ready:0},history:[],mistakes:[],finished:false});
+let state=fresh(),selected=[],resolved=false,sound=false,audio;
+// Đọc save trong localStorage (key không đổi để không mất tiến độ cũ); save hỏng thì bỏ qua
 let saved=null;try{saved=JSON.parse(localStorage.getItem(key));if(!saved||!Number.isInteger(saved.index)||saved.index<0||saved.index>9||!Array.isArray(saved.history)||!saved.stats)saved=null;}catch{}
+if(saved&&!Array.isArray(saved.mistakes))saved.mistakes=[]; // save cũ (trước khi có mistakes) coi như chưa sai lần nào
 const labels={people:'Lực lượng quần chúng',base:'Mạng lưới tổ chức',reach:'Tuyên truyền, vận động',ready:'Chuẩn bị hành động'};
-function save(){try{localStorage.setItem(key,JSON.stringify(state));}catch{document.getElementById('save-status')?.replaceChildren(document.createTextNode('Trình duyệt không cho lưu; hãy hoàn thành trong phiên này.'));}}
+// Tiện ích nhỏ
+const $=id=>document.getElementById(id);
+const reducedMotion=()=>!!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+function save(){try{localStorage.setItem(key,JSON.stringify(state));}catch{$('save-status')?.replaceChildren(document.createTextNode('Trình duyệt không cho lưu; hãy hoàn thành trong phiên này.'));}}
+// Âm thanh: chỉ phát khi người chơi bật nút loa. tone = tiếng "tích" ngắn, paperSound = tiếng lật giấy
 function tone(){if(!sound)return;try{audio=audio||new(window.AudioContext||window.webkitAudioContext)();const o=audio.createOscillator(),g=audio.createGain();o.connect(g);g.connect(audio.destination);o.frequency.value=440;g.gain.setValueAtTime(.035,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.15);o.start();o.stop(audio.currentTime+.15);}catch{}}
+// Đặt hồi hiện tại lên <body data-act> để acts.css đổi màu giấy
+function setAct(a){if(a)document.body.dataset.act=a;else delete document.body.dataset.act;}
 function scroll(){window.scrollTo({top:0,behavior:'instant'});}
 function paperSound(){
 if(!sound)return;
@@ -29,16 +43,186 @@ source.start(start);source.stop(start+duration);
 }).catch(()=>{});
 }catch{}
 }
-function openRecords(index){const dialog=document.getElementById('archive');dialog.showModal();paperSound();if(Number.isInteger(index)){dialog.querySelectorAll('details').forEach((d,i)=>d.open=i===index);dialog.querySelectorAll('details')[index].scrollIntoView({block:'nearest'});}}
-document.getElementById('archive-body').innerHTML=D.records.map(([title,body])=>`<details><summary>${title}</summary><p>${body}</p></details>`).join('');
-document.getElementById('records').onclick=()=>openRecords();document.getElementById('close').onclick=()=>document.getElementById('archive').close();document.getElementById('sound').onclick=e=>{sound=!sound;e.currentTarget.textContent='Âm thanh: '+(sound?'bật':'tắt');e.currentTarget.setAttribute('aria-pressed',sound);tone();};
-function home(){app.innerHTML=window.GameUI.home(D,saved);
-document.getElementById('start').onclick=()=>{if(saved&&!confirm('Bắt đầu lại sẽ thay thế tiến độ đang lưu. Tiếp tục?'))return;state={index:0,stats:{people:0,base:0,reach:0,ready:0},history:[],finished:false};save();play();};document.getElementById('resume')?.addEventListener('click',()=>{state=saved;state.finished?ending():play();});}
-function board(){return window.GameUI.board(state,labels);}
-function play(){if(state.index>=9){ending();return;}selected=[];resolved=false;const s=D.scenes[state.index];app.innerHTML=window.GameUI.play(D,state,labels);
-document.getElementById('more').onclick=()=>openRecords(s.record);app.querySelectorAll('[data-card]').forEach(b=>b.onclick=()=>{if(resolved)return;const i=Number(b.dataset.card);if(selected.includes(i))selected=selected.filter(n=>n!==i);else if(selected.length<2)selected.push(i);app.querySelectorAll('[data-card]').forEach(btn=>{const yes=selected.includes(Number(btn.dataset.card));btn.setAttribute('aria-pressed',yes);btn.disabled=selected.length===2&&!yes;});document.getElementById('selection').textContent=selected.length+'/2 thẻ';document.getElementById('commit').disabled=selected.length!==2;document.getElementById('save-status').textContent=selected.length===2?'Sẵn sàng triển khai':`Chọn thêm ${2-selected.length} hoạt động`;tone();});document.getElementById('commit').onclick=commit;scroll();}
-function commit(){if(resolved||selected.length!==2)return;const s=D.scenes[state.index],f=document.getElementById('feedback');if(s.answer&&!s.answer.every(i=>selected.includes(i))){f.innerHTML='<div class="feedback"><h3>Còn thiếu một điều kiện quan trọng</h3><p>Nhật đầu hàng tạo thời cơ, nhưng cần cả tổ chức và lực lượng đã được chuẩn bị. Hãy bỏ thẻ “Chỉ cần Nhật đầu hàng” và xem lại hai căn cứ còn lại.</p></div>';return;}resolved=true;const before={...state.stats};selected.forEach(i=>{const c=s.cards[i];if(c[2]!=='none')state.stats[c[2]]+=c[3];});let synergy='';if(state.index===3&&before.base>=3){state.stats.people++;synergy='Cơ sở đã khôi phục từ chương I giúp hoạt động tập hợp quần chúng được hỗ trợ tốt hơn.';}else if(state.index===6&&before.people>=7){state.stats.ready++;synergy='Mạng lưới quần chúng từ các chương trước hỗ trợ cao trào kháng Nhật.';}else if(state.index===8){synergy='Các cơ sở, hoạt động vận động và lực lượng bạn xây dựng từ đầu cùng hiện diện trong nhiệm vụ cuối.';}
-const omitted=s.cards.find((_,i)=>!selected.includes(i));state.history.push({scene:state.index,picks:[...selected]});state.index++;save();app.querySelectorAll('[data-card]').forEach(b=>b.disabled=true);document.querySelector('.decision')?.classList.add('is-resolved');document.getElementById('save-status').textContent='Đã hoàn thành chặng này';document.getElementById('board').innerHTML=board();f.innerHTML=`<div class="feedback"><div class="eyebrow">Kết quả hành động</div><h3>${selected.map(i=>s.cards[i][0]).join(' + ')}</h3><p>Bạn tăng cường ${[...new Set(selected.map(i=>labels[s.cards[i][2]]?.toLowerCase()).filter(Boolean))].join(' và ')}.${!s.answer?' Lượt này chưa ưu tiên “'+omitted[0]+'”.':''}</p>${synergy?`<p class="carry">${synergy}</p>`:''}<p><strong>Trong lịch sử:</strong> ${s.explain}</p><div class="chain">${s.link}</div></div>`;const b=document.getElementById('commit');b.textContent=state.index===9?'Xem kết thúc hành trình →':'Tiếp tục hành trình →';b.disabled=false;b.onclick=()=>{const next=D.scenes[state.index];if(!next){state.finished=true;save();ending();}else if(next.chapter!==s.chapter)checkpoint(s.chapter);else play();};tone();f.scrollIntoView({behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'nearest'});}
-function checkpoint(chapter){const text=chapter===0?['Vì sao khôi phục tổ chức có ý nghĩa cho giai đoạn sau?','Tạo mạng lưới để tiếp tục vận động và phối hợp.','Chỉ để ghi nhớ các mốc thời gian.']:['Điều gì nổi bật trong cách lãnh đạo giai đoạn 1936–1939?','Điều chỉnh phương pháp theo hoàn cảnh, mở rộng lực lượng.','Dùng một hình thức đấu tranh cho mọi hoàn cảnh.'];app.innerHTML=`<section class="chapter-break"><div class="eyebrow">Hoàn thành chương ${chapter+1}</div><h1>${D.chapters[chapter].name}</h1><p>${text[0]}</p><div class="check"><button data-good="true">${text[1]}</button><button data-good="false">${text[2]}</button></div><p id="check-feedback" aria-live="polite"></p><button id="next" class="primary">Sang chương tiếp theo →</button></section>`;app.querySelectorAll('[data-good]').forEach(b=>b.onclick=()=>{b.className=b.dataset.good==='true'?'correct':'wrong';document.getElementById('check-feedback').textContent=b.dataset.good==='true'?'Đúng. Thành quả ấy được mang sang chương tiếp theo.':'Thử nghĩ đến cách tổ chức và phương pháp đã thích ứng với tình hình.';});document.getElementById('next').onclick=play;scroll();}
-function ending(){state.finished=true;save();app.innerHTML=`<section class="end"><div class="eyebrow">2 tháng 9 năm 1945</div><h1>Độc lập là thành quả<br>của cả một hành trình.</h1><p>Từ gây dựng tổ chức, mở rộng phong trào đến chuẩn bị và chớp thời cơ: những yếu tố cùng kết hợp để làm nên thắng lợi.</p><div class="timeline"><div><b>19/8</b>Hà Nội</div><div><b>23/8</b>Huế</div><div><b>25/8</b>Sài Gòn</div><div><b>2/9</b>Tuyên ngôn Độc lập</div></div><div class="end-grid"><article><div class="eyebrow">01 · Lãnh đạo</div><h3>Nhận định đúng, hành động kịp thời</h3><p>Đảng và Hồ Chí Minh xác định nhiệm vụ, tập hợp lực lượng, điều chỉnh phương pháp và nắm bắt thời cơ.</p></article><article><div class="eyebrow">02 · Nhân dân</div><h3>Sức mạnh của đoàn kết</h3><p>Quần chúng được vận động, tổ chức và trực tiếp tham gia đấu tranh giành chính quyền.</p></article><article><div class="eyebrow">03 · Chuẩn bị</div><h3>Thành quả tích lũy lâu dài</h3><p>Lực lượng chính trị, vũ trang, tổ chức và căn cứ được xây dựng qua nhiều giai đoạn.</p></article><article><div class="eyebrow">04 · Quốc tế</div><h3>Thời cơ thuận lợi</h3><p>Thắng lợi Đồng minh và Nhật đầu hàng tạo điều kiện khách quan; sự chuẩn bị giúp biến thời cơ thành thắng lợi.</p></article></div><h3>Một kỷ nguyên mới</h3><p>Nước Việt Nam Dân chủ Cộng hòa ra đời; nhân dân từ địa vị bị trị trở thành người làm chủ. Thắng lợi cổ vũ phong trào giải phóng dân tộc trên thế giới.</p><div class="actions" style="justify-content:center"><button id="end-records">Đọc hồ sơ đầy đủ</button><button id="replay" class="primary">Trở về màn đầu</button></div><p class="notice">Hoàn thành ${state.history.length}/9 chặng đường.</p></section>`;document.getElementById('end-records').onclick=()=>openRecords(8);document.getElementById('replay').onclick=()=>{saved=state;home();scroll();};scroll();}
+
+/* ---------- Ánh sáng, dải lực lượng, chuyển màn, rửa ảnh, hiện khi cuộn ---------- */
+// View Transitions API: màn cũ mờ đi, màn mới trượt vào (CSS trong base.css). Không có API thì dùng hiệu ứng CSS cũ.
+const useVT=!!document.startViewTransition&&!reducedMotion();
+if(useVT)document.documentElement?.classList.add('has-vt');
+let cleanups=[]; // việc cần gỡ khi rời màn (ví dụ listener bàn phím của màn mở chương)
+function show(build){
+  cleanups.forEach(f=>f());cleanups=[];
+  const run=()=>{build();enhance();};
+  if(!useVT||!app.childElementCount){run();return;}
+  const t=document.startViewTransition(run);
+  t.ready.catch(()=>{});t.finished.catch(()=>{}); // chuyển màn bị hủy (ví dụ đổi kích thước cửa sổ) thì bỏ qua, màn mới vẫn hiện
+}
+// Gọi cb một lần khi phần tử vào khung nhìn (không có IntersectionObserver thì gọi ngay)
+function whenVisible(el,cb){
+  if(!window.IntersectionObserver){cb();return;}
+  const io=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){io.disconnect();cb();}},{rootMargin:'0px 0px -8% 0px'});
+  io.observe(el);
+}
+// Sau khi dựng màn: bật "rửa ảnh" khi ảnh đã tải xong và đã nhìn thấy; bật hiện-khi-cuộn
+function enhance(){
+  app.querySelectorAll('[data-develop]').forEach(fig=>{
+    const img=fig.querySelector('img');if(!img)return;
+    const on=()=>whenVisible(fig,()=>fig.classList.add('is-on'));
+    img.decode?img.decode().then(on,on):on(); // ảnh lỗi vẫn bật để không kẹt ở trạng thái ẩn
+  });
+  app.querySelectorAll('[data-reveal]').forEach(el=>whenVisible(el,()=>el.classList.add('is-in')));
+}
+
+// Khoảng cách từ đỉnh `root` tới đỉnh `el`, đo bằng offsetTop (không bị ảnh hưởng bởi animation trượt/nghiêng của tờ bản đồ)
+function offsetWithin(el,root){let y=0,e=el;while(e&&e!==root){y+=e.offsetTop||0;e=e.offsetParent;}return e===root?y:null;}
+/* Dời tâm quầng đèn tới giữa phần tử `el` (chỗ cần đọc). Hai lớp sáng cùng dịch bằng transform trong 600ms:
+   #lamp = quầng trong căn phòng (tọa độ cả trang), .sheet-light = ánh đèn rọi lên tờ bản đồ (tọa độ trong tờ giấy). */
+function aimLamp(el){
+  const lamp=$('lamp');if(!lamp||!el||el.offsetTop===undefined||!lamp.style)return;
+  const half=(el.offsetHeight||0)/2,docY=offsetWithin(el,document.body);
+  if(docY!==null)lamp.style.setProperty('--ly',(docY+half)+'px');
+  const sheet=el.closest?.('.sheet');
+  if(sheet&&sheet.style){const y=offsetWithin(el,sheet);if(y!==null)sheet.style.setProperty('--ly',(y+half)+'px');}
+}
+// Dải lực lượng + la bàn + tuyến 9 chặng (nền phòng). Chỉ hiện ở màn chơi, câu hỏi cuối chương và màn kết.
+function renderStrip(o={}){const el=$('strip');el.hidden=false;el.innerHTML=UI.strip(D,state,labels,o);}
+function hideStrip(){$('strip').hidden=true;}
+// Cả 4 hướng la bàn đã sáng thì quầng đèn sáng lên một nấc
+function setBright(on){if(on)document.body.dataset.bright='';else delete document.body.dataset.bright;}
+const allWindsLit=()=>(Array.isArray(state.signals)?state.signals.filter(Boolean).length:(state.signals||0))>=4;
+// Bấm la bàn → mở/đóng bảng 4 hướng; bấm ra ngoài hoặc Esc → đóng
+function toggleCompass(open){const b=$('compass-btn'),p=$('compass-panel');if(!b||!p)return;const want=open===undefined?p.hidden:open;p.hidden=!want;b.setAttribute('aria-expanded',want);}
+$('strip').addEventListener('click',e=>{if(e.target.closest?.('#compass-btn'))toggleCompass();else if(!e.target.closest?.('#compass-panel'))toggleCompass(false);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')toggleCompass(false);});
+// will-change chỉ gắn trong lúc animation đang chạy, xong thì gỡ
+document.addEventListener('animationstart',e=>{if(e.target.style)e.target.style.willChange='transform, opacity, filter';});
+['animationend','animationcancel'].forEach(t=>document.addEventListener(t,e=>{if(e.target.style)e.target.style.willChange='';}));
+
+/* ---------- Đầu trang, hồ sơ lịch sử, hộp xem ảnh ---------- */
+function openRecords(index){const dialog=$('archive');dialog.showModal();paperSound();if(Number.isInteger(index)){dialog.querySelectorAll('details').forEach((d,i)=>d.open=i===index);dialog.querySelectorAll('details')[index].scrollIntoView({block:'nearest'});}}
+$('archive-body').innerHTML=UI.records(D);
+$('records').onclick=()=>openRecords();
+$('close').onclick=()=>$('archive').close();
+$('sound').onclick=e=>{sound=!sound;const b=e.currentTarget;b.innerHTML=UI.icon(sound?'sound':'mute');b.setAttribute('aria-pressed',sound);tone();};
+/* Bấm vào ảnh nhỏ trong khối "Trong lịch sử" → mở hộp xem ảnh lớn.
+   FLIP: đo vị trí ảnh nhỏ và ảnh lớn, rồi cho ảnh lớn bay từ chỗ ảnh nhỏ ra giữa (chỉ animate transform).
+   Đóng bằng Esc (mặc định của <dialog>), nút Đóng hoặc bấm ra ngoài; đóng xong focus quay về ảnh nhỏ. */
+let lastThumb=null;
+app.addEventListener('click',e=>{
+  const z=e.target.closest?.('[data-zoom]');if(!z)return;
+  const v=$('photo-view'),big=v.querySelector('img'),thumb=z.querySelector('img');
+  big.src=z.dataset.zoom;big.alt=z.dataset.alt;
+  v.querySelector('figcaption').textContent=[z.dataset.caption,z.dataset.credit].filter(Boolean).join(' — ');
+  lastThumb=z;v.showModal();
+  if(reducedMotion()||!thumb||!big.animate)return;
+  const a=thumb.getBoundingClientRect(),b=big.getBoundingClientRect();
+  if(!b.width||!b.height)return;
+  big.animate([{transformOrigin:'0 0',transform:`translate(${a.left-b.left}px,${a.top-b.top}px) scale(${a.width/b.width},${a.height/b.height})`},{transformOrigin:'0 0',transform:'none'}],{duration:640,easing:'cubic-bezier(.16,1,.3,1)'});
+});
+$('photo-close').onclick=()=>$('photo-view').close();
+$('photo-view').addEventListener('click',e=>{const r=e.currentTarget.getBoundingClientRect?.();if(r&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom))e.currentTarget.close();});
+$('photo-view').addEventListener('close',()=>lastThumb?.focus?.());
+
+/* ---------- Các màn ---------- */
+// Trang chủ
+function home(){show(()=>{setAct();hideStrip();setBright(false);app.innerHTML=UI.home(D,saved);aimLamp(app.querySelector('.home-photo'));
+$('start').onclick=()=>{if(saved&&!confirm('Bắt đầu lại sẽ thay thế tiến độ đang lưu. Tiếp tục?'))return;state=fresh();save();chapterIntro(0);};
+$('resume')?.addEventListener('click',()=>{state=saved;state.finished?ending():play();});});}
+
+// Màn mở đầu chương: không tự chuyển; bấm nút, Enter hoặc phím → để vào chương
+function chapterIntro(chapter){show(()=>{
+  setAct(String(chapter+1));hideStrip();setBright(false);app.innerHTML=UI.chapterIntro(D,chapter);aimLamp(app.querySelector('.intro-media'));scroll();
+  const onKey=e=>{if((e.key==='Enter'||e.key==='ArrowRight')&&!document.querySelector('dialog[open]')){e.preventDefault();go();}};
+  const go=()=>{document.removeEventListener('keydown',onKey);play();};
+  document.addEventListener('keydown',onKey);
+  $('chapter-go').onclick=e=>{e?.preventDefault?.();go();};
+  $('chapter-go').focus?.({preventScroll:true});
+});}
+
+// Các nút thẻ trên màn hiện tại
+function cards(){return app.querySelectorAll('[data-card]');}
+// Cập nhật thẻ sau mỗi lần chọn/bỏ chọn.
+// Chọn đủ 2 thẻ: thẻ còn lại nhận aria-disabled (không làm mờ, CSS hiện gợi ý "Bỏ chọn một thẻ để đổi")
+function syncCards(){
+  cards().forEach(btn=>{const yes=selected.includes(Number(btn.dataset.card));btn.setAttribute('aria-pressed',yes);btn.setAttribute('aria-disabled',selected.length===2&&!yes);});
+  $('commit').disabled=selected.length!==2;
+  $('save-status').textContent=selected.length===2?'Sẵn sàng triển khai':`Chọn thêm ${2-selected.length} hoạt động`;
+}
+
+// Màn chơi một chặng
+function play(){if(state.index>=9){ending();return;}show(()=>{selected=[];resolved=false;const s=D.scenes[state.index];setAct(state.index===8?'finale':String(s.chapter+1));
+const enter=!app.querySelector('.sheet'); // tờ bản đồ chỉ trượt vào khi vừa vào chương, không trượt lại ở mỗi chặng
+app.innerHTML=UI.play(D,state,labels,{enter});
+// Chặng 9: nếu cả 4 hướng đã sáng, kim la bàn xoay một lần và quầng đèn sáng lên một nấc
+renderStrip({spin:state.index===8});setBright(state.index===8&&allWindsLit());aimLamp(app.querySelector('.hand'));
+$('more').onclick=()=>openRecords(s.record);
+cards().forEach(b=>b.onclick=()=>{if(resolved)return;const i=Number(b.dataset.card);if(selected.includes(i))selected=selected.filter(n=>n!==i);else if(selected.length<2)selected.push(i);else return;syncCards();tone();});
+$('commit').onclick=commit;scroll();});}
+
+// Đóng dấu son lên thẻ sai (có chữ, không chỉ báo bằng màu) và cho thẻ rung nhẹ
+function stamp(i,text){const b=[...cards()].find(c=>Number(c.dataset.card)===i);if(!b)return;b.classList.add('is-wrong');b.insertAdjacentHTML('beforeend',`<span class="stamp">${text}</span>`);}
+// Hiện khối kết quả và cuộn mượt tới đầu khối (cuộn ngay nếu người dùng tắt chuyển động)
+function showFeedback(html){const f=$('feedback');f.innerHTML=html;enhance();aimLamp(f);f.scrollIntoView({behavior:reducedMotion()?'instant':'smooth',block:'start'});}
+
+/* Bấm "Triển khai".
+   - Thẻ trap → dấu "SAI LẦM LỊCH SỬ"; thẻ now → dấu "CHƯA ĐẾN LÚC"; thẻ good không có dấu.
+   - Thẻ sai ghi vào state.mistakes (không trùng) và không được cộng điểm.
+   - Chặng có `answer` (chặng 8): chọn sai thì không qua chặng, nút đổi thành "Xem lại và chọn lại".
+   - Các chặng khác: vẫn cho đi tiếp, phản hồi giải thích lựa chọn của lịch sử. */
+function commit(){if(resolved||selected.length!==2)return;resolved=true;
+const s=D.scenes[state.index],idx=state.index,picks=[...selected];
+const wrong=picks.filter(i=>UI.kindOf(s.cards[i])!=='good');
+cards().forEach(b=>{b.disabled=true;b.removeAttribute?.('aria-disabled');});
+wrong.forEach(i=>{stamp(i,UI.kindOf(s.cards[i])==='trap'?'Sai lầm lịch sử':'Chưa đến lúc');const id=`${idx}-${i}`;if(!state.mistakes.includes(id))state.mistakes.push(id);});
+const omitted=s.cards.findIndex((_,i)=>!picks.includes(i));
+// Thẻ đúng bị bỏ qua: thẻ còn lại nếu là thẻ good, nếu không thì lấy trường better của thẻ sai
+const better=wrong.length?(UI.kindOf(s.cards[omitted])==='good'?omitted:UI.meta(s.cards[wrong[0]]).better??null):null;
+const b=$('commit');
+if(wrong.length&&s.answer){ // scene 8 keeps the old rule: no progress, no points, try again
+  save();$('save-status').textContent='Chưa triển khai được';
+  showFeedback(UI.feedback({scene:s,picks,wrong,better,retry:true}));
+  b.textContent='Xem lại và chọn lại';b.onclick=retry;tone();return;
+}
+// Cộng điểm: chỉ thẻ good được cộng
+const before={...state.stats};
+picks.forEach(i=>{const c=s.cards[i];if(UI.kindOf(c)==='good'&&c[2]!=='none')state.stats[c[2]]+=c[3];});
+// Cộng hưởng giữa các chặng (giữ nguyên quy tắc cũ)
+let synergy='';if(idx===3&&before.base>=3){state.stats.people++;synergy='Cơ sở đã khôi phục từ chương I giúp hoạt động tập hợp quần chúng được hỗ trợ tốt hơn.';}else if(idx===6&&before.people>=7){state.stats.ready++;synergy='Mạng lưới quần chúng từ các chương trước hỗ trợ cao trào kháng Nhật.';}else if(idx===8){synergy='Các cơ sở, hoạt động vận động và lực lượng bạn xây dựng từ đầu cùng hiện diện trong nhiệm vụ cuối.';}
+state.history.push({scene:idx,picks});state.index++;save();
+// Chọn đúng hết: thu gọn thẻ. Có thẻ sai: giữ nguyên thẻ để thấy rõ con dấu
+if(!wrong.length)document.querySelector('.decision')?.classList.add('is-resolved');
+$('save-status').textContent='Đã hoàn thành chặng này';
+renderStrip({prev:before});
+showFeedback(UI.feedback({scene:s,picks,wrong,better,before,after:state.stats,synergy}));
+b.textContent=state.index===9?'Xem kết thúc hành trình →':'Tiếp tục hành trình →';b.disabled=false;
+b.onclick=()=>{const next=D.scenes[state.index];if(!next){state.finished=true;save();ending();}else if(next.chapter!==s.chapter)checkpoint(s.chapter);else play();};tone();}
+
+// "Xem lại và chọn lại" (chặng 8): gỡ dấu, mở khóa thẻ, xóa phản hồi; lần sai không được cộng điểm
+function retry(){resolved=false;selected=[];
+app.querySelectorAll('.stamp').forEach(x=>x.remove());
+cards().forEach(c=>{c.disabled=false;c.classList.remove('is-wrong');});
+$('feedback').innerHTML='';syncCards();
+const b=$('commit');b.textContent='Triển khai →';b.onclick=commit;
+document.querySelector('.hand')?.scrollIntoView?.({behavior:reducedMotion()?'instant':'smooth',block:'center'});}
+
+// Câu hỏi cuối chương: [câu hỏi, đáp án đúng, đáp án sai, giải thích khi sai].
+// Đề xuất đáp án sai mới (lấy từ nhầm lẫn có thật) nằm trong docs/de-xuat-cau-hoi.md, chờ nhóm duyệt.
+const QUESTIONS=[
+  ['Vì sao khôi phục tổ chức có ý nghĩa cho giai đoạn sau?','Tạo mạng lưới để tiếp tục vận động và phối hợp.','Chỉ để ghi nhớ các mốc thời gian.','Thử nghĩ đến cách tổ chức và phương pháp đã thích ứng với tình hình.'],
+  ['Điều gì nổi bật trong cách lãnh đạo giai đoạn 1936–1939?','Điều chỉnh phương pháp theo hoàn cảnh, mở rộng lực lượng.','Dùng một hình thức đấu tranh cho mọi hoàn cảnh.','Thử nghĩ đến cách tổ chức và phương pháp đã thích ứng với tình hình.']
+];
+// Màn câu hỏi cuối chương: đúng → dấu tích; sai → dấu son "CHƯA ĐÚNG" + giải thích. Không trừ điểm, chọn lại thoải mái
+function checkpoint(chapter){show(()=>{setAct(String(chapter+1));const q=QUESTIONS[chapter];const enter=!app.querySelector('.sheet');app.innerHTML=UI.checkpoint(D,chapter,q,{enter});renderStrip();setBright(false);aimLamp(app.querySelector('.check'));
+app.querySelectorAll('[data-good]').forEach(b=>b.onclick=()=>{
+  const good=b.dataset.good==='true';
+  if(good){b.className='correct';}
+  else if(!b.classList.contains('wrong')){b.className='wrong';b.insertAdjacentHTML('beforeend','<span class="stamp">Chưa đúng</span>');}
+  $('check-feedback').textContent=good?'Đúng. Thành quả ấy được mang sang chương tiếp theo.':q[3];});
+$('next').onclick=()=>chapterIntro(chapter+1);scroll();});}
+
+// Màn kết
+function ending(){state.finished=true;save();show(()=>{setAct('finale');const enter=!app.querySelector('.sheet');app.innerHTML=UI.ending(D,state,{enter});
+// Màn kết: tuyến 9 chặng sáng đủ lần lượt, la bàn chỉ "Tháng Tám", rồi ảnh Ba Đình hiện
+renderStrip({seq:true,forceLit:true});setBright(true);aimLamp(app.querySelector('.end-hero'));
+$('end-records').onclick=()=>openRecords(8);$('replay').onclick=()=>{saved=state;home();scroll();};scroll();});}
+
 home();})();

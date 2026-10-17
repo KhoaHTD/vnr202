@@ -1,0 +1,13 @@
+/* ============================================================
+   ACTS: không khí theo từng hồi. Đặt bằng <body data-act="1|2|3|finale"> (game.js → setAct).
+   Căn phòng luôn tối và phẳng; mỗi hồi chỉ đổi độ chìm của mép tờ bản đồ vào bóng tối.
+   ============================================================ */
+
+/* Hồi I (1930–1935): mép tờ giấy chìm sâu hơn, như thời kỳ bị vây hãm */
+[data-act="1"] { --edge: .6; }
+
+/* Hồi II, III: dùng giá trị mặc định trong tokens.css */
+
+/* Màn cuối (8–9/1945): mép sáng hơn, tiêu đề chặng gạch chân đỏ son */
+[data-act="finale"] { --edge: .35; }
+[data-act="finale"] .sheet-head h2 { text-decoration: underline 3px var(--accent); text-underline-offset: 10px; }

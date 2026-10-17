@@ -20,4 +20,7 @@ Các chi tiết không đưa vào lượt chơi nằm trong hồ sơ hoặc bả
 - Nhóm duyệt lại mọi ngày, thuật ngữ và thêm số trang giáo trình chính thức. Bản này chưa được kiểm chứng độc lập toàn bộ.
 
 ## Cấu trúc
-`content.js`: dữ liệu. `game.js`: trạng thái và tương tác. `style.css`: giao diện responsive. Tiến độ lưu localStorage sau mỗi tình huống; âm thanh chỉ bật theo lựa chọn.
+Giao diện "bàn bản đồ dưới ánh đèn": căn phòng tối phẳng (đầu trang, dải lực lượng, la bàn thời cơ, tuyến 9 chặng) và tờ bản đồ giấy da (màn chơi, câu hỏi cuối chương, màn kết).
+`content.js`: dữ liệu. `ui.js`: dựng HTML. `game.js`: trạng thái, sự kiện, chuyển màn, quầng đèn.
+CSS: `tokens.css` (màu, chữ, chuyển động) → `base.css` (căn phòng, nút, đầu trang) → `components.css` (từng khối) → `acts.css` (độ chìm mép tờ giấy theo hồi). `style.css`, `redesign.css`, `archive-paper.css` là bản cũ, không còn được nạp.
+Tiến độ lưu localStorage sau mỗi tình huống; âm thanh chỉ bật theo lựa chọn. Kiểm tra: `node test-logic.cjs` (logic) và `node check.cjs` (trình duyệt thật, cần `node server.cjs` đang chạy).
