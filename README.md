@@ -1,100 +1,83 @@
-# Đường đến tháng Tám · v2
+# Đường đến tháng Tám
 
-Web game lịch sử Việt Nam giai đoạn 1930–1945, giao diện tiếng Việt. Người chơi kéo thả hoặc chọn–đặt các hoạt động để đáp ứng hai nhiệm vụ trên địa bàn minh họa. Bản mới có 3 chương, 9 chặng, 36 thẻ theo màn và 18 nhiệm vụ được chấm điểm.
+Game dẫn truyện và lựa chọn cho môn Lịch sử Đảng. Màn hình máy tính có cảnh pixel bên trái, dẫn truyện và câu hỏi bên phải. Mỗi giai đoạn bắt đầu độc lập từ trang chọn; trên điện thoại, cảnh nằm trên phần đọc và lựa chọn.
 
-## Mở và chơi thử
+## Chạy và xem
 
-Yêu cầu Node.js; dùng Node 22 trở lên để chạy cả bộ kiểm tra trình duyệt. Game dùng HTML/CSS/JavaScript thuần và SVG được tạo trong mã nguồn, không cần cài thư viện để khởi động.
+Cần Node.js 22 trở lên. Không cần cài thêm thư viện.
 
 ```powershell
 npm start
 ```
 
-Giữ cửa sổ chạy mở, sau đó truy cập:
+- [Chọn giai đoạn](http://127.0.0.1:5173/)
+- [Xem thử đoạn kết](http://127.0.0.1:5173/ending-preview.html)
+- [1930–1935](http://127.0.0.1:5173/hanh-trinh.html?giai-doan=1930-1935)
+- [1936–1939](http://127.0.0.1:5173/hanh-trinh.html?giai-doan=1936-1939)
+- [1939–1945](http://127.0.0.1:5173/hanh-trinh.html?giai-doan=1939-1945)
 
-- Trang đầu: [http://localhost:5173/index.html](http://localhost:5173/index.html).
-- Bàn chơi: [http://localhost:5173/hanh-trinh.html](http://localhost:5173/hanh-trinh.html).
+Máy chủ chỉ lắng nghe tại 127.0.0.1:5173. Đây là bản chạy tại máy, chưa xuất bản lên Internet.
 
-Chạy qua HTTP để hai trang và phiên chơi dùng cùng một nguồn. Không dùng việc mở tệp HTML trực tiếp làm cách chạy được hỗ trợ. Font Google là tùy chọn; khi không tải được, trình duyệt dùng font dự phòng của hệ thống.
+## Luồng chơi hiện tại
 
-## Cách chơi và điểm số
+| Giai đoạn | Câu hỏi | Điểm tối đa |
+|---|---:|---:|
+| 1930–1935 | 4 | 400 |
+| 1936–1939 | 4 | 400 |
+| 1939–1945 | 18 và một lượt đón thời cơ | 1900 |
 
-Mỗi chặng hiện một câu bối cảnh, hai nhiệm vụ và bốn hoạt động có minh họa. Đặt hai thẻ vào hai nhiệm vụ rồi bấm **Triển khai**. Có thể mở **Tìm hiểu**, thông tin thẻ, thông tin nhiệm vụ hoặc **Hồ sơ** để đọc thêm; phần đọc sâu không bắt buộc để đi tiếp.
+Đọc đoạn dẫn, chọn một trong bốn phương án, rồi xác nhận. Mỗi phương án có giải thích riêng. Phù hợp lần đầu được 100 điểm; sau một lựa chọn chưa phù hợp, câu ấy vẫn phải được hoàn thành nhưng nhận 0 điểm. Những lựa chọn đã thử được giữ lại và không được chọn lặp. Không chấm điểm bằng thứ tự bấm các hoạt động trong cảnh nữa.
 
-- Kéo bằng chuột hoặc thao tác con trỏ; cũng có thể chọn một thẻ rồi chọn nhiệm vụ để đặt.
-- Bàn phím: Tab đến thẻ, Enter/Space để chọn; Tab đến nhiệm vụ, Enter/Space để đặt. Escape hủy chọn. Nút **Đưa về khay** trả thẻ chưa khóa.
-- Đặt thẻ vào ô đã có thẻ sẽ thay thẻ; nếu chuyển một thẻ giữa hai ô đã có thẻ thì hai thẻ đổi chỗ. Có thể đổi cách bố trí trước khi triển khai.
-- Thả hụt không tính là một lần trả lời và không làm mất điểm. Highlight vùng nhận chỉ cho biết có thể thả, không tiết lộ phương án phù hợp.
-- Sau triển khai, ô phù hợp được khóa. Phần chưa phù hợp có thể điều chỉnh hoặc chọn **Tiếp tục và ôn lại sau**. Cần triển khai ít nhất một lần trước khi chuyển chặng.
+Câu hỏi có phương án nhiễu từ những thời kỳ khác, những mốc gần nhau và các cặp cơ quan–quyết định dễ nhầm. Dẫn truyện không tự nêu đáp án trước câu hỏi. Sách mở bài đọc bối cảnh tự chọn; bóng đèn mở hướng dẫn và cách tính điểm. Không hiển thị mã nguồn tư liệu hoặc ghi chú biên tập cho người chơi.
 
-| Kết quả một nhiệm vụ | Điểm |
-|---|---:|
-| Phù hợp ngay lần triển khai đầu | 10 |
-| Phù hợp sau khi điều chỉnh | 5 |
-| Chưa hoàn thành khi chuyển chặng | 0 |
+Sau câu hỏi thứ hai ở Tân Trào, người chơi chủ động bấm Đón thời cơ. Thông báo nhỏ hiện trước 2,5 giây; tín hiệu bay qua đúng 5 giây hoạt động, không có vòng đếm ngược. Bắt ở lượt đầu nhận 100 điểm; bỏ lỡ được đón lại với 0 điểm. Không tính thời gian khi hộp đọc đang mở hoặc tab ở nền. Tín hiệu không tự xuất hiện trong lúc đọc câu hỏi.
 
-Mỗi chặng tối đa 20 điểm; toàn hành trình tối đa **180 điểm**. Chương 1 và 2 mỗi chương tối đa 40 điểm, chương 3 tối đa 100 điểm. Không có điểm tốc độ hoặc phạt khi đọc tư liệu. Nhiều thẻ cùng đáp ứng nhiệm vụ được chấp nhận với điểm như nhau.
+Kết quả có điểm, số câu phù hợp ngay lần đầu và phần xem lại: câu hỏi, lựa chọn đầu, lý do, phương án phù hợp. Giai đoạn chính luôn khép lại bằng thắng lợi tháng Tám và sự ra đời của nước Việt Nam Dân chủ Cộng hòa ngày 2/9/1945. Hai giai đoạn dẫn có lời kết riêng.
 
-Phản hồi đánh giá sự phù hợp với nhiệm vụ và bối cảnh, không gọi người chơi hay hoạt động lịch sử là “sai”. Nút **Vì sao?** giải thích đúng cặp nhiệm vụ–thẻ đã triển khai, kèm phương án đáp ứng và định vị nguồn.
+## Đoạn kết điện ảnh
 
-## Xem kết quả, ôn tập và lưu phiên
+Sau khi xác nhận phương án phù hợp ở câu cuối giai đoạn 1939–1945, điểm được lưu và đoạn kết tự chạy: tối dần 2 giây; nền video cờ hiện trong 1,8 giây với độ sáng giảm; video đọc Tuyên ngôn xuất hiện ở giữa trong 1,2 giây. Quốc ca bắt đầu từ mức 0 khi còn 3 giây video, tăng theo thời gian phát thực tế tới mức đầy đủ lúc video kết thúc. Sau đó video đọc mờ đi, cờ tiếp tục bay và quốc ca phát hết; màn hình chuyển về kết quả.
 
-Sau hành trình có tổng điểm, điểm từng chương và số nhiệm vụ phù hợp ngay, đã điều chỉnh hoặc chưa hoàn thành. Phần xem lại giữ lựa chọn ban đầu kể cả khi đã sửa; có bộ lọc, lý do riêng cho từng cặp, các phương án phù hợp và lịch sử những lần triển khai. Có thể xem lại chương sau hai chương đầu.
+Dùng nguyên ba tệp trong ending/, không sửa hoặc thay thế video/audio gốc. Video cờ lặp và luôn tắt tiếng. Có tạm dừng, bật/tắt âm thanh, nút Xem kết quả và Escape để rời đoạn kết; điều khiển tự ẩn khi không dùng. Rời tab tạm dừng. Kết quả có nút Xem lại đoạn kết. Trang ending-preview.html cho xem thử độc lập với điểm chơi.
 
-**Luyện lại tình huống** mở một lượt luyện riêng của chặng đó. Điểm luyện được thông báo khi hoàn tất, không viết lại điểm hoặc lịch sử của lượt hành trình. Quay lại xem lại giữ các mục đang mở và vị trí cuộn trong lượt luyện hiện tại.
+Âm thanh được mở khóa bằng thao tác xác nhận cuối hoặc nút xem thử; nếu trình duyệt từ chối phát, một nút Phát đoạn kết xuất hiện. Bộ trộn dùng Web Audio khi có hỗ trợ. Máy chủ hỗ trợ video/mp4, audio/mpeg, HEAD và HTTP Range để video dài có thể tải, tua theo từng đoạn.
 
-Tiến độ, thứ tự thẻ đã xáo và tùy chọn âm thanh được lưu bằng **sessionStorage trong cùng tab**. Tải lại trang hoặc chuyển giữa hai URL trên cùng nguồn có thể tiếp tục lượt đang chơi. Đóng tab kết thúc phạm vi lưu phiên; đây không phải tài khoản, lịch sử lưu dài hạn hoặc bảng xếp hạng. Lượt luyện đang thực hiện chỉ ở bộ nhớ, không tự tiếp tục sau tải lại. Nếu trình duyệt chặn lưu phiên, game thông báo và vẫn cho chơi, nhưng tải lại có thể mất tiến độ.
+Xem [ghi chú triển khai đoạn kết](docs/ending-implementation.md).
 
-Lượt mới thay tiến độ lượt cũ; game hỏi lại nếu hành trình còn đang chơi. Âm thanh mặc định tắt và có nút bật/tắt. Các hiệu ứng trạng thái cần tôn trọng tùy chọn giảm chuyển động của hệ điều hành.
+## Lưu tiến độ
 
-## Nội dung, minh họa và nguồn
+Mỗi giai đoạn dùng một khóa localStorage riêng: thang-tam:story:1:<giai-doan>. Lưu câu trả lời, lần lựa chọn đầu và thời gian tín hiệu đã qua; tải lại hoặc đóng rồi mở lại trình duyệt có thể tiếp tục trên cùng hồ sơ trình duyệt. Không có tài khoản hay đồng bộ sang máy khác. Chơi lại chỉ xóa lượt của giai đoạn đang chọn, có xác nhận trước khi thay điểm.
 
-Bộ matching đã đối chiếu ba Word của nhóm qua bản trích OOXML. Đây là căn cứ nội bộ, **chưa phải xác minh lịch sử độc lập hoặc duyệt chuyên môn**. Các đánh giá là quy tắc biên tập theo nhiệm vụ cụ thể, không phải kết luận trích nguyên văn giáo trình.
+Dữ liệu được kiểm tra và dựng lại theo luật khi khôi phục. Điểm tính từ câu trả lời đầu, không lấy tổng điểm lưu sẵn. Nếu bộ nhớ trình duyệt bị chặn, game vẫn chơi được và hiện thông báo không lưu được.
 
-- `docs/content-model-v2.json`: nguồn dữ liệu 9 màn, 72 cặp đánh giá, lý do và phương án được chấp nhận.
-- `docs/content-matrix-v2.md`: bản đọc ma trận cho nhóm.
-- `docs/content-review-v2.md`: giới hạn nguồn, nội dung đã điều chỉnh và chi tiết cần duyệt.
-- `docs/source-extracts-v2/`: bản trích có hash và định vị đoạn `D1:P013`… Số Pxxx là đoạn OOXML, không phải trang.
-- `docs/ui-semantics-v2.md`: ý nghĩa màu, icon, số, đường nối và trạng thái tương tác.
-- `docs/asset-manifest-v2.md`: phạm vi và nguồn gốc minh họa.
-
-Nguồn trong game mở bản trích liên quan ở tab mới. Khi bản trích được phục vụ dưới dạng văn bản, dùng tìm kiếm trong trang với mã Pxxx để đến đoạn; fragment không thay thế một trình đọc Markdown.
-
-Minh họa v2 là **SVG tạo trong repository**, không phải ảnh tư liệu, bản đồ địa lý hay tái dựng địa điểm có thật. Cây, sông, nhà và nhân vật tạo ngữ cảnh; các đường nối biểu thị quan hệ tổ chức và liên lạc. Điểm người chơi phản ánh mức độ hiểu nhiệm vụ, không thay đổi diễn biến lịch sử. Ảnh cũ chưa rõ nguồn/khác thời kỳ không được dùng làm ảnh tư liệu cho bản v2.
-
-## Cấu trúc đang chạy
+## Mã đang được tải
 
 | Tệp | Vai trò |
 |---|---|
-| `index.html`, `hanh-trinh.html` | Trang đầu và game, giữ URL hiện có |
-| `src/js/v2-content.js` | Payload tạo sẵn: `window.V2_DATA`; không fetch JSON trong lượt chơi |
-| `src/js/v2-core.js` | Luật đặt/hoán đổi, triển khai, 10/5/0, lịch sử, tổng kết, khôi phục phiên |
-| `src/js/v2-art.js` | Icon, hình 36 thẻ và 9 cảnh SVG |
-| `src/js/v2-ui.js` | HTML của landing, chương, bàn chơi, kết quả, xem lại và bảng đọc thêm |
-| `src/js/v2-game.js` | Điều phối giao diện, chuột/chạm/bàn phím, dialog, phiên và âm báo |
-| `src/css/v2-tokens.css`, `src/css/v2.css` | Vai trò màu, chữ, khoảng cách, bố cục và trạng thái |
-| `server.cjs` | Máy chủ tĩnh cục bộ, bind `127.0.0.1:5173` |
+| index.html, hanh-trinh.html | Chọn giai đoạn và chơi độc lập theo URL |
+| src/js/story-content.js | 26 câu, dẫn truyện, phương án, lý do và bài đọc bối cảnh |
+| src/js/story-core.js | Luật chọn, thử lại, điểm, thời cơ và khôi phục tiến độ |
+| src/js/story-game.js | Giao diện, phím, hộp đọc và tổng kết |
+| src/js/story-ending.js, src/css/story-ending.css | Chuyển cảnh, video, trộn quốc ca và điều khiển đoạn kết |
+| src/css/story.css | Bố cục hai cột và điện thoại |
+| src/css/story-tone.css | Màu mực/giấy, chữ, lựa chọn và không khí lịch sử |
+| src/js/august-world.js | Bộ vẽ cảnh pixel được giữ từ bản trước |
 
-Các tệp giao diện/luật cũ được giữ trong repository nhưng hai entry HTML mới không nạp chúng. Không chỉnh trực tiếp payload `v2-content.js` vì lần build sau sẽ ghi lại.
+Các bộ august-content/core/game, v2, network và pixel-draft được giữ để tham khảo, không điều khiển trang chơi chính. Tiến độ cũ không được chuyển thành điểm của bộ câu hỏi mới.
 
-## Cập nhật nội dung và kiểm tra
+## Nguồn và phạm vi
 
-Khi biên tập matching, cập nhật bản nháp chương ở `docs/content-drafts-v2/`, đối chiếu nguồn và chạy theo thứ tự:
+Nội dung dựa vào ba tài liệu Word của nhóm; tệp gốc được giữ nguyên. Xem [bảng đối chiếu câu hỏi](docs/story-implementation.md), [bản trích](docs/source-extracts-v2/) và [kịch bản hình ảnh](docs/kich-ban-hinh-anh-pixel.md). Các mã đối chiếu chỉ phục vụ biên tập trong dữ liệu và tài liệu phát triển.
 
-```powershell
-node tools/build-content-spec-v2.cjs
-node tools/build-runtime-content-v2.cjs
-node tools/build-content-spec-v2.cjs --check
-node tools/build-runtime-content-v2.cjs --check
-```
+Cảnh pixel là hình minh họa, chưa phải phục dựng chính xác kiến trúc hoặc trang phục. Độ khó được thiết kế qua phân biệt bối cảnh, chủ trương và mốc dễ nhầm; chưa được đo qua thử nghiệm với lớp sinh viên thực tế.
 
-Hồ sơ đọc thêm và thông điệp chương được biên soạn trong `tools/build-runtime-content-v2.cjs`. Công cụ sinh payload kiểm định vị nguồn, độ dài hồ sơ và giữ nguyên scenes/evaluations của model. Nếu Word thay đổi, đọc lại nguồn trước; `tools/extract-docx-content-v2.ps1` chỉ trích xuất, không tự duyệt nội dung.
+## Kiểm tra
 
 ```powershell
 npm test
 npm run test:browser
+npm run test:ending
+npm run test:media
 ```
 
-`npm test` kiểm tra engine và tính đồng bộ tài liệu/payload. `npm run test:browser` chạy Chromium thật bằng hồ sơ kiểm tra riêng, tự mở server cục bộ khi cần. Script không gắn vào trình duyệt cá nhân. Có thể chỉ định `GAME_BROWSER_PATH`, `GAME_TEST_BASE_URL` hoặc `GAME_QA_DIR` khi cần chọn trình duyệt, nguồn chạy hay nơi lưu ảnh kiểm tra.
-
-Đã chạy 14 kiểm tra luật v2 và kiểm tra tính đồng bộ nội dung đạt. Kết quả kiểm tra trình duyệt và bằng chứng hình ảnh được ghi riêng trong `docs/qa-v2.md` khi thực hiện. Kiểm tra tự động không chứng minh thao tác trên phần cứng cảm ứng hoặc mức độ thú vị với người chơi thật; các phần này cần thử trực tiếp.
+Bộ kiểm tra trình duyệt cần Chrome hoặc Edge, tạo hồ sơ riêng và không gắn vào trình duyệt người dùng. Ảnh kiểm tra ở .qa/story/ (không theo dõi bằng Git). npm run test:august và npm run test:legacy dành cho các bộ luật trước.
