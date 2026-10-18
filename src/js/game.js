@@ -11,7 +11,7 @@ let run=E.newRun(/[?&]mode=class\b/.test(location.search)?'class':'solo');
 let ui={sel:null,msg:{},why:{}},sound=false,audio;
 const storyEnding=window.StoryEnding.create({onFinish:()=>endingResults()});
 // Chỉ để test (check.cjs) đọc trạng thái lượt chơi; game không lưu ở đâu cả
-window.GameDebug={state:()=>run,ui:()=>ui,ending:()=>storyEnding.state()};
+window.GameDebug={state:()=>run,ui:()=>ui,ending:()=>storyEnding.state(),skipVoyage:false}; // skipVoyage = true: bỏ chuyển cảnh bản đồ (test)
 
 // Tiện ích nhỏ
 const $=id=>document.getElementById(id);
@@ -62,11 +62,12 @@ source.start(start);source.stop(start+duration);
 // View Transitions API: màn cũ mờ đi, màn mới trượt vào (CSS trong base.css). Không có API thì dùng hiệu ứng CSS cũ.
 const useVT=!!document.startViewTransition&&!reducedMotion();
 if(useVT)document.documentElement?.classList.add('has-vt');
+let noVT=false; // true khi voyage tự dựng màn dưới lớp phủ: bỏ View Transition
 let cleanups=[]; // việc cần gỡ khi rời màn (ví dụ listener bàn phím của màn mở chương)
 function show(build,kind){
   cleanups.forEach(f=>f());cleanups=[];
   const run=()=>{build();enhance();};
-  if(!useVT||!app.childElementCount){run();return;}
+  if(!useVT||noVT||!app.childElementCount){run();return;}
   const root=document.documentElement;
   if(kind)root.dataset.vt=kind; // "leg": chặng → chặng, tờ cũ bị gạt đi, tờ mới đáp xuống (CSS trong play.css)
   const t=document.startViewTransition(run);
@@ -78,6 +79,22 @@ function whenVisible(el,cb){
   const io=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){io.disconnect();cb();}},{rootMargin:'0px 0px -8% 0px'});
   io.observe(el);
 }
+/* Bản đồ nhỏ "bay" từ điểm của chặng trước sang điểm chặng này: nội suy viewBox trong 900ms (viewBox không animate được bằng CSS) */
+let lastMapVB=null;
+function flyMap(){
+  const svg=app.querySelector('.ctx-map svg');if(!svg)return;
+  const to=svg.getAttribute('viewBox').split(' ').map(Number),from=lastMapVB;lastMapVB=to;
+  if(!from||reducedMotion()||from.every((v,i)=>Math.abs(v-to[i])<1))return;
+  const t0=performance.now(),D=900,ease=t=>1-Math.pow(1-t,3);
+  svg.setAttribute('viewBox',from.join(' '));
+  const step=now=>{
+    const k=Math.min(1,(now-t0)/D),e=ease(k),z=Math.sin(Math.PI*k)*.5; // kéo ra giữa chừng rồi áp sát điểm đến, như camera bay
+    const cx=from[0]+from[2]/2+(to[0]+to[2]/2-from[0]-from[2]/2)*e,cy=from[1]+from[3]/2+(to[1]+to[3]/2-from[1]-from[3]/2)*e,w=(from[2]+(to[2]-from[2])*e)*(1+z),h=(from[3]+(to[3]-from[3])*e)*(1+z);
+    if(svg.isConnected)svg.setAttribute('viewBox',`${(cx-w/2).toFixed(1)} ${(cy-h/2).toFixed(1)} ${w.toFixed(1)} ${h.toFixed(1)}`);
+    if(k<1&&svg.isConnected)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
 // Sau khi dựng màn: bật "rửa ảnh" khi ảnh đã tải xong và đã nhìn thấy; bật hiện-khi-cuộn
 function enhance(){
   app.querySelectorAll('[data-develop]').forEach(fig=>{
@@ -86,6 +103,7 @@ function enhance(){
     img.decode?img.decode().then(on,on):on(); // ảnh lỗi vẫn bật để không kẹt ở trạng thái ẩn
   });
   app.querySelectorAll('[data-reveal]').forEach(el=>whenVisible(el,()=>el.classList.add('is-in')));
+  flyMap();
 }
 
 // Khoảng cách từ đỉnh `root` tới đỉnh `el`, đo bằng offsetTop (không bị ảnh hưởng bởi animation trượt/nghiêng của tờ bản đồ)
@@ -145,12 +163,19 @@ $('photo-close').onclick=()=>$('photo-view').close();
 $('photo-view').addEventListener('click',e=>{const r=e.currentTarget.getBoundingClientRect?.();if(r&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom))e.currentTarget.close();});
 $('photo-view').addEventListener('close',()=>lastThumb?.focus?.());
 
+/* ---------- Chuyển cảnh "Hành quân trên bản đồ": từ chặng fromIdx sang chặng run.index (xem voyage.js) ---------- */
+function voyage(fromIdx,build,o={}){
+  if(window.GameDebug.skipVoyage||reducedMotion()||!window.Voyage||!window.MAP_DATA||!app.firstElementChild){build();return;}
+  const sheet=app.querySelector('.sheet')||app.firstElementChild,to=run.index;
+  window.Voyage.run({D,run,from:fromIdx,to,sheet,chapterCard:!!o.chapter,sfx:()=>sfx('snap'),onSwap:()=>{noVT=true;try{build();}finally{noVT=false;}}});
+}
+
 /* ---------- Các màn ---------- */
 // Màn mở đầu chương: không tự chuyển; bấm nút, Enter hoặc phím → để vào chương. Chương 1 có công tắc chế độ Lớp học.
 function chapterIntro(chapter){show(()=>{
   setAct(String(chapter+1));hideStrip();setBright(false);app.innerHTML=UI.chapterIntro(D,chapter,run);aimLamp(app.querySelector('.intro-media'));scroll();
   const onKey=e=>{if((e.key==='Enter'||e.key==='ArrowRight')&&!e.target.closest?.('input,button')&&!document.querySelector('dialog[open]')){e.preventDefault();go();}};
-  const go=()=>{document.removeEventListener('keydown',onKey);play();};
+  const go=()=>{document.removeEventListener('keydown',onKey);voyage(run.index>0?run.index-1:null,play,{chapter:true});};
   document.addEventListener('keydown',onKey);cleanups.push(()=>document.removeEventListener('keydown',onKey));
   const sw=$('mode-class');if(sw)sw.onchange=()=>setMode(sw.checked?'class':'solo');
   $('chapter-go').onclick=e=>{e?.preventDefault?.();go();};
@@ -187,7 +212,7 @@ function paint(fresh=[]){
 function play(){if(run.index>=D.scenes.length){ending();return;}
   const leg=!!app.querySelector('.sheet .stage'); // đang ở một chặng khác thì đổi tờ; từ màn mở chương/tổng kết vào thì giữ cách cũ
   show(()=>{
-  ui={sel:null,msg:{},why:{},tf:{started:false,left:UI.TF_SECONDS}};const s=D.scenes[run.index];setAct(run.index===8?'finale':String(s.chapter+1));
+  ui={sel:null,msg:{},why:{},tf:{started:false,left:UI.tfSecs(D.scenes[run.index]),last:null},nudge:false};const s=D.scenes[run.index];setAct(run.index===8?'finale':String(s.chapter+1));
   if(run.index===D.scenes.length-1)storyEnding.prepare();
   const enter=!app.querySelector('.sheet'); // tờ bản đồ chỉ trượt vào khi vừa vào chương, không trượt lại ở mỗi chặng
   app.innerHTML=UI.play(D,run,{enter,leg});setBright(false);document.body.dataset.mode=run.mode;
@@ -214,9 +239,12 @@ function putCard(slot,id){
 }
 /* Kéo thả bằng Pointer Events (chuột, bút, cảm ứng): kéo >6px mới tính là kéo; dưới ngưỡng là bấm (chạm chọn rồi chạm ô).
    Thả lên ô/điểm nóng thì chấm ngay; thả ra ngoài thì thẻ đứng yên ở rổ. */
-function bindStage(){
-  const root=stageEl();let drag=null,swallow=false;
-  const dropAt=(x,y)=>document.elementFromPoint(x,y)?.closest?.('[data-drop]')||null;
+/* Kéo thả dùng chung (Pointer Events: chuột, bút, cảm ứng). Kéo >6px mới tính là kéo; dưới ngưỡng là bấm.
+   itemSel: thẻ kéo được · dropSel: nơi thả · onDrop(đích, id, rectThẻ) → true nếu nhận · onMiss(id, rectThẻ) khi thả ra ngoài mọi đích.
+   Trả hàm swallowed(): true ngay sau một cú kéo (để bỏ cú click đi kèm). */
+function pointerDrag(root,{itemSel,idOf,dropSel='[data-drop]',onDrop,onMiss}){
+  let drag=null,swallow=false;
+  const dropAt=(x,y)=>document.elementFromPoint(x,y)?.closest?.(dropSel)||null;
   const clearOver=()=>app.querySelectorAll('.is-over').forEach(e=>e.classList.remove('is-over'));
   const move=e=>{
     if(!drag||e.pointerId!==drag.pid)return;
@@ -224,7 +252,7 @@ function bindStage(){
       if(Math.hypot(e.clientX-drag.x,e.clientY-drag.y)<6)return;
       drag.on=true;const r=drag.el.getBoundingClientRect();
       drag.dx=drag.x-r.left;drag.dy=drag.y-r.top;
-      drag.ghost=drag.el.cloneNode(true);drag.ghost.classList.add('ev-ghost');drag.ghost.style.width=r.width+'px';drag.ghost.removeAttribute('data-card');
+      drag.ghost=drag.el.cloneNode(true);drag.ghost.classList.add('ev-ghost');drag.ghost.style.width=r.width+'px';drag.ghost.removeAttribute('data-card');drag.ghost.removeAttribute('data-boss');
       document.body.appendChild(drag.ghost);drag.el.classList.add('is-dragging');document.body.classList.add('is-dragging');
     }
     drag.ghost.style.transform=`translate(${e.clientX-drag.dx}px,${e.clientY-drag.dy}px) rotate(-2deg)`;
@@ -236,19 +264,26 @@ function bindStage(){
     const d=drag;drag=null;
     if(!d.on)return;
     swallow=true;setTimeout(()=>swallow=false,0);
+    const rect=d.ghost.getBoundingClientRect();
     d.ghost.remove();document.body.classList.remove('is-dragging');clearOver();
     const t=e.type==='pointerup'?dropAt(e.clientX,e.clientY):null;
-    if(t&&putCard(t.dataset.drop,d.id))return;
+    if(t&&onDrop(t,d.id,rect))return;
     d.el.classList.remove('is-dragging');
+    if(e.type==='pointerup'&&!t&&onMiss)onMiss(d.id,rect);
   };
   root.addEventListener('pointerdown',e=>{
     if(e.button>0||!e.isPrimary)return;
-    const el=e.target.closest?.('.ev[data-card]');if(!el||el.classList.contains('is-faded'))return;
-    drag={el,id:el.dataset.card,pid:e.pointerId,x:e.clientX,y:e.clientY,on:false};
+    const el=e.target.closest?.(itemSel);if(!el)return;
+    drag={el,id:idOf(el),pid:e.pointerId,x:e.clientX,y:e.clientY,on:false};
     document.addEventListener('pointermove',move);document.addEventListener('pointerup',end);document.addEventListener('pointercancel',end);
   });
+  return ()=>swallow;
+}
+function bindStage(){
+  const root=stageEl();
+  const swallowed=pointerDrag(root,{itemSel:'.ev[data-card]:not(.is-faded)',idOf:el=>el.dataset.card,onDrop:(t,id)=>putCard(t.dataset.drop,id)});
   root.addEventListener('click',e=>{
-    if(swallow)return;
+    if(swallowed())return;
     const t=e.target;
     const ev=t.closest?.('.ev[data-card]');
     if(ev){
@@ -359,7 +394,7 @@ let tfTimer=null;
 const stopTfTimer=()=>{if(tfTimer){clearInterval(tfTimer);tfTimer=null;}};
 function paintTf(){
   const t=E.stageOf(run).tf;
-  $('tf').innerHTML=UI.tfView(D,run,{started:ui.tf.started,classMode:isClass(),left:ui.tf.left});
+  $('tf').innerHTML=UI.tfView(D,run,{started:ui.tf.started,classMode:isClass(),left:ui.tf.left,last:ui.tf.last,secs:UI.tfSecs(D.scenes[run.index])});
   stageEl().classList.toggle('is-done',t.done);
   app.querySelector('.sheet')?.classList.toggle('is-done',t.done);
   const b=$('proceed');b.hidden=!t.done;
@@ -369,13 +404,14 @@ function paintTf(){
 }
 function startTf(){
   if(ui.tf.started||E.stageDone(run))return;
-  ui.tf.started=true;ui.tf.left=UI.TF_SECONDS;paintTf();
+  const secs=UI.tfSecs(D.scenes[run.index]);
+  ui.tf.started=true;ui.tf.left=secs;paintTf();
   if(isClass())return; // Lớp học: không tính giờ
   const t0=performance.now();
   tfTimer=setInterval(()=>{
-    ui.tf.left=Math.max(0,UI.TF_SECONDS-(performance.now()-t0)/1000);
-    const bar=app.querySelector('.tf-bar i'),out=$('tf-time');
-    if(bar)bar.style.transform=`scaleX(${ui.tf.left/UI.TF_SECONDS})`;
+    ui.tf.left=Math.max(0,secs-(performance.now()-t0)/1000);
+    const clock=app.querySelector('.tf-clock'),out=$('tf-time');
+    if(clock){clock.style.setProperty('--f',ui.tf.left/secs);clock.classList.toggle('is-low',ui.tf.left<=5);clock.setAttribute('aria-valuenow',Math.ceil(ui.tf.left));}
     if(out)out.textContent=Math.ceil(ui.tf.left);
     if(ui.tf.left<=0){stopTfTimer();E.tfExpire(run,D);sfx('bad');finishTf();}
   },100);
@@ -383,9 +419,26 @@ function startTf(){
 }
 function answerTf(ans){
   if(!ui.tf.started||E.stageDone(run))return;
+  const top=app.querySelector('.tf-top'),box=top&&top.getBoundingClientRect(),idx=E.stageOf(run).tf.i;
   const res=E.tfAnswer(run,D,ans);if(!res)return;
   sfx(res.ok?'ok':'bad');
+  ui.tf.last=res;
   if(res.done){stopTfTimer();finishTf();}else{paintTf();renderStrip();}
+  flyTf(top,box,idx,res.ok);
+}
+/* Phiếu vừa chấm đóng dấu rồi bay xuống khay "đã thẩm định" (bản sao bay, phiếu thật đã là phiếu kế tiếp) */
+function flyTf(top,box,idx,ok){
+  if(!top||!box||reducedMotion()||!top.animate)return;
+  const slot=app.querySelector(`.tf-slip[data-slip="${idx}"]`);if(!slot)return;
+  const to=slot.getBoundingClientRect(),g=top.cloneNode(true);
+  g.removeAttribute('id');g.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));
+  g.classList.remove('is-drag');g.classList.add('tf-fly',ok?'is-ok':'is-bad');g.removeAttribute('data-top');g.setAttribute('aria-hidden','true');
+  g.style.cssText=`left:${box.left}px;top:${box.top}px;width:${box.width}px;height:${box.height}px;transform:${top.style.transform||'none'}`;
+  g.insertAdjacentHTML('beforeend',`<span class="tf-ink">${ok?'CHÍNH XÁC':'CHƯA ĐÚNG'}</span>`);
+  document.body.appendChild(g);slot.style.visibility='hidden';
+  const dx=to.left+to.width/2-(box.left+box.width/2),dy=to.top+to.height/2-(box.top+box.height/2),sc=Math.max(.08,to.width/box.width);
+  const a=g.animate([{transform:g.style.transform,offset:0},{transform:'none',offset:.001},{transform:'none',offset:.42},{transform:`translate(${dx}px,${dy}px) scale(${sc}) rotate(-6deg)`,opacity:.9,offset:1}],{duration:900,easing:'cubic-bezier(.5,0,.3,1)',fill:'forwards'});
+  const fin=()=>{g.remove();slot.style.visibility='';};a.finished.then(fin,fin);setTimeout(fin,1400);
 }
 function finishTf(){
   stopTfTimer();paintTf();renderStrip();
@@ -410,30 +463,83 @@ function bindTf(){
     else if(e.key==='ArrowRight'||k==='d'){e.preventDefault();answerTf(true);}
   };
   document.addEventListener('keydown',onKey);cleanups.push(()=>document.removeEventListener('keydown',onKey));
+  // Kéo phiếu (chuột hoặc cảm ứng): sang trái = SAI, sang phải = ĐÚNG; kéo quá 100px thì chốt
+  let drag=null;
+  root.addEventListener('pointerdown',e=>{
+    const top=e.target.closest?.('.tf-top[data-top]');if(!top||!ui.tf.started||E.stageDone(run)||e.button>0)return;
+    drag={top,x:e.clientX,id:e.pointerId,dx:0};top.classList.add('is-drag');try{top.setPointerCapture(e.pointerId);}catch{}
+  });
+  root.addEventListener('pointermove',e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    drag.dx=e.clientX-drag.x;const k=Math.max(-1,Math.min(1,drag.dx/120));
+    drag.top.style.transform=`translateX(${drag.dx}px) rotate(${drag.dx/22}deg)`;
+    drag.top.querySelector('.tf-hint--yes').style.opacity=Math.max(0,k);drag.top.querySelector('.tf-hint--no').style.opacity=Math.max(0,-k);
+  });
+  const endDrag=e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    const {top,dx}=drag;drag=null;top.classList.remove('is-drag');
+    if(Math.abs(dx)>100){answerTf(dx>0);return;}
+    top.style.transform='';top.querySelectorAll('.tf-hint').forEach(h=>{h.style.opacity='';});
+  };
+  root.addEventListener('pointerup',endDrag);root.addEventListener('pointercancel',endDrag);
 }
 
-/* ---------- Màn trùm (chặng 9): chọn 4 thẻ đã sưu tầm ---------- */
+/* ---------- Màn trùm (chặng 9): kéo 4 thẻ bằng chứng vào rổ ---------- */
 function paintBoss(){
   const b=E.stageOf(run).boss;
-  $('boss').innerHTML=UI.bossView(D,run);
+  $('boss').innerHTML=UI.bossView(D,run,{nudge:ui.nudge});
   stageEl().classList.toggle('is-done',b.done);
   app.querySelector('.sheet')?.classList.toggle('is-done',b.done);
   const p=$('proceed');p.hidden=!b.done;p.textContent='Xem kết thúc hành trình →';
   $('save-status').textContent='';
 }
+// Thẻ bay (FLIP) từ khung `from` tới chỗ mới của nó sau khi vẽ lại; rổ nhún khi nhận thẻ
+function flyBoss(key,from,intoBasket){
+  const el=app.querySelector(`.ev[data-boss="${key}"]`);if(!el||!from||reducedMotion()||!el.animate)return;
+  const to=el.getBoundingClientRect(),dx=from.left-to.left,dy=from.top-to.top;
+  el.animate([{transform:`translate(${dx}px,${dy}px) rotate(-4deg) scale(${from.width/to.width||1})`,zIndex:5},{transform:'none',zIndex:5}],{duration:460,easing:'cubic-bezier(.2,.9,.25,1)'});
+  if(intoBasket){const bk=$('basket');bk?.animate?.([{transform:'scale(1)'},{transform:'scale(.98)',offset:.6},{transform:'scale(1)'}],{duration:520,easing:'ease-out'});}
+}
+function bossMove(key,fn,from){
+  const el=app.querySelector(`.ev[data-boss="${key}"]`);from=from||el?.getBoundingClientRect();
+  if(!fn())return false;
+  ui.nudge=false;sfx('snap');paintBoss();
+  flyBoss(key,from,E.stageOf(run).boss.picked.includes(key));
+  return true;
+}
+function submitBoss(){
+  const res=E.bossSubmit(run,D);
+  if(!res){ui.nudge=true;paintBoss();return;}
+  sfx(res.ok===E.BOSS_PICK?'ok':'bad');paintBoss();renderStrip();
+  $('feedback').innerHTML=UI.stageDone(D,run,{classMode:isClass()});
+  const f=$('feedback');$('more').onclick=()=>openRecords('stage');enhance();aimLamp(f);f.scrollIntoView({behavior:reducedMotion()?'instant':'smooth',block:'nearest'});
+}
 function bindBoss(){
-  stageEl().addEventListener('click',e=>{
-    const pick=e.target.closest?.('[data-boss]');
-    if(pick){if(E.bossToggle(run,D,pick.dataset.boss)){sfx('snap');paintBoss();app.querySelector(`[data-boss="${pick.dataset.boss}"]`)?.focus?.({preventScroll:true});}return;}
-    if(e.target.closest?.('#boss-submit')){
-      const res=E.bossSubmit(run,D);if(!res)return;
-      sfx(res.ok===E.BOSS_PICK?'ok':'bad');paintBoss();renderStrip();
-      $('feedback').innerHTML=UI.stageDone(D,run,{classMode:isClass()});
-      const f=$('feedback');$('more').onclick=()=>openRecords('stage');enhance();aimLamp(f);f.scrollIntoView({behavior:reducedMotion()?'instant':'smooth',block:'nearest'});return;
+  const root=stageEl();
+  const inBasket=key=>E.stageOf(run).boss.picked.includes(key);
+  const swallowed=pointerDrag(root,{
+    itemSel:'.ev[data-boss]:not([disabled])',idOf:el=>el.dataset.boss,dropSel:'[data-bin]',
+    onDrop:(t,key,rect)=>bossMove(key,()=>E.bossPlace(run,D,key,Number(t.dataset.bin)),rect),
+    onMiss:(key,rect)=>{if(inBasket(key))bossMove(key,()=>E.bossToggle(run,D,key),rect);}
+  });
+  root.addEventListener('click',e=>{
+    if(swallowed())return;
+    const pick=e.target.closest?.('.ev[data-boss]');
+    if(pick){
+      if(pick.disabled)return;
+      const key=pick.dataset.boss;
+      if(!bossMove(key,()=>E.bossToggle(run,D,key))){ui.nudge=true;paintBoss();}
+      app.querySelector(`.ev[data-boss="${key}"]`)?.focus?.({preventScroll:true});return;
     }
+    if(e.target.closest?.('#boss-submit')){submitBoss();return;}
     if(e.target.closest?.('#bonus-go'))startBonus();
   });
-  const onKey=e=>{if(e.key==='Enter'&&e.target===document.body&&E.stageDone(run)){e.preventDefault();proceed();}};
+  const onKey=e=>{
+    if(e.ctrlKey||e.metaKey||e.altKey||document.querySelector('dialog[open]')||e.target.closest?.('input,textarea'))return;
+    const done=E.stageDone(run);
+    if(/^[1-8]$/.test(e.key)&&!done){const it=E.bossPoolOf(run,D)[Number(e.key)-1];if(it){const key=it.key;if(!bossMove(key,()=>E.bossToggle(run,D,key))){ui.nudge=true;paintBoss();}app.querySelector(`.ev[data-boss="${key}"]`)?.focus?.({preventScroll:true});}return;}
+    if(e.key==='Enter'&&e.target===document.body){e.preventDefault();if(done)proceed();else submitBoss();}
+  };
   document.addEventListener('keydown',onKey);cleanups.push(()=>document.removeEventListener('keydown',onKey));
 }
 
@@ -463,9 +569,9 @@ function skipStage(){
 }
 
 function next(){
-  const s=E.sceneOf(run,D);E.advance(run,D);
+  const s=E.sceneOf(run,D),prevIdx=run.index;E.advance(run,D);
   if(run.finished){ending();return;}
-  if(D.scenes[run.index].chapter!==s.chapter)summary(s.chapter);else play();
+  if(D.scenes[run.index].chapter!==s.chapter)summary(s.chapter);else voyage(prevIdx,play);
 }
 
 // Tổng kết cuối chương: album của chương + điểm chương (thay cho câu hỏi cuối chương cũ)
@@ -474,6 +580,14 @@ function summary(chapter){show(()=>{
   app.innerHTML=UI.chapterSummary(D,run,chapter,{enter});renderStrip();setBright(false);aimLamp(app.querySelector('.chapter-break'));
   $('next').onclick=()=>chapterIntro(chapter+1);$('next').focus?.({preventScroll:true});scroll();
   bindShelf();
+  // Rê chuột vào mốc ↔ ghim: cùng data-stage thì cùng sáng
+  const hot=(stage,on)=>app.querySelectorAll(`[data-stage="${stage}"]`).forEach(e=>e.classList.toggle('is-hot',on));
+  const hotBox=(stage,on)=>app.querySelectorAll('[data-cluster]').forEach(e=>{if(e.dataset.cluster.split(',').includes(String(stage)))e.classList.toggle('is-hot',on);});
+  const cb=app.querySelector('.chapter-break--map');
+  if(cb){
+    cb.addEventListener('mouseover',e=>{const t=e.target.closest?.('[data-stage]');if(t){hot(t.dataset.stage,true);hotBox(t.dataset.stage,true);}});
+    cb.addEventListener('mouseout',e=>{const t=e.target.closest?.('[data-stage]');if(t){hot(t.dataset.stage,false);hotBox(t.dataset.stage,false);}});
+  }
   app.querySelectorAll('[data-retry-stage]').forEach(b=>b.onclick=()=>{if(E.retryStage(run,Number(b.dataset.retryStage)))play();});
 });}
 

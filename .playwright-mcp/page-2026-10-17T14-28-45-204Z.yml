@@ -1,0 +1,21 @@
+- generic [active] [ref=f1e1]:
+  - main [ref=f1e2]:
+    - generic [ref=f1e3]:
+      - heading "Đường đến tháng Tám" [level=1] [ref=f1e5]:
+        - generic [ref=f1e6]: Đường đến
+        - emphasis [ref=f1e7]:
+          - generic [aria-hidden] [ref=f1e8]: t
+          - generic [aria-hidden] [ref=f1e9]: h
+          - generic [aria-hidden] [ref=f1e10]: á
+          - generic [aria-hidden] [ref=f1e11]: "n"
+          - generic [aria-hidden] [ref=f1e12]: g
+          - generic [aria-hidden] [ref=f1e13]: T
+          - generic [aria-hidden] [ref=f1e14]: á
+          - generic [aria-hidden] [ref=f1e15]: m
+      - figure "Ảnh tư liệu · 19/8/1945" [ref=f1e17]:
+        - img "Đông đảo quần chúng mít tinh trước Nhà hát lớn Hà Nội, lá cờ đỏ sao vàng lớn treo giữa mặt tiền" [ref=f1e19]
+      - link "Bắt đầu hành trình" [ref=f1e21] [cursor=pointer]:
+        - /url: hanh-trinh.html
+  - generic [ref=f1e24]:
+    - button "Tạm dừng chuyển động" [ref=f1e25] [cursor=pointer]
+    - button "Âm thanh" [ref=f1e28] [cursor=pointer]

@@ -1,2 +1,5 @@
-﻿node_modules/
+node_modules/
 .qa/
+
+# Ảnh chụp màn hình kiểm tra giao diện (nặng, sinh lại được)
+screenshots/
