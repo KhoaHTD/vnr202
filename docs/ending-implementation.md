@@ -2,7 +2,7 @@
 
 ## Luồng chính
 
-Chỉ giai đoạn 1939–1945 tự chạy đoạn kết sau câu cuối. Hai giai đoạn dẫn vẫn kết thúc bằng phần tổng kết riêng. Trả lời chưa phù hợp ở câu cuối không kích hoạt; người chơi chọn lại phù hợp rồi mới vào đoạn kết. Điểm được lưu trước khi chuyển cảnh. Tải lại một lượt đã hoàn thành mở kết quả thay vì ép xem phim lại; có nút xem lại đoạn kết.
+Trên `hanh-trinh.html`, đoạn kết tự chạy sau khi hoàn thành chặng 9 (nút “Xem kết thúc hành trình”). Điểm đã được chấm trước khi chuyển cảnh. Có nút xem lại đoạn kết trên trang kết quả; chơi lại không giữ điểm.
 
 ## Nhịp hình và tiếng
 

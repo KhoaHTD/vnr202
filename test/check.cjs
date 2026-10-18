@@ -179,10 +179,10 @@ async function targets(){try{return await(await fetch(`http://127.0.0.1:${PORT}/
   const run=await ev("JSON.parse(JSON.stringify(GameDebug.state()))");
   if(await ev('localStorage.length'))fail('Trang game không được ghi localStorage');
   if(!run.finished)fail('Chưa đi hết hành trình');
-  // Màn kết trang 1: chỉ có ảnh Bác (có alt), nút sang kết quả; giọng Bác có nguồn mp3 (không ép phát trong trình duyệt thử nghiệm)
-  if(!await ev("!!document.querySelector('.finale .fin-photo img[alt]:not([alt=\"\"])')&&!!document.getElementById('fin-results')&&!document.getElementById('final-score')"))fail('Màn kết trang 1 phải có ảnh Bác (alt) và nút Xem kết quả, chưa có điểm');
-  await click('#fin-results');await wait(1700);
-  if(!await ev("!document.querySelector('.finale')&&!!document.getElementById('voice-ctl')"))fail('Trang 2 không còn ảnh Bác nhưng phải có nút giọng Bác');
+  // Đoạn kết phim (cờ / Tuyên ngôn / Quốc ca): dialog mở, chưa có bảng điểm; bấm Xem kết quả để bỏ qua
+  if(!await ev("!!document.getElementById('ending-screen')?.open&&!document.getElementById('final-score')"))fail('Màn kết phải mở đoạn phim, chưa hiện điểm');
+  await click('[data-ending-action="finish"]');await wait(1800);
+  if(!await ev("!document.getElementById('ending-screen')?.open&&!!document.getElementById('final-score')"))fail('Sau đoạn kết phải hiện bảng điểm');
   const shown=await ev("document.getElementById('final-score').textContent");
   if(shown!=='150')fail('Điểm cuối phải 150 (15 + 0 + 15 + 20 + 4×20 + 20), thấy '+shown);
   if(await ev("document.querySelectorAll('.review li').length")!==4)fail('Danh sách cần ôn phải có 4 mục');

@@ -335,25 +335,7 @@ function chapterSummary(D,run,chapter,o={}){
   return sheet(`<div class="chapter-break"><div class="eyebrow">Hoàn thành chương ${chapter+1} · ${D.chapters[chapter].years}</div><h1 class="place">${D.chapters[chapter].name}</h1><p class="chapter-score"><b>${pts}</b>/${max} điểm của chương</p><div class="cb-grid"><div class="cb-main"><h2 class="sr-only">Dòng thời gian của chương</h2><ol class="tl-list">${items}</ol><ul class="stage-stars" aria-label="Sao từng chặng">${rows}</ul></div>${journeyMap(D,run,{size:'full',now:stages[stages.length-1]})}</div>${collectShelf(D,run,chapter)}<ul class="links">${links}</ul><button id="next" class="primary">Sang chương tiếp theo →</button></div>`,o.enter);
 }
 
-/* Màn kết, trang 1: chỉ có ảnh Bác. Bình minh đỏ + chùm tia sáng → tờ giấy gấp ba rơi xuống và mở ra (paper unfold) → ảnh Bác hiện dần (rửa ảnh) →
-   ngôi sao vàng bừng sáng, giọng Bác vang lên → con dấu 2/9/1945 và khẩu hiệu. Mọi mốc thời gian nằm trong CSS (.finale) và game.js (endingPortrait). */
-function endingPortrait(D){
-  const img=D.endingImage,dust=Array.from({length:16},(_,i)=>`<i style="--x:${(i*37)%100}%;--s:${3+(i*5)%5}px;--d:${9+(i*3)%8}s;--w:${(i*0.9).toFixed(1)}s"></i>`).join('');
-  const words=['Độc lập','Tự do','Hạnh phúc'].map((w,i)=>`<span style="--i:${i}">${w}</span>`).join('<b aria-hidden="true">·</b>');
-  return `<section class="finale" id="finale" aria-label="Tuyên ngôn Độc lập, 2 tháng 9 năm 1945">
-    <div class="fin-bg" aria-hidden="true"><span class="fin-dawn"></span><span class="fin-rays"></span><span class="fin-star"><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.6 7.1.7-5.4 4.8 1.6 7L12 17.4 5.8 21.1l1.6-7L2 9.3l7.1-.7z"/></svg></span><span class="fin-dust">${dust}</span></div>
-    <div class="fin-stage">
-      <div class="unfold"><div class="uf-panel uf-top"></div><div class="uf-panel uf-mid"></div><div class="uf-panel uf-bot"></div>
-        <figure class="fin-photo"><img src="${img.src}" alt="${esc(img.alt)}" width="${img.width}" height="${img.height}" style="object-position:${img.portrait||'84% 40%'}"><span class="fin-sweep" aria-hidden="true"></span></figure>
-        <span class="stamp fin-stamp">2 tháng 9 năm 1945</span></div>
-      <p class="fin-motto" aria-label="Độc lập, Tự do, Hạnh phúc">${words}</p>
-      <p class="fin-cap">Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập · Quảng trường Ba Đình, Hà Nội</p>
-      <blockquote class="fin-quote">${img.quote}</blockquote>
-      <div class="fin-actions"><button class="primary" id="fin-results">Xem kết quả hành trình ${icon('arrow')}</button></div>
-    </div></section>`;
-}
-
-// Màn kết, trang 2: điểm, album 1930–1945 hoàn chỉnh, danh sách cần ôn kèm lời giải, bốn bài học
+// Màn kết (sau đoạn phim cờ / Tuyên ngôn / Quốc ca): điểm, album 1930–1945, danh sách cần ôn, bốn bài học
 function ending(D,run,o={}){
   const score=E.score(run),max=E.MAX(D),rev=E.review(run,D);
   const verdict=score===max?'Trọn vẹn: không ô nào phải gợi ý.':score>=max*.75?'Rất tốt: nắm vững phần lớn các mốc.':score>=max*.5?'Khá: còn vài mốc cần ôn lại.':'Mới bắt đầu: hãy xem danh sách ôn bên dưới rồi chơi lại.';
@@ -364,7 +346,7 @@ function ending(D,run,o={}){
   return sheet(`<div class="end"><div class="end-hero"><div><p class="end-score"><span id="final-score">${score}</span><small>/${max} điểm</small></p><p class="end-stars">${starRow(Math.round(totalStars/D.scenes.length),22)} <small>${totalStars}/${D.scenes.length*3} sao</small></p><h1 class="place">Độc lập là thành quả<br>của cả một hành trình.</h1><p>${verdict}</p></div></div>`
   +`<div class="end-body"><section class="album-full" data-reveal><h3>Dòng thời gian 1930–1945 do bạn hoàn thành</h3><div class="cb-grid"><ol class="tl-list tl-list--full">${tl}</ol>${journeyMap(D,run,{size:'full'})}</div></section>${collectShelf(D,run)}${review}`
   +`<div class="end-grid">${pillars.map(([k,h,p],i)=>`<article data-reveal style="--i:${i}"><div class="eyebrow">${k}</div><h3>${h}</h3><p>${p}</p></article>`).join('')}</div>`
-  +`<p class="end-note">Nước Việt Nam Dân chủ Cộng hòa ra đời; nhân dân từ địa vị bị trị trở thành người làm chủ. Thắng lợi cổ vũ phong trào giải phóng dân tộc trên thế giới.</p><div class="actions"><button id="end-records">Đọc hồ sơ đầy đủ</button>${run.mode==='class'?`<button id="open-scoresheet">${icon('print',18)} Phiếu ghi điểm</button>`:''}<button id="replay" class="primary">Chơi lại</button></div></div></div>`,o.enter);
+  +`<p class="end-note">Nước Việt Nam Dân chủ Cộng hòa ra đời; nhân dân từ địa vị bị trị trở thành người làm chủ. Thắng lợi cổ vũ phong trào giải phóng dân tộc trên thế giới.</p><div class="actions"><button id="end-records">Đọc hồ sơ đầy đủ</button>${run.mode==='class'?`<button id="open-scoresheet">${icon('print',18)} Phiếu ghi điểm</button>`:''}<button type="button" id="replay-ending">Xem lại đoạn kết</button><button id="replay" class="primary">Chơi lại</button></div></div></div>`,o.enter);
 }
 
 // Phiếu ghi điểm cho ban tổ chức (chế độ Lớp học): bảng chặng × team, tổng tự cộng, in được. Không lưu gì.
@@ -383,4 +365,4 @@ function records(D,only,open){
   return items+(idx.length<D.records.length?'<p class="records-note">Các hồ sơ sau sẽ mở khi bạn đi tới giai đoạn đó.</p>':'');
 }
 
-return {endingPortrait,bossView,tfView,TF_SECONDS,starRow,journeyMap,collectShelf,chapterIntro,strip,play,tray,slots,hints,spots,stageDone,chapterSummary,ending,scoresheet,records,icon};})();
+return {bossView,tfView,TF_SECONDS,starRow,journeyMap,collectShelf,chapterIntro,strip,play,tray,slots,hints,spots,stageDone,chapterSummary,ending,scoresheet,records,icon};})();
