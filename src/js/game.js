@@ -636,6 +636,17 @@ $('sheet-btn')&&($('sheet-btn').onclick=openScoresheet);
 /* Phím tua ẩn dành cho dev: mũi tên trái/phải tua giữa các chặng.
    Chỉ bật trên localhost / 127.0.0.1 hoặc khi URL có ?dev; phím S/D vẫn trả lời câu đúng/sai. */
 if(/^(localhost|127\.0\.0\.1)$/.test(location.hostname)||/[?&]dev\b/.test(location.search)){
+  /* Ctrl + ←/→: đi qua đi lại giữa các chặng chỉ để xem giao diện. Chỉ đổi run.index, không chạm điểm, đáp án, album hay chuỗi đúng. */
+  document.addEventListener('keydown',e=>{
+    if((e.key!=='ArrowLeft'&&e.key!=='ArrowRight')||!e.ctrlKey||e.repeat||e.metaKey||e.altKey||e.shiftKey)return;
+    if(document.querySelector('dialog[open]')||e.target.closest?.('input,textarea,select,[contenteditable="true"]'))return;
+    if(storyEnding.isActive())return;
+    e.preventDefault();e.stopImmediatePropagation();
+    const to=Math.max(0,Math.min(D.scenes.length-1,run.index+(e.key==='ArrowLeft'?-1:1)));
+    if(to===run.index&&app.querySelector('.sheet .stage,.sheet .tf'))return;
+    const cur=run.stages[run.index];if(cur?.boss&&!cur.boss.done)cur.boss.pool=null; // bộ thẻ trùm tính từ album: rời đi thì bỏ để lúc chơi thật tính lại cho đúng
+    run.index=to;play();
+  },true);
   document.addEventListener('keydown',e=>{
     if((e.key!=='ArrowLeft'&&e.key!=='ArrowRight')||e.repeat||e.ctrlKey||e.metaKey||e.altKey)return;
     if(document.querySelector('dialog[open]')||e.target.closest?.('input,textarea,select,[contenteditable="true"]'))return;

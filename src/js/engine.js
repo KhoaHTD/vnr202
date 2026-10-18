@@ -264,7 +264,7 @@ function bossPoolOf(run,D){
   const chance=[];
   [run.index-1,run.index].forEach(si=>D.scenes[si].cards.filter(c=>c.slot&&c.t>=BOSS_T).forEach(c=>chance.push({key:si+':'+c.id,scene:si,card:c})));
   const h=str=>[...str].reduce((a,ch)=>(a*31+ch.charCodeAt(0))%1000003,7);
-  b.pool=[...idx.slice(0,4).map(k=>({...prep[k],prep:true})),...chance.slice(0,4).map(x=>({...x,prep:false}))].sort((x,y)=>h(x.key)-h(y.key));
+  b.pool=[...idx.slice(0,4).filter(k=>prep[k]).map(k=>({...prep[k],prep:true})),...chance.slice(0,4).map(x=>({...x,prep:false}))].sort((x,y)=>h(x.key)-h(y.key));
   return b.pool;
 }
 /* Rổ bằng chứng: picked là 4 ô (key thẻ hoặc null), thứ tự ô do người chơi chọn.
