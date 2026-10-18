@@ -3,14 +3,14 @@ chapters:[{name:'Gây dựng & khôi phục',years:'1930–1935',image:{src:'ass
 // Ảnh tư liệu: src rỗng = khung giữ chỗ; xóa hẳn trường image = không hiện gì. Danh sách ô ảnh: docs/anh-tu-lieu.md
 // width/height = kích thước thật của file; focus = object-position (điểm nhìn chính); composite = ảnh ghép.
 // source, license: NHÓM PHẢI ĐIỀN và xác minh chú thích trước khi phát hành.
-endingImage:{src:'assets/img/1945-09-02-ba-dinh.webp',width:500,height:260,focus:'75% 40%',composite:true,alt:'Ảnh ghép hai khung: bên trái là biển người cùng lá cờ đỏ sao vàng, bên phải là Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập',caption:'Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập tại Quảng trường Ba Đình, 2/9/1945 (ảnh ghép)',date:'2/9/1945',source:'',license:''},
+endingImage:{src:'assets/img/1945-09-02-ba-dinh.webp',width:500,height:260,focus:'75% 40%',portrait:'84% 40%',quote:'“Tất cả mọi người đều sinh ra có quyền bình đẳng. Tạo hóa cho họ những quyền không ai có thể xâm phạm được; trong những quyền ấy, có quyền được sống, quyền tự do và quyền mưu cầu hạnh phúc.”',composite:true,alt:'Ảnh ghép hai khung: bên trái là biển người cùng lá cờ đỏ sao vàng, bên phải là Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập',caption:'Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập tại Quảng trường Ba Đình, 2/9/1945 (ảnh ghép)',date:'2/9/1945',source:'',license:''},
 // BẢN NHÁP NỘI DUNG: mọi năm, tên sự kiện, gợi ý cần nhóm đối chiếu giáo trình trước khi dùng thật.
-// Mỗi chặng: 2 điểm nóng (slots) + 4 thẻ (2 thẻ đúng gắn slot, 2 thẻ nhiễu slot:null).
+// Mỗi chặng có kind: 'match' ghép thẻ vào 2 điểm nóng · 'order' xếp 4 thẻ theo thời gian · 'tf' 5 câu đúng/sai (sinh từ 4 thẻ) · 'boss' màn trùm chặng 9 (chọn 4 thẻ sưu tầm chứng minh chuẩn bị lâu dài). Mỗi chặng: 2 điểm nóng (slots) + 4 thẻ (2 thẻ đúng gắn slot, 2 thẻ nhiễu slot:null).
 // t = số dùng để xếp thẻ trong album (năm + tháng/12). hint1 = gợi ý nấc 1 viết riêng cho từng thẻ nhiễu.
 // slot.hint2 = gợi ý nội dung (nấc 2), slot.why = lời giải "Vì sao?" (nấc 3), slot.swap = gợi ý khi đặt thẻ đúng nhầm ô.
 // slot.fx: 'light' (ánh sáng rọi vào điểm) | 'route' (đường liên lạc nối hai điểm) | 'seal' (con dấu năm); slot.caption = chú thích hiện ra khi đúng.
 scenes:[
-{chapter:0,date:'1930–1931',title:'Từ những tiếng nói riêng lẻ',record:0,motif:'flag',
+{chapter:0,date:'1930–1931',title:'Từ những tiếng nói riêng lẻ',record:0,motif:'flag',place:{name:'Nghệ–Tĩnh',x:53,y:68},kind:'match',
  news:'Khủng hoảng kinh tế 1929–1933 tác động đến Đông Dương. Pháp tăng bóc lột và đàn áp, đời sống nhân dân khó khăn.',
  image:{src:''},
  slots:[
@@ -29,7 +29,7 @@ scenes:[
   {id:'c4',name:'Hội nghị Trung ương 8, thành lập Việt Minh',year:'Tháng 5/1941',t:1941.4,slot:null,hint1:'Hội nghị Trung ương 8 diễn ra năm 1941, muộn hơn tình huống này 11 năm. Hãy tìm sự kiện của năm 1930.'}],
  explain:'Phong trào 1930–1931 thể hiện sức mạnh công–nông và vai trò tổ chức, lãnh đạo của Đảng. Xô viết Nghệ–Tĩnh là đỉnh cao, với những hoạt động quản lý đời sống ở một số địa phương.',
  link:'Khủng hoảng và bóc lột → một chính đảng thống nhất → phong trào công–nông.'},
-{chapter:0,date:'1932–1935',title:'Giữ những mạch nối',record:1,motif:'document',
+{chapter:0,date:'1932–1935',title:'Giữ những mạch nối',record:1,motif:'document',place:{name:'Ma Cao',x:92,y:20,off:true},kind:'match',
  news:'Sau cao trào, thực dân Pháp đàn áp khốc liệt. Nhiều cơ sở bị phá vỡ, cán bộ bị bắt, phong trào gặp khó khăn.',
  image:{src:''},
  slots:[
@@ -48,7 +48,7 @@ scenes:[
   {id:'c4',name:'Phá kho thóc cứu đói',year:'1945',t:1945.3,slot:null,hint1:'Phá kho thóc cứu đói diễn ra năm 1945, muộn hơn giai đoạn này hơn 10 năm. Hãy tìm sự kiện trong khoảng 1932–1935.'}],
  explain:'Việc giữ vững tổ chức giúp phong trào tiếp tục sau đàn áp. Luận cương tháng 10/1930 có đóng góp nhưng còn hạn chế về nhiệm vụ dân tộc và tập hợp lực lượng; những vấn đề này cần được tiếp tục khắc phục.',
  link:'Đàn áp → khôi phục tổ chức → nền tảng cho cao trào tiếp theo.'},
-{chapter:1,date:'1936',title:'Một cánh cửa mở ra',record:2,motif:'meeting',
+{chapter:1,date:'1936',title:'Một cánh cửa mở ra',record:2,motif:'meeting',place:{name:'Thượng Hải',x:92,y:6,off:true},kind:'order',
  news:'Nguy cơ phát xít gia tăng. Đại hội VII Quốc tế Cộng sản chủ trương mặt trận rộng rãi; Chính phủ Mặt trận Nhân dân Pháp lên nắm quyền năm 1936.',
  image:{src:''},
  slots:[
@@ -67,7 +67,7 @@ scenes:[
   {id:'c4',name:'Xô viết Nghệ–Tĩnh',year:'1930–1931',t:1930.7,slot:null,hint1:'Xô viết Nghệ–Tĩnh diễn ra 1930–1931, sớm hơn tình huống này khoảng 5 năm. Hãy tìm sự kiện của năm 1936.'}],
  explain:'Điều kiện quốc tế tạo cơ hội hoạt động mới. Đảng điều chỉnh nhiệm vụ trước mắt và hình thức đấu tranh, gắn phong trào với nhu cầu thiết thực của nhân dân.',
  link:'Điều kiện mới → đường lối mới → thu thập dân nguyện.'},
-{chapter:1,date:'1936–1939',title:'Tập hợp thành sức mạnh chung',record:3,motif:'crowd',
+{chapter:1,date:'1936–1939',title:'Tập hợp thành sức mạnh chung',record:3,motif:'crowd',place:{name:'Hà Nội',x:45,y:28},kind:'order',
  news:'Phong trào phát triển qua dân nguyện, báo chí, bãi công, văn hóa, giáo dục và hoạt động nghị trường.',
  image:{src:''},
  slots:[
@@ -86,7 +86,7 @@ scenes:[
   {id:'c4',name:'Đội Việt Nam Tuyên truyền Giải phóng quân',year:'Tháng 12/1944',t:1944.95,slot:null,hint1:'Đội Việt Nam Tuyên truyền Giải phóng quân thành lập cuối năm 1944, muộn hơn giai đoạn này hơn 5 năm. Hãy tìm sự kiện từ 1936 đến 1939.'}],
  explain:'Phong trào dân chủ rèn luyện lực lượng chính trị rộng lớn. Văn kiện “Chung quanh vấn đề chiến sách mới” đặt vấn đề lựa chọn kẻ thù chính và tránh gắn máy móc giải phóng dân tộc với cách mạng ruộng đất.',
  link:'Mở rộng mặt trận → chọn đúng kẻ thù → rèn luyện quần chúng.'},
-{chapter:2,date:'1939–1941',title:'Độc lập là nhiệm vụ cấp thiết',record:4,motif:'meeting',
+{chapter:2,date:'1939–1941',title:'Độc lập là nhiệm vụ cấp thiết',record:4,motif:'meeting',place:{name:'Pác Bó, Cao Bằng',x:46,y:6},kind:'tf',
  news:'Chiến tranh thế giới thứ hai bùng nổ. Pháp tăng đàn áp; Nhật vào Đông Dương, khiến tình hình dân tộc thêm gay gắt.',
  image:{src:''},
  slots:[
@@ -105,7 +105,7 @@ scenes:[
   {id:'c4',name:'Quân lệnh số 1',year:'13/8/1945',t:1945.6,slot:null,hint1:'Quân lệnh số 1 ban hành năm 1945, muộn hơn giai đoạn này 4 năm trở lên. Hãy tìm sự kiện từ 1939 đến 1941.'}],
  explain:'Sự chuyển hướng là một quá trình. Hội nghị tháng 11/1940 chưa hoàn toàn dứt khoát; Hội nghị VIII hoàn chỉnh chủ trương, đặt lợi ích dân tộc lên trên quyền lợi bộ phận.',
  link:'Chiến tranh và áp bức → ưu tiên giải phóng dân tộc → Việt Minh.'},
-{chapter:2,date:'1941–1944',title:'Chuẩn bị từ những việc bền bỉ',record:5,motif:'star',
+{chapter:2,date:'1941–1944',title:'Chuẩn bị từ những việc bền bỉ',record:5,motif:'star',place:{name:'Cao Bằng',x:50,y:10},kind:'tf',
  news:'Phong trào Việt Minh phát triển. Công tác xây dựng lực lượng chính trị, vũ trang và căn cứ địa được đẩy mạnh.',
  image:{src:''},
  slots:[
@@ -124,7 +124,7 @@ scenes:[
   {id:'c4',name:'Khởi nghĩa Ba Tơ',year:'11/3/1945',t:1945.2,slot:null,hint1:'Khởi nghĩa Ba Tơ diễn ra tháng 3/1945, muộn hơn giai đoạn này. Hãy tìm sự kiện từ 1941 đến 1944.'}],
  explain:'Ngày 22/12/1944, Đội Việt Nam Tuyên truyền Giải phóng quân được thành lập. Lực lượng vũ trang, chính trị và căn cứ bổ trợ nhau; không yếu tố nào tự mình giải thích được thắng lợi.',
  link:'Chuẩn bị lâu dài → khả năng hành động khi thời cơ đến.'},
-{chapter:2,date:'THÁNG 3–7/1945',title:'Cao trào kháng Nhật',record:6,motif:'rice',
+{chapter:2,date:'THÁNG 3–7/1945',title:'Cao trào kháng Nhật',record:6,motif:'rice',place:{name:'Bắc Bộ',x:53,y:36},kind:'tf',
  news:'Ngày 9/3/1945, Nhật đảo chính Pháp. Cuộc khủng hoảng chính trị sâu sắc xuất hiện nhưng điều kiện tổng khởi nghĩa chưa chín muồi.',
  image:{src:'assets/img/1945-giai-phong-quan-duong-pho.webp',width:500,height:334,focus:'35% 50%',alt:'Đoàn người mang súng, đội mũ, diễu hành trên đường phố, người dân đứng hai bên',caption:'Lực lượng vũ trang cách mạng trên đường phố, 1945',date:'1945',source:'',license:''},
  slots:[
@@ -143,7 +143,7 @@ scenes:[
   {id:'c4',name:'Quân lệnh số 1',year:'13/8/1945',t:1945.6,slot:null,hint1:'Quân lệnh số 1 ban hành tháng 8/1945, muộn hơn tình huống này vài tháng. Hãy tìm sự kiện từ tháng 3 đến tháng 7/1945.'}],
  explain:'Khởi nghĩa từng phần, phong trào phá kho thóc và phát triển vùng giải phóng rèn luyện quần chúng, chuẩn bị trực tiếp cho tổng khởi nghĩa. Không phát động tổng khởi nghĩa chỉ vì một biến cố đơn lẻ.',
  link:'Nhật đảo chính → cao trào kháng Nhật → chuẩn bị trực tiếp.'},
-{chapter:2,date:'THÁNG 8/1945',title:'Nhận ra thời cơ',record:7,motif:'document',
+{chapter:2,date:'THÁNG 8/1945',title:'Nhận ra thời cơ',record:7,motif:'document',place:{name:'Tân Trào, Tuyên Quang',x:38,y:17},kind:'tf',
  news:'Nhật đi đến đầu hàng Đồng minh. Chính quyền thân Nhật khủng hoảng; quân Đồng minh chưa vào Đông Dương giải giáp quân Nhật.',
  image:{src:''},
  slots:[
@@ -162,7 +162,7 @@ scenes:[
   {id:'c4',name:'Nhật đảo chính Pháp',year:'9/3/1945',t:1945.2,slot:null,hint1:'Nhật đảo chính Pháp diễn ra ngày 9/3/1945, sớm hơn tình huống này 5 tháng. Hãy tìm sự kiện của tháng 8/1945.'}],
  explain:'Nhật đầu hàng là điều kiện khách quan quan trọng. Thắng lợi còn bắt nguồn từ sự chuẩn bị chủ động, sức mạnh nhân dân và quyết định chớp thời cơ; không tự động xảy ra chỉ vì Nhật thất bại.',
  link:'Thời cơ khách quan + chuẩn bị chủ quan → quyết định tổng khởi nghĩa.'},
-{chapter:2,date:'THÁNG 8–9/1945',title:'Những mạch nối cùng chuyển động',record:8,motif:'flag',
+{chapter:2,date:'THÁNG 8–9/1945',title:'Những mạch nối cùng chuyển động',record:8,motif:'flag',place:{name:'Ba Đình, Hà Nội',x:47,y:31},kind:'boss',
  news:'Quân lệnh số 1 được ban hành đêm 13/8. Hội nghị toàn quốc của Đảng và Đại hội Quốc dân tại Tân Trào thông qua các quyết định quan trọng.',
  image:{src:'assets/img/1945-08-19-nha-hat-lon.webp',width:500,height:329,focus:'50% 35%',alt:'Đông đảo quần chúng mít tinh trước Nhà hát lớn Hà Nội, lá cờ đỏ sao vàng lớn treo giữa mặt tiền',caption:'Mít tinh tại quảng trường Nhà hát lớn Hà Nội, 19/8/1945',date:'19/8/1945',source:'',license:''},
  slots:[

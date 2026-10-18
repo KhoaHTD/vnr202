@@ -44,13 +44,12 @@
 
 /* ================= NỀN PHÒNG: màn mở chương =================
    Ảnh đặt trên bàn dưới đèn (không có tờ bản đồ), tên chương uốn cung. Bấm "Vào chương" thì tờ bản đồ trượt vào. */
-.chapter-intro { display: grid; grid-template-columns: minmax(0, 560px) minmax(0, 380px); justify-content: center; gap: clamp(40px, 6vw, 88px); align-items: center; max-width: 1180px; min-height: calc(100svh - 200px); margin: 0 auto; }
+.chapter-intro { display: grid; grid-template-columns: minmax(0, 560px) minmax(0, 560px); justify-content: center; gap: clamp(40px, 6vw, 88px); align-items: center; max-width: 1180px; min-height: calc(100svh - 200px); margin: 0 auto; }
 .intro-media { justify-self: end; width: 100%; max-width: 560px; }
-.chapter-intro-text { max-width: 440px; }
+.chapter-intro-text { max-width: 560px; }
 .intro-title { margin: var(--s2) 0 var(--s5); color: var(--parchment); }
 .intro-title .place { fill: var(--parchment); }
 .photo--intro.no-dev img, .photo--intro.no-dev .photo-media::after { animation: none; } /* ảnh đến từ landing bằng ảnh bay: không rửa ảnh lại */
-.chapter-intro .hint { margin-top: var(--s2); font: 400 13px var(--font-mono); color: var(--parchment-soft); }
 
 /* ================= ẢNH TƯ LIỆU (dùng chung) =================
    Ảnh "dán" trên một mảng giấy: viền mảnh, mẩu băng dính ở góc, chú thích Space Mono.
