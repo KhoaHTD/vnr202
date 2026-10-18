@@ -800,3 +800,11 @@ html[data-vt=leg]::view-transition-new(sheet) { animation: sheet-land 600ms var(
 .end-hero { grid-template-columns: 1fr; justify-items: center; text-align: center; }
 .end-hero p { margin-inline: auto; }
 .end-score, .end-stars { justify-content: center; }
+
+/* Chỉnh bố cục: chữ dẫn không bị ép co trong màn thấp; thẻ sưu tầm và dòng tổng kết căn đều */
+.stage > * { flex-shrink: 0; }
+.shelf-list { grid-template-columns: repeat(auto-fit, minmax(168px, 1fr)); }
+.shelf-title { text-align: left; }
+.links { max-width: 72ch; display: grid; gap: var(--s2); margin-top: var(--s4); text-align: center; }
+.links li { text-wrap: balance; line-height: 1.45; padding: var(--s2) var(--s3); border-top: 1px solid color-mix(in srgb, var(--accent) 22%, transparent); }
+.links li:first-child { border-top: 0; }
