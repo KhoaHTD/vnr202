@@ -1,2 +1,0 @@
-[     120ms] [WARNING] [cờ] "national" đang dùng hình TẠM (flags/star-1945.placeholder.svg), chưa đúng mẫu lịch sử. Thay file tham chiếu rồi đặt *_IS_PLACEHOLDER = false trong flags3d.js. @ http://localhost:5173/flags3d.js:175
-[     130ms] [WARNING] [cờ] "party" đang dùng hình TẠM (flags/party.placeholder.svg), chưa đúng mẫu lịch sử. Thay file tham chiếu rồi đặt *_IS_PLACEHOLDER = false trong flags3d.js. @ http://localhost:5173/flags3d.js:175
