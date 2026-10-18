@@ -50,21 +50,3 @@ Sửa hằng `QUESTIONS` trong `game.js`. Mỗi câu gồm 4 phần tử:
 ```js
 ['Câu hỏi', 'Đáp án đúng', 'Đáp án sai', 'Giải thích khi chọn sai']
 ```
-
----
-
-## Thang độ khó 9 chặng (đã áp dụng trong `content.js`)
-
-| Chặng | Kiểu | Mức | Hỏi gì |
-|---|---|---|---|
-| 1 | Ghép | Dễ | Nhận diện sự kiện, thẻ nhiễu xa về thời gian |
-| 2 | Ghép | Dễ–vừa | Thẻ nhiễu cùng giai đoạn (Luận cương 10/1930, Ban Chỉ huy ở ngoài 1934) |
-| 3 | Xếp thứ tự | Vừa | 4 mốc trong 1935–1936 |
-| 4 | Xếp thứ tự | Vừa–khó | 4 mốc 1936–1939 cách nhau khoảng 1 năm, ẩn năm |
-| 5 | Đúng/sai | Vừa | Hội nghị, địa điểm, người chủ trì (40 giây) |
-| 6 | Đúng/sai | Vừa–khó | Nguồn gốc lực lượng, thứ tự sự kiện gần nhau (40 giây) |
-| 7 | Đúng/sai | Khó | Chủ trương sau đảo chính 9/3/1945, khẩu hiệu, địa bàn (50 giây) |
-| 8 | Đúng/sai | Khó nhất | Thứ tự trong vài ngày, vai trò thời cơ và chuẩn bị (50 giây) |
-| 9 | Màn trùm | Khó | Thẻ ẩn năm, chọn bằng chứng chuẩn bị lâu dài |
-
-Câu đúng/sai chặng 5–8 viết tay ở trường `tf` của từng chặng; mỗi câu có chú thích dòng nguồn trong `docs/noi-dung-goc.md`. Chặng không có `tf` vẫn tự sinh câu từ ngày tháng của thẻ.

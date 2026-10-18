@@ -4,7 +4,7 @@
    Điểm mỗi ô: đúng ngay lần đầu 10 · đúng sau 1 lần gợi ý (nấc 1) 5 · đúng sau khi thẻ bị làm mờ (nấc 2), xem đáp án hoặc bỏ qua 0.
    Tối đa 20 điểm/chặng, 180 điểm/9 chặng. Gợi ý tăng dần 3 nấc: thời điểm → làm mờ 1 thẻ nhiễu + nội dung → hiện đáp án.
    Kiểu chơi theo chặng (scene.kind): 'match' ghép thẻ vào 2 ô (như trên) · 'order' xếp cả 4 thẻ theo thứ tự thời gian (5/3/0 điểm mỗi vị trí, 4 vị trí) ·
-   'tf' 5 câu đúng/sai (4 điểm mỗi câu; câu viết tay ở scene.tf, nếu không có thì tự sinh từ thẻ; giới hạn giờ scene.tfSeconds). Mọi kiểu đều tối đa 20 điểm/chặng.
+   'tf' 5 câu đúng/sai (4 điểm mỗi câu). Mọi kiểu đều tối đa 20 điểm/chặng.
    Chế độ 'class' (lớp học): cùng luật, nhưng gợi ý chỉ tăng khi MC bấm hint(); chơi một mình thì hint() tự gọi sau mỗi lần sai.
    ============================================================ */
 window.GameEngine=(()=>{
@@ -20,7 +20,7 @@ function newStage(scene){
   const k=kindOf(scene);
   if(k==='order')return {ids:['P1','P2','P3','P4'],P1:newSlot(),P2:newSlot(),P3:newSlot(),P4:newSlot(),faded:[],order:null};
   if(k==='tf')return {ids:[],faded:[],order:null,tf:{items:null,i:0,done:false,pts:0}};
-  if(k==='boss')return {ids:[],faded:[],order:null,boss:{pool:null,picked:[null,null,null,null],done:false,pts:0}};
+  if(k==='boss')return {ids:[],faded:[],order:null,boss:{pool:null,picked:[],done:false,pts:0}};
   return {ids:SLOT_IDS.slice(),A:newSlot(),B:newSlot(),faded:[],order:null};
 }
 function newRun(mode='solo',D=window.GAME_DATA){
@@ -188,7 +188,7 @@ function review(run,D=window.GAME_DATA){
   run.stages.forEach((st,i)=>{
     const scene=D.scenes[i];
     if(st.tf){
-      (st.tf.items||[]).forEach(it=>{if(it.ok===false)out.push({scene:i,slot:'-',situation:it.text,card:cardOf(scene,it.cardId)||{name:scene.title,year:scene.date},how:'missed',pts:0,why:it.explain});});
+      (st.tf.items||[]).forEach(it=>{if(it.ok===false)out.push({scene:i,slot:'-',situation:it.text,card:cardOf(scene,it.cardId),how:'missed',pts:0,why:it.explain});});
       return;
     }
     if(st.boss){
@@ -213,7 +213,6 @@ function timeline(run,D=window.GAME_DATA,upTo=null){
 /* Kiểu đúng/sai: 5 câu sinh từ dữ liệu thẻ có sẵn (không cần nội dung viết thêm), mỗi câu 4 điểm.
    Thứ tự cố định: ngày đúng · ngày sai · so sánh đúng · ngày sai · so sánh sai. Nhãn thời gian sai lấy từ thẻ cùng chặng cách ≥ 1,5 năm nên chắc chắn sai. */
 function tfItems(scene){
-  if(scene.tf&&scene.tf.length)return scene.tf.map(q=>({cardId:q.card||null,text:q.text,answer:q.answer,explain:q.explain})); // câu viết tay trong content.js
   const cs=scene.cards,A=cs.find(c=>c.slot==='A'),B=cs.find(c=>c.slot==='B'),dec=cs.filter(c=>!c.slot);
   const far=c=>cs.filter(x=>x.id!==c.id&&Math.abs(x.t-c.t)>=1.5).sort((p,q)=>Math.abs(p.t-c.t)-Math.abs(q.t-c.t))[0]; // nhãn sai gần nhất (nhưng cách ≥ 1,5 năm) cho câu khó vừa phải
   const why=c=>c.slot?slotOf(scene,c.slot).why:`${c.name} diễn ra ${c.year}.`;
@@ -259,37 +258,26 @@ function bossPoolOf(run,D){
   const b=stageOf(run).boss;
   if(b.pool)return b.pool;
   const prep=run.album.map(a=>({key:a.scene+':'+a.card,scene:a.scene,card:cardOf(D.scenes[a.scene],a.card)})).filter(x=>x.card.t<BOSS_T&&x.scene<run.index).sort((x,y)=>x.card.t-y.card.t);
-  const n=prep.length,idx=[...new Set([Math.floor(n/3),Math.floor(n/2),n-2,n-1])].filter(k=>k>=0); // nghiêng về các mốc gần tháng 8/1945 để khó phân biệt với thẻ thời cơ
-  for(let k=n-3;idx.length<4&&k>=0;k--)if(!idx.includes(k))idx.push(k);
+  const n=prep.length,idx=[...new Set([0,Math.floor(n/3),Math.floor(2*n/3),n-1])];
+  for(let k=1;idx.length<4&&k<n;k++)if(!idx.includes(k))idx.push(k);
   const chance=[];
   [run.index-1,run.index].forEach(si=>D.scenes[si].cards.filter(c=>c.slot&&c.t>=BOSS_T).forEach(c=>chance.push({key:si+':'+c.id,scene:si,card:c})));
   const h=str=>[...str].reduce((a,ch)=>(a*31+ch.charCodeAt(0))%1000003,7);
   b.pool=[...idx.slice(0,4).map(k=>({...prep[k],prep:true})),...chance.slice(0,4).map(x=>({...x,prep:false}))].sort((x,y)=>h(x.key)-h(y.key));
   return b.pool;
 }
-/* Rổ bằng chứng: picked là 4 ô (key thẻ hoặc null), thứ tự ô do người chơi chọn.
-   bossToggle: thẻ đang trong rổ thì lấy ra, chưa có thì bỏ vào ô trống đầu tiên (rổ đầy → false).
-   bossPlace: đặt thẻ vào đúng ô idx (kéo thả). Thẻ đang ở ô khác thì dời đi; ô idx đang có thẻ khác thì thẻ đó trở về cột. */
-const bossCount=run=>stageOf(run).boss.picked.filter(Boolean).length;
+// Chọn / bỏ chọn một thẻ (tối đa 4). Trả true nếu đổi được.
 function bossToggle(run,D,key){
   const b=stageOf(run).boss;bossPoolOf(run,D);
   if(b.done)return false;
   const i=b.picked.indexOf(key);
-  if(i>=0){b.picked[i]=null;return true;}
-  const e=b.picked.indexOf(null);
-  if(e<0)return false;
-  b.picked[e]=key;return true;
-}
-function bossPlace(run,D,key,idx){
-  const b=stageOf(run).boss,pool=bossPoolOf(run,D);
-  if(b.done||!(idx>=0&&idx<BOSS_PICK)||!pool.some(it=>it.key===key))return false;
-  const at=b.picked.indexOf(key);if(at===idx)return false;
-  if(at>=0)b.picked[at]=null;
-  b.picked[idx]=key;return true;
+  if(i>=0){b.picked.splice(i,1);return true;}
+  if(b.picked.length>=BOSS_PICK)return false;
+  b.picked.push(key);return true;
 }
 function bossSubmit(run,D){
   const b=stageOf(run).boss,pool=bossPoolOf(run,D);
-  if(b.done||b.picked.filter(Boolean).length!==BOSS_PICK)return null;
+  if(b.done||b.picked.length!==BOSS_PICK)return null;
   const ok=pool.filter(it=>it.prep&&b.picked.includes(it.key)).length;
   b.pts=ok*BOSS_POINTS;b.done=true;
   run.streak=ok===BOSS_PICK?run.streak+1:0;
@@ -330,4 +318,4 @@ function dots(run,i){
 /* Số lần ô bị chấm sai trong chặng hiện tại (mỗi lần thả thẻ tăng attempts; ô đúng ngay lần chấm đó thì không tính). Dùng để quyết định khi nào hiện link "Bỏ qua". */
 function wrongs(run){const st=stageOf(run);return st.ids.reduce((n,id)=>n+st[id].attempts-(st[id].how==='first'||st[id].how==='retry'||st[id].how==='faded'?1:0),0);}
 const isDone=(run,i)=>stageIsDone(run.stages[i]);
-return {fastForward,bossPoolOf,bossToggle,bossPlace,bossCount,bossSubmit,BOSS_PICK,kindOf,tfItemsOf,tfAnswer,tfExpire,dots,TF_COUNT,isDone,stars,retryStage,finishReplay,wrongs,SLOT_IDS,POINTS,newRun,sceneOf,stageOf,cardOf,slotOf,orderOf,tray,isFaded,place,unplace,drop,quick,hint,reveal,skip,stageDone,advance,stagePoints,score,MAX,review,timeline};})();
+return {fastForward,bossPoolOf,bossToggle,bossSubmit,BOSS_PICK,kindOf,tfItemsOf,tfAnswer,tfExpire,dots,TF_COUNT,isDone,stars,retryStage,finishReplay,wrongs,SLOT_IDS,POINTS,newRun,sceneOf,stageOf,cardOf,slotOf,orderOf,tray,isFaded,place,unplace,drop,quick,hint,reveal,skip,stageDone,advance,stagePoints,score,MAX,review,timeline};})();
