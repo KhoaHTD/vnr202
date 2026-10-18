@@ -655,26 +655,6 @@ document.addEventListener('keydown',e=>{
   const cur=run.stages[run.index];if(cur?.boss&&!cur.boss.done)cur.boss.pool=null; // bộ thẻ trùm tính từ album: rời đi thì bỏ để lúc chơi thật tính lại cho đúng
   run.index=to;play();
 },true);
-/* Phím tua ẩn dành cho dev: mũi tên trái/phải tua giữa các chặng.
-   Chỉ bật trên localhost / 127.0.0.1 hoặc khi URL có ?dev; phím S/D vẫn trả lời câu đúng/sai. */
-if(/^(localhost|127\.0\.0\.1)$/.test(location.hostname)||/[?&]dev\b/.test(location.search)){
-  document.addEventListener('keydown',e=>{
-    if((e.key!=='ArrowLeft'&&e.key!=='ArrowRight')||e.repeat||e.ctrlKey||e.metaKey||e.altKey)return;
-    if(document.querySelector('dialog[open]')||e.target.closest?.('input,textarea,select,[contenteditable="true"]'))return;
-    e.preventDefault();e.stopImmediatePropagation();
-    if(storyEnding.isActive())return;
-    if(e.key==='ArrowLeft'){
-      if(run.index<=0)return;
-      E.fastForward(run,D,run.index-1);play();return;
-    }
-    if(run.index>=D.scenes.length)return;
-    const nextIndex=run.index+1;
-    E.fastForward(run,D,nextIndex);
-    if(nextIndex>=D.scenes.length)ending();else play();
-  });
-}
-
-
 /* Từ landing: tấm ảnh đang bay (index.html bấm nút → sessionStorage 'enter-photo', hanh-trinh.html dựng lại ở đầu <body>) bay nốt vào ô ảnh
    của màn mở chương. FLIP: đo ô ảnh rồi animate transform (dịch + xoay + co/giãn đều) ~0,95s; chữ và đầu trang hiện dần từ giữa chặng bay;
    đáp xuống thì ảnh thật thế chỗ ngay (cùng khung, cùng duotone) và bỏ hiệu ứng rửa ảnh để không chớp. Không có JS/animate: ảnh thật hiện luôn. */
