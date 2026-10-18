@@ -128,15 +128,20 @@ function scenePhoto(s){
   return `<figure class="photo scene-photo${img.src?'':' is-blank'}"><div class="photo-media" style="aspect-ratio:${w}/${h};--focus:${img.focus||'50% 50%'}">${pic}${art}<div class="spots" id="spots"></div></div><figcaption>${credit}</figcaption></figure>`;
 }
 
+/* Dải bối cảnh mỏng: bản đồ nhỏ có ghim + một dòng bản tin. Không thêm thông tin nào khác để người chơi tập trung vào câu hỏi. */
+function tfContext(D,run){
+  const s=D.scenes[run.index];
+  return `<div class="ctx"><div class="ctx-map">${journeyMap(D,run,{size:'mini',now:run.index})}</div><p class="ctx-news brief">${s.news}</p></div>`;
+}
 function play(D,run,o={}){
   const s=D.scenes[run.index],kind=E.kindOf(s);
   // Chặng → chặng: một vệt đèn quét qua mặt giấy tờ mới (chỉ trang trí)
   const leg=o.leg?`<span class="sheet-sweep" aria-hidden="true"></span>`:'';
   const head=`<header class="sheet-head"><div><span class="eyebrow">Chương ${s.chapter+1} · ${s.date} · Chặng ${run.index+1}/9</span><h2 class="place">${s.title}</h2></div></header>`;
   const proceed=`<div class="bottom"><span id="save-status" class="toast" aria-live="polite"></span><div class="bottom-btns"><button class="primary" id="proceed" hidden>Tiếp tục hành trình →</button></div></div>`;
-  if(kind==='tf'||kind==='boss')return sheet(leg+head+`<div class="stage stage--${kind}" id="stage"><p class="brief">${s.news}</p><div class="${kind}" id="${kind}"></div>${proceed}<div id="feedback" aria-live="polite"></div></div>`,o.enter);
+  if(kind==='tf'||kind==='boss')return sheet(leg+head+`<div class="stage stage--${kind}" id="stage">${tfContext(D,run)}<div class="${kind}" id="${kind}"></div>${proceed}<div id="feedback" aria-live="polite"></div></div>`,o.enter);
   return sheet(leg+head
-  +`<div class="stage stage--${kind}" id="stage"><p class="brief">${s.news}</p>`
+  +`<div class="stage stage--${kind}" id="stage">${kind==='order'?tfContext(D,run):`<p class="brief">${s.news}</p>`}`
   +`<div class="stage-main"><div class="col-left"><div class="scene" id="scene" data-lit="0">${scenePhoto(s)}</div><div id="hints" aria-live="polite" hidden></div></div>`
   +`<div class="col-right"><div class="slots" id="slots"></div>`
   +`${proceed}<button id="skip" class="skip-link" hidden>Bỏ qua, ôn lại sau</button></div></div>`
@@ -252,22 +257,59 @@ function starRow(n,size=18){
   return `<span class="stars" role="img" aria-label="${n} trên 3 sao">${[1,2,3].map(k=>`<i class="star${k<=n?' is-on':''}" aria-hidden="true">${icon('star',size)}</i>`).join('')}</span>`;
 }
 
-/* Bản đồ hành trình: dải đất Việt Nam nét mảnh + 9 điểm dừng (D.scenes[i].place). Điểm của chặng đã xong sáng lên và nối nhau bằng một nét đứt;
-   o.now = chặng vừa xong (điểm đó ping một lần). size 'mini' không ghi tên (tên đặt ngoài hình), 'full' ghi tên từng điểm đã sáng. */
-const VN_OUTLINE='M22 8L38 2L55 6L68 14L72 26L66 34L62 42L56 48L54 58L52 70L56 84L62 98L68 112L72 128L74 142L70 156L62 168L56 176L48 186L40 196L32 206L24 202L20 190L24 178L30 168L28 156L32 144L38 132L36 118L40 104L42 90L38 78L34 64L30 52L24 40L16 30L14 18Z';
+/* Bản đồ hành trình: bản đồ Việt Nam thật (Natural Earth, dựng bởi tools/build-map.cjs → map-data.js) kiểu bản đồ cổ.
+   Lớp: vân nước ven bờ → nước láng giềng → Việt Nam → sông → lưới kinh vĩ độ → quần đảo → chữ → tuyến hành trình → ghim.
+   Điểm dừng lấy từ D.scenes[i].place {lat, lon}; điểm ngoài khung (Thượng Hải) vẽ thành mũi tên ở mép trên bên phải.
+   size 'full' = cả nước, có tên địa danh · 'mini' = ô vuông cắt quanh điểm dừng hiện tại, không chữ. */
+const MAPW=()=>window.MAP_DATA;
+function mapView(M,o){
+  const P=(la,lo)=>M.project(la,lo);
+  if(o.size==='mini'&&o.at){const [x,y]=o.at,r=150;return [Math.max(0,Math.min(M.W-2*r,x-r)),Math.max(0,Math.min(M.H-2*r,y-r)),2*r,2*r];}
+  const [x0,y0]=P(24.4,101.4),[x1,y1]=P(7.6,115.4);
+  return [x0,y0,x1-x0,y1-y0];
+}
 function journeyMap(D,run,o={}){
-  const full=o.size==='full';
+  const M=MAPW(),full=o.size==='full';
+  if(!M)return '';
   const done=D.scenes.map((s,i)=>E.isDone(run,i));
   const lit=D.scenes.map((s,i)=>i).filter(i=>done[i]);
-  const path=lit.length>1?`<path class="jm-route" d="${lit.map((i,k)=>`${k?'L':'M'}${D.scenes[i].place.x} ${D.scenes[i].place.y}`).join('')}"/>`:'';
+  const at=i=>{
+    const pl=D.scenes[i].place;
+    if(pl.lat==null)return [pl.x,pl.y];
+    const p=M.project(pl.lat,pl.lon);
+    if(pl.lat>M.lat[1]||pl.lon>M.lon[1]||pl.lat<M.lat[0]||pl.lon<M.lon[0])return [M.W-34,34]; // ngoài khung: mũi tên ở góc trên bên phải
+    return p;
+  };
+  const cur=o.now!=null?at(o.now):null;
+  const vb=mapView(M,{size:o.size,at:cur});
+  // Tuyến hành trình: cung cong nối các điểm đã qua, theo thứ tự chặng
+  const seg=[];let prev=null;
+  lit.forEach(i=>{const q=at(i);if(prev&&(Math.abs(prev[0]-q[0])+Math.abs(prev[1]-q[1])>1)){const mx=(prev[0]+q[0])/2,my=(prev[1]+q[1])/2,dx=q[0]-prev[0],dy=q[1]-prev[1],n=Math.hypot(dx,dy)||1;seg.push(`M${prev[0].toFixed(1)} ${prev[1].toFixed(1)}Q${(mx-dy*.13).toFixed(1)} ${(my+dx*.13).toFixed(1)} ${q[0].toFixed(1)} ${q[1].toFixed(1)}`);}prev=q;});
+  const route=seg.length?`<path class="jm-route" d="${seg.join('')}"/>`:'';
+  const land=M.nb.map(n=>n.d).concat([M.vn]);
+  const halo=['jm-w1','jm-w2','jm-w3'].map(c=>`<g class="${c}">${land.map(d=>`<path d="${d}"/>`).join('')}</g>`).join('');
   const pins=D.scenes.map((s,i)=>{
-    const pl=s.place,on=done[i];
-    const label=full&&on?`<text class="jm-label" x="${pl.x<50?pl.x+3.5:pl.x-3.5}" y="${pl.y+1.2}" text-anchor="${pl.x<50?'start':'end'}">${esc(pl.name)}</text>`:'';
-    return `<g class="jm-pin${on?' is-lit':''}${o.now===i?' is-now':''}${pl.off?' is-off':''}"><circle class="jm-ring" cx="${pl.x}" cy="${pl.y}" r="3.4"/><circle class="jm-dot" cx="${pl.x}" cy="${pl.y}" r="1.9"/>${label}</g>`;
+    const p=at(i),on=done[i],pl=s.place,off=pl.lat!=null&&(pl.lat>M.lat[1]||pl.lon>M.lon[1]);
+    const east=p[0]<(vb[0]+vb[2]*.55),anchor=east?'start':'end';
+    const label=full&&on?`<text class="jm-label" x="${east?20:-20}" y="6" text-anchor="${anchor}">${esc(pl.name)}</text>`:'';
+    const arrow=off?`<path class="jm-arrow" d="M${p[0]-26} ${p[1]+4}h22m-7-7 7 7-7 7"/>`:'';
+    return `<g class="jm-pin${on?' is-lit':''}${o.now===i?' is-now':''}${off?' is-off':''}" transform="translate(${p[0].toFixed(1)} ${p[1].toFixed(1)})">${arrow}<ellipse class="jm-shadow" cx="3" cy="4" rx="9" ry="4"/><circle class="jm-ring" r="12"/><circle class="jm-dot" r="6"/>${label}</g>`;
   }).join('');
+  const txt=(c,x,y,t,rot=0,extra='')=>`<text class="${c}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle"${rot?` transform="rotate(${rot} ${x.toFixed(1)} ${y.toFixed(1)})"`:''}${extra}>${t}</text>`;
+  const pj=(la,lo)=>M.project(la,lo);
+  const labels=full?[
+    txt('jm-sea',...pj(14.2,111.4),'BIỂN ĐÔNG',-62),txt('jm-sea jm-sea--s',...pj(19.9,107.6),'VỊNH BẮC BỘ',-34),
+    txt('jm-cty',...pj(24.0,104.2),'TRUNG QUỐC'),txt('jm-cty',...pj(19.4,102.7),'LÀO',-60),txt('jm-cty',...pj(12.9,104.4),'CAM-PU-CHIA')
+  ].join(''):'';
+  const isl=Object.values(M.isl).map(g=>`<g class="jm-isl">${g.pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="${full?2.6:3.4}"/>`).join('')}${full?txt('jm-islname',g.at[0]+(g.label.includes('Hoàng')?0:-6),g.at[1]+(g.label.includes('Hoàng')?-22:-26),g.label):''}</g>`).join('');
+  const lonT=M.ticks.lon.filter(t=>t.x>vb[0]+10&&t.x<vb[0]+vb[2]-10).map(t=>txt('jm-tick',t.x,vb[1]+22,t.v+'°Đ')).join('');
+  const latT=M.ticks.lat.filter(t=>t.y>vb[1]+30&&t.y<vb[1]+vb[3]-10).map(t=>`<text class="jm-tick" x="${(vb[0]+8).toFixed(1)}" y="${(t.y-4).toFixed(1)}">${t.v}°B</text>`).join('');
+  const rose=full?`<g class="jm-rose" transform="translate(${(vb[0]+78).toFixed(1)} ${(vb[1]+vb[3]-84).toFixed(1)})"><circle r="40"/><circle r="26"/><path d="M0 -52 8 -8 52 0 8 8 0 52 -8 8 -52 0 -8 -8Z"/><text y="-58" text-anchor="middle">B</text></g>`:'';
   const names=lit.map(i=>D.scenes[i].place.name);
   const alt=lit.length?`Bản đồ hành trình: đã qua ${lit.length} trên ${D.scenes.length} điểm, mới nhất là ${names[names.length-1]}`:'Bản đồ hành trình: chưa có điểm nào sáng';
-  return `<figure class="jmap jmap--${full?'full':'mini'}"><svg viewBox="0 0 100 215" role="img" aria-label="${esc(alt)}" focusable="false"><path class="jm-land" d="${VN_OUTLINE}"/>${path}${pins}</svg>${o.size==='mini'&&o.now!=null?`<figcaption>${esc(D.scenes[o.now].place.name)}</figcaption>`:''}</figure>`;
+  const body=`<g class="jm-halo">${halo}</g>${M.nb.map(n=>`<path class="jm-nb" d="${n.d}"/>`).join('')}<path class="jm-vn" d="${M.vn}"/>${M.lakes.map(d=>`<path class="jm-lake" d="${d}"/>`).join('')}${M.rivers.map(r=>`<path class="jm-river${r.major?' is-major':''}" d="${r.d}"/>`).join('')}<path class="jm-grat" d="${M.grat}"/>${isl}${labels}${full?lonT+latT:''}${route}${pins}${rose}`;
+  const cap=o.size==='mini'&&o.now!=null?`<figcaption>${esc(D.scenes[o.now].place.name)}</figcaption>`:'';
+  return `<figure class="jmap jmap--${full?'full':'mini'}"><svg viewBox="${vb.map(v=>v.toFixed(1)).join(' ')}" role="img" aria-label="${esc(alt)}" focusable="false">${body}</svg>${cap}</figure>`;
 }
 
 /* Thẻ sưu tầm: thẻ đúng đã vào album, chạm để lật. Mặt sau: địa danh, câu ý nghĩa của ô (slot.caption) và ảnh tư liệu nếu chặng có, không thì biểu tượng chủ đề. */
@@ -284,15 +326,19 @@ function collectShelf(D,run,chapter=null){
 
 /* Kiểu đúng/sai (chương III): một câu một lần, nút Đúng / Sai to, 5 chấm tiến độ, thanh đếm ngược 20 giây (Lớp học: không tính giờ).
    o = {started, classMode, left (giây còn lại)}. Câu đã trả lời hiện chấm ✓ / ✕ (có ký hiệu, không chỉ màu). */
-const TF_SECONDS=20;
+const TF_SECONDS=40;const tfSecs=scene=>(scene&&scene.tfSeconds)||TF_SECONDS;
 function tfView(D,run,o={}){
-  const t=run.stages[run.index].tf,items=E.tfItemsOf(run,D),n=items.length;
-  const dots=`<ol class="tf-dots" aria-label="Tiến độ ${t.i}/${n} câu">${items.map((it,k)=>`<li class="tf-dot${it.ok===true?' is-ok':it.ok===false?' is-bad':k===t.i?' is-now':''}"><span class="sr-only">Câu ${k+1}: ${it.ok===true?'đúng':it.ok===false?'sai':'chưa trả lời'}</span><span aria-hidden="true">${it.ok===true?'✓':it.ok===false?'✕':k+1}</span></li>`).join('')}</ol>`;
-  if(t.done)return `<div class="tf-card is-done">${dots}<p class="tf-result"><b>${t.pts}</b>/20 điểm · ${items.filter(i=>i.ok).length}/${n} câu đúng</p></div>`;
-  if(!o.started)return `<div class="tf-card is-ready">${dots}<p class="tf-ready">${o.classMode?`${n} câu đúng/sai, không tính giờ. MC đọc to rồi bấm Đúng hoặc Sai theo lớp.`:`${n} câu đúng/sai trong ${TF_SECONDS} giây. Hết giờ, câu chưa trả lời tính là sai.`}</p><button class="primary tf-start" id="tf-start">${o.classMode?'Bắt đầu':`Bắt đầu · ${TF_SECONDS} giây`} ${icon('arrow')}</button></div>`;
-  const it=items[t.i],left=o.left==null?TF_SECONDS:o.left;
-  const timer=o.classMode?'':`<div class="tf-timer"><div class="tf-bar" role="progressbar" aria-label="Thời gian còn lại" aria-valuemin="0" aria-valuemax="${TF_SECONDS}" aria-valuenow="${Math.ceil(left)}"><i style="transform:scaleX(${left/TF_SECONDS})"></i></div><output id="tf-time" class="tf-time" aria-live="off">${Math.ceil(left)}</output></div>`;
-  return `<div class="tf-card">${timer}<p class="tf-count">Câu ${t.i+1}/${n}</p><p class="tf-q" id="tf-q" aria-live="polite">${it.text}</p><div class="tf-actions"><button class="tf-btn tf-btn--no" id="tf-false" aria-keyshortcuts="ArrowLeft">✕ Sai</button><button class="tf-btn tf-btn--yes" id="tf-true" aria-keyshortcuts="ArrowRight">✓ Đúng</button></div>${dots}</div>`;
+  const t=run.stages[run.index].tf,items=E.tfItemsOf(run,D),n=items.length,secs=o.secs||TF_SECONDS;
+  const tray=`<ol class="tf-tray" aria-label="Phiếu đã thẩm định ${t.i}/${n}">${items.map((it,k)=>`<li class="tf-slip${it.ok===true?' is-ok':it.ok===false?' is-bad':k===t.i&&o.started?' is-now':''}" data-slip="${k}"><span class="sr-only">Phiếu ${k+1}: ${it.ok===true?'đúng':it.ok===false?'sai':'chưa trả lời'}</span><span aria-hidden="true">${it.ok===true?'✓':it.ok===false?'✕':k+1}</span></li>`).join('')}</ol>`;
+  if(t.done)return `<div class="tf-desk tf-desk--done"><p class="tf-result"><b>${t.pts}</b><span>/20 điểm</span><em>${items.filter(i=>i.ok).length}/${n} phiếu đúng</em></p>${tray}</div>`;
+  const left=o.left==null?secs:o.left,rest=n-t.i-1;
+  const pile=`${rest>1?'<i class="tf-sheet s3" aria-hidden="true"></i>':''}${rest>0?'<i class="tf-sheet s2" aria-hidden="true"></i>':''}`;
+  if(!o.started)return `<div class="tf-desk is-ready"><div class="tf-pile is-closed"><i class="tf-sheet s3" aria-hidden="true"></i><i class="tf-sheet s2" aria-hidden="true"></i><div class="tf-sheet tf-top"><span class="tf-ribbon">Hồ sơ · ${n} phiếu</span><p class="tf-ready">${o.classMode?'Không tính giờ. MC đọc to từng phiếu rồi bấm SAI hoặc ĐÚNG theo lớp.':`Thẩm định ${n} phiếu trong ${secs} giây. Hết giờ, phiếu chưa chấm tính là sai.`}</p><button class="primary tf-start" id="tf-start">Mở hồ sơ ${icon('arrow')}</button></div></div></div>${tray}`;
+  const it=items[t.i];
+  const clock=o.classMode?'':`<div class="tf-clock${left<=5?' is-low':''}" style="--f:${left/secs}" role="progressbar" aria-label="Thời gian còn lại" aria-valuemin="0" aria-valuemax="${secs}" aria-valuenow="${Math.ceil(left)}"><output id="tf-time" aria-live="off">${Math.ceil(left)}</output></div>`;
+  const stamp=(id,cls,mark,word,key,short)=>`<button class="tf-stamp tf-stamp--${cls}" id="${id}" aria-keyshortcuts="${key}"><span class="tf-stamp-face"><i aria-hidden="true">★</i><b>${word}</b><small aria-hidden="true">${mark}</small></span><kbd aria-hidden="true">${short}</kbd></button>`;
+  const last=o.last?`<p class="tf-verdict ${o.last.ok?'is-ok':'is-bad'}" role="status"><b>${o.last.ok?'✓ Chính xác.':'✕ Chưa đúng.'}</b> ${o.last.item.explain}</p>`:'<p class="tf-verdict" aria-hidden="true">&nbsp;</p>';
+  return `<div class="tf-desk">${stamp('tf-false','no','✕','SAI','ArrowLeft','←')}<div class="tf-pile">${pile}<article class="tf-sheet tf-top" data-top><header><span class="tf-no">Phiếu ${t.i+1}/${n}</span>${clock}</header><p class="tf-q" id="tf-q" aria-live="polite">${it.text}</p><span class="tf-hint tf-hint--no" aria-hidden="true">SAI</span><span class="tf-hint tf-hint--yes" aria-hidden="true">ĐÚNG</span></article></div>${stamp('tf-true','yes','✓','ĐÚNG','ArrowRight','→')}</div>${last}${tray}`;
 }
 // Sau chặng đúng/sai: từng câu, đáp án đúng và lời giải
 function tfReview(D,run){
@@ -311,7 +357,7 @@ function bossView(D,run,o={}){
       else if(!it.prep&&on){mark='✕ Thời cơ, không phải chuẩn bị';cls=' is-bad';}
       else if(it.prep){mark='Bỏ sót';cls=' is-miss';}
     }
-    return `<li><button type="button" class="boss-pick${cls}" data-boss="${it.key}" aria-pressed="${on}"${b.done?' disabled':''}><span class="boss-year">${esc(it.card.year)}</span><span class="boss-name">${esc(it.card.name)}</span>${mark?`<span class="boss-mark">${mark}</span>`:''}</button></li>`;
+    return `<li><button type="button" class="boss-pick${cls}" data-boss="${it.key}" aria-pressed="${on}"${b.done?' disabled':''}>${b.done?`<span class="boss-year">${esc(it.card.year)}</span>`:''}<span class="boss-name">${esc(it.card.name)}</span>${mark?`<span class="boss-mark">${mark}</span>`:''}</button></li>`;
   }).join('');
   const foot=b.done?`<p class="tf-result"><b>${b.pts}</b>/20 điểm · ${b.pts/5}/${n} bằng chứng đúng</p>`:`<p class="boss-count" aria-live="polite">Đã chọn ${b.picked.length}/${n}</p><button class="primary" id="boss-submit"${b.picked.length===n?'':' disabled'}>Chốt đáp án ${icon('arrow')}</button>`;
   return `<div class="boss-card${b.done?' is-done':''}"><p class="boss-kicker">Màn trùm</p><h3 class="boss-q">Cách mạng Tháng Tám có phải là “ăn may”?</h3><p class="boss-sub">Chọn ${n} thẻ đã sưu tầm chứng minh đây là kết quả của <b>chuẩn bị lâu dài</b>, không chỉ của thời cơ tháng 8/1945.</p><ul class="boss-pool">${items}</ul>${foot}</div>`;
@@ -383,4 +429,4 @@ function records(D,only,open){
   return items+(idx.length<D.records.length?'<p class="records-note">Các hồ sơ sau sẽ mở khi bạn đi tới giai đoạn đó.</p>':'');
 }
 
-return {endingPortrait,bossView,tfView,TF_SECONDS,starRow,journeyMap,collectShelf,chapterIntro,strip,play,tray,slots,hints,spots,stageDone,chapterSummary,ending,scoresheet,records,icon};})();
+return {endingPortrait,bossView,tfView,TF_SECONDS,tfSecs,starRow,journeyMap,collectShelf,chapterIntro,strip,play,tray,slots,hints,spots,stageDone,chapterSummary,ending,scoresheet,records,icon};})();

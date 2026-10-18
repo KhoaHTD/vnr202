@@ -21,7 +21,7 @@ D.scenes.forEach((s,i)=>{
 });
 assert.equal(E.MAX(D),180);
 // Dây thời gian: thẻ xếp theo năm tăng dần; mọi chặng có motif minh họa
-{const r=E.newRun('solo');D.scenes.forEach((s,i)=>{r.index=i;const t=E.orderOf(r).map(id=>s.cards.find(c=>c.id===id).t);assert.equal(JSON.stringify(t),JSON.stringify([...t].sort((a,b)=>a-b)),`chặng ${i+1}: thẻ phải xếp theo thời gian`);assert.ok(s.motif,`chặng ${i+1} thiếu motif`);});}
+{const r=E.newRun('solo');D.scenes.forEach((s,i)=>{r.index=i;const t=E.orderOf(r).map(id=>s.cards.find(c=>c.id===id).t);const srt=JSON.stringify([...t].sort((a,b)=>a-b));if(s.kind==='order')assert.notEqual(JSON.stringify(t),srt,`chặng ${i+1}: kiểu xếp thứ tự phải xáo thẻ`);else assert.equal(JSON.stringify(t),srt,`chặng ${i+1}: thẻ phải xếp theo thời gian`);assert.ok(s.motif,`chặng ${i+1} thiếu motif`);});}
 
 const correctFor=(run,id)=>E.slotOf(E.sceneOf(run),id).correct;
 const wrongCards=run=>E.sceneOf(run).cards.filter(c=>!c.slot).map(c=>c.id);

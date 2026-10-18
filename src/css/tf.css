@@ -1,0 +1,151 @@
+/* ============================================================
+   Trang Đúng/Sai (chặng 5–8): "bàn thẩm định hồ sơ".
+   Dải bối cảnh mỏng · hàng chơi: con dấu SAI | chồng phiếu | con dấu ĐÚNG · lời giải phiếu vừa chấm · khay phiếu đã chấm.
+   Chỉ animate transform, opacity, clip-path.
+   ============================================================ */
+
+/* Dải bối cảnh: bản đồ nhỏ + một dòng bản tin */
+.ctx { display: flex; align-items: center; gap: var(--s3); padding-bottom: var(--s2); border-bottom: 1px solid var(--line); }
+.ctx-map { flex: none; width: 76px; }
+.ctx-map .jmap { margin: 0; }
+.ctx-map figcaption { display: none; }
+.ctx-news { margin: 0; max-width: none; font-size: 15px; line-height: 1.5; }
+.stage--tf .ctx, .stage--boss .ctx { transition: opacity var(--dur-3) var(--ease-soft); }
+.stage--tf:has(.tf-top) .ctx { opacity: .6; }
+
+.stage--tf .tf { display: grid; gap: var(--s2); padding: var(--s3) 0 var(--s2); }
+.tf-desk { display: grid; grid-template-columns: 148px minmax(0, 640px) 148px; justify-content: center; align-items: center; gap: clamp(16px, 3vw, 40px); }
+.tf-desk.is-ready, .tf-desk--done { grid-template-columns: minmax(0, 640px); }
+
+/* Chồng phiếu */
+.tf-pile { position: relative; min-height: 250px; display: grid; }
+.tf-sheet {
+  position: relative; display: block; padding: var(--s3) var(--s4) var(--s4);
+  background: var(--parchment); border: 1px solid color-mix(in srgb, var(--ink) 35%, var(--stain)); border-radius: 3px;
+  box-shadow: var(--shadow); background-image: var(--grain);
+  /* mép phiếu răng cưa nhẹ ở đáy */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7px), 97% 100%, 94% calc(100% - 7px), 91% 100%, 88% calc(100% - 7px), 85% 100%, 82% calc(100% - 7px), 79% 100%, 76% calc(100% - 7px), 73% 100%, 70% calc(100% - 7px), 67% 100%, 64% calc(100% - 7px), 61% 100%, 58% calc(100% - 7px), 55% 100%, 52% calc(100% - 7px), 49% 100%, 46% calc(100% - 7px), 43% 100%, 40% calc(100% - 7px), 37% 100%, 34% calc(100% - 7px), 31% 100%, 28% calc(100% - 7px), 25% 100%, 22% calc(100% - 7px), 19% 100%, 16% calc(100% - 7px), 13% 100%, 10% calc(100% - 7px), 7% 100%, 4% calc(100% - 7px), 1% 100%, 0 calc(100% - 7px));
+}
+.tf-pile > .tf-sheet { grid-area: 1 / 1; }
+i.tf-sheet { padding: 0; }
+.tf-pile .s2 { transform: translate(7px, 8px) rotate(1.8deg); background-color: color-mix(in srgb, var(--parchment) 90%, var(--stain)); }
+.tf-pile .s3 { transform: translate(-6px, 14px) rotate(-1.6deg); background-color: color-mix(in srgb, var(--parchment) 82%, var(--stain)); }
+.tf-top { z-index: 2; touch-action: pan-y; cursor: grab; user-select: none; animation: tf-in var(--dur-3) var(--ease-soft) both; }
+.tf-top.is-drag { cursor: grabbing; animation: none; transition: none; }
+@keyframes tf-in { from { opacity: 0; transform: translateY(26px) rotate(1.4deg); } }
+.tf-top::before { /* kẹp giấy */
+  content: ''; position: absolute; top: -9px; left: 26px; width: 15px; height: 40px;
+  border: 2px solid color-mix(in srgb, var(--ink-soft) 70%, var(--parchment)); border-radius: 8px 8px 7px 7px;
+}
+.tf-top header { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); min-height: 44px; margin-left: 28px; }
+.tf-no { font: 600 12px var(--font-ui); letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
+.tf-q { margin: var(--s3) 0 0; font: 600 clamp(22px, 2.5vw, 30px)/1.4 var(--font-display); text-wrap: pretty; color: var(--ink); }
+.tf-q b { color: var(--accent); }
+
+/* Đồng hồ quả quýt */
+.tf-clock {
+  display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%;
+  background: conic-gradient(var(--accent) calc(var(--f, 1) * 360deg), color-mix(in srgb, var(--ink-soft) 22%, transparent) 0);
+  -webkit-mask: radial-gradient(circle, #000 0 100%); position: relative;
+}
+.tf-clock::before { content: ''; position: absolute; inset: 5px; border-radius: 50%; background: var(--parchment); }
+.tf-clock output { position: relative; font: 700 17px/1 var(--font-display); color: var(--ink); font-variant-numeric: tabular-nums; }
+.tf-clock.is-low output { color: var(--accent); }
+.tf-clock.is-low { animation: tf-tick 1s ease-in-out infinite; }
+@keyframes tf-tick { 50% { transform: scale(1.1); } }
+
+/* Gợi ý khi kéo phiếu */
+.tf-hint { position: absolute; top: 56px; padding: 2px 12px; font: 800 26px var(--font-display); letter-spacing: .06em; border: 4px solid currentColor; border-radius: 6px; opacity: 0; pointer-events: none; }
+.tf-hint--no { right: 20px; color: var(--accent); transform: rotate(8deg); }
+.tf-hint--yes { left: 20px; color: var(--ok); transform: rotate(-8deg); }
+
+/* Phiếu đóng (chưa bấm Mở hồ sơ) */
+.tf-pile.is-closed { min-height: 250px; }
+.tf-pile.is-closed .tf-top { display: grid; justify-items: center; align-content: center; gap: var(--s3); text-align: center; cursor: default; }
+.tf-pile.is-closed .tf-top::before { display: none; }
+.tf-ribbon { padding: 4px 18px; font: 700 13px var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--parchment); background: var(--accent); transform: rotate(-2deg); }
+.tf-ready { margin: 0; max-width: 40ch; font-size: 18px; line-height: 1.5; }
+.tf-start { min-height: 56px; padding: 0 28px; font-size: 19px; }
+
+/* Con dấu tròn kiểu dấu triện văn kiện: hai vòng viền, vòng chấm bên trong, ngôi sao trên đầu, chữ lớn ở giữa */
+.sheet .tf-stamp {
+  display: grid; justify-items: center; gap: 8px; padding: 0; min-height: 0; border: 0; background: none; color: var(--accent); cursor: pointer;
+  transition: transform var(--dur-2) var(--ease-press);
+}
+.sheet .tf-stamp--yes { color: var(--ok); }
+.sheet .tf-stamp:hover:not(:disabled) { background: none; transform: scale(1.06) rotate(-3deg); }
+.sheet .tf-stamp:active:not(:disabled) { transform: scale(.94); }
+.tf-stamp-face {
+  position: relative; display: grid; place-items: center; align-content: center; width: 132px; height: 132px; border-radius: 50%;
+  border: 4px double currentColor; transform: rotate(-7deg);
+  background: radial-gradient(circle, transparent 52%, color-mix(in srgb, currentColor 9%, transparent) 100%);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 35%, transparent);
+}
+.tf-stamp-face::before { content: ''; position: absolute; inset: 9px; border-radius: 50%; border: 1.5px dashed color-mix(in srgb, currentColor 70%, transparent); }
+.tf-stamp--yes .tf-stamp-face { transform: rotate(6deg); }
+.tf-stamp-face i { font: normal 400 15px/1 var(--font-display); margin-bottom: 2px; }
+.tf-stamp-face b { font: 800 27px/1 var(--font-display); letter-spacing: .06em; }
+.tf-stamp-face small { margin-top: 4px; font: 700 20px/1 var(--font-display); }
+.tf-stamp kbd { font: 600 12px var(--font-ui); color: var(--ink-soft); }
+
+/* Lời giải phiếu vừa chấm */
+.tf-verdict { min-height: 2.9em; max-width: 720px; margin: var(--s3) auto 0; padding: 0 var(--s3); text-align: center; font-size: 17px; line-height: 1.5; color: var(--ink-soft); animation: msg-in var(--dur-2) var(--ease-soft) both; }
+.tf-verdict.is-ok b { color: var(--ok); }
+.tf-verdict.is-bad b { color: var(--accent); }
+
+/* Khay phiếu đã chấm */
+.tf-tray { display: flex; justify-content: center; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.tf-slip { display: grid; place-items: center; width: 58px; height: 38px; font: 700 15px var(--font-ui); color: var(--ink-soft); background: color-mix(in srgb, var(--parchment) 85%, var(--stain)); border: 1.5px dashed color-mix(in srgb, var(--ink-soft) 50%, transparent); border-radius: 3px; }
+.tf-slip.is-now { border-style: solid; border-color: var(--ink); color: var(--ink); }
+.tf-slip.is-ok { color: #fff; background: var(--ok); border: 1.5px solid var(--ok); animation: tf-land var(--dur-3) var(--ease-press) both; }
+.tf-slip.is-bad { color: var(--parchment); background: var(--accent); border: 1.5px solid var(--accent); animation: tf-land var(--dur-3) var(--ease-press) both; }
+@keyframes tf-land { from { transform: scale(.4) rotate(-8deg); opacity: 0; } }
+
+/* Phiếu bay xuống khay sau khi chấm */
+.tf-fly { position: fixed; z-index: 90; margin: 0; pointer-events: none; transform-origin: 50% 50%; animation: none; cursor: default; }
+.tf-fly .tf-clock { display: none; }
+.tf-ink { position: absolute; right: 18px; bottom: 26px; padding: 2px 12px; font: 800 28px var(--font-display); letter-spacing: .06em; border: 4px solid currentColor; border-radius: 6px; transform: rotate(-9deg); animation: stamp var(--dur-2) var(--ease-press) both; }
+.tf-fly.is-ok .tf-ink { color: var(--ok); }
+.tf-fly.is-bad .tf-ink { color: var(--accent); }
+
+/* Điểm chặng */
+.tf-result { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 4px 12px; margin: 0; }
+.tf-result b { font: 800 56px/1 var(--font-display); color: var(--accent); }
+.tf-result span { font-size: 20px; color: var(--ink-soft); }
+.tf-result em { flex-basis: 100%; text-align: center; font-style: normal; color: var(--ink-soft); }
+
+/* Đáp án từng câu (dưới phần "Trong lịch sử") */
+.tf-review { display: grid; gap: 10px; margin: var(--s2) 0 var(--s3); padding: 0; list-style: none; }
+.tf-review li { display: flex; gap: 12px; }
+.tf-mark { flex: none; display: grid; place-items: center; width: 26px; height: 26px; margin-top: 2px; font: 700 13px var(--font-mono); border-radius: 50%; color: #fff; background: var(--ok); }
+.tf-review li.is-bad .tf-mark { background: var(--accent); }
+.tf-review p { margin: 0; }
+.tf-review .tf-why { color: var(--ink-soft); font-size: 14px; }
+
+body[data-mode=class] .tf-q { font-size: clamp(26px, 3vw, 38px); }
+body[data-mode=class] .tf-verdict { font-size: 20px; }
+
+/* Màn nhỏ: phiếu trên, hai con dấu đứng cạnh nhau bên dưới */
+@media (max-width: 860px) {
+  .tf-desk { grid-template-columns: 1fr 1fr; grid-template-areas: "pile pile" "no yes"; gap: var(--s3); }
+  .tf-desk .tf-pile { grid-area: pile; min-height: 240px; }
+  .tf-desk .tf-stamp--no { grid-area: no; } .tf-desk .tf-stamp--yes { grid-area: yes; }
+  .tf-desk.is-ready, .tf-desk--done { grid-template-columns: 1fr; grid-template-areas: none; }
+  .tf-sheet { padding: var(--s3) var(--s3) var(--s4); }
+  .tf-top header { margin-left: 24px; }
+  .tf-tray { gap: 6px; } .tf-slip { width: 46px; }
+  .ctx-map { width: 44px; } .ctx-news { font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tf-top, .tf-verdict, .tf-slip, .tf-ink, .tf-clock.is-low { animation: none; }
+  .sheet .tf-stamp, .sheet .tf-stamp:hover:not(:disabled), .sheet .tf-stamp:active:not(:disabled) { transition: none; transform: none; }
+}
+
+/* Chặng xếp thứ tự: trải đều theo chiều cao, không để nửa dưới tờ giấy trống */
+.stage--order { min-height: calc(100dvh - 270px); justify-content: space-evenly; gap: var(--s4); }
+.stage--order .slot-drop { min-height: 104px; }
+.stage--order .tl-slot .ev { min-height: 118px; }
+.stage--order .tl-slot .ev .ev-name, .stage--order .tl-slot .ev b { font-size: 17px; }
+.stage--order::after { content: 'Sớm  ───────────────────────────────▶  Muộn'; order: 0; align-self: center; font: italic 400 13px var(--font-ui); letter-spacing: .08em; color: var(--ink-soft); white-space: pre; }
+@media (max-width: 860px) { .stage--order { min-height: 0; justify-content: flex-start; } .stage--order::after { display: none; } }

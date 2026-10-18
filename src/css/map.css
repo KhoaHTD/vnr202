@@ -1,0 +1,58 @@
+/* ============================================================
+   Bản đồ hành trình kiểu bản đồ cổ (SVG sinh trong ui.js journeyMap, dữ liệu src/js/map-data.js).
+   Chỉ dùng màu của tokens.css. Đơn vị trong SVG là đơn vị viewBox (khung 800 rộng).
+   ============================================================ */
+.jmap--full { flex: 0 0 340px; width: 340px; }
+.jmap svg { background: color-mix(in srgb, var(--parchment) 70%, var(--parchment-shade)); border-radius: 2px; box-shadow: inset 0 0 0 1px var(--line); overflow: hidden; }
+.jmap--mini svg { box-shadow: inset 0 0 0 1px var(--line), 0 1px 3px color-mix(in srgb, var(--stain) 30%, transparent); }
+
+/* Vân nước ven bờ (nhiều nét chồng mờ dần ra biển, như bản khắc đồng) */
+.jm-halo path { fill: none; stroke: var(--stain); stroke-linejoin: round; }
+.jm-w1 path { stroke-width: 26; opacity: .05; } .jm-w2 path { stroke-width: 16; opacity: .08; } .jm-w3 path { stroke-width: 8; opacity: .13; }
+.jm-nb { fill: color-mix(in srgb, var(--parchment-shade) 92%, var(--parchment)); stroke: color-mix(in srgb, var(--ink-soft) 55%, transparent); stroke-width: 1; stroke-linejoin: round; stroke-dasharray: 5 2.5; }
+.jm-vn { fill: color-mix(in srgb, var(--parchment-shade) 72%, var(--stain)); stroke: var(--ink-soft); stroke-width: 1.5; stroke-linejoin: round; }
+.jm-lake { fill: color-mix(in srgb, var(--ink-soft) 28%, var(--parchment)); stroke: var(--ink-soft); stroke-width: .7; }
+.jm-river { fill: none; stroke: color-mix(in srgb, #3b5a6b 75%, var(--ink-soft)); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; opacity: .75; }
+.jm-river.is-major { stroke-width: 1.8; opacity: .85; }
+.jm-grat { fill: none; stroke: var(--stain); stroke-width: .6; opacity: .25; }
+
+/* Chữ: biển in nghiêng giãn cách, nước láng giềng chữ hoa nhạt */
+.jm-sea, .jm-cty, .jm-islname, .jm-tick { font-family: var(--font-display); fill: var(--ink-soft); }
+.jm-sea { font-size: 30px; font-style: italic; letter-spacing: .38em; opacity: .55; }
+.jm-sea--s { font-size: 21px; letter-spacing: .26em; }
+.jm-cty { font-size: 19px; font-weight: 600; letter-spacing: .32em; opacity: .5; }
+.jm-islname { font-size: 15px; font-style: italic; opacity: .85; }
+.jm-tick { font-size: 12px; font-family: var(--font-ui); opacity: .6; }
+.jm-isl circle { fill: var(--ink-soft); }
+.jm-rose circle { fill: none; stroke: var(--stain); stroke-width: 1; opacity: .5; }
+.jm-rose path { fill: color-mix(in srgb, var(--stain) 30%, transparent); stroke: var(--stain); stroke-width: 1; opacity: .75; }
+.jm-rose text { font: 700 16px var(--font-display); fill: var(--ink-soft); }
+
+/* Tuyến hành trình + ghim */
+.jm-route { fill: none; stroke: var(--accent); stroke-width: 3.2; stroke-dasharray: 9 7; stroke-linecap: round; }
+.jm-ring { fill: var(--parchment); stroke: color-mix(in srgb, var(--ink-soft) 60%, transparent); stroke-width: 2; }
+.jm-dot { fill: color-mix(in srgb, var(--ink-soft) 45%, transparent); }
+.jm-shadow { fill: var(--ink); opacity: .22; }
+.jm-pin.is-lit .jm-ring { stroke: var(--accent); stroke-width: 2.6; }
+.jm-pin.is-lit .jm-dot { fill: var(--accent); }
+.jm-pin.is-off .jm-ring { stroke-dasharray: 5 4; }
+.jm-arrow { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.jm-pin.is-now .jm-ring { transform-box: fill-box; transform-origin: center; animation: jm-ping 1400ms var(--ease-soft) 2; }
+@keyframes jm-ping { 0% { transform: scale(1); } 40% { transform: scale(1.7); stroke-width: 3.4; } 100% { transform: scale(1); } }
+.jm-label { font: 700 22px var(--font-display); fill: var(--ink); paint-order: stroke; stroke: var(--parchment); stroke-width: 6px; stroke-linejoin: round; }
+
+/* Mini: ô vuông quanh điểm hiện tại, không chữ, chấm to cho dễ thấy */
+.jmap--mini text { display: none; }
+.jmap--mini .jm-grat, .jmap--mini .jm-rose { display: none; }
+.jmap--mini .jm-nb, .jmap--mini .jm-vn { stroke-width: 2.2; }
+.jmap--mini .jm-pin:not(.is-now) { opacity: .55; }
+
+@media (max-width: 860px) { .jmap--full { flex-basis: auto; width: min(300px, 80%); } }
+@media (prefers-reduced-motion: reduce) { .jm-pin.is-now .jm-ring { animation: none; } }
+
+/* Chuyển cảnh: tiêu đề chặng như mực loang, tờ chương mở gấp */
+h2.place { animation: ink-in var(--dur-4) var(--ease-soft) both; }
+@keyframes ink-in { from { clip-path: inset(0 100% 0 0); opacity: .2; filter: blur(3px); } 60% { filter: blur(0); } to { clip-path: inset(0 0 0 0); opacity: 1; } }
+.sheet:has(.chapter-break), .sheet:has(.chapter-intro) { animation: fold-open 900ms var(--ease-soft) both; transform-origin: 50% 0; }
+@keyframes fold-open { from { clip-path: inset(0 50% 0 50%); transform: perspective(1400px) rotateX(10deg) translateY(36px); opacity: .4; } 55% { opacity: 1; } to { clip-path: inset(0 0 0 0); transform: none; } }
+@media (prefers-reduced-motion: reduce) { h2.place, .sheet:has(.chapter-break), .sheet:has(.chapter-intro) { animation: none; } }

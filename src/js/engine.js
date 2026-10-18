@@ -4,7 +4,7 @@
    Điểm mỗi ô: đúng ngay lần đầu 10 · đúng sau 1 lần gợi ý (nấc 1) 5 · đúng sau khi thẻ bị làm mờ (nấc 2), xem đáp án hoặc bỏ qua 0.
    Tối đa 20 điểm/chặng, 180 điểm/9 chặng. Gợi ý tăng dần 3 nấc: thời điểm → làm mờ 1 thẻ nhiễu + nội dung → hiện đáp án.
    Kiểu chơi theo chặng (scene.kind): 'match' ghép thẻ vào 2 ô (như trên) · 'order' xếp cả 4 thẻ theo thứ tự thời gian (5/3/0 điểm mỗi vị trí, 4 vị trí) ·
-   'tf' 5 câu đúng/sai (4 điểm mỗi câu). Mọi kiểu đều tối đa 20 điểm/chặng.
+   'tf' 5 câu đúng/sai (4 điểm mỗi câu; câu viết tay ở scene.tf, nếu không có thì tự sinh từ thẻ; giới hạn giờ scene.tfSeconds). Mọi kiểu đều tối đa 20 điểm/chặng.
    Chế độ 'class' (lớp học): cùng luật, nhưng gợi ý chỉ tăng khi MC bấm hint(); chơi một mình thì hint() tự gọi sau mỗi lần sai.
    ============================================================ */
 window.GameEngine=(()=>{
@@ -188,7 +188,7 @@ function review(run,D=window.GAME_DATA){
   run.stages.forEach((st,i)=>{
     const scene=D.scenes[i];
     if(st.tf){
-      (st.tf.items||[]).forEach(it=>{if(it.ok===false)out.push({scene:i,slot:'-',situation:it.text,card:cardOf(scene,it.cardId),how:'missed',pts:0,why:it.explain});});
+      (st.tf.items||[]).forEach(it=>{if(it.ok===false)out.push({scene:i,slot:'-',situation:it.text,card:cardOf(scene,it.cardId)||{name:scene.title,year:scene.date},how:'missed',pts:0,why:it.explain});});
       return;
     }
     if(st.boss){
@@ -213,6 +213,7 @@ function timeline(run,D=window.GAME_DATA,upTo=null){
 /* Kiểu đúng/sai: 5 câu sinh từ dữ liệu thẻ có sẵn (không cần nội dung viết thêm), mỗi câu 4 điểm.
    Thứ tự cố định: ngày đúng · ngày sai · so sánh đúng · ngày sai · so sánh sai. Nhãn thời gian sai lấy từ thẻ cùng chặng cách ≥ 1,5 năm nên chắc chắn sai. */
 function tfItems(scene){
+  if(scene.tf&&scene.tf.length)return scene.tf.map(q=>({cardId:q.card||null,text:q.text,answer:q.answer,explain:q.explain})); // câu viết tay trong content.js
   const cs=scene.cards,A=cs.find(c=>c.slot==='A'),B=cs.find(c=>c.slot==='B'),dec=cs.filter(c=>!c.slot);
   const far=c=>cs.filter(x=>x.id!==c.id&&Math.abs(x.t-c.t)>=1.5).sort((p,q)=>Math.abs(p.t-c.t)-Math.abs(q.t-c.t))[0]; // nhãn sai gần nhất (nhưng cách ≥ 1,5 năm) cho câu khó vừa phải
   const why=c=>c.slot?slotOf(scene,c.slot).why:`${c.name} diễn ra ${c.year}.`;
@@ -258,8 +259,8 @@ function bossPoolOf(run,D){
   const b=stageOf(run).boss;
   if(b.pool)return b.pool;
   const prep=run.album.map(a=>({key:a.scene+':'+a.card,scene:a.scene,card:cardOf(D.scenes[a.scene],a.card)})).filter(x=>x.card.t<BOSS_T&&x.scene<run.index).sort((x,y)=>x.card.t-y.card.t);
-  const n=prep.length,idx=[...new Set([0,Math.floor(n/3),Math.floor(2*n/3),n-1])];
-  for(let k=1;idx.length<4&&k<n;k++)if(!idx.includes(k))idx.push(k);
+  const n=prep.length,idx=[...new Set([Math.floor(n/3),Math.floor(n/2),n-2,n-1])].filter(k=>k>=0); // nghiêng về các mốc gần tháng 8/1945 để khó phân biệt với thẻ thời cơ
+  for(let k=n-3;idx.length<4&&k>=0;k--)if(!idx.includes(k))idx.push(k);
   const chance=[];
   [run.index-1,run.index].forEach(si=>D.scenes[si].cards.filter(c=>c.slot&&c.t>=BOSS_T).forEach(c=>chance.push({key:si+':'+c.id,scene:si,card:c})));
   const h=str=>[...str].reduce((a,ch)=>(a*31+ch.charCodeAt(0))%1000003,7);

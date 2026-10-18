@@ -77,6 +77,22 @@ function whenVisible(el,cb){
   const io=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){io.disconnect();cb();}},{rootMargin:'0px 0px -8% 0px'});
   io.observe(el);
 }
+/* Bản đồ nhỏ "bay" từ điểm của chặng trước sang điểm chặng này: nội suy viewBox trong 900ms (viewBox không animate được bằng CSS) */
+let lastMapVB=null;
+function flyMap(){
+  const svg=app.querySelector('.ctx-map svg');if(!svg)return;
+  const to=svg.getAttribute('viewBox').split(' ').map(Number),from=lastMapVB;lastMapVB=to;
+  if(!from||reducedMotion()||from.every((v,i)=>Math.abs(v-to[i])<1))return;
+  const t0=performance.now(),D=900,ease=t=>1-Math.pow(1-t,3);
+  svg.setAttribute('viewBox',from.join(' '));
+  const step=now=>{
+    const k=Math.min(1,(now-t0)/D),e=ease(k),z=Math.sin(Math.PI*k)*.5; // kéo ra giữa chừng rồi áp sát điểm đến, như camera bay
+    const cx=from[0]+from[2]/2+(to[0]+to[2]/2-from[0]-from[2]/2)*e,cy=from[1]+from[3]/2+(to[1]+to[3]/2-from[1]-from[3]/2)*e,w=(from[2]+(to[2]-from[2])*e)*(1+z),h=(from[3]+(to[3]-from[3])*e)*(1+z);
+    if(svg.isConnected)svg.setAttribute('viewBox',`${(cx-w/2).toFixed(1)} ${(cy-h/2).toFixed(1)} ${w.toFixed(1)} ${h.toFixed(1)}`);
+    if(k<1&&svg.isConnected)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
 // Sau khi dựng màn: bật "rửa ảnh" khi ảnh đã tải xong và đã nhìn thấy; bật hiện-khi-cuộn
 function enhance(){
   app.querySelectorAll('[data-develop]').forEach(fig=>{
@@ -85,6 +101,7 @@ function enhance(){
     img.decode?img.decode().then(on,on):on(); // ảnh lỗi vẫn bật để không kẹt ở trạng thái ẩn
   });
   app.querySelectorAll('[data-reveal]').forEach(el=>whenVisible(el,()=>el.classList.add('is-in')));
+  flyMap();
 }
 
 // Khoảng cách từ đỉnh `root` tới đỉnh `el`, đo bằng offsetTop (không bị ảnh hưởng bởi animation trượt/nghiêng của tờ bản đồ)
@@ -186,7 +203,7 @@ function paint(fresh=[]){
 function play(){if(run.index>=D.scenes.length){ending();return;}
   const leg=!!app.querySelector('.sheet .stage'); // đang ở một chặng khác thì đổi tờ; từ màn mở chương/tổng kết vào thì giữ cách cũ
   show(()=>{
-  ui={sel:null,msg:{},why:{},tf:{started:false,left:UI.TF_SECONDS}};const s=D.scenes[run.index];setAct(run.index===8?'finale':String(s.chapter+1));
+  ui={sel:null,msg:{},why:{},tf:{started:false,left:UI.tfSecs(D.scenes[run.index]),last:null}};const s=D.scenes[run.index];setAct(run.index===8?'finale':String(s.chapter+1));
   const enter=!app.querySelector('.sheet'); // tờ bản đồ chỉ trượt vào khi vừa vào chương, không trượt lại ở mỗi chặng
   app.innerHTML=UI.play(D,run,{enter,leg});setBright(false);document.body.dataset.mode=run.mode;
   renderStrip();paint();aimLamp(app.querySelector('.stage-main')||app.querySelector('.tf'));
@@ -357,7 +374,7 @@ let tfTimer=null;
 const stopTfTimer=()=>{if(tfTimer){clearInterval(tfTimer);tfTimer=null;}};
 function paintTf(){
   const t=E.stageOf(run).tf;
-  $('tf').innerHTML=UI.tfView(D,run,{started:ui.tf.started,classMode:isClass(),left:ui.tf.left});
+  $('tf').innerHTML=UI.tfView(D,run,{started:ui.tf.started,classMode:isClass(),left:ui.tf.left,last:ui.tf.last,secs:UI.tfSecs(D.scenes[run.index])});
   stageEl().classList.toggle('is-done',t.done);
   app.querySelector('.sheet')?.classList.toggle('is-done',t.done);
   const b=$('proceed');b.hidden=!t.done;
@@ -367,13 +384,14 @@ function paintTf(){
 }
 function startTf(){
   if(ui.tf.started||E.stageDone(run))return;
-  ui.tf.started=true;ui.tf.left=UI.TF_SECONDS;paintTf();
+  const secs=UI.tfSecs(D.scenes[run.index]);
+  ui.tf.started=true;ui.tf.left=secs;paintTf();
   if(isClass())return; // Lớp học: không tính giờ
   const t0=performance.now();
   tfTimer=setInterval(()=>{
-    ui.tf.left=Math.max(0,UI.TF_SECONDS-(performance.now()-t0)/1000);
-    const bar=app.querySelector('.tf-bar i'),out=$('tf-time');
-    if(bar)bar.style.transform=`scaleX(${ui.tf.left/UI.TF_SECONDS})`;
+    ui.tf.left=Math.max(0,secs-(performance.now()-t0)/1000);
+    const clock=app.querySelector('.tf-clock'),out=$('tf-time');
+    if(clock){clock.style.setProperty('--f',ui.tf.left/secs);clock.classList.toggle('is-low',ui.tf.left<=5);clock.setAttribute('aria-valuenow',Math.ceil(ui.tf.left));}
     if(out)out.textContent=Math.ceil(ui.tf.left);
     if(ui.tf.left<=0){stopTfTimer();E.tfExpire(run,D);sfx('bad');finishTf();}
   },100);
@@ -381,9 +399,26 @@ function startTf(){
 }
 function answerTf(ans){
   if(!ui.tf.started||E.stageDone(run))return;
+  const top=app.querySelector('.tf-top'),box=top&&top.getBoundingClientRect(),idx=E.stageOf(run).tf.i;
   const res=E.tfAnswer(run,D,ans);if(!res)return;
   sfx(res.ok?'ok':'bad');
+  ui.tf.last=res;
   if(res.done){stopTfTimer();finishTf();}else{paintTf();renderStrip();}
+  flyTf(top,box,idx,res.ok);
+}
+/* Phiếu vừa chấm đóng dấu rồi bay xuống khay "đã thẩm định" (bản sao bay, phiếu thật đã là phiếu kế tiếp) */
+function flyTf(top,box,idx,ok){
+  if(!top||!box||reducedMotion()||!top.animate)return;
+  const slot=app.querySelector(`.tf-slip[data-slip="${idx}"]`);if(!slot)return;
+  const to=slot.getBoundingClientRect(),g=top.cloneNode(true);
+  g.removeAttribute('id');g.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));
+  g.classList.remove('is-drag');g.classList.add('tf-fly',ok?'is-ok':'is-bad');g.removeAttribute('data-top');g.setAttribute('aria-hidden','true');
+  g.style.cssText=`left:${box.left}px;top:${box.top}px;width:${box.width}px;height:${box.height}px;transform:${top.style.transform||'none'}`;
+  g.insertAdjacentHTML('beforeend',`<span class="tf-ink">${ok?'CHÍNH XÁC':'CHƯA ĐÚNG'}</span>`);
+  document.body.appendChild(g);slot.style.visibility='hidden';
+  const dx=to.left+to.width/2-(box.left+box.width/2),dy=to.top+to.height/2-(box.top+box.height/2),sc=Math.max(.08,to.width/box.width);
+  const a=g.animate([{transform:g.style.transform,offset:0},{transform:'none',offset:.001},{transform:'none',offset:.42},{transform:`translate(${dx}px,${dy}px) scale(${sc}) rotate(-6deg)`,opacity:.9,offset:1}],{duration:900,easing:'cubic-bezier(.5,0,.3,1)',fill:'forwards'});
+  const fin=()=>{g.remove();slot.style.visibility='';};a.finished.then(fin,fin);setTimeout(fin,1400);
 }
 function finishTf(){
   stopTfTimer();paintTf();renderStrip();
@@ -408,6 +443,25 @@ function bindTf(){
     else if(e.key==='ArrowRight'||k==='d'){e.preventDefault();answerTf(true);}
   };
   document.addEventListener('keydown',onKey);cleanups.push(()=>document.removeEventListener('keydown',onKey));
+  // Kéo phiếu (chuột hoặc cảm ứng): sang trái = SAI, sang phải = ĐÚNG; kéo quá 100px thì chốt
+  let drag=null;
+  root.addEventListener('pointerdown',e=>{
+    const top=e.target.closest?.('.tf-top[data-top]');if(!top||!ui.tf.started||E.stageDone(run)||e.button>0)return;
+    drag={top,x:e.clientX,id:e.pointerId,dx:0};top.classList.add('is-drag');try{top.setPointerCapture(e.pointerId);}catch{}
+  });
+  root.addEventListener('pointermove',e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    drag.dx=e.clientX-drag.x;const k=Math.max(-1,Math.min(1,drag.dx/120));
+    drag.top.style.transform=`translateX(${drag.dx}px) rotate(${drag.dx/22}deg)`;
+    drag.top.querySelector('.tf-hint--yes').style.opacity=Math.max(0,k);drag.top.querySelector('.tf-hint--no').style.opacity=Math.max(0,-k);
+  });
+  const endDrag=e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    const {top,dx}=drag;drag=null;top.classList.remove('is-drag');
+    if(Math.abs(dx)>100){answerTf(dx>0);return;}
+    top.style.transform='';top.querySelectorAll('.tf-hint').forEach(h=>{h.style.opacity='';});
+  };
+  root.addEventListener('pointerup',endDrag);root.addEventListener('pointercancel',endDrag);
 }
 
 /* ---------- Màn trùm (chặng 9): chọn 4 thẻ đã sưu tầm ---------- */
