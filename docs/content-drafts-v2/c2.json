@@ -1,0 +1,293 @@
+{
+  "chapterId": "c2",
+  "findings": [
+    {
+      "id": "c2-source-status",
+      "issue": "Nội dung có căn cứ trong tài liệu nội bộ, chưa được xác minh độc lập.",
+      "evidence": "Đã đọc toàn bộ D2 (GiaiDoan1936Den1939.docx qua bản trích OOXML), các ghi chú C0–C6 và đối chiếu phần tương ứng trong docs/noi-dung-goc.md. Hai văn bản có nhiều đoạn trùng nhau; đây không phải hai chứng cứ lịch sử độc lập. Pxxx là đoạn OOXML, không phải trang.",
+      "decision": "Trạng thái bản nháp là source-supported, cần nhóm duyệt. sourceRefs chỉ định vị căn cứ nội bộ; không dùng nhãn verified. Mọi đánh giá phù hợp/chưa phù hợp là quy tắc biên tập theo nhiệm vụ cụ thể, không phải lời trích hoặc kết luận nguyên văn của tài liệu."
+    },
+    {
+      "id": "c2-france-date",
+      "issue": "Mốc về Mặt trận Nhân dân Pháp trong tài liệu không nhất quán.",
+      "evidence": "D2:P010 ghi '(5/1935)' nhưng ngay sau đó ghi chính phủ lên nắm quyền năm 1936; D2:P067 dùng năm 1936 mà không có mốc 5/1935. Ghi chú C0 còn nhấn mạnh các chính sách chỉ được áp dụng hạn chế và bị cản trở ở thuộc địa.",
+      "decision": "Không dùng tháng hoặc năm thắng lợi của Mặt trận Nhân dân Pháp làm dữ kiện chấm điểm. Bối cảnh chỉ nói tranh thủ điều kiện hoạt động công khai, kết hợp cơ sở bí mật; không mô tả có tự do hoàn toàn hay công khai thay thế hoàn toàn bí mật. Nhóm cần đối chiếu nguồn học thuật trước khi phát hành phần tư liệu có mốc cụ thể."
+    },
+    {
+      "id": "c2-literacy-date",
+      "issue": "Mốc truyền bá quốc ngữ chưa đủ chắc chắn để đưa vào bài ghép.",
+      "evidence": "D2:P045 và D2:P098 cùng ghi Hội truyền bá quốc ngữ 'phát triển mạnh từ cuối năm 1937'; docs/noi-dung-goc.md lặp lại cách viết này nên không giải quyết được điểm cần xác minh. Không có kiểm chứng độc lập trong đợt này.",
+      "decision": "Màn s04 dùng phạm vi 1936–1939 để nói về phong trào của cả giai đoạn, không nói mọi hoạt động bắt đầu cùng lúc hoặc tồn tại suốt cả giai đoạn. Không hỏi ngày thành lập, không ghi mốc cuối 1937 và không dùng mốc đó để loại phương án. Nhóm cần duyệt riêng cách diễn giải hoạt động dạy chữ trước phát hành."
+    },
+    {
+      "id": "c2-card-revision",
+      "issue": "Thẻ vũ trang và tổng khởi nghĩa trong kế hoạch cũ quá xa hai nhiệm vụ của chương, dễ bị loại bằng mẹo.",
+      "evidence": "D2:P034–P038 mô tả dân nguyện, ủy ban hành động và báo chí; D2:P045–P047 mô tả truyền bá quốc ngữ, nghị trường và hội ái hữu/tương tế. D2:P020/P057 khẳng định kết hợp công khai với bí mật.",
+      "decision": "Thay bằng các hoạt động có thật trong khung tư liệu cùng giai đoạn. Màn s03 nhận cả thu thập dân nguyện và lập ủy ban hành động cho nhiệm vụ gom nguyện vọng; thẻ ủy ban được định nghĩa trong màn là đầu mối tiếp nhận dân nguyện. Thẻ cơ sở bí mật được giữ như một công việc hỗ trợ có ý nghĩa, không bị đánh giá là không phù hợp với toàn giai đoạn."
+    },
+    {
+      "id": "c2-target-scope",
+      "issue": "Nhiệm vụ 'Kết nối nhiều tầng lớp' quá rộng: báo chí, lớp học, nghị trường hoặc hội đoàn đều có thể góp phần thực hiện.",
+      "evidence": "D2:P023/P024 nói tập hợp quần chúng, D2:P044–P047 liệt kê nhiều hình thức vận động; D2:P051/P056 nêu kết quả và bài học tập hợp lực lượng rộng rãi. Nguồn không cung cấp một xếp hạng cho các hình thức này.",
+      "decision": "Đổi nhiệm vụ s04 thành 'Lập hội tương trợ' và 'Mở lớp học chữ', chấp nhận cả hội ái hữu lẫn hội tương tế ở ô tương trợ. Điều kiện lập hội hiện ngay trên nhãn, không giấu trong phần đọc thêm. Đánh giá các thẻ còn lại chỉ theo công việc trực tiếp được yêu cầu, không phủ nhận khả năng góp phần vận động quần chúng. Chi tiết hoạt động của thẻ là tình huống biên tập để làm rõ phạm vi, không trình bày như trích dẫn lịch sử."
+    },
+    {
+      "id": "c2-author-comments",
+      "issue": "Cần bảo toàn ý nghĩa các ghi chú tác giả thay vì chỉ đọc phần thân tài liệu.",
+      "evidence": "Ghi chú C6 diễn giải dân nguyện là nguyện vọng quần chúng; C0 giới hạn điều kiện công khai; C1/C2 làm rõ giai đoạn phục hồi và hệ thống tổ chức; C3/C4 bổ sung Tổng Bí thư và tên Mặt trận; C5 làm rõ bối cảnh thuộc địa. Bản sau tại D2:P061–P111 tích hợp nhiều bổ sung nhưng vẫn lặp mốc truyền bá quốc ngữ.",
+      "decision": "Dùng 'nguyện vọng' để giải nghĩa dân nguyện, giữ tính có điều kiện của hoạt động công khai và không đưa tên người, ngày hội nghị hoặc danh xưng Mặt trận đang cần rà soát thành câu hỏi phụ. Không coi phần lặp hoặc bình luận tác giả là xác minh độc lập."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s03",
+      "chapterId": "c2",
+      "period": "1936",
+      "title": "Một cánh cửa mở",
+      "contextShort": "Phong trào tranh thủ điều kiện công khai, đồng thời giữ cơ sở bí mật.",
+      "learningObjective": "Phân biệt tiếp nhận nguyện vọng với phát hành thông tin; hiểu công khai và bí mật được kết hợp.",
+      "sourceRefs": ["D2:P020", "D2:P033", "D2:P034", "D2:P035", "D2:P038", "D2:P057"],
+      "targets": [
+        {
+          "id": "s03-gather-wishes",
+          "label": "Gom nguyện vọng",
+          "detail": "Tiếp nhận và tập hợp dân nguyện trong cuộc vận động Đông Dương Đại hội. Ở đây, dân nguyện là nguyện vọng của người dân."
+        },
+        {
+          "id": "s03-publish-news",
+          "label": "Xuất bản báo công khai",
+          "detail": "Đưa nội dung tuyên truyền đến công chúng bằng một hình thức xuất bản công khai."
+        }
+      ],
+      "cards": [
+        {
+          "id": "s03-petitions",
+          "label": "Thu thập dân nguyện",
+          "detail": "Ghi nhận và tập hợp nguyện vọng của người dân trong cuộc vận động Đông Dương Đại hội."
+        },
+        {
+          "id": "s03-public-press",
+          "label": "Báo chí công khai",
+          "detail": "Xuất bản báo bằng tiếng Việt hoặc tiếng Pháp để truyền đạt nội dung đến công chúng."
+        },
+        {
+          "id": "s03-action-committees",
+          "label": "Lập ủy ban hành động",
+          "detail": "Trong màn này, lập đầu mối tại cơ sở để tiếp nhận, tập hợp dân nguyện; không đại diện mọi việc một ủy ban có thể làm."
+        },
+        {
+          "id": "s03-secret-base",
+          "label": "Giữ cơ sở bí mật",
+          "detail": "Duy trì bộ phận hoạt động bí mật, kết hợp với hoạt động công khai; thẻ không bao gồm xuất bản hoặc nhận dân nguyện."
+        }
+      ],
+      "evaluations": [
+        {
+          "targetId": "s03-gather-wishes",
+          "cardId": "s03-petitions",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Thu thập dân nguyện trực tiếp tập hợp nguyện vọng của người dân.",
+          "reasonDetail": "Trong cuộc vận động Đông Dương Đại hội, việc thu thập dân nguyện giúp tập hợp điều người dân muốn đề đạt. Thẻ đáp ứng nhiệm vụ tiếp nhận nguyện vọng ở ô này; chưa có nghĩa mọi nguyện vọng đã được giải quyết.",
+          "sourceRefs": ["D2:P033", "D2:P034"],
+          "suggestedCardIds": []
+        },
+        {
+          "targetId": "s03-gather-wishes",
+          "cardId": "s03-public-press",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Thẻ đang phát hành thông tin; ô này cần tiếp nhận nguyện vọng.",
+          "reasonDetail": "Báo chí công khai giúp đưa nội dung đến công chúng, còn nhiệm vụ ở đây là nhận và tập hợp dân nguyện. Thẻ trong màn chỉ mô tả việc xuất bản, nên chưa thực hiện công việc tiếp nhận đang thiếu; báo chí vẫn có ý nghĩa vận động và phản ánh đời sống.",
+          "sourceRefs": ["D2:P034", "D2:P038"],
+          "suggestedCardIds": ["s03-petitions", "s03-action-committees"]
+        },
+        {
+          "targetId": "s03-gather-wishes",
+          "cardId": "s03-action-committees",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Đầu mối tại cơ sở giúp tiếp nhận và gom dân nguyện.",
+          "reasonDetail": "Tài liệu đặt việc lập các ủy ban hành động tại nhà máy, đồn điền, thôn xóm trong cuộc vận động thu thập dân nguyện. Với thẻ được định nghĩa là đầu mối tiếp nhận trong màn này, đây là một cách phù hợp để gom nguyện vọng; không suy ra mọi ủy ban chỉ làm một công việc này.",
+          "sourceRefs": ["D2:P033", "D2:P034", "D2:P035"],
+          "suggestedCardIds": []
+        },
+        {
+          "targetId": "s03-gather-wishes",
+          "cardId": "s03-secret-base",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Cơ sở bí mật hỗ trợ phong trào; cần thêm hoạt động tiếp nhận dân nguyện.",
+          "reasonDetail": "Duy trì cơ sở bí mật là một phần của cách kết hợp hình thức hoạt động trong giai đoạn này. Tuy nhiên, thẻ chưa bao gồm việc tiếp nhận nguyện vọng đang được ô yêu cầu; có thể chọn thu thập dân nguyện hoặc lập đầu mối nhận dân nguyện để làm rõ công việc đó.",
+          "sourceRefs": ["D2:P020", "D2:P034", "D2:P035", "D2:P057"],
+          "suggestedCardIds": ["s03-petitions", "s03-action-committees"]
+        },
+        {
+          "targetId": "s03-publish-news",
+          "cardId": "s03-petitions",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Ghi nhận nguyện vọng chưa thực hiện việc xuất bản tin ra công chúng.",
+          "reasonDetail": "Thu thập dân nguyện có vai trò tiếp nhận điều người dân muốn đề đạt trong cuộc vận động. Ô này cần một hình thức xuất bản công khai, còn thẻ mới dừng ở khâu tập hợp nguyện vọng; báo chí công khai đáp ứng phần phát hành thông tin.",
+          "sourceRefs": ["D2:P034", "D2:P038"],
+          "suggestedCardIds": ["s03-public-press"]
+        },
+        {
+          "targetId": "s03-publish-news",
+          "cardId": "s03-public-press",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Báo công khai đưa nội dung tuyên truyền đến công chúng.",
+          "reasonDetail": "Tài liệu ghi nhận việc xuất bản báo công khai bằng tiếng Việt và tiếng Pháp trong phong trào. Hình thức này đáp ứng trực tiếp nhiệm vụ phát hành thông tin ra công chúng; điều đó không có nghĩa mọi hoạt động bí mật đều chấm dứt.",
+          "sourceRefs": ["D2:P020", "D2:P038", "D2:P057"],
+          "suggestedCardIds": []
+        },
+        {
+          "targetId": "s03-publish-news",
+          "cardId": "s03-action-committees",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Thẻ lập nơi nhận dân nguyện, chưa tổ chức phát hành báo công khai.",
+          "reasonDetail": "Các ủy ban hành động là một hình thức tổ chức của cuộc vận động, và thẻ này chỉ mô tả đầu mối tiếp nhận dân nguyện. Việc đó chưa thực hiện yêu cầu xuất bản tin công khai ở ô này; không phải kết luận rằng các ủy ban không thể tuyên truyền hoặc phổ biến thông tin trong thực tế.",
+          "sourceRefs": ["D2:P034", "D2:P035", "D2:P038"],
+          "suggestedCardIds": ["s03-public-press"]
+        },
+        {
+          "targetId": "s03-publish-news",
+          "cardId": "s03-secret-base",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Giữ cơ sở bí mật chưa tạo ra hình thức phát hành tin công khai.",
+          "reasonDetail": "Cơ sở bí mật vẫn được duy trì và kết hợp với hoạt động công khai trong giai đoạn này. Ô đang cần xuất bản thông tin tới công chúng, trong khi thẻ chỉ duy trì bộ phận bí mật; báo chí công khai là công việc trực tiếp còn thiếu, không phải sự thay thế toàn bộ cơ sở bí mật.",
+          "sourceRefs": ["D2:P020", "D2:P038", "D2:P057"],
+          "suggestedCardIds": ["s03-public-press"]
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "chapterId": "c2",
+      "period": "1936–1939",
+      "title": "Mở rộng sự tham gia",
+      "contextShort": "Phong trào mở rộng bằng hội đoàn, giáo dục và nhiều hình thức vận động.",
+      "learningObjective": "Nhận biết nhiều hình thức vận động cùng có ý nghĩa, nhưng mỗi hoạt động đáp ứng một công việc trực tiếp khác nhau.",
+      "sourceRefs": ["D2:P023", "D2:P044", "D2:P045", "D2:P046", "D2:P047", "D2:P051", "D2:P056"],
+      "targets": [
+        {
+          "id": "s04-mutual-support",
+          "label": "Lập hội tương trợ",
+          "detail": "Tạo hội đoàn để người dân sinh hoạt và giúp đỡ nhau. Nhiệm vụ hỏi hình thức tương trợ, không hỏi mọi cách tập hợp quần chúng."
+        },
+        {
+          "id": "s04-literacy",
+          "label": "Mở lớp học chữ",
+          "detail": "Chọn hoạt động trực tiếp giúp người dân học đọc, học viết chữ quốc ngữ."
+        }
+      ],
+      "cards": [
+        {
+          "id": "s04-friendship-societies",
+          "label": "Lập hội ái hữu",
+          "detail": "Trong màn này, tổ chức sinh hoạt và tương trợ qua hội ái hữu để tạo sự gắn bó giữa người tham gia."
+        },
+        {
+          "id": "s04-mutual-aid-societies",
+          "label": "Lập hội tương tế",
+          "detail": "Trong màn này, tập hợp người tham gia vào hội để giúp đỡ nhau và cùng duy trì sinh hoạt."
+        },
+        {
+          "id": "s04-literacy-work",
+          "label": "Truyền bá quốc ngữ",
+          "detail": "Tổ chức hoạt động dạy và học chữ quốc ngữ. Thẻ không yêu cầu nhớ ngày thành lập Hội truyền bá quốc ngữ."
+        },
+        {
+          "id": "s04-representative-elections",
+          "label": "Tranh cử dân biểu",
+          "detail": "Tham gia tranh cử vào cơ quan dân biểu để mở rộng tuyên truyền; thẻ không bao gồm mở lớp học hoặc lập hội tương trợ."
+        }
+      ],
+      "evaluations": [
+        {
+          "targetId": "s04-mutual-support",
+          "cardId": "s04-friendship-societies",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Sinh hoạt hội ái hữu đáp ứng cách gắn kết bằng tương trợ đang được yêu cầu.",
+          "reasonDetail": "Hội ái hữu được tài liệu nêu trong các hình thức tổ chức quần chúng của phong trào. Với sinh hoạt và tương trợ được mô tả trên thẻ, hình thức này đáp ứng nhiệm vụ gắn bó người tham gia; đây là một cách phù hợp, không phải cách tập hợp duy nhất.",
+          "sourceRefs": ["D2:P047", "D2:P051", "D2:P056"],
+          "suggestedCardIds": []
+        },
+        {
+          "targetId": "s04-mutual-support",
+          "cardId": "s04-mutual-aid-societies",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Hội tương tế tạo hình thức giúp đỡ nhau để gắn kết người tham gia.",
+          "reasonDetail": "Tài liệu ghi nhận việc thành lập các hội tương tế trong phong trào. Hoạt động giúp đỡ nhau được đặt trong thẻ đáp ứng đúng cách gắn kết mà ô yêu cầu; việc chấp nhận thẻ này không loại vai trò của hội ái hữu hoặc hình thức vận động khác.",
+          "sourceRefs": ["D2:P047", "D2:P051", "D2:P056"],
+          "suggestedCardIds": []
+        },
+        {
+          "targetId": "s04-mutual-support",
+          "cardId": "s04-literacy-work",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Dạy chữ có giá trị tập hợp; ô này cần hình thức hội tương trợ.",
+          "reasonDetail": "Hoạt động truyền bá quốc ngữ thuộc mặt trận văn hóa, giáo dục và có thể góp phần gắn bó người tham gia. Tuy vậy, ô này hỏi việc lập hội lấy tương trợ làm cách sinh hoạt, còn thẻ mô tả dạy chữ; hội ái hữu hoặc hội tương tế đáp ứng phạm vi ấy trực tiếp hơn.",
+          "sourceRefs": ["D2:P044", "D2:P045", "D2:P047", "D2:P051"],
+          "suggestedCardIds": ["s04-friendship-societies", "s04-mutual-aid-societies"]
+        },
+        {
+          "targetId": "s04-mutual-support",
+          "cardId": "s04-representative-elections",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Tranh cử mở diễn đàn tuyên truyền, chưa lập hội sinh hoạt tương trợ.",
+          "reasonDetail": "Tham gia tranh cử dân biểu được tài liệu nêu là cách mở rộng tuyên truyền đường lối. Đây là hình thức hoạt động nghị trường, còn ô yêu cầu hội đoàn giúp đỡ nhau; thẻ chưa thực hiện công việc ấy, dù tranh cử vẫn có ý nghĩa vận động quần chúng.",
+          "sourceRefs": ["D2:P044", "D2:P046", "D2:P047"],
+          "suggestedCardIds": ["s04-friendship-societies", "s04-mutual-aid-societies"]
+        },
+        {
+          "targetId": "s04-literacy",
+          "cardId": "s04-friendship-societies",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Thẻ tổ chức hội ái hữu, chưa bố trí hoạt động dạy và học chữ.",
+          "reasonDetail": "Hội ái hữu là một hình thức tập hợp và sinh hoạt quần chúng trong tài liệu. Thẻ này chưa mô tả dạy đọc, viết nên chưa đáp ứng nhiệm vụ mở lớp; điều đó không phủ nhận một hội có thể hỗ trợ việc học nếu có thêm hoạt động giáo dục cụ thể.",
+          "sourceRefs": ["D2:P045", "D2:P047"],
+          "suggestedCardIds": ["s04-literacy-work"]
+        },
+        {
+          "targetId": "s04-literacy",
+          "cardId": "s04-mutual-aid-societies",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Tương trợ có thể hỗ trợ người học, nhưng thẻ chưa tổ chức dạy chữ.",
+          "reasonDetail": "Lập hội tương tế tạo hình thức giúp đỡ nhau theo tình huống của thẻ. Mục tiêu ở đây là hoạt động trực tiếp dạy đọc, viết, nên cần thẻ truyền bá quốc ngữ; không suy ra rằng hội tương tế không thể hỗ trợ lớp học trong thực tế.",
+          "sourceRefs": ["D2:P045", "D2:P047"],
+          "suggestedCardIds": ["s04-literacy-work"]
+        },
+        {
+          "targetId": "s04-literacy",
+          "cardId": "s04-literacy-work",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Truyền bá quốc ngữ đáp ứng trực tiếp hoạt động dạy và học chữ.",
+          "reasonDetail": "Tài liệu đặt hoạt động truyền bá quốc ngữ trong lĩnh vực văn hóa, giáo dục của phong trào. Với nội dung dạy và học chữ được mô tả trên thẻ, đây là hoạt động đáp ứng ô mở lớp; màn này không yêu cầu xác định ngày thành lập hoặc quy mô của Hội.",
+          "sourceRefs": ["D2:P044", "D2:P045"],
+          "suggestedCardIds": []
+        },
+        {
+          "targetId": "s04-literacy",
+          "cardId": "s04-representative-elections",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Diễn đàn dân biểu phục vụ tuyên truyền, chưa thực hiện việc dạy đọc, viết.",
+          "reasonDetail": "Tranh cử vào cơ quan dân biểu là một hình thức mở rộng tuyên truyền được ghi trong tài liệu. Ô này cần tổ chức dạy chữ, còn thẻ chưa bố trí hoạt động học tập đó; việc chưa đáp ứng ô không hạ thấp vai trò của đấu tranh nghị trường.",
+          "sourceRefs": ["D2:P044", "D2:P045", "D2:P046"],
+          "suggestedCardIds": ["s04-literacy-work"]
+        }
+      ]
+    }
+  ]
+}

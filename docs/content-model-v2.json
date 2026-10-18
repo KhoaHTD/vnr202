@@ -1,0 +1,2087 @@
+{
+  "schemaVersion": 2,
+  "contentVersion": "v2-source-review-01",
+  "artifactPurpose": "Documentation handoff; not imported by the current game.",
+  "evidenceScope": "Compared with supplied internal documents, not independently verified or subject-approved.",
+  "scoring": {
+    "firstSuitable": 10,
+    "corrected": 5,
+    "unresolved": 0,
+    "targetCount": 18,
+    "maxScore": 180,
+    "chapterMaxScores": {
+      "c1": 40,
+      "c2": 40,
+      "c3": 100
+    }
+  },
+  "sources": [
+    {
+      "id": "D1",
+      "file": "docs/GiaiDoan1930Den1935.docx",
+      "extract": "docs/source-extracts-v2/GiaiDoan1930Den1935.md",
+      "sha256": "f97360b08b4f3ff008d73a7530c85c52f68a412c47f833601b47d8f077daa73c",
+      "extractSha256": "8fc5b10c422624de1601696dde4dd3fb8a3712506df7036e8e18081a6ca1f4e0",
+      "locator": "OOXML paragraph Pxxx, not a page number",
+      "status": "internal-source",
+      "independentlyVerified": false
+    },
+    {
+      "id": "D2",
+      "file": "docs/GiaiDoan1936Den1939.docx",
+      "extract": "docs/source-extracts-v2/GiaiDoan1936Den1939.md",
+      "sha256": "c9623004e73e6ae06247845b062f43b80976a46b70b894a59f9cb930da50dd1e",
+      "extractSha256": "e4cb37a0f570ed00356ad3a8e912ba59e9eee17ef421dcf24a51a000c8d7797a",
+      "locator": "OOXML paragraph Pxxx, not a page number",
+      "status": "internal-source",
+      "independentlyVerified": false
+    },
+    {
+      "id": "D3",
+      "file": "docs/GiaiDoan1939Den1945.docx",
+      "extract": "docs/source-extracts-v2/GiaiDoan1939Den1945.md",
+      "sha256": "95ba78fcd428f2ba280c6b8ea227e7a63651aae5ef04571b6344776efae233c8",
+      "extractSha256": "d1c888f54f9413a01eb8078e38c524868bf08b7ce32fd3c9e8fd7759388175cd",
+      "locator": "OOXML paragraph Pxxx, not a page number",
+      "status": "internal-source",
+      "independentlyVerified": false
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s01",
+      "chapterId": "c1",
+      "period": "1930–1931",
+      "title": "Những yêu cầu thiết thực",
+      "contextShort": "Theo tư liệu, ghép một yêu cầu tiêu biểu với mỗi nhóm công nhân và nông dân.",
+      "learningObjective": "Nhận biết những yêu cầu đời sống tiêu biểu được tư liệu gắn với công nhân và nông dân, rồi liên hệ sự kết hợp phong trào công–nông.",
+      "sourceRefs": [
+        "D1:P013",
+        "D1:P031"
+      ],
+      "targets": [
+        {
+          "id": "s01-workers",
+          "label": "Yêu cầu công nhân",
+          "detail": "Đặt một yêu cầu tiêu biểu của công nhân được tư liệu mô tả; một trong hai thẻ phù hợp đều được chấp nhận."
+        },
+        {
+          "id": "s01-farmers",
+          "label": "Yêu cầu nông dân",
+          "detail": "Đặt một yêu cầu tiêu biểu của nông dân được tư liệu mô tả. Đây không phải khẳng định mỗi yêu cầu chỉ có ý nghĩa với một nhóm trong mọi hoàn cảnh."
+        }
+      ],
+      "cards": [
+        {
+          "id": "s01-wages",
+          "label": "Tăng lương",
+          "detail": "Yêu cầu cải thiện tiền lương của công nhân trong phong trào được tư liệu nêu."
+        },
+        {
+          "id": "s01-hours",
+          "label": "Giảm giờ làm",
+          "detail": "Yêu cầu rút ngắn thời gian lao động của công nhân được tư liệu nêu."
+        },
+        {
+          "id": "s01-levies",
+          "label": "Giảm sưu",
+          "detail": "Một yêu cầu giảm gánh nặng đời sống được tư liệu gắn với nông dân."
+        },
+        {
+          "id": "s01-taxes",
+          "label": "Giảm thuế",
+          "detail": "Một yêu cầu kinh tế của nông dân trong phần mô tả phong trào; không có nghĩa các nhóm khác không chịu thuế."
+        }
+      ],
+      "evaluations": [
+        {
+          "targetId": "s01-workers",
+          "cardId": "s01-wages",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Tăng lương là yêu cầu tiêu biểu của công nhân được tư liệu nêu.",
+          "reasonDetail": "Tư liệu mô tả công nhân đấu tranh đòi tăng lương, giảm giờ làm. Đặt Tăng lương ở ô này thể hiện đúng một yêu cầu đời sống được nêu; Giảm giờ làm cũng là phương án được chấp nhận.",
+          "sourceRefs": [
+            "D1:P013"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s01-workers",
+          "cardId": "s01-hours",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Giảm giờ làm là yêu cầu tiêu biểu của công nhân được tư liệu nêu.",
+          "reasonDetail": "Bên cạnh tăng lương, tư liệu nêu yêu cầu giảm giờ làm của công nhân. Ô chỉ cần một yêu cầu tiêu biểu, nên lựa chọn này có giá trị tương đương Tăng lương khi tính điểm.",
+          "sourceRefs": [
+            "D1:P013"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s01-workers",
+          "cardId": "s01-levies",
+          "outcome": "needs-review",
+          "reasonType": "category-mismatch",
+          "reasonShort": "Trong phần tư liệu đang xét, giảm sưu được nêu ở nhóm yêu cầu của nông dân.",
+          "reasonDetail": "Giảm sưu là yêu cầu có ý nghĩa đối với đời sống nhân dân, nhưng đoạn tư liệu đang dùng nêu nó trong nhóm yêu cầu của nông dân. Ô này hỏi yêu cầu tiêu biểu của công nhân trong chính mô tả ấy: bạn có thể chọn Tăng lương hoặc Giảm giờ làm.",
+          "sourceRefs": [
+            "D1:P013"
+          ],
+          "suggestedCardIds": [
+            "s01-wages",
+            "s01-hours"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s01-workers",
+          "cardId": "s01-taxes",
+          "outcome": "needs-review",
+          "reasonType": "category-mismatch",
+          "reasonShort": "Tư liệu gắn giảm thuế với yêu cầu nông dân ở tình huống này.",
+          "reasonDetail": "Ô đang yêu cầu một ví dụ thuộc nhóm công nhân theo cách trình bày trong tư liệu. Đoạn này gắn giảm thuế với nông dân, còn công nhân được nêu là đòi tăng lương, giảm giờ làm; cách ghép không khẳng định công nhân không chịu thuế hoặc không có quyền đòi giảm thuế.",
+          "sourceRefs": [
+            "D1:P013"
+          ],
+          "suggestedCardIds": [
+            "s01-wages",
+            "s01-hours"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s01-farmers",
+          "cardId": "s01-wages",
+          "outcome": "needs-review",
+          "reasonType": "category-mismatch",
+          "reasonShort": "Tăng lương nằm trong nhóm yêu cầu của công nhân ở đoạn tư liệu này.",
+          "reasonDetail": "Tư liệu phân biệt ví dụ yêu cầu của công nhân là tăng lương, giảm giờ làm và của nông dân là giảm sưu, giảm thuế. Ô này hỏi nhóm nông dân theo chính mô tả đó; không dùng kết quả ghép để phủ nhận hoàn cảnh người lao động có thể đồng thời thuộc nhiều nhóm.",
+          "sourceRefs": [
+            "D1:P013"
+          ],
+          "suggestedCardIds": [
+            "s01-levies",
+            "s01-taxes"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s01-farmers",
+          "cardId": "s01-hours",
+          "outcome": "needs-review",
+          "reasonType": "category-mismatch",
+          "reasonShort": "Giảm giờ làm được tư liệu nêu ở nhóm yêu cầu của công nhân.",
+          "reasonDetail": "Giảm giờ làm là một yêu cầu đời sống hợp lý, nhưng đoạn tư liệu dùng cho màn này đặt nó ở nhóm công nhân. Để đáp ứng ô yêu cầu nông dân theo tư liệu, có thể dùng Giảm sưu hoặc Giảm thuế; cả hai đều được chấp nhận.",
+          "sourceRefs": [
+            "D1:P013"
+          ],
+          "suggestedCardIds": [
+            "s01-levies",
+            "s01-taxes"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s01-farmers",
+          "cardId": "s01-levies",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Giảm sưu là một yêu cầu tiêu biểu của nông dân được nguồn nêu.",
+          "reasonDetail": "Tư liệu mô tả nông dân đấu tranh đòi giảm sưu, giảm thuế. Lựa chọn này đáp ứng ô bằng một trong hai ví dụ của nhóm nông dân, không có yêu cầu phải chọn riêng thẻ Giảm thuế.",
+          "sourceRefs": [
+            "D1:P013"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s01-farmers",
+          "cardId": "s01-taxes",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Giảm thuế là một yêu cầu tiêu biểu của nông dân được nguồn nêu.",
+          "reasonDetail": "Tư liệu gắn yêu cầu giảm thuế với phong trào nông dân. Bạn đã chọn một ví dụ đáp ứng nhiệm vụ; Giảm sưu cũng được chấp nhận với điểm như nhau.",
+          "sourceRefs": [
+            "D1:P013"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        }
+      ],
+      "recordId": "r01",
+      "contentStatus": "source-supported-pending-subject-review",
+      "acceptedAssignments": [
+        {
+          "s01-workers": "s01-wages",
+          "s01-farmers": "s01-levies"
+        },
+        {
+          "s01-workers": "s01-wages",
+          "s01-farmers": "s01-taxes"
+        },
+        {
+          "s01-workers": "s01-hours",
+          "s01-farmers": "s01-levies"
+        },
+        {
+          "s01-workers": "s01-hours",
+          "s01-farmers": "s01-taxes"
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "chapterId": "c1",
+      "period": "1932–1935",
+      "title": "Giữ mạch nối",
+      "contextShort": "Sau đàn áp, cần khôi phục tổ chức và duy trì việc học tập trong tù.",
+      "learningObjective": "Phân biệt khôi phục tổ chức bí mật và duy trì học tập trong tù; nhìn nhận các hoạt động tập hợp, tuyên truyền khác vẫn có giá trị.",
+      "sourceRefs": [
+        "D1:P077",
+        "D1:P078",
+        "D1:P082",
+        "D1:P085",
+        "D1:P088"
+      ],
+      "targets": [
+        {
+          "id": "s02-network",
+          "label": "Khôi phục cơ sở bí mật",
+          "detail": "Bố trí hoạt động trực tiếp củng cố lại cơ sở tổ chức bí mật bị gián đoạn; không hỏi mọi việc có thể hỗ trợ phong trào."
+        },
+        {
+          "id": "s02-learning",
+          "label": "Học tập trong tù",
+          "detail": "Bố trí hoạt động học tập và truyền đạt kiến thức của những chiến sĩ trong nhà tù. Cảnh là minh họa, không tái dựng một nhà tù có thật."
+        }
+      ],
+      "cards": [
+        {
+          "id": "s02-secret-network",
+          "label": "Củng cố cơ sở bí mật",
+          "detail": "Khôi phục các cơ sở và đầu mối tổ chức theo nhiệm vụ xây dựng tổ chức bí mật. Tuyến nối trong cảnh là ký hiệu minh họa, không phải tuyến đường lịch sử đã xác minh."
+        },
+        {
+          "id": "s02-study",
+          "label": "Học và dịch sách",
+          "detail": "Tổ chức học lý luận, dịch sách báo, trao đổi kiến thức trong tù như tư liệu mô tả."
+        },
+        {
+          "id": "s02-mobilize",
+          "label": "Tập hợp quần chúng",
+          "detail": "Một nhiệm vụ quan trọng để khôi phục và phát triển phong trào, được tư liệu nêu cùng công tác tổ chức."
+        },
+        {
+          "id": "s02-antiwar",
+          "label": "Tuyên truyền chống chiến tranh",
+          "detail": "Một nhiệm vụ được nêu ở Đại hội I, có giá trị riêng nhưng không thay mọi công việc khôi phục và học tập."
+        }
+      ],
+      "evaluations": [
+        {
+          "targetId": "s02-network",
+          "cardId": "s02-secret-network",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Củng cố cơ sở bí mật trực tiếp đáp ứng nhiệm vụ khôi phục tổ chức.",
+          "reasonDetail": "Chương trình hành động trong tư liệu nhấn mạnh khôi phục tổ chức và xây dựng một tổ chức bí mật có kỷ luật. Lựa chọn này đáp ứng trực tiếp công việc của ô; những tuyến được nối trong cảnh chỉ là cách minh họa quan hệ tổ chức.",
+          "sourceRefs": [
+            "D1:P082",
+            "D1:P085"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s02-network",
+          "cardId": "s02-study",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Học và dịch sách phục vụ bồi dưỡng; ô này cần trực tiếp khôi phục cơ sở tổ chức.",
+          "reasonDetail": "Học tập trong tù giúp giữ vững nhận thức và bồi dưỡng con người, nên có đóng góp cho phong trào. Tuy vậy, ô này yêu cầu một hoạt động trực tiếp củng cố cơ sở tổ chức, không phải toàn bộ sự chuẩn bị lâu dài; Củng cố cơ sở bí mật đáp ứng rõ hơn.",
+          "sourceRefs": [
+            "D1:P078",
+            "D1:P082"
+          ],
+          "suggestedCardIds": [
+            "s02-secret-network"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s02-network",
+          "cardId": "s02-mobilize",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Tập hợp quần chúng không thay trực tiếp công việc củng cố cơ sở bí mật đang được hỏi.",
+          "reasonDetail": "Tư liệu nêu tập hợp quần chúng là nhiệm vụ quan trọng cùng với củng cố, phát triển tổ chức. Hai công việc hỗ trợ nhau, nhưng ô này giới hạn ở khôi phục cơ sở tổ chức bí mật; đánh giá chưa phù hợp với ô không phủ nhận ý nghĩa của vận động quần chúng.",
+          "sourceRefs": [
+            "D1:P082",
+            "D1:P088"
+          ],
+          "suggestedCardIds": [
+            "s02-secret-network"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s02-network",
+          "cardId": "s02-antiwar",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Tuyên truyền chống chiến tranh là nhiệm vụ khác, chưa trực tiếp khôi phục cơ sở bí mật.",
+          "reasonDetail": "Đại hội I trong tư liệu có nêu tuyên truyền chống chiến tranh, bên cạnh củng cố tổ chức và tập hợp quần chúng. Thẻ có ý nghĩa trong giai đoạn, nhưng không thực hiện trực tiếp phần việc phục hồi cơ sở mà ô đang yêu cầu; hãy dùng Củng cố cơ sở bí mật.",
+          "sourceRefs": [
+            "D1:P082",
+            "D1:P088"
+          ],
+          "suggestedCardIds": [
+            "s02-secret-network"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s02-learning",
+          "cardId": "s02-secret-network",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Củng cố tổ chức không thay nội dung học tập và dịch sách trong tù.",
+          "reasonDetail": "Trong tù có cả tổ chức chi bộ bí mật và hoạt động học tập; hai việc liên quan nhưng không đồng nhất. Ô này hỏi công việc học và truyền đạt kiến thức, nên Học và dịch sách là phương án trực tiếp, thay vì gán mọi sinh hoạt bí mật thành hoạt động học.",
+          "sourceRefs": [
+            "D1:P077",
+            "D1:P078"
+          ],
+          "suggestedCardIds": [
+            "s02-study"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s02-learning",
+          "cardId": "s02-study",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Tư liệu nêu học lý luận và dịch sách báo trong nhà tù.",
+          "reasonDetail": "Tư liệu mô tả việc biến nhà tù thành trường học cách mạng qua học lý luận, dịch sách báo và xuất bản báo bí mật. Thẻ Học và dịch sách đáp ứng đúng hoạt động kiến thức mà ô này yêu cầu.",
+          "sourceRefs": [
+            "D1:P078"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s02-learning",
+          "cardId": "s02-mobilize",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Tập hợp lực lượng không trực tiếp đáp ứng nhiệm vụ học và trao đổi kiến thức trong tù.",
+          "reasonDetail": "Tập hợp quần chúng góp phần phục hồi phong trào, nhưng ô đang hỏi một công việc cụ thể trong nhà tù: duy trì học tập và truyền đạt kiến thức. Học và dịch sách phù hợp trực tiếp hơn; không cần phủ nhận nhiệm vụ tập hợp quần chúng để phân biệt hai việc.",
+          "sourceRefs": [
+            "D1:P078",
+            "D1:P088"
+          ],
+          "suggestedCardIds": [
+            "s02-study"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s02-learning",
+          "cardId": "s02-antiwar",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Chủ đề tuyên truyền chống chiến tranh không tự thay hoạt động học và dịch sách trong tù.",
+          "reasonDetail": "Tuyên truyền chống chiến tranh là một nhiệm vụ được tư liệu nêu, nhưng tên nhiệm vụ ấy không cho biết hoạt động học tập trong tù đã được tổ chức. Ô này yêu cầu hình thức học và trao đổi kiến thức; chọn Học và dịch sách để thực hiện đúng phần việc đang xét.",
+          "sourceRefs": [
+            "D1:P078",
+            "D1:P088"
+          ],
+          "suggestedCardIds": [
+            "s02-study"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        }
+      ],
+      "recordId": "r02",
+      "contentStatus": "source-supported-pending-subject-review",
+      "acceptedAssignments": [
+        {
+          "s02-network": "s02-secret-network",
+          "s02-learning": "s02-study"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "chapterId": "c2",
+      "period": "1936",
+      "title": "Một cánh cửa mở",
+      "contextShort": "Phong trào tranh thủ điều kiện công khai, đồng thời giữ cơ sở bí mật.",
+      "learningObjective": "Phân biệt tiếp nhận nguyện vọng với phát hành thông tin; hiểu công khai và bí mật được kết hợp.",
+      "sourceRefs": [
+        "D2:P020",
+        "D2:P033",
+        "D2:P034",
+        "D2:P035",
+        "D2:P038",
+        "D2:P057"
+      ],
+      "targets": [
+        {
+          "id": "s03-gather-wishes",
+          "label": "Gom nguyện vọng",
+          "detail": "Tiếp nhận và tập hợp dân nguyện trong cuộc vận động Đông Dương Đại hội. Ở đây, dân nguyện là nguyện vọng của người dân."
+        },
+        {
+          "id": "s03-publish-news",
+          "label": "Xuất bản báo công khai",
+          "detail": "Đưa nội dung tuyên truyền đến công chúng bằng một hình thức xuất bản công khai."
+        }
+      ],
+      "cards": [
+        {
+          "id": "s03-petitions",
+          "label": "Thu thập dân nguyện",
+          "detail": "Ghi nhận và tập hợp nguyện vọng của người dân trong cuộc vận động Đông Dương Đại hội."
+        },
+        {
+          "id": "s03-public-press",
+          "label": "Báo chí công khai",
+          "detail": "Xuất bản báo bằng tiếng Việt hoặc tiếng Pháp để truyền đạt nội dung đến công chúng."
+        },
+        {
+          "id": "s03-action-committees",
+          "label": "Lập ủy ban hành động",
+          "detail": "Trong màn này, lập đầu mối tại cơ sở để tiếp nhận, tập hợp dân nguyện; không đại diện mọi việc một ủy ban có thể làm."
+        },
+        {
+          "id": "s03-secret-base",
+          "label": "Giữ cơ sở bí mật",
+          "detail": "Duy trì bộ phận hoạt động bí mật, kết hợp với hoạt động công khai; thẻ không bao gồm xuất bản hoặc nhận dân nguyện."
+        }
+      ],
+      "evaluations": [
+        {
+          "targetId": "s03-gather-wishes",
+          "cardId": "s03-petitions",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Thu thập dân nguyện trực tiếp tập hợp nguyện vọng của người dân.",
+          "reasonDetail": "Trong cuộc vận động Đông Dương Đại hội, việc thu thập dân nguyện giúp tập hợp điều người dân muốn đề đạt. Thẻ đáp ứng nhiệm vụ tiếp nhận nguyện vọng ở ô này; chưa có nghĩa mọi nguyện vọng đã được giải quyết.",
+          "sourceRefs": [
+            "D2:P033",
+            "D2:P034"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s03-gather-wishes",
+          "cardId": "s03-public-press",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Thẻ đang phát hành thông tin; ô này cần tiếp nhận nguyện vọng.",
+          "reasonDetail": "Báo chí công khai giúp đưa nội dung đến công chúng, còn nhiệm vụ ở đây là nhận và tập hợp dân nguyện. Thẻ trong màn chỉ mô tả việc xuất bản, nên chưa thực hiện công việc tiếp nhận đang thiếu; báo chí vẫn có ý nghĩa vận động và phản ánh đời sống.",
+          "sourceRefs": [
+            "D2:P034",
+            "D2:P038"
+          ],
+          "suggestedCardIds": [
+            "s03-petitions",
+            "s03-action-committees"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s03-gather-wishes",
+          "cardId": "s03-action-committees",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Đầu mối tại cơ sở giúp tiếp nhận và gom dân nguyện.",
+          "reasonDetail": "Tài liệu đặt việc lập các ủy ban hành động tại nhà máy, đồn điền, thôn xóm trong cuộc vận động thu thập dân nguyện. Với thẻ được định nghĩa là đầu mối tiếp nhận trong màn này, đây là một cách phù hợp để gom nguyện vọng; không suy ra mọi ủy ban chỉ làm một công việc này.",
+          "sourceRefs": [
+            "D2:P033",
+            "D2:P034",
+            "D2:P035"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s03-gather-wishes",
+          "cardId": "s03-secret-base",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Cơ sở bí mật hỗ trợ phong trào; cần thêm hoạt động tiếp nhận dân nguyện.",
+          "reasonDetail": "Duy trì cơ sở bí mật là một phần của cách kết hợp hình thức hoạt động trong giai đoạn này. Tuy nhiên, thẻ chưa bao gồm việc tiếp nhận nguyện vọng đang được ô yêu cầu; có thể chọn thu thập dân nguyện hoặc lập đầu mối nhận dân nguyện để làm rõ công việc đó.",
+          "sourceRefs": [
+            "D2:P020",
+            "D2:P034",
+            "D2:P035",
+            "D2:P057"
+          ],
+          "suggestedCardIds": [
+            "s03-petitions",
+            "s03-action-committees"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s03-publish-news",
+          "cardId": "s03-petitions",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Ghi nhận nguyện vọng chưa thực hiện việc xuất bản tin ra công chúng.",
+          "reasonDetail": "Thu thập dân nguyện có vai trò tiếp nhận điều người dân muốn đề đạt trong cuộc vận động. Ô này cần một hình thức xuất bản công khai, còn thẻ mới dừng ở khâu tập hợp nguyện vọng; báo chí công khai đáp ứng phần phát hành thông tin.",
+          "sourceRefs": [
+            "D2:P034",
+            "D2:P038"
+          ],
+          "suggestedCardIds": [
+            "s03-public-press"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s03-publish-news",
+          "cardId": "s03-public-press",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Báo công khai đưa nội dung tuyên truyền đến công chúng.",
+          "reasonDetail": "Tài liệu ghi nhận việc xuất bản báo công khai bằng tiếng Việt và tiếng Pháp trong phong trào. Hình thức này đáp ứng trực tiếp nhiệm vụ phát hành thông tin ra công chúng; điều đó không có nghĩa mọi hoạt động bí mật đều chấm dứt.",
+          "sourceRefs": [
+            "D2:P020",
+            "D2:P038",
+            "D2:P057"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s03-publish-news",
+          "cardId": "s03-action-committees",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Thẻ lập nơi nhận dân nguyện, chưa tổ chức phát hành báo công khai.",
+          "reasonDetail": "Các ủy ban hành động là một hình thức tổ chức của cuộc vận động, và thẻ này chỉ mô tả đầu mối tiếp nhận dân nguyện. Việc đó chưa thực hiện yêu cầu xuất bản tin công khai ở ô này; không phải kết luận rằng các ủy ban không thể tuyên truyền hoặc phổ biến thông tin trong thực tế.",
+          "sourceRefs": [
+            "D2:P034",
+            "D2:P035",
+            "D2:P038"
+          ],
+          "suggestedCardIds": [
+            "s03-public-press"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s03-publish-news",
+          "cardId": "s03-secret-base",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Giữ cơ sở bí mật chưa tạo ra hình thức phát hành tin công khai.",
+          "reasonDetail": "Cơ sở bí mật vẫn được duy trì và kết hợp với hoạt động công khai trong giai đoạn này. Ô đang cần xuất bản thông tin tới công chúng, trong khi thẻ chỉ duy trì bộ phận bí mật; báo chí công khai là công việc trực tiếp còn thiếu, không phải sự thay thế toàn bộ cơ sở bí mật.",
+          "sourceRefs": [
+            "D2:P020",
+            "D2:P038",
+            "D2:P057"
+          ],
+          "suggestedCardIds": [
+            "s03-public-press"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        }
+      ],
+      "recordId": "r03",
+      "contentStatus": "source-supported-pending-subject-review",
+      "acceptedAssignments": [
+        {
+          "s03-gather-wishes": "s03-petitions",
+          "s03-publish-news": "s03-public-press"
+        },
+        {
+          "s03-gather-wishes": "s03-action-committees",
+          "s03-publish-news": "s03-public-press"
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "chapterId": "c2",
+      "period": "1936–1939",
+      "title": "Mở rộng sự tham gia",
+      "contextShort": "Phong trào mở rộng bằng hội đoàn, giáo dục và nhiều hình thức vận động.",
+      "learningObjective": "Nhận biết nhiều hình thức vận động cùng có ý nghĩa, nhưng mỗi hoạt động đáp ứng một công việc trực tiếp khác nhau.",
+      "sourceRefs": [
+        "D2:P023",
+        "D2:P044",
+        "D2:P045",
+        "D2:P046",
+        "D2:P047",
+        "D2:P051",
+        "D2:P056"
+      ],
+      "targets": [
+        {
+          "id": "s04-mutual-support",
+          "label": "Lập hội tương trợ",
+          "detail": "Tạo hội đoàn để người dân sinh hoạt và giúp đỡ nhau. Nhiệm vụ hỏi hình thức tương trợ, không hỏi mọi cách tập hợp quần chúng."
+        },
+        {
+          "id": "s04-literacy",
+          "label": "Mở lớp học chữ",
+          "detail": "Chọn hoạt động trực tiếp giúp người dân học đọc, học viết chữ quốc ngữ."
+        }
+      ],
+      "cards": [
+        {
+          "id": "s04-friendship-societies",
+          "label": "Lập hội ái hữu",
+          "detail": "Trong màn này, tổ chức sinh hoạt và tương trợ qua hội ái hữu để tạo sự gắn bó giữa người tham gia."
+        },
+        {
+          "id": "s04-mutual-aid-societies",
+          "label": "Lập hội tương tế",
+          "detail": "Trong màn này, tập hợp người tham gia vào hội để giúp đỡ nhau và cùng duy trì sinh hoạt."
+        },
+        {
+          "id": "s04-literacy-work",
+          "label": "Truyền bá quốc ngữ",
+          "detail": "Tổ chức hoạt động dạy và học chữ quốc ngữ. Thẻ không yêu cầu nhớ ngày thành lập Hội truyền bá quốc ngữ."
+        },
+        {
+          "id": "s04-representative-elections",
+          "label": "Tranh cử dân biểu",
+          "detail": "Tham gia tranh cử vào cơ quan dân biểu để mở rộng tuyên truyền; thẻ không bao gồm mở lớp học hoặc lập hội tương trợ."
+        }
+      ],
+      "evaluations": [
+        {
+          "targetId": "s04-mutual-support",
+          "cardId": "s04-friendship-societies",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Sinh hoạt hội ái hữu đáp ứng cách gắn kết bằng tương trợ đang được yêu cầu.",
+          "reasonDetail": "Hội ái hữu được tài liệu nêu trong các hình thức tổ chức quần chúng của phong trào. Với sinh hoạt và tương trợ được mô tả trên thẻ, hình thức này đáp ứng nhiệm vụ gắn bó người tham gia; đây là một cách phù hợp, không phải cách tập hợp duy nhất.",
+          "sourceRefs": [
+            "D2:P047",
+            "D2:P051",
+            "D2:P056"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s04-mutual-support",
+          "cardId": "s04-mutual-aid-societies",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Hội tương tế tạo hình thức giúp đỡ nhau để gắn kết người tham gia.",
+          "reasonDetail": "Tài liệu ghi nhận việc thành lập các hội tương tế trong phong trào. Hoạt động giúp đỡ nhau được đặt trong thẻ đáp ứng đúng cách gắn kết mà ô yêu cầu; việc chấp nhận thẻ này không loại vai trò của hội ái hữu hoặc hình thức vận động khác.",
+          "sourceRefs": [
+            "D2:P047",
+            "D2:P051",
+            "D2:P056"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s04-mutual-support",
+          "cardId": "s04-literacy-work",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Dạy chữ có giá trị tập hợp; ô này cần hình thức hội tương trợ.",
+          "reasonDetail": "Hoạt động truyền bá quốc ngữ thuộc mặt trận văn hóa, giáo dục và có thể góp phần gắn bó người tham gia. Tuy vậy, ô này hỏi việc lập hội lấy tương trợ làm cách sinh hoạt, còn thẻ mô tả dạy chữ; hội ái hữu hoặc hội tương tế đáp ứng phạm vi ấy trực tiếp hơn.",
+          "sourceRefs": [
+            "D2:P044",
+            "D2:P045",
+            "D2:P047",
+            "D2:P051"
+          ],
+          "suggestedCardIds": [
+            "s04-friendship-societies",
+            "s04-mutual-aid-societies"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s04-mutual-support",
+          "cardId": "s04-representative-elections",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Tranh cử mở diễn đàn tuyên truyền, chưa lập hội sinh hoạt tương trợ.",
+          "reasonDetail": "Tham gia tranh cử dân biểu được tài liệu nêu là cách mở rộng tuyên truyền đường lối. Đây là hình thức hoạt động nghị trường, còn ô yêu cầu hội đoàn giúp đỡ nhau; thẻ chưa thực hiện công việc ấy, dù tranh cử vẫn có ý nghĩa vận động quần chúng.",
+          "sourceRefs": [
+            "D2:P044",
+            "D2:P046",
+            "D2:P047"
+          ],
+          "suggestedCardIds": [
+            "s04-friendship-societies",
+            "s04-mutual-aid-societies"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s04-literacy",
+          "cardId": "s04-friendship-societies",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Thẻ tổ chức hội ái hữu, chưa bố trí hoạt động dạy và học chữ.",
+          "reasonDetail": "Hội ái hữu là một hình thức tập hợp và sinh hoạt quần chúng trong tài liệu. Thẻ này chưa mô tả dạy đọc, viết nên chưa đáp ứng nhiệm vụ mở lớp; điều đó không phủ nhận một hội có thể hỗ trợ việc học nếu có thêm hoạt động giáo dục cụ thể.",
+          "sourceRefs": [
+            "D2:P045",
+            "D2:P047"
+          ],
+          "suggestedCardIds": [
+            "s04-literacy-work"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s04-literacy",
+          "cardId": "s04-mutual-aid-societies",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Tương trợ có thể hỗ trợ người học, nhưng thẻ chưa tổ chức dạy chữ.",
+          "reasonDetail": "Lập hội tương tế tạo hình thức giúp đỡ nhau theo tình huống của thẻ. Mục tiêu ở đây là hoạt động trực tiếp dạy đọc, viết, nên cần thẻ truyền bá quốc ngữ; không suy ra rằng hội tương tế không thể hỗ trợ lớp học trong thực tế.",
+          "sourceRefs": [
+            "D2:P045",
+            "D2:P047"
+          ],
+          "suggestedCardIds": [
+            "s04-literacy-work"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s04-literacy",
+          "cardId": "s04-literacy-work",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Truyền bá quốc ngữ đáp ứng trực tiếp hoạt động dạy và học chữ.",
+          "reasonDetail": "Tài liệu đặt hoạt động truyền bá quốc ngữ trong lĩnh vực văn hóa, giáo dục của phong trào. Với nội dung dạy và học chữ được mô tả trên thẻ, đây là hoạt động đáp ứng ô mở lớp; màn này không yêu cầu xác định ngày thành lập hoặc quy mô của Hội.",
+          "sourceRefs": [
+            "D2:P044",
+            "D2:P045"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s04-literacy",
+          "cardId": "s04-representative-elections",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Diễn đàn dân biểu phục vụ tuyên truyền, chưa thực hiện việc dạy đọc, viết.",
+          "reasonDetail": "Tranh cử vào cơ quan dân biểu là một hình thức mở rộng tuyên truyền được ghi trong tài liệu. Ô này cần tổ chức dạy chữ, còn thẻ chưa bố trí hoạt động học tập đó; việc chưa đáp ứng ô không hạ thấp vai trò của đấu tranh nghị trường.",
+          "sourceRefs": [
+            "D2:P044",
+            "D2:P045",
+            "D2:P046"
+          ],
+          "suggestedCardIds": [
+            "s04-literacy-work"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        }
+      ],
+      "recordId": "r04",
+      "contentStatus": "source-supported-pending-subject-review",
+      "acceptedAssignments": [
+        {
+          "s04-mutual-support": "s04-friendship-societies",
+          "s04-literacy": "s04-literacy-work"
+        },
+        {
+          "s04-mutual-support": "s04-mutual-aid-societies",
+          "s04-literacy": "s04-literacy-work"
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "chapterId": "c3",
+      "period": "1939–1941",
+      "title": "Nhiệm vụ cấp thiết",
+      "contextShort": "Điều kiện công khai bị thu hẹp; cần tập hợp lực lượng và thay đổi phương thức hoạt động.",
+      "learningObjective": "Nhận ra việc tập hợp lực lượng trong mặt trận và đổi phương thức hoạt động trong quá trình chuyển hướng 1939–1941.",
+      "sourceRefs": [
+        "D3:P003",
+        "D3:P005",
+        "D3:P009",
+        "D3:P010",
+        "D3:P029",
+        "D3:P035",
+        "D3:P038"
+      ],
+      "targets": [
+        {
+          "id": "s05-front",
+          "label": "Tập hợp thành mặt trận",
+          "detail": "Chọn hình thức tổ chức liên kết rộng rãi các lực lượng yêu nước trong mặt trận. Ô này hỏi việc xây dựng tổ chức liên kết, không bao quát mọi chính sách vận động."
+        },
+        {
+          "id": "s05-adapt",
+          "label": "Chọn công khai hay bí mật",
+          "detail": "Chọn hình thức công khai/bí mật cho hoạt động của mạng lưới trước đàn áp và sự thu hẹp điều kiện công khai. Ô không hỏi mọi thay đổi về cách đấu tranh."
+        }
+      ],
+      "cards": [
+        {
+          "id": "s05-coalition",
+          "label": "Lập mặt trận đoàn kết",
+          "detail": "Liên kết các lực lượng yêu nước trong mặt trận. Quá trình có Mặt trận Thống nhất Dân tộc Phản đế Đông Dương được chủ trương năm 1939 và Việt Minh ra đời năm 1941; đây không phải hai tên gọi của cùng một mặt trận."
+        },
+        {
+          "id": "s05-secret",
+          "label": "Chuyển sang bí mật",
+          "detail": "Chuyển phương thức hoạt động trước đàn áp và việc thu hẹp các điều kiện công khai, hợp pháp. Không hiểu là mọi nơi, mọi hoạt động đều thay đổi đồng loạt trong một thời điểm."
+        },
+        {
+          "id": "s05-rent",
+          "label": "Giảm tô, giảm tức",
+          "detail": "Một chủ trương đáp ứng quyền lợi dân cày trong quá trình tập trung vào giải phóng dân tộc; tiếp tục được nêu ở Hội nghị tháng 5/1941."
+        },
+        {
+          "id": "s05-guerrilla",
+          "label": "Xây dựng du kích",
+          "detail": "Duy trì, phát triển lực lượng du kích và căn cứ theo chủ trương tháng 11/1940; góp phần chuẩn bị lực lượng vũ trang."
+        }
+      ],
+      "evaluations": [
+        {
+          "targetId": "s05-front",
+          "cardId": "s05-coalition",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Mặt trận liên kết rộng rãi các lực lượng yêu nước.",
+          "reasonDetail": "Nhiệm vụ của ô là tổ chức lực lượng yêu nước trong một mặt trận chung. Tài liệu nêu chủ trương mặt trận phản đế năm 1939 và việc thành lập Việt Minh năm 1941 trong quá trình chuyển hướng. Các bước này diễn ra theo thời gian, không phải một quyết định tức thời.",
+          "sourceRefs": [
+            "D3:P009",
+            "D3:P029",
+            "D3:P035",
+            "D3:P038"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s05-front",
+          "cardId": "s05-secret",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Bí mật là phương thức, chưa phải hình thức mặt trận.",
+          "reasonDetail": "Chuyển sang bí mật giúp thích ứng với đàn áp và có ý nghĩa đối với hoạt động của tổ chức. Tuy nhiên, ô này hỏi hình thức liên kết rộng rãi các lực lượng yêu nước trong mặt trận, nên 'Lập mặt trận đoàn kết' đáp ứng trực tiếp hơn.",
+          "sourceRefs": [
+            "D3:P009",
+            "D3:P010",
+            "D3:P035"
+          ],
+          "suggestedCardIds": [
+            "s05-coalition"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s05-front",
+          "cardId": "s05-rent",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Chính sách dân cày chưa thay việc lập mặt trận.",
+          "reasonDetail": "Giảm tô, giảm tức đáp ứng quyền lợi dân cày và không mất ý nghĩa khi giải phóng dân tộc được đặt lên hàng đầu. Nhưng ô này yêu cầu hình thức tổ chức liên kết các lực lượng trong mặt trận, còn thẻ đang nêu một chính sách xã hội. 'Lập mặt trận đoàn kết' trực tiếp thực hiện nhiệm vụ tổ chức ấy.",
+          "sourceRefs": [
+            "D3:P009",
+            "D3:P032",
+            "D3:P033",
+            "D3:P035"
+          ],
+          "suggestedCardIds": [
+            "s05-coalition"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s05-front",
+          "cardId": "s05-guerrilla",
+          "outcome": "needs-review",
+          "reasonType": "scope",
+          "reasonShort": "Du kích là một lực lượng, chưa phải mặt trận rộng.",
+          "reasonDetail": "Duy trì và phát triển du kích là một bước chuẩn bị lực lượng vũ trang có ý nghĩa. Phạm vi thẻ chưa bao quát việc liên kết rộng rãi các giai cấp, tầng lớp yêu nước trong mặt trận mà ô này yêu cầu. Hãy cân nhắc 'Lập mặt trận đoàn kết' cho nhiệm vụ đó.",
+          "sourceRefs": [
+            "D3:P009",
+            "D3:P014",
+            "D3:P035"
+          ],
+          "suggestedCardIds": [
+            "s05-coalition"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s05-adapt",
+          "cardId": "s05-coalition",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Mặt trận tập hợp lực lượng; ô này hỏi phương thức.",
+          "reasonDetail": "Mặt trận góp phần tập hợp lực lượng cho nhiệm vụ giải phóng dân tộc. Ô này đang yêu cầu điều chỉnh cách hoạt động trước đàn áp tăng và điều kiện công khai bị thu hẹp, nên việc lập mặt trận chưa trực tiếp trả lời yêu cầu ấy. 'Chuyển sang bí mật' thể hiện sự thích ứng về phương thức.",
+          "sourceRefs": [
+            "D3:P003",
+            "D3:P009",
+            "D3:P010",
+            "D3:P035"
+          ],
+          "suggestedCardIds": [
+            "s05-secret"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s05-adapt",
+          "cardId": "s05-secret",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Phương thức được điều chỉnh trước điều kiện đàn áp.",
+          "reasonDetail": "Chiến tranh và đàn áp làm điều kiện công khai, hợp pháp của phong trào trước đó bị thu hẹp. Tài liệu nêu việc chuyển sang hoạt động bí mật, bất hợp pháp như một điều chỉnh phương thức. Đây là quá trình thích ứng theo hoàn cảnh, không phải kết luận rằng mọi hoạt động công khai đều luôn không có giá trị.",
+          "sourceRefs": [
+            "D3:P003",
+            "D3:P010"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s05-adapt",
+          "cardId": "s05-rent",
+          "outcome": "needs-review",
+          "reasonType": "category-mismatch",
+          "reasonShort": "Giảm tô là chính sách, chưa phải đổi phương thức.",
+          "reasonDetail": "Giảm tô, giảm tức là một nội dung chủ trương liên quan quyền lợi dân cày. Ô này hỏi cách tổ chức hoạt động khi điều kiện công khai thay đổi, nên chính sách đó chưa thay cho việc điều chỉnh phương thức. 'Chuyển sang bí mật' đáp ứng đúng loại yêu cầu đang xét.",
+          "sourceRefs": [
+            "D3:P003",
+            "D3:P010",
+            "D3:P033"
+          ],
+          "suggestedCardIds": [
+            "s05-secret"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s05-adapt",
+          "cardId": "s05-guerrilla",
+          "outcome": "needs-review",
+          "reasonType": "scope",
+          "reasonShort": "Xây du kích chưa chọn hình thức công khai/bí mật cho mạng lưới.",
+          "reasonDetail": "Lực lượng du kích được duy trì và phát triển trong quá trình chuẩn bị đấu tranh, đồng thời có ý nghĩa với cách đấu tranh mới. Tuy nhiên, ô này hỏi riêng hình thức công khai/bí mật cho hoạt động của mạng lưới trong hoàn cảnh bị thu hẹp điều kiện công khai. 'Chuyển sang bí mật' trả lời trực tiếp lựa chọn đang được yêu cầu, không phủ nhận vai trò của du kích.",
+          "sourceRefs": [
+            "D3:P003",
+            "D3:P010",
+            "D3:P014"
+          ],
+          "suggestedCardIds": [
+            "s05-secret"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        }
+      ],
+      "recordId": "r05",
+      "contentStatus": "source-supported-pending-subject-review",
+      "acceptedAssignments": [
+        {
+          "s05-front": "s05-coalition",
+          "s05-adapt": "s05-secret"
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "chapterId": "c3",
+      "period": "1941–đầu 1945",
+      "title": "Chuẩn bị bền bỉ",
+      "contextShort": "Lực lượng và căn cứ được chuẩn bị trên nhiều phương diện.",
+      "learningObjective": "Phân biệt những hoạt động trực tiếp phát triển lực lượng chính trị với xây dựng địa bàn căn cứ, đồng thời nhận biết vai trò bổ trợ của lực lượng vũ trang.",
+      "sourceRefs": [
+        "D3:P040",
+        "D3:P041",
+        "D3:P042",
+        "D3:P043",
+        "D3:P044",
+        "D3:P045",
+        "D3:P047"
+      ],
+      "targets": [
+        {
+          "id": "s06-political",
+          "label": "Mở rộng lực lượng chính trị",
+          "detail": "Chọn hoạt động trực tiếp vận động, tập hợp quần chúng vào phong trào cứu nước, qua tổ chức hoặc tuyên truyền."
+        },
+        {
+          "id": "s06-base",
+          "label": "Mở địa bàn, nối liên lạc",
+          "detail": "Mở rộng các địa bàn từ căn cứ và xây dựng tuyến liên lạc kết nối cơ sở; không hỏi chung mọi việc giúp bảo vệ căn cứ."
+        }
+      ],
+      "cards": [
+        {
+          "id": "s06-associations",
+          "label": "Phát triển hội cứu quốc",
+          "detail": "Vận động nhiều tầng lớp tham gia Việt Minh thông qua các hội cứu quốc."
+        },
+        {
+          "id": "s06-bases",
+          "label": "Mở địa bàn và liên lạc",
+          "detail": "Từ những địa bàn căn cứ, phát triển cơ sở ra vùng lân cận và xây dựng tuyến liên lạc kết nối các lực lượng."
+        },
+        {
+          "id": "s06-defense",
+          "label": "Tổ chức tự vệ, du kích",
+          "detail": "Xây dựng bộ phận lực lượng vũ trang bảo vệ cơ sở, hỗ trợ phong trào và đấu tranh khi có điều kiện. Thẻ tập trung vào nhiệm vụ tổ chức bộ phận này."
+        },
+        {
+          "id": "s06-press",
+          "label": "Báo chí vận động",
+          "detail": "Dùng báo chí cách mạng tuyên truyền mục tiêu độc lập và vận động quần chúng tham gia."
+        }
+      ],
+      "evaluations": [
+        {
+          "targetId": "s06-political",
+          "cardId": "s06-associations",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Hội cứu quốc trực tiếp tập hợp nhiều tầng lớp.",
+          "reasonDetail": "Tài liệu nêu việc vận động nhân dân tham gia Việt Minh thông qua các hội cứu quốc. Đây là cách trực tiếp tập hợp nhiều tầng lớp yêu nước, đáp ứng nhiệm vụ phát triển lực lượng chính trị. Báo chí vận động cũng là một phương án được chấp nhận ở ô này.",
+          "sourceRefs": [
+            "D3:P041",
+            "D3:P042"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s06-political",
+          "cardId": "s06-bases",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Căn cứ tạo địa bàn; ô này hỏi vận động quần chúng.",
+          "reasonDetail": "Căn cứ giúp bảo toàn và phát triển lực lượng, nên có vai trò hỗ trợ quan trọng. Nhưng ô này yêu cầu hoạt động trực tiếp vận động, tập hợp quần chúng, trong khi thẻ tập trung vào địa bàn đứng chân. Các hội cứu quốc hoặc báo chí vận động trực tiếp đáp ứng nhiệm vụ đang hỏi.",
+          "sourceRefs": [
+            "D3:P041",
+            "D3:P042",
+            "D3:P045"
+          ],
+          "suggestedCardIds": [
+            "s06-associations",
+            "s06-press"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s06-political",
+          "cardId": "s06-defense",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Tự vệ hỗ trợ phong trào; cần trực tiếp vận động dân.",
+          "reasonDetail": "Tự vệ, du kích bảo vệ cơ sở và hỗ trợ phong trào; hoạt động vũ trang còn có thể kết hợp tuyên truyền. Tuy nhiên, thẻ này được giới hạn ở việc tổ chức bộ phận vũ trang, còn ô hỏi hoạt động trực tiếp tập hợp quần chúng. 'Phát triển hội cứu quốc' hoặc 'Báo chí vận động' trả lời cụ thể hơn, không phủ nhận sự gắn bó giữa chính trị và vũ trang.",
+          "sourceRefs": [
+            "D3:P041",
+            "D3:P042",
+            "D3:P043",
+            "D3:P044"
+          ],
+          "suggestedCardIds": [
+            "s06-associations",
+            "s06-press"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s06-political",
+          "cardId": "s06-press",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Báo chí tuyên truyền độc lập và vận động quần chúng.",
+          "reasonDetail": "Báo chí cách mạng góp phần tuyên truyền mục tiêu độc lập và vận động quần chúng. Vì ô này yêu cầu mở rộng lực lượng chính trị thông qua vận động, báo chí đáp ứng trực tiếp nhiệm vụ. Cùng với các hội cứu quốc, hoạt động tuyên truyền góp phần mở rộng nền tảng quần chúng.",
+          "sourceRefs": [
+            "D3:P041",
+            "D3:P042"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s06-base",
+          "cardId": "s06-associations",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Hội cứu quốc tập hợp người; ô yêu cầu mở địa bàn và tuyến liên lạc.",
+          "reasonDetail": "Các hội cứu quốc phát triển lực lượng chính trị và góp phần tạo nền tảng cho cách mạng. Ô này yêu cầu trực tiếp mở rộng địa bàn từ căn cứ và xây dựng tuyến liên lạc, không hỏi mọi hoạt động giúp phong trào lớn mạnh. 'Mở địa bàn và liên lạc' thực hiện rõ công việc địa bàn ấy.",
+          "sourceRefs": [
+            "D3:P041",
+            "D3:P045",
+            "D3:P047"
+          ],
+          "suggestedCardIds": [
+            "s06-bases"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s06-base",
+          "cardId": "s06-bases",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Mở rộng địa bàn và tuyến liên lạc đáp ứng nhiệm vụ.",
+          "reasonDetail": "Tài liệu nêu Bắc Sơn – Võ Nhai và Cao Bằng là những địa bàn bảo toàn, phát triển lực lượng, từ đó mở rộng cơ sở và các tuyến liên lạc. Thẻ trực tiếp mô tả phát triển địa bàn và kết nối các lực lượng như ô yêu cầu. Đây chỉ là một mặt của chuẩn bị, còn lực lượng chính trị và vũ trang vẫn có vai trò quan trọng.",
+          "sourceRefs": [
+            "D3:P040",
+            "D3:P043",
+            "D3:P045",
+            "D3:P047"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s06-base",
+          "cardId": "s06-defense",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Bảo vệ cơ sở chưa thay công việc mở địa bàn và tuyến liên lạc.",
+          "reasonDetail": "Tự vệ, du kích trực tiếp góp phần bảo vệ cơ sở và có vai trò với căn cứ, nên sẽ là một cách hợp lý nếu nhiệm vụ chỉ hỏi củng cố căn cứ nói chung. Nhưng ô này giới hạn ở mở rộng địa bàn và xây dựng tuyến liên lạc, trong khi thẻ mô tả tổ chức lực lượng bảo vệ. 'Mở địa bàn và liên lạc' đáp ứng công việc cụ thể đang xét.",
+          "sourceRefs": [
+            "D3:P043",
+            "D3:P045"
+          ],
+          "suggestedCardIds": [
+            "s06-bases"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s06-base",
+          "cardId": "s06-press",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Báo chí vận động dân, chưa trực tiếp mở địa bàn và tuyến liên lạc.",
+          "reasonDetail": "Báo chí có vai trò tuyên truyền và vận động quần chúng, góp phần mở rộng lực lượng chính trị. Ô này hỏi công việc phát triển cơ sở ra địa bàn lân cận và nối các tuyến liên lạc, không chỉ việc đưa thông tin đến người đọc. 'Mở địa bàn và liên lạc' là phương án thể hiện trực tiếp công việc của ô.",
+          "sourceRefs": [
+            "D3:P042",
+            "D3:P045"
+          ],
+          "suggestedCardIds": [
+            "s06-bases"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        }
+      ],
+      "recordId": "r06",
+      "contentStatus": "source-supported-pending-subject-review",
+      "acceptedAssignments": [
+        {
+          "s06-political": "s06-associations",
+          "s06-base": "s06-bases"
+        },
+        {
+          "s06-political": "s06-press",
+          "s06-base": "s06-bases"
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "chapterId": "c3",
+      "period": "Tháng 3–7/1945",
+      "title": "Chuẩn bị trực tiếp",
+      "contextShort": "Tháng 3/1945, sau đảo chính, điều kiện tổng khởi nghĩa chưa chín muồi.",
+      "learningObjective": "Hiểu quan hệ giữa cứu đói và vận động chính trị; phân biệt khởi nghĩa từng phần với phát động tổng khởi nghĩa khi chưa đủ điều kiện.",
+      "sourceRefs": [
+        "D3:P053",
+        "D3:P054",
+        "D3:P055",
+        "D3:P056",
+        "D3:P058",
+        "D3:P059",
+        "D3:P060",
+        "D3:P064"
+      ],
+      "targets": [
+        {
+          "id": "s07-food",
+          "label": "Cứu đói gắn chống Nhật",
+          "detail": "Chọn hoạt động trực tiếp giải quyết nhu cầu lương thực, đồng thời thu hút, tổ chức quần chúng trong cao trào kháng Nhật."
+        },
+        {
+          "id": "s07-partial",
+          "label": "Giành chính quyền từng phần",
+          "detail": "Hành động ở các địa phương có điều kiện để giải phóng từng nơi, tạo thêm tiền đề; chưa đồng nhất với tổng khởi nghĩa toàn quốc."
+        }
+      ],
+      "cards": [
+        {
+          "id": "s07-rice",
+          "label": "Phá kho thóc cứu đói",
+          "detail": "Gắn nhu cầu sống còn của nhân dân với đấu tranh chống Nhật; qua hoạt động, quần chúng được thu hút, tổ chức và rèn luyện."
+        },
+        {
+          "id": "s07-local-uprising",
+          "label": "Khởi nghĩa từng phần",
+          "detail": "Phối hợp lực lượng và quần chúng giành chính quyền ở từng nơi có điều kiện, phát triển vùng giải phóng."
+        },
+        {
+          "id": "s07-self-defense",
+          "label": "Xây dựng tự vệ",
+          "detail": "Chuẩn bị lực lượng bảo vệ và hỗ trợ phong trào; hoạt động này tiếp tục được đẩy mạnh trong các đô thị."
+        },
+        {
+          "id": "s07-national-now",
+          "label": "Tổng khởi nghĩa ngay tháng 3",
+          "detail": "Phát động đồng loạt trên toàn quốc ngay sau đảo chính tháng 3/1945, thay vì cao trào và bước chuẩn bị từng phần."
+        }
+      ],
+      "evaluations": [
+        {
+          "targetId": "s07-food",
+          "cardId": "s07-rice",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Cứu đói đồng thời thu hút, tổ chức quần chúng.",
+          "reasonDetail": "Phong trào phá kho thóc gắn nhu cầu lương thực sống còn với đấu tranh chống Nhật. Tài liệu nhấn mạnh qua hoạt động này, quần chúng được thu hút, tổ chức và rèn luyện, nên ý nghĩa vượt ra ngoài cứu trợ đơn thuần. Thẻ đáp ứng cả hai phần của nhiệm vụ: cứu đói và vận động trong cao trào.",
+          "sourceRefs": [
+            "D3:P055",
+            "D3:P059"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s07-food",
+          "cardId": "s07-local-uprising",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Khởi nghĩa từng phần chưa trực tiếp giải quyết lương thực.",
+          "reasonDetail": "Khởi nghĩa từng phần góp phần giải phóng địa phương và tạo tiền đề cho tổng khởi nghĩa. Nhưng ô này yêu cầu hoạt động trực tiếp gắn việc giải quyết nạn đói với vận động quần chúng chống Nhật. 'Phá kho thóc cứu đói' thể hiện rõ mối quan hệ cụ thể ấy.",
+          "sourceRefs": [
+            "D3:P058",
+            "D3:P059",
+            "D3:P064"
+          ],
+          "suggestedCardIds": [
+            "s07-rice"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s07-food",
+          "cardId": "s07-self-defense",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Tự vệ hỗ trợ phong trào, chưa trực tiếp cứu đói.",
+          "reasonDetail": "Xây dựng tự vệ là công việc chuẩn bị và hỗ trợ phong trào được tiếp tục trong các đô thị. Ô này đang yêu cầu hoạt động trực tiếp đáp ứng nhu cầu lương thực đồng thời tổ chức quần chúng chống Nhật, nên tự vệ chưa thay cho nhiệm vụ đó. 'Phá kho thóc cứu đói' phù hợp hơn với yêu cầu cụ thể.",
+          "sourceRefs": [
+            "D3:P043",
+            "D3:P059",
+            "D3:P060"
+          ],
+          "suggestedCardIds": [
+            "s07-rice"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s07-food",
+          "cardId": "s07-national-now",
+          "outcome": "needs-review",
+          "reasonType": "timing",
+          "reasonShort": "Tháng 3 chưa đủ điều kiện tổng khởi nghĩa.",
+          "reasonDetail": "Chỉ thị tháng 3 nhận định đảo chính tạo khủng hoảng chính trị nhưng điều kiện tổng khởi nghĩa chưa chín muồi. Phát động toàn quốc ngay lúc đó vừa chưa đáp ứng điều kiện, vừa chưa trực tiếp thể hiện việc gắn cứu đói với vận động mà ô yêu cầu. 'Phá kho thóc cứu đói' là một hoạt động cụ thể trong cao trào chuẩn bị.",
+          "sourceRefs": [
+            "D3:P054",
+            "D3:P055",
+            "D3:P056",
+            "D3:P059"
+          ],
+          "suggestedCardIds": [
+            "s07-rice"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s07-partial",
+          "cardId": "s07-rice",
+          "outcome": "needs-review",
+          "reasonType": "scope",
+          "reasonShort": "Cứu đói góp phần cao trào, chưa thay giành chính quyền.",
+          "reasonDetail": "Phong trào phá kho thóc thu hút và rèn luyện quần chúng, có ý nghĩa chính trị quan trọng. Ô này hỏi hình thức phối hợp để giành chính quyền ở từng địa phương có điều kiện, nên hoạt động cứu đói riêng chưa thể hiện đủ nhiệm vụ ấy. 'Khởi nghĩa từng phần' đáp ứng trực tiếp phạm vi đang xét.",
+          "sourceRefs": [
+            "D3:P058",
+            "D3:P059",
+            "D3:P064"
+          ],
+          "suggestedCardIds": [
+            "s07-local-uprising"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s07-partial",
+          "cardId": "s07-local-uprising",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Từng địa phương hành động khi có điều kiện.",
+          "reasonDetail": "Từ tháng 3/1945, lực lượng vũ trang phối hợp quần chúng giải phóng nhiều địa phương và lập chính quyền cách mạng. Đây là khởi nghĩa từng phần trong cao trào kháng Nhật, góp phần chuẩn bị trực tiếp cho tổng khởi nghĩa. Điều đó không có nghĩa mọi địa phương đều phải hành động cùng lúc ngay sau đảo chính.",
+          "sourceRefs": [
+            "D3:P054",
+            "D3:P058",
+            "D3:P064"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s07-partial",
+          "cardId": "s07-self-defense",
+          "outcome": "needs-review",
+          "reasonType": "missing-condition",
+          "reasonShort": "Có lực lượng hỗ trợ chưa đủ thành khởi nghĩa.",
+          "reasonDetail": "Tự vệ là một bộ phận chuẩn bị và hỗ trợ phong trào, nhưng việc tổ chức lực lượng này riêng lẻ chưa thể hiện phối hợp giành chính quyền ở địa phương. Ô đang hỏi hình thức hành động với quần chúng tại nơi có điều kiện. 'Khởi nghĩa từng phần' trực tiếp thể hiện bước hành động đó.",
+          "sourceRefs": [
+            "D3:P043",
+            "D3:P058",
+            "D3:P060",
+            "D3:P064"
+          ],
+          "suggestedCardIds": [
+            "s07-local-uprising"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s07-partial",
+          "cardId": "s07-national-now",
+          "outcome": "needs-review",
+          "reasonType": "timing",
+          "reasonShort": "Khủng hoảng tháng 3 chưa đồng nghĩa thời cơ toàn quốc.",
+          "reasonDetail": "Sau đảo chính, tài liệu nêu điều kiện tổng khởi nghĩa chưa chín muồi và chủ trương thúc đẩy cao trào để tạo tiền đề. Ô này yêu cầu hành động từng phần ở nơi có điều kiện, nên phát động đồng loạt toàn quốc ngay lúc đó vượt quá bước đi đang xét. 'Khởi nghĩa từng phần' thể hiện sự chủ động phù hợp với tình hình ấy.",
+          "sourceRefs": [
+            "D3:P054",
+            "D3:P055",
+            "D3:P056",
+            "D3:P058"
+          ],
+          "suggestedCardIds": [
+            "s07-local-uprising"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        }
+      ],
+      "recordId": "r07",
+      "contentStatus": "source-supported-pending-subject-review",
+      "acceptedAssignments": [
+        {
+          "s07-food": "s07-rice",
+          "s07-partial": "s07-local-uprising"
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "chapterId": "c3",
+      "period": "Tháng 8/1945",
+      "title": "Hai điều kiện cùng hội tụ",
+      "contextShort": "Hoàn cảnh thuận lợi gặp sự chuẩn bị trong nước.",
+      "learningObjective": "Phân biệt điều kiện khách quan với sự chuẩn bị chủ quan; hiểu thời cơ gắn sự kết hợp hai mặt chứ không chỉ một biến cố bên ngoài.",
+      "sourceRefs": [
+        "D3:P067",
+        "D3:P068",
+        "D3:P069",
+        "D3:P096",
+        "D3:P097",
+        "D3:P099",
+        "D3:P100"
+      ],
+      "targets": [
+        {
+          "id": "s08-objective",
+          "label": "Điều kiện khách quan",
+          "detail": "Chọn một biến chuyển ngoài sự chuẩn bị của lực lượng cách mạng, làm bộ máy thống trị suy yếu. Các thẻ là ví dụ liên quan với nhau, không phải một danh sách đầy đủ."
+        },
+        {
+          "id": "s08-subjective",
+          "label": "Sự chuẩn bị trong nước",
+          "detail": "Chọn một kết quả của quá trình tổ chức, xây dựng lực lượng và vận động quần chúng, còn gọi là sự chuẩn bị chủ quan."
+        }
+      ],
+      "cards": [
+        {
+          "id": "s08-japan-surrender",
+          "label": "Nhật đầu hàng Đồng minh",
+          "detail": "Biến chuyển quốc tế làm quân Nhật tại Đông Dương hoang mang; phân biệt thông tin Nhật sắp đầu hàng với tuyên bố chính thức."
+        },
+        {
+          "id": "s08-regime-crisis",
+          "label": "Chính quyền thân Nhật khủng hoảng",
+          "detail": "Bộ máy chính quyền thân Nhật lâm vào khủng hoảng trong tình thế Nhật đi đến đầu hàng."
+        },
+        {
+          "id": "s08-ready-forces",
+          "label": "Tổ chức, lực lượng sẵn sàng",
+          "detail": "Kết quả chuẩn bị lâu dài về tổ chức, cán bộ, lực lượng chính trị, lực lượng vũ trang và căn cứ."
+        },
+        {
+          "id": "s08-trained-masses",
+          "label": "Quần chúng được rèn luyện",
+          "detail": "Nhân dân được tập hợp, tổ chức và rèn luyện qua hoạt động thực tiễn, đặc biệt trong cao trào kháng Nhật."
+        }
+      ],
+      "evaluations": [
+        {
+          "targetId": "s08-objective",
+          "cardId": "s08-japan-surrender",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Biến chuyển quốc tế tạo hoàn cảnh thuận lợi.",
+          "reasonDetail": "Nhật đi đến đầu hàng Đồng minh làm suy yếu nghiêm trọng bộ máy thống trị ở Đông Dương, là điều kiện khách quan thuận lợi. Tài liệu đồng thời nhấn mạnh khả năng tận dụng hoàn cảnh ấy đến từ sự chuẩn bị trong nước. Đặt thẻ ở ô này không có nghĩa một mình sự đầu hàng đủ bảo đảm thắng lợi.",
+          "sourceRefs": [
+            "D3:P067",
+            "D3:P068",
+            "D3:P099",
+            "D3:P100"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s08-objective",
+          "cardId": "s08-regime-crisis",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Khủng hoảng bộ máy thống trị thuộc hoàn cảnh bên ngoài.",
+          "reasonDetail": "Tài liệu nêu chính quyền thân Nhật lâm vào khủng hoảng khi Nhật đi đến đầu hàng. Đây là một biểu hiện của hoàn cảnh khách quan thuận lợi, liên quan trực tiếp với biến chuyển quốc tế, nên được chấp nhận ở ô này. Nó vẫn cần kết hợp với lực lượng cách mạng đã chuẩn bị để trở thành khả năng hành động thực tế.",
+          "sourceRefs": [
+            "D3:P067",
+            "D3:P068",
+            "D3:P100"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s08-objective",
+          "cardId": "s08-ready-forces",
+          "outcome": "needs-review",
+          "reasonType": "category-mismatch",
+          "reasonShort": "Sẵn sàng của tổ chức thuộc sự chuẩn bị trong nước.",
+          "reasonDetail": "Tổ chức và lực lượng sẵn sàng là thành quả chủ động xây dựng trong nước, có vai trò thiết yếu. Ô này đang hỏi biến chuyển khách quan ngoài quá trình chuẩn bị ấy, nên thẻ thuộc nhóm còn lại. 'Nhật đầu hàng Đồng minh' hoặc 'Chính quyền thân Nhật khủng hoảng' thể hiện loại yếu tố của ô.",
+          "sourceRefs": [
+            "D3:P067",
+            "D3:P068",
+            "D3:P096",
+            "D3:P100"
+          ],
+          "suggestedCardIds": [
+            "s08-japan-surrender",
+            "s08-regime-crisis"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s08-objective",
+          "cardId": "s08-trained-masses",
+          "outcome": "needs-review",
+          "reasonType": "category-mismatch",
+          "reasonShort": "Quần chúng được rèn luyện là kết quả chuẩn bị.",
+          "reasonDetail": "Quần chúng được tổ chức và rèn luyện qua phong trào là kết quả của hoạt động trong nước. Thẻ có ý nghĩa đối với sự sẵn sàng chủ quan, còn ô đang phân loại hoàn cảnh khách quan tạo thuận lợi. Có thể chọn sự đầu hàng của Nhật hoặc khủng hoảng chính quyền thân Nhật cho ô này.",
+          "sourceRefs": [
+            "D3:P059",
+            "D3:P064",
+            "D3:P067",
+            "D3:P068",
+            "D3:P097"
+          ],
+          "suggestedCardIds": [
+            "s08-japan-surrender",
+            "s08-regime-crisis"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s08-subjective",
+          "cardId": "s08-japan-surrender",
+          "outcome": "needs-review",
+          "reasonType": "category-mismatch",
+          "reasonShort": "Nhật đầu hàng là hoàn cảnh, chưa phải chuẩn bị nội lực.",
+          "reasonDetail": "Nhật đầu hàng là điều kiện khách quan quan trọng, không phải thành quả tổ chức và xây dựng lực lượng trong nước. Ô này yêu cầu phần chuẩn bị chủ quan giúp tận dụng thời cơ, nên thẻ thuộc nhóm khác. 'Tổ chức, lực lượng sẵn sàng' hoặc 'Quần chúng được rèn luyện' thể hiện phần chuẩn bị ấy.",
+          "sourceRefs": [
+            "D3:P067",
+            "D3:P068",
+            "D3:P096",
+            "D3:P097",
+            "D3:P100"
+          ],
+          "suggestedCardIds": [
+            "s08-ready-forces",
+            "s08-trained-masses"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s08-subjective",
+          "cardId": "s08-regime-crisis",
+          "outcome": "needs-review",
+          "reasonType": "category-mismatch",
+          "reasonShort": "Khủng hoảng phía đối phương chưa thay sự chuẩn bị.",
+          "reasonDetail": "Khủng hoảng của chính quyền thân Nhật tạo hoàn cảnh thuận lợi nhưng không phải sự chuẩn bị của lực lượng cách mạng. Ô đang hỏi nội lực đã được xây dựng để biến cơ hội thành hành động. Tổ chức, lực lượng sẵn sàng hoặc quần chúng được rèn luyện đều là ví dụ được chấp nhận.",
+          "sourceRefs": [
+            "D3:P067",
+            "D3:P068",
+            "D3:P096",
+            "D3:P097",
+            "D3:P100"
+          ],
+          "suggestedCardIds": [
+            "s08-ready-forces",
+            "s08-trained-masses"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s08-subjective",
+          "cardId": "s08-ready-forces",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Lực lượng sẵn sàng là thành quả chuẩn bị chủ động.",
+          "reasonDetail": "Tài liệu nêu sự chuẩn bị lâu dài về tổ chức, cán bộ, lực lượng chính trị, lực lượng vũ trang và căn cứ là nền tảng tận dụng thời cơ. Đây là phần chủ quan được xây dựng trong nước, khác với biến chuyển của chiến tranh quốc tế. Thẻ đại diện cho một mặt của sự chuẩn bị, không có nghĩa chỉ cần một yếu tố riêng lẻ.",
+          "sourceRefs": [
+            "D3:P068",
+            "D3:P096",
+            "D3:P100"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s08-subjective",
+          "cardId": "s08-trained-masses",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Quần chúng được tổ chức, rèn luyện qua phong trào.",
+          "reasonDetail": "Các hoạt động đấu tranh và cao trào kháng Nhật đã thu hút, tổ chức và rèn luyện quần chúng. Đó là một kết quả chuẩn bị trong nước, góp phần tạo sự sẵn sàng chủ quan khi thời cơ đến. Sự sẵn sàng của tổ chức và lực lượng cũng thuộc nhóm chuẩn bị chủ động này.",
+          "sourceRefs": [
+            "D3:P059",
+            "D3:P064",
+            "D3:P068",
+            "D3:P097"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        }
+      ],
+      "recordId": "r08",
+      "contentStatus": "source-supported-pending-subject-review",
+      "acceptedAssignments": [
+        {
+          "s08-objective": "s08-japan-surrender",
+          "s08-subjective": "s08-ready-forces"
+        },
+        {
+          "s08-objective": "s08-japan-surrender",
+          "s08-subjective": "s08-trained-masses"
+        },
+        {
+          "s08-objective": "s08-regime-crisis",
+          "s08-subjective": "s08-ready-forces"
+        },
+        {
+          "s08-objective": "s08-regime-crisis",
+          "s08-subjective": "s08-trained-masses"
+        }
+      ]
+    },
+    {
+      "id": "s09",
+      "chapterId": "c3",
+      "period": "Tháng 8/1945",
+      "title": "Phối hợp hành động",
+      "contextShort": "Cần tập trung, thống nhất và kịp thời huy động sức dân.",
+      "learningObjective": "Nhận ra vai trò của chỉ đạo phối hợp và lực lượng quần chúng trong tổng khởi nghĩa; không phủ nhận sự chủ động địa phương hoặc vai trò hỗ trợ của lực lượng vũ trang.",
+      "sourceRefs": [
+        "D3:P069",
+        "D3:P071",
+        "D3:P072",
+        "D3:P078",
+        "D3:P093",
+        "D3:P097",
+        "D3:P098"
+      ],
+      "targets": [
+        {
+          "id": "s09-coordinate",
+          "label": "Thống nhất chỉ đạo",
+          "detail": "Truyền đạt chủ trương và phối hợp hành động tập trung, thống nhất, kịp thời; địa phương vẫn chủ động vận dụng theo tình hình thực tế."
+        },
+        {
+          "id": "s09-mobilize",
+          "label": "Huy động quần chúng",
+          "detail": "Trực tiếp tập hợp đông đảo nhân dân thành lực lượng hành động. Nhiệm vụ này khác với riêng việc tổ chức bộ phận vũ trang hỗ trợ."
+        }
+      ],
+      "cards": [
+        {
+          "id": "s09-communicate",
+          "label": "Truyền đạt và phối hợp",
+          "detail": "Đưa chủ trương đến các đầu mối, phối hợp chỉ đạo tập trung, thống nhất, kịp thời; kết hợp sự chủ động của từng địa phương."
+        },
+        {
+          "id": "s09-masses",
+          "label": "Tập hợp quần chúng",
+          "detail": "Huy động đông đảo nhân dân trực tiếp tham gia hành động giành chính quyền."
+        },
+        {
+          "id": "s09-armed-support",
+          "label": "Vũ trang hỗ trợ",
+          "detail": "Phát huy vai trò của bộ phận lực lượng vũ trang trong hỗ trợ đấu tranh chính trị và sức mạnh quần chúng."
+        },
+        {
+          "id": "s09-base",
+          "label": "Củng cố căn cứ",
+          "detail": "Bảo toàn, phát triển địa bàn đứng chân cho lực lượng; một công việc chuẩn bị có giá trị nhưng không thay mọi yêu cầu hành động."
+        }
+      ],
+      "evaluations": [
+        {
+          "targetId": "s09-coordinate",
+          "cardId": "s09-communicate",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Chủ trương chung giúp hành động thống nhất, kịp thời.",
+          "reasonDetail": "Tài liệu nêu việc chỉ đạo tổng khởi nghĩa dựa trên nguyên tắc tập trung, thống nhất và kịp thời. Truyền đạt chủ trương và phối hợp giữa các đầu mối trực tiếp đáp ứng yêu cầu đó. Sự thống nhất vẫn đi cùng việc địa phương chủ động vận dụng theo tình hình, không phải mọi nơi đều có diễn biến giống nhau.",
+          "sourceRefs": [
+            "D3:P071",
+            "D3:P072",
+            "D3:P078",
+            "D3:P098"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s09-coordinate",
+          "cardId": "s09-masses",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Có đông người chưa tự tạo chỉ đạo thống nhất.",
+          "reasonDetail": "Quần chúng là lực lượng trực tiếp giành chính quyền và có vai trò thiết yếu. Tuy nhiên, ô này hỏi công việc truyền đạt chủ trương và phối hợp chỉ đạo; việc tập hợp người riêng chưa thể hiện đầy đủ quan hệ chỉ đạo chung. 'Truyền đạt và phối hợp' đáp ứng trực tiếp nhiệm vụ đang hỏi.",
+          "sourceRefs": [
+            "D3:P072",
+            "D3:P093",
+            "D3:P097"
+          ],
+          "suggestedCardIds": [
+            "s09-communicate"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s09-coordinate",
+          "cardId": "s09-armed-support",
+          "outcome": "needs-review",
+          "reasonType": "scope",
+          "reasonShort": "Vũ trang hỗ trợ chưa thay phối hợp chỉ đạo chung.",
+          "reasonDetail": "Lực lượng vũ trang hỗ trợ đấu tranh chính trị và sức mạnh của đông đảo quần chúng trong tổng khởi nghĩa. Thẻ mô tả một vai trò lực lượng, còn ô yêu cầu phối hợp chỉ đạo trên các đầu mối để hành động thống nhất, kịp thời. 'Truyền đạt và phối hợp' trực tiếp đáp ứng yêu cầu rộng hơn ấy.",
+          "sourceRefs": [
+            "D3:P072",
+            "D3:P093"
+          ],
+          "suggestedCardIds": [
+            "s09-communicate"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s09-coordinate",
+          "cardId": "s09-base",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Căn cứ tạo nền tảng, chưa thay truyền đạt chủ trương.",
+          "reasonDetail": "Căn cứ là một phần chuẩn bị lâu dài giúp bảo toàn và phát triển lực lượng. Trong nhiệm vụ hiện tại, địa bàn đứng chân chưa thay cho truyền đạt chủ trương và phối hợp hành động kịp thời giữa các đầu mối. 'Truyền đạt và phối hợp' trực tiếp giải quyết yêu cầu của ô; điều đó không làm mất giá trị của căn cứ.",
+          "sourceRefs": [
+            "D3:P045",
+            "D3:P069",
+            "D3:P072",
+            "D3:P096"
+          ],
+          "suggestedCardIds": [
+            "s09-communicate"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s09-mobilize",
+          "cardId": "s09-communicate",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Chỉ đạo cần đi cùng việc trực tiếp huy động dân.",
+          "reasonDetail": "Truyền đạt chủ trương và phối hợp chỉ đạo giúp thống nhất hành động. Nhưng ô này đang yêu cầu công việc trực tiếp tập hợp đông đảo nhân dân tham gia, nên chỉ nêu luồng chỉ đạo chưa thể hiện đầy đủ việc huy động lực lượng quần chúng. 'Tập hợp quần chúng' trực tiếp đáp ứng phần việc đó.",
+          "sourceRefs": [
+            "D3:P072",
+            "D3:P093",
+            "D3:P097"
+          ],
+          "suggestedCardIds": [
+            "s09-masses"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s09-mobilize",
+          "cardId": "s09-masses",
+          "outcome": "suitable",
+          "reasonType": null,
+          "reasonShort": "Quần chúng là lực lượng trực tiếp giành chính quyền.",
+          "reasonDetail": "Tổng khởi nghĩa diễn ra bằng sức mạnh của đông đảo quần chúng, kết hợp đấu tranh chính trị với lực lượng vũ trang hỗ trợ. Tập hợp quần chúng trực tiếp đáp ứng nhiệm vụ huy động sức dân ở ô này. Điều đó thể hiện sự gắn bó giữa vận động chính trị với hoạt động của các lực lượng hỗ trợ.",
+          "sourceRefs": [
+            "D3:P093",
+            "D3:P097"
+          ],
+          "suggestedCardIds": [],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s09-mobilize",
+          "cardId": "s09-armed-support",
+          "outcome": "needs-review",
+          "reasonType": "scope",
+          "reasonShort": "Lực lượng hỗ trợ chưa thay huy động đông đảo nhân dân.",
+          "reasonDetail": "Lực lượng vũ trang giữ vai trò hỗ trợ quan trọng trong sự kết hợp các hình thức đấu tranh. Ô này yêu cầu trực tiếp huy động đông đảo nhân dân, nên riêng bộ phận vũ trang chưa bao quát lực lượng quần chúng đang được hỏi. 'Tập hợp quần chúng' đáp ứng nhiệm vụ ấy mà không phủ nhận vai trò hỗ trợ vũ trang.",
+          "sourceRefs": [
+            "D3:P093",
+            "D3:P097"
+          ],
+          "suggestedCardIds": [
+            "s09-masses"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        },
+        {
+          "targetId": "s09-mobilize",
+          "cardId": "s09-base",
+          "outcome": "needs-review",
+          "reasonType": "task-mismatch",
+          "reasonShort": "Địa bàn chuẩn bị chưa tự huy động quần chúng.",
+          "reasonDetail": "Củng cố căn cứ góp phần tạo nền tảng để lực lượng cách mạng hoạt động. Ô này đang hỏi việc trực tiếp huy động đông đảo nhân dân hành động giành chính quyền, chứ không chỉ duy trì địa bàn đứng chân. 'Tập hợp quần chúng' thể hiện trực tiếp yêu cầu ấy.",
+          "sourceRefs": [
+            "D3:P045",
+            "D3:P093",
+            "D3:P096",
+            "D3:P097"
+          ],
+          "suggestedCardIds": [
+            "s09-masses"
+          ],
+          "evidenceStatus": "source-supported",
+          "evaluationNature": "editorial-match",
+          "subjectReviewStatus": "pending"
+        }
+      ],
+      "recordId": "r09",
+      "contentStatus": "source-supported-pending-subject-review",
+      "acceptedAssignments": [
+        {
+          "s09-coordinate": "s09-communicate",
+          "s09-mobilize": "s09-masses"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "C1-01",
+      "issue": "Màn 01 cũ dùng nhiệm vụ kết nối công–nông quá rộng, nên loại Hỗ trợ đời sống sẽ không công bằng.",
+      "evidence": "D1:P013 nêu yêu cầu đời sống; D1:P031 nêu liên minh công–nông. Hai ý hỗ trợ nhau, không loại trừ nhau.",
+      "decision": "Đổi màn mở đầu thành ghép những yêu cầu tiêu biểu của công nhân và nông dân được nguồn nêu. Mỗi ô nhận một trong hai phương án phù hợp; liên hệ công–nông được trình bày sau màn và trong hồ sơ. Không nói thuế chỉ liên quan nông dân trong mọi hoàn cảnh."
+    },
+    {
+      "id": "C1-02",
+      "issue": "Báo chí công khai ở màn 02 không có căn cứ đủ cụ thể để phủ định toàn giai đoạn chỉ bằng đối lập công khai/bí mật.",
+      "evidence": "D1:P077–P078 nói về chi bộ và học tập, báo bí mật trong tù; D1:P082 nêu xây dựng tổ chức bí mật; D1:P088 nêu nhiều nhiệm vụ có giá trị.",
+      "decision": "Dùng bốn hoạt động có căn cứ: củng cố cơ sở bí mật, học và dịch sách trong tù, tập hợp quần chúng, tuyên truyền chống chiến tranh. Chấm theo hai công việc cụ thể, không coi hai thẻ chưa ghép là hoạt động vô ích."
+    },
+    {
+      "id": "C1-03",
+      "issue": "Tài liệu nguồn chưa phải giáo trình chính thức có số trang kiểm chứng; còn ghi chú biên tập và mốc cần xem lại.",
+      "evidence": "D1:P066/C0 ghi đọc lại thêm trong sgk; P081 dùng đầu năm 1932 trong khi P082 nêu ngày 15-6-1932; P083 có tên một tác phẩm cần đối chiếu trước khi sử dụng.",
+      "decision": "Nội dung gameplay không dùng ngày công bố Chương trình hành động hoặc tên tác phẩm này để chấm điểm. Đánh dấu source-supported/editorial-match, chưa tuyên bố xác minh độc lập hoặc duyệt chuyên môn."
+    },
+    {
+      "id": "c2-source-status",
+      "issue": "Nội dung có căn cứ trong tài liệu nội bộ, chưa được xác minh độc lập.",
+      "evidence": "Đã đọc toàn bộ D2 (GiaiDoan1936Den1939.docx qua bản trích OOXML), các ghi chú C0–C6 và đối chiếu phần tương ứng trong docs/noi-dung-goc.md. Hai văn bản có nhiều đoạn trùng nhau; đây không phải hai chứng cứ lịch sử độc lập. Pxxx là đoạn OOXML, không phải trang.",
+      "decision": "Trạng thái bản nháp là source-supported, cần nhóm duyệt. sourceRefs chỉ định vị căn cứ nội bộ; không dùng nhãn verified. Mọi đánh giá phù hợp/chưa phù hợp là quy tắc biên tập theo nhiệm vụ cụ thể, không phải lời trích hoặc kết luận nguyên văn của tài liệu."
+    },
+    {
+      "id": "c2-france-date",
+      "issue": "Mốc về Mặt trận Nhân dân Pháp trong tài liệu không nhất quán.",
+      "evidence": "D2:P010 ghi '(5/1935)' nhưng ngay sau đó ghi chính phủ lên nắm quyền năm 1936; D2:P067 dùng năm 1936 mà không có mốc 5/1935. Ghi chú C0 còn nhấn mạnh các chính sách chỉ được áp dụng hạn chế và bị cản trở ở thuộc địa.",
+      "decision": "Không dùng tháng hoặc năm thắng lợi của Mặt trận Nhân dân Pháp làm dữ kiện chấm điểm. Bối cảnh chỉ nói tranh thủ điều kiện hoạt động công khai, kết hợp cơ sở bí mật; không mô tả có tự do hoàn toàn hay công khai thay thế hoàn toàn bí mật. Nhóm cần đối chiếu nguồn học thuật trước khi phát hành phần tư liệu có mốc cụ thể."
+    },
+    {
+      "id": "c2-literacy-date",
+      "issue": "Mốc truyền bá quốc ngữ chưa đủ chắc chắn để đưa vào bài ghép.",
+      "evidence": "D2:P045 và D2:P098 cùng ghi Hội truyền bá quốc ngữ 'phát triển mạnh từ cuối năm 1937'; docs/noi-dung-goc.md lặp lại cách viết này nên không giải quyết được điểm cần xác minh. Không có kiểm chứng độc lập trong đợt này.",
+      "decision": "Màn s04 dùng phạm vi 1936–1939 để nói về phong trào của cả giai đoạn, không nói mọi hoạt động bắt đầu cùng lúc hoặc tồn tại suốt cả giai đoạn. Không hỏi ngày thành lập, không ghi mốc cuối 1937 và không dùng mốc đó để loại phương án. Nhóm cần duyệt riêng cách diễn giải hoạt động dạy chữ trước phát hành."
+    },
+    {
+      "id": "c2-card-revision",
+      "issue": "Thẻ vũ trang và tổng khởi nghĩa trong kế hoạch cũ quá xa hai nhiệm vụ của chương, dễ bị loại bằng mẹo.",
+      "evidence": "D2:P034–P038 mô tả dân nguyện, ủy ban hành động và báo chí; D2:P045–P047 mô tả truyền bá quốc ngữ, nghị trường và hội ái hữu/tương tế. D2:P020/P057 khẳng định kết hợp công khai với bí mật.",
+      "decision": "Thay bằng các hoạt động có thật trong khung tư liệu cùng giai đoạn. Màn s03 nhận cả thu thập dân nguyện và lập ủy ban hành động cho nhiệm vụ gom nguyện vọng; thẻ ủy ban được định nghĩa trong màn là đầu mối tiếp nhận dân nguyện. Thẻ cơ sở bí mật được giữ như một công việc hỗ trợ có ý nghĩa, không bị đánh giá là không phù hợp với toàn giai đoạn."
+    },
+    {
+      "id": "c2-target-scope",
+      "issue": "Nhiệm vụ 'Kết nối nhiều tầng lớp' quá rộng: báo chí, lớp học, nghị trường hoặc hội đoàn đều có thể góp phần thực hiện.",
+      "evidence": "D2:P023/P024 nói tập hợp quần chúng, D2:P044–P047 liệt kê nhiều hình thức vận động; D2:P051/P056 nêu kết quả và bài học tập hợp lực lượng rộng rãi. Nguồn không cung cấp một xếp hạng cho các hình thức này.",
+      "decision": "Đổi nhiệm vụ s04 thành 'Lập hội tương trợ' và 'Mở lớp học chữ', chấp nhận cả hội ái hữu lẫn hội tương tế ở ô tương trợ. Điều kiện lập hội hiện ngay trên nhãn, không giấu trong phần đọc thêm. Đánh giá các thẻ còn lại chỉ theo công việc trực tiếp được yêu cầu, không phủ nhận khả năng góp phần vận động quần chúng. Chi tiết hoạt động của thẻ là tình huống biên tập để làm rõ phạm vi, không trình bày như trích dẫn lịch sử."
+    },
+    {
+      "id": "c2-author-comments",
+      "issue": "Cần bảo toàn ý nghĩa các ghi chú tác giả thay vì chỉ đọc phần thân tài liệu.",
+      "evidence": "Ghi chú C6 diễn giải dân nguyện là nguyện vọng quần chúng; C0 giới hạn điều kiện công khai; C1/C2 làm rõ giai đoạn phục hồi và hệ thống tổ chức; C3/C4 bổ sung Tổng Bí thư và tên Mặt trận; C5 làm rõ bối cảnh thuộc địa. Bản sau tại D2:P061–P111 tích hợp nhiều bổ sung nhưng vẫn lặp mốc truyền bá quốc ngữ.",
+      "decision": "Dùng 'nguyện vọng' để giải nghĩa dân nguyện, giữ tính có điều kiện của hoạt động công khai và không đưa tên người, ngày hội nghị hoặc danh xưng Mặt trận đang cần rà soát thành câu hỏi phụ. Không coi phần lặp hoặc bình luận tác giả là xác minh độc lập."
+    },
+    {
+      "id": "c3-source-status",
+      "issue": "Toàn bộ nội dung chỉ được đối chiếu với nguồn nội bộ D3, chưa được kiểm chứng độc lập hoặc duyệt môn học.",
+      "evidence": "D3 là bản trích GiaiDoan1939Den1945.docx, SHA256 95ba78fcd428f2ba280c6b8ea227e7a63651aae5ef04571b6344776efae233c8. Pxxx là thứ tự đoạn OOXML, không phải trang; các bảng và hai comments đã được đọc.",
+      "decision": "Trạng thái của mọi cặp là source-supported draft, cần nhóm/người phụ trách môn học duyệt. Các lý do giới hạn ở lập luận mà đoạn nguồn thực sự hỗ trợ; không biến tài liệu nội bộ thành bằng chứng đã xác minh độc lập."
+    },
+    {
+      "id": "c3-transition-process",
+      "issue": "Dễ trình bày chuyển hướng 1939–1941 như một quyết định tức thời, hoặc coi mọi nội dung đã hoàn chỉnh ngay tháng 11/1940.",
+      "evidence": "D3:P008–P011 nêu bước mở đầu năm 1939; D3:P029 phân biệt hạn chế của Hội nghị tháng 11/1940; D3:P032–P038 nêu việc hoàn chỉnh tháng 5/1941.",
+      "decision": "Giữ s05 trên khoảng 1939–1941 và ghi rõ quá trình trong phần giải thích. Không hỏi một mốc hội nghị duy nhất như toàn bộ sự chuyển hướng."
+    },
+    {
+      "id": "c3-s05-meaningful-cards",
+      "issue": "Thẻ đề xuất 'Duy trì nguyên cách công khai' và 'Tổng khởi nghĩa ngay' khiến s05 dựa vào hai phương án phủ định khá dễ loại; nhãn 'Tập hợp cứu quốc' còn dễ đồng nhất mặt trận năm 1939 với Việt Minh năm 1941.",
+      "evidence": "D3:P009 ghi Mặt trận Thống nhất Dân tộc Phản đế Đông Dương; D3:P035–P038 ghi Việt Minh. D3:P010 nêu đổi phương thức; D3:P014 và D3:P033 nêu các hoạt động khác có ý nghĩa trong cùng giai đoạn.",
+      "decision": "Thẻ s05 là 'Lập mặt trận đoàn kết', 'Chuyển sang bí mật', 'Giảm tô, giảm tức', 'Xây dựng du kích'. Nhiệm vụ tách rõ hình thức tổ chức mặt trận với đổi phương thức hoạt động; phần đọc thêm phân biệt hai mặt trận theo thời điểm. Không phủ nhận vai trò chính sách xã hội hoặc du kích."
+    },
+    {
+      "id": "c3-s06-multiple-valid",
+      "issue": "Nguồn cho phép hơn một cách phát triển lực lượng chính trị; chỉ chấp nhận hội cứu quốc sẽ loại một lựa chọn có căn cứ.",
+      "evidence": "D3:P041 nêu các hội cứu quốc tập hợp lực lượng; D3:P042 nêu báo chí cách mạng tuyên truyền và vận động quần chúng. D3:P043–P044 cho thấy hoạt động vũ trang còn kết hợp tuyên truyền, nên không thể khẳng định vũ trang tách biệt tuyệt đối với chính trị.",
+      "decision": "s06 chấp nhận cả 'Phát triển hội cứu quốc' và 'Báo chí vận động' cho ô lực lượng chính trị. Thẻ 'Tổ chức tự vệ, du kích' được mô tả riêng về chức năng bảo vệ cơ sở, không gộp toàn bộ hoạt động quân sự kết hợp tuyên truyền. Chấm theo việc trực tiếp đáp ứng nhiệm vụ, không xếp thẻ thành tốt/xấu."
+    },
+    {
+      "id": "c3-s07-famine-politics",
+      "issue": "Comment C0 yêu cầu bổ sung ý nghĩa chính trị và nhấn mạnh Việt Minh; nếu chỉ minh họa phát gạo thì thu hẹp phong trào phá kho thóc thành cứu trợ.",
+      "evidence": "D3:P059 gắn cứu đói với chống Nhật, thu hút, tổ chức và rèn luyện quần chúng; D3:P041 nêu công tác vận động qua Việt Minh; D3:P054–P055 đặt hoạt động trong cao trào kháng Nhật. Comment C0: 'Thiếu ý nghĩa chính trị. Nhấn mạnh hoạt động của Việt Minh'.",
+      "decision": "Ô s07 yêu cầu 'Cứu đói gắn chống Nhật'; cả giải thích phù hợp và chưa phù hợp đều giữ quan hệ dân sinh–vận động chính trị. Cần nhóm duyệt phần hồ sơ bổ sung vai trò Việt Minh; không coi comment là một nguồn sự kiện độc lập."
+    },
+    {
+      "id": "c3-s08-avoid-word-trap",
+      "issue": "Cặp 'Nhật đầu hàng Đồng minh' với 'Chỉ cần Nhật đầu hàng' kiểm tra sự chú ý vào hai chữ 'chỉ cần' nhiều hơn hiểu lịch sử.",
+      "evidence": "D3:P067 mô tả Nhật đầu hàng và chính quyền thân Nhật khủng hoảng; D3:P068–P069, D3:P096–P100 giải thích thời cơ gắn hoàn cảnh khách quan với sự chuẩn bị và hành động trong nước.",
+      "decision": "Thay s08 bằng bốn yếu tố có thật, hai yếu tố khách quan và hai ví dụ chuẩn bị chủ quan; mỗi ô chấp nhận hai thẻ. Hai thẻ khách quan liên quan với nhau, không trình bày như hai điều kiện độc lập hoặc một danh sách đầy đủ. Khi khóa một thẻ luôn còn thẻ thuộc nhóm còn lại."
+    },
+    {
+      "id": "c3-s08-chronology",
+      "issue": "Nếu đặt việc ban lệnh tổng khởi nghĩa sau ngày Nhật hoàng tuyên bố đầu hàng một cách máy móc sẽ trái trình tự nêu trong chính tài liệu.",
+      "evidence": "D3:P071 nêu đêm 13/8 đã ban Quân lệnh số 1 khi nhận tin Nhật sắp đầu hàng; D3:P067 nêu tuyên bố ngày 15/8; D3:P072 nêu Hội nghị 14–15/8.",
+      "decision": "s08 chỉ hỏi loại yếu tố trong tháng 8, không chấm thứ tự kéo thẻ như niên biểu hoặc ngụ ý chỉ sau 15/8 mới có quyết định. Các mốc chính xác để trong tư liệu nếu cần và phải giữ phân biệt thông tin sắp đầu hàng với tuyên bố chính thức."
+    },
+    {
+      "id": "c3-s09-local-initiative",
+      "issue": "Thẻ 'Mỗi nơi tự chọn thời điểm' dễ khiến chủ động địa phương bị đánh giá chung là chưa phù hợp.",
+      "evidence": "D3:P072 nhấn mạnh tập trung, thống nhất, kịp thời; D3:P078 và D3:P098 ghi nhận địa phương chủ động theo tình hình thực tế và chủ trương đã được quán triệt.",
+      "decision": "Bỏ thẻ này, thay bằng 'Củng cố căn cứ', một hoạt động chuẩn bị có giá trị nhưng khác nhiệm vụ của màn. Phần lý do ô chỉ đạo khẳng định phối hợp chung vẫn đi cùng chủ động vận dụng tại địa phương."
+    },
+    {
+      "id": "c3-date-granularity",
+      "issue": "Tài liệu chứa mốc ngày hội nghị, tên địa phương và bảng diễn biến chưa có trích thư mục/trang đủ để kiểm tra độc lập; không cần các chi tiết ấy để chấm matching.",
+      "evidence": "D3:P062 tự dẫn 'Theo sách Lịch sử 12 nâng cao'; D3:P075–P092 là bảng thời gian–diễn biến. Không xác định được trang nguồn hay phiên bản sách từ bản trích.",
+      "decision": "Không khẳng định có mâu thuẫn đã được kiểm chứng. Loại ngày chi tiết và tên tỉnh lỵ khỏi đáp án gameplay s05–s09; giữ khoảng thời gian và mối quan hệ có căn cứ trong nguồn nội bộ."
+    },
+    {
+      "id": "c3-visible-scope",
+      "issue": "Một số nhãn nhiệm vụ còn rộng hơn phạm vi chấm nằm trong phần đọc thêm.",
+      "evidence": "D3:P010 phân biệt phương thức công khai/bí mật với hoạt động vũ trang; D3:P043/P045 cho thấy lực lượng bảo vệ cũng góp phần củng cố căn cứ; D3:P054 nêu rõ điều kiện ngay sau đảo chính tháng 3.",
+      "decision": "Hiện ngay lựa chọn công khai/bí mật ở nhãn s05. Đổi ô s06 thành Mở địa bàn, nối liên lạc và thẻ địa bàn tương ứng, thay vì dùng Củng cố căn cứ quá rộng để loại tự vệ. Hiện tháng 3/1945 trong bối cảnh và thẻ tổng khởi nghĩa ở s07; không giấu mốc đang dùng để đánh giá trong nút đọc thêm."
+    },
+    {
+      "id": "c3-final-significance",
+      "issue": "Comment C1 cho rằng phần ý nghĩa chưa nhấn mạnh đủ chuyển biến vai trò, vị thế của Đảng và tác động quốc tế.",
+      "evidence": "D3:P101–P104 và Comment C1; D3:P102 có nêu cổ vũ phong trào giải phóng dân tộc trên thế giới nhưng không triển khai đầy đủ nội dung comment đề nghị.",
+      "decision": "Không dựng đáp án chấm điểm mới chỉ từ yêu cầu của comment. Ghi thành hạng mục nhóm bổ sung/duyệt cho hồ sơ kết thúc; điểm người chơi không thay đổi diễn biến và ý nghĩa lịch sử."
+    }
+  ],
+  "structuralValidation": {
+    "scenes": 9,
+    "targets": 18,
+    "cards": 36,
+    "evaluations": 72,
+    "suitable": 25,
+    "needsReview": 47,
+    "solutionCounts": {
+      "s01": 4,
+      "s02": 1,
+      "s03": 2,
+      "s04": 2,
+      "s05": 1,
+      "s06": 2,
+      "s07": 1,
+      "s08": 4,
+      "s09": 1
+    },
+    "lockDeadEnds": 0,
+    "warnings": []
+  }
+}

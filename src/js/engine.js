@@ -298,8 +298,8 @@ function bossSubmit(run,D){
   return {ok,pts:b.pts};
 }
 
-/* Công cụ thử nghiệm (nút "Tua" ở game.js): chơi hoàn hảo các chặng trước `target`, đặt lại từ `target` trở đi, rồi đứng ở chặng `target`.
-   target = số chặng (0–8) hoặc D.scenes.length để tới màn kết. Không dùng trong luật chơi thường. */
+/* Phím tua dev: giữ nguyên điểm của chặng đã hoàn thành, đánh dấu chặng chưa xong trước `target` là bỏ qua (0 điểm),
+   đặt lại từ `target` trở đi, rồi đứng ở chặng `target`. target = 0–D.scenes.length. */
 function fastForward(run,D,target){
   const n=D.scenes.length;
   run.resume=null;run.snap=null;run.finished=false;
@@ -308,10 +308,12 @@ function fastForward(run,D,target){
     if(j>=target){run.stages[j]=newStage(sc);run.album=run.album.filter(a=>a.scene!==j);continue;}
     if(stageIsDone(run.stages[j]))continue;
     run.index=j;const st=run.stages[j],k=kindOf(sc);
-    if(k==='tf'){tfItemsOf(run,D).forEach(it=>{if(!st.tf.done)tfAnswer(run,D,it.answer);});}
-    else if(k==='boss'){bossPoolOf(run,D).filter(it=>it.prep).forEach(it=>bossToggle(run,D,it.key));bossSubmit(run,D);}
-    else if(k==='order'){byTime(sc).forEach((c,i)=>{if(!st['P'+(i+1)].locked)dropOrder(run,'P'+(i+1),c.id,D);});}
-    else sc.slots.forEach(sl=>{if(!st[sl.id].locked)drop(run,sl.id,sl.correct,D);});
+    if(k==='tf')tfExpire(run,D);
+    else if(k==='boss'){
+      st.boss.done=true;st.boss.pts=0;st.boss.picked=[];run.streak=0;
+      sc.cards.filter(c=>c.slot).forEach(c=>run.album.push({scene:j,slot:c.slot,card:c.id,how:'skipped'}));
+    }
+    else st.ids.forEach(id=>{if(!st[id].locked)skip(run,id,D);});
   }
   run.index=Math.min(target,n);run.streak=0;
   if(target>=n)run.finished=true;

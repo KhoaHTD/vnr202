@@ -728,11 +728,6 @@ html[data-vt=leg]::view-transition-new(sheet) { animation: sheet-land 600ms var(
 .slot--pos .pts { font-size: 18px; }
 .slot--pos .how { font-size: 12px; }
 
-/* Nút Tua (chỉ khi thử nghiệm ở localhost hoặc ?dev): nhỏ, dưới điểm ở góc phải */
-#dev-go { position: fixed; top: 80px; right: 12px; z-index: 3000; min-width: 44px; min-height: 44px; padding: 0 10px; font: 600 13px var(--font-ui); color: var(--room); background: var(--lamp); border: 1px dashed var(--room); border-radius: 8px; cursor: pointer; opacity: .85; }
-#dev-go:hover { opacity: 1; }
-@media print { #dev-go { display: none; } }
-
 /* ================= Màn kết, trang 1: ảnh Bác ================= */
 /* Dòng thời gian (giây): 0,1 bình minh đỏ · 0,8 giấy rơi · 1,6–3,1 mở giấy · 3,2–7,2 ảnh hiện · 5 vệt đèn · 6,2 sao bừng sáng + giọng Bác
    · 7 con dấu · 7,4–8,5 khẩu hiệu · 8,4 chú thích · 8,6 trích dẫn · 9,2 nút. Bấm/Enter: thêm .is-skip, mọi thứ nhảy tới trạng thái cuối. */

@@ -9,6 +9,7 @@ const D=window.GAME_DATA,UI=window.GameUI,E=window.GameEngine,app=document.getEl
 let run=E.newRun(/[?&]mode=class\b/.test(location.search)?'class':'solo');
 // Trạng thái giao diện của chặng đang chơi: thẻ đang chọn (chạm), thông báo gợi ý từng ô, ô đang mở "Vì sao?"
 let ui={sel:null,msg:{},why:{}},sound=false,audio;
+const storyEnding=window.StoryEnding.create({onFinish:()=>endingResults()});
 // Chỉ để test (check.cjs) đọc trạng thái lượt chơi; game không lưu ở đâu cả
 window.GameDebug={state:()=>run,ui:()=>ui,skipVoyage:false}; // skipVoyage = true: bỏ chuyển cảnh bản đồ (test)
 
@@ -612,65 +613,12 @@ function openScoresheet(){
   dlg.showModal();paperSound();
 }
 
-/* ---------- Màn kết ---------- */
-// Giọng Bác đọc Tuyên ngôn Độc lập. Luôn có nút tạm dừng; không phụ thuộc nút bật/tắt hiệu ứng âm thanh.
-const VOICE_SRC='assets/audio/bac-ho-tuyen-ngon-doc-lap.mp3';
-let voice=null,voiceStarted=false;
-function voiceBtn(){
-  let b=$('voice-ctl');
-  if(!b){b=document.createElement('button');b.type='button';b.id='voice-ctl';document.body.appendChild(b);
-    b.onclick=()=>{if(!voice)return;if(voice.paused){voiceStarted=true;voice.play().catch(()=>{});}else voice.pause();voiceLabel();};}
-  return b;
-}
-function voiceLabel(){
-  const b=$('voice-ctl');if(!b||!voice)return;
-  const ended=voice.ended;
-  b.textContent=voice.paused?(ended?'↻ Nghe lại giọng Bác':voice.currentTime>0?'▶ Tiếp tục nghe':'▶ Nghe giọng Bác'):'⏸ Tạm dừng giọng Bác';
-}
-function startVoice(){
-  if(voiceStarted)return;voiceStarted=true;
-  if(!voice){voice=new Audio(VOICE_SRC);voice.preload='auto';}
-  voice.onplay=voice.onpause=voice.onended=voiceLabel;
-  voice.volume=0;voiceBtn();
-  voice.play().then(()=>{
-    const t0=performance.now(),iv=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/1200);voice.volume=.9*k;if(k>=1)clearInterval(iv);},60); // mở dần âm lượng
-  }).catch(()=>{voiceStarted=false;voiceLabel();}); // trình duyệt chặn tự phát: nút "Nghe giọng Bác" thay thế
-  voiceLabel();
-}
-function stopVoice(){
-  if(voice){voice.pause();voice.currentTime=0;voice.onplay=voice.onpause=voice.onended=null;}
-  voiceStarted=false;$('voice-ctl')?.remove();
-}
-// Tiếng trống trầm lúc ngôi sao bừng sáng (tổng hợp, ngắn, nhỏ)
-function boom(){
-  try{
-    audio=audio||new(window.AudioContext||window.webkitAudioContext)();
-    const t=audio.currentTime,o=audio.createOscillator(),g=audio.createGain();
-    o.type='sine';o.frequency.setValueAtTime(120,t);o.frequency.exponentialRampToValueAtTime(40,t+.9);
-    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.45,t+.03);g.gain.exponentialRampToValueAtTime(.001,t+1.2);
-    o.connect(g);g.connect(audio.destination);o.start(t);o.stop(t+1.25);
-  }catch{}
+/* ---------- Màn kết: đoạn phim cờ / Tuyên ngôn / Quốc ca (bản trước merge), rồi trang điểm ---------- */
+function ending(){
+  if(storyEnding.isActive())return;
+  hideStrip();setAct('finale');setBright(true);storyEnding.start();
 }
 
-// Màn kết, trang 1: chỉ có ảnh Bác. Mốc ~6,2s (ảnh gần rõ): trống, ngôi sao bừng sáng, giọng Bác. Bấm/Enter bỏ qua hiệu ứng.
-function ending(){show(()=>{
-  setAct('finale');app.innerHTML=UI.endingPortrait(D);hideStrip();setBright(true);
-  if(!voice){voice=new Audio(VOICE_SRC);voice.preload='auto';}
-  const fin=$('finale'),timers=[],at=(ms,f)=>timers.push(setTimeout(f,ms));
-  let climax=false,ready=false;
-  const doClimax=()=>{if(climax)return;climax=true;boom();startVoice();};
-  at(reducedMotion()?400:6200,doClimax);
-  at(reducedMotion()?500:9000,()=>{ready=true;});
-  const skip=()=>{fin.classList.add('is-skip');doClimax();ready=true;};
-  fin.addEventListener('click',e=>{if(!e.target.closest('#fin-results'))skip();});
-  const onKey=e=>{if(e.key!=='Enter'&&e.key!==' ')return;if(e.target.closest?.('button'))return;e.preventDefault();if(ready)endingResults();else skip();};
-  document.addEventListener('keydown',onKey);
-  cleanups.push(()=>{timers.forEach(clearTimeout);document.removeEventListener('keydown',onKey);});
-  $('fin-results').onclick=()=>{doClimax();endingResults();};
-  aimLamp(app.querySelector('.fin-stage'));scroll();
-});}
-
-// Màn kết, trang 2: điểm, sao, dòng thời gian + bản đồ, thẻ sưu tầm, ôn tập
 function endingResults(){show(()=>{
   setAct('finale');app.innerHTML=UI.ending(D,run,{enter:false});
   // tuyến 9 chặng sáng đủ lần lượt, quầng đèn sáng hơn, điểm chạy từ 0 lên
@@ -680,20 +628,27 @@ function endingResults(){show(()=>{
   bindShelf();
   $('end-records').onclick=()=>openRecords('all');
   $('open-scoresheet')&&($('open-scoresheet').onclick=openScoresheet);
-  $('replay').onclick=()=>{stopVoice();run=E.newRun(run.mode);chapterIntro(0);};
+  $('replay-ending')&&($('replay-ending').onclick=()=>storyEnding.start());
+  $('replay').onclick=()=>{storyEnding.stopBackgroundMusic();run=E.newRun(run.mode);chapterIntro(0);};
   scroll();});}
 $('sheet-btn')&&($('sheet-btn').onclick=openScoresheet);
-/* Nút "Tua" để thử từng kiểu chơi: nhỏ, dưới điểm ở góc phải. Mỗi lần bấm chơi hoàn hảo chặng hiện tại rồi sang chặng sau (chặng cuối → màn kết).
-   Chỉ hiện khi chạy ở localhost / 127.0.0.1 hoặc thêm ?dev vào địa chỉ. */
+/* Phím tua ẩn dành cho dev: mũi tên trái/phải tua giữa các chặng.
+   Chỉ bật trên localhost / 127.0.0.1 hoặc khi URL có ?dev; phím S/D vẫn trả lời câu đúng/sai. */
 if(/^(localhost|127\.0\.0\.1)$/.test(location.hostname)||/[?&]dev\b/.test(location.search)){
-  const btn=document.createElement('button');btn.type='button';btn.id='dev-go';btn.textContent='Tua ›';btn.title='Tua sang chặng sau (chỉ để thử)';btn.setAttribute('aria-label','Tua sang chặng sau');
-  document.body.appendChild(btn);
-  btn.onclick=()=>{
+  document.addEventListener('keydown',e=>{
+    if((e.key!=='ArrowLeft'&&e.key!=='ArrowRight')||e.repeat||e.ctrlKey||e.metaKey||e.altKey)return;
+    if(document.querySelector('dialog[open]')||e.target.closest?.('input,textarea,select,[contenteditable="true"]'))return;
+    e.preventDefault();e.stopImmediatePropagation();
+    if(storyEnding.isActive())return;
+    if(e.key==='ArrowLeft'){
+      if(run.index<=0)return;
+      E.fastForward(run,D,run.index-1);play();return;
+    }
     if(run.index>=D.scenes.length)return;
-    const i=run.index+1;
-    E.fastForward(run,D,i);
-    if(i>=D.scenes.length)ending();else play();
-  };
+    const nextIndex=run.index+1;
+    E.fastForward(run,D,nextIndex);
+    if(nextIndex>=D.scenes.length)ending();else play();
+  });
 }
 
 
