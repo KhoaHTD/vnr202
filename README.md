@@ -1,4 +1,6 @@
-# Đường đến tháng Tám
+# Đường đến độc lập
+
+> 15 năm bão lửa, 15 ngày vàng lịch sử.
 
 Web game tiếng Việt ghép tình huống – sự kiện lịch sử 1930–1945: 3 chương, 9 chặng. Mỗi chặng có một cảnh ảnh với **2 điểm nóng** (hai tình huống A, B) và **rổ 4 thẻ sự kiện kèm năm** (2 đúng, 2 nhiễu là sự kiện thật nhưng thuộc thời điểm khác). Người chơi kéo thẻ vào đúng tình huống; **chấm ngay khi thả**: đúng thì thẻ "cạch" vào ô, ô khóa, cảnh đổi, "+10" bay lên và thẻ lật bay vào album dòng thời gian; sai thì thẻ rung rồi về rổ kèm một dòng gợi ý ngắn như "Muộn 5 năm!". Mục tiêu: nhớ sự kiện nào diễn ra khi nào và giải quyết vấn đề gì. Chưa đo thời lượng bằng nhóm người chơi thật.
 

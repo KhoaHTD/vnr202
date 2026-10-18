@@ -16,7 +16,7 @@ const el = {
   stage: $('.stage'), bg: $('.backdrop img'), star: $('.star'), flagRed: $('.flag--red'), flagBlack: $('.flag--black'),
   shard1: $('.shard--1'), shard2: $('.shard--2'),
   lead: $('.t-lead > span'), main: $('.t-main > span'),
-  hero: $('.hero'), cta: $('.cta'), controls: $('.controls'), motion: $('#motion'), sound: $('#sound'),
+  hero: $('.hero'), motto: $('.motto'), cta: $('.cta'), controls: $('.controls'), motion: $('#motion'), sound: $('#sound'),
 };
 const NEXT = el.cta.getAttribute('href');
 
@@ -73,7 +73,7 @@ el.cta.addEventListener('pointerenter', prefetch);
 el.cta.addEventListener('focus', prefetch);
 
 /* ---------- Intro ---------- */
-const animated = [el.stage, el.bg, el.star, el.flagRed, el.flagBlack, el.shard1, el.shard2, el.lead, el.main, el.cta, el.controls];
+const animated = [el.stage, el.bg, el.star, el.flagRed, el.flagBlack, el.shard1, el.shard2, el.lead, el.main, el.motto, el.cta, el.controls];
 const BLACK_FULL = 'inset(0% 0 0 0)'; // cờ đen đủ 588px; trạng thái cuối trong CSS chỉ còn dải rách ở đáy
 
 // Kết thúc intro (chạy hết hoặc bị bỏ qua): trả mọi thứ về CSS cuối, gỡ will-change, tải trước trang sau
@@ -114,6 +114,7 @@ function buildIntro() {
     .from(el.main, { y: '90vh', opacity: 0, duration: 1.2, ease: 'expo.out' }, 1.05)
     .call(paper, null, 1.05)
     .call(thud, null, 1.7)
+    .from(el.motto, { y: 12, opacity: 0, duration: .6, ease: 'power2.out' }, 1.9)                         // khẩu hiệu: hiện sau khi tên đã đáp xuống
     .from(el.cta, { y: 12, opacity: 0, duration: .5, ease: 'power2.out' }, 2.2)                           // cta: nút và hai nút điều khiển
     .from(el.controls, { opacity: 0, duration: .5, ease: 'power1.out' }, 2.2);
 
@@ -169,7 +170,7 @@ addEventListener('pageshow', e => {
   exitTl.kill(); exitTl = null; exiting = false; navigating = false; leaveListeners(false);
   veil?.remove(); veil = null; flyer?.remove(); flyer = null;
   el.cta.removeAttribute('aria-disabled');
-  gsap.set([el.hero, el.controls, el.cta], { clearProps: 'all' });
+  gsap.set([el.hero, el.controls, el.cta, el.motto], { clearProps: 'all' });
 });
 
 /* ---------- Khởi động ---------- */

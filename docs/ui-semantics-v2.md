@@ -29,7 +29,7 @@ Nhãn, hình và màu phải cùng làm rõ trạng thái. Không yêu cầu ng�
 
 | Thành phần đang xuất hiện | Ý nghĩa riêng | Phản hồi hoặc tên truy cập |
 |---|---|---|
-| Dấu bản đồ gấp ở thương hiệu | Hành trình và kết nối; đồng thời là liên kết về trang đầu | Link có tên “Đường đến tháng Tám — Trang đầu” |
+| Dấu bản đồ gấp ở thương hiệu | Hành trình và kết nối; đồng thời là liên kết về trang đầu | Link có tên “Đường đến độc lập — Trang đầu” |
 | Bàn tay | Có thao tác chọn/kéo/đặt; trong header mở cách chơi | Đặt kèm tên thao tác, không dùng như dấu đáp án |
 | Chữ i trong vòng tròn | Có thông tin thêm; sau triển khai chỉ phần cần xem lại | Nút thông tin thẻ có `aria-label` cụ thể; kết quả có nhãn chữ riêng |
 | Quyển sách | Hồ sơ hoặc đọc tư liệu | Mở nội dung đọc tự chọn |

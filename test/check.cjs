@@ -59,7 +59,7 @@ async function targets(){try{return await(await fetch(`http://127.0.0.1:${PORT}/
     for(const sh of document.styleSheets){try{walk(sh.cssRules);}catch{}}return seen?bad:['(không đọc được quy tắc transition nào)'];})()`);};
   for(const page of [URL,GAME]){const lt=await layoutTransitions(page);if(lt.length)fail('Transition trên thuộc tính bố cục ('+page+'): '+lt.join(' | '));}
 
-  // 3) LANDING (index.html): cảnh intro.pptx (ảnh mít tinh + sao đen + cờ + THÁNG TÁM). Chữ thấy được chỉ gồm tiêu đề và nút; không còn cờ/WebGL/hiệu ứng cũ;
+  // 3) LANDING (index.html): cảnh intro.pptx (ảnh mít tinh + sao đen + cờ + tên game và khẩu hiệu). Chữ thấy được chỉ gồm tiêu đề và nút; không còn cờ/WebGL/hiệu ứng cũ;
   //    ba họ font; chữ nghiêng chỉ ở "tháng"; nút đỏ son cao ≥ 48px; vừa trọn một màn hình ở 1440×900, 1366×768, 390×844
   //    (sau khi bỏ qua intro bằng một phím bất kỳ); 2 nút điều khiển 40px có aria; không đụng localStorage.
   const skip=()=>ev("dispatchEvent(new KeyboardEvent('keydown',{key:'x',bubbles:true}))");
@@ -75,7 +75,7 @@ async function targets(){try{return await(await fetch(`http://127.0.0.1:${PORT}/
       const three=performance.getEntriesByType('resource').some(e=>/three|flags3d|yearcard/.test(e.name));
       return JSON.stringify({text,fams,italics,gone,oldTokens,three,img:!!q('.backdrop img[alt]')&&q('.backdrop img').alt.length>10,href:q('.cta').getAttribute('href'),ctaBg:cs.backgroundColor,ctaRadius:parseFloat(cs.borderTopLeftRadius),cta:r('.cta'),title:r('.title'),ctrl:[...document.querySelectorAll('.controls button')].map(b=>[Math.round(b.offsetWidth),b.getAttribute('aria-label'),b.getAttribute('aria-pressed')]),ls:localStorage.length,vh:innerHeight,sx:document.documentElement.scrollWidth>innerWidth});})()`));
     const where=`landing ${w}×${h}`;
-    if(!/^Đường đến\s+tháng Tám\s+Bắt đầu hành trình$/i.test(L.text))fail(`${where}: nội dung landing sai: "${L.text}"`);
+    if(!/^Đường đến\s+độc lập\s+15 năm bão lửa\s+15 ngày vàng lịch sử\s+Bắt đầu hành trình$/i.test(L.text))fail(`${where}: nội dung landing sai: "${L.text}"`);
     if(!L.img||L.href!=='hanh-trinh.html')fail(`${where}: thiếu ảnh có alt hoặc nút không trỏ tới hanh-trinh.html`);
     if(L.gone.length)fail(`${where}: còn phần đã xoá: ${L.gone}`);
     if(L.oldTokens.length||L.three)fail(`${where}: còn token/mã của bản cũ: ${L.oldTokens} ${L.three}`);

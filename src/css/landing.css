@@ -1,7 +1,7 @@
 /* ============================================================
    LANDING (index.html): dựng lại chuyển cảnh Morph của intro.pptx.
    Cảnh cuối (slide 2): ảnh mít tinh 19/8/1945 đen trắng, ngôi sao đen 70% phủ kín, cờ đỏ sao vàng + hai mảnh cờ + dải cờ đen,
-   "ĐƯỜNG ĐẾN" nhỏ giãn chữ và "THÁNG TÁM" lớn (THÁNG nghiêng, TÁM đỏ cờ) ở giữa, nút bên dưới.
+   "ĐƯỜNG ĐẾN" nhỏ giãn chữ và "ĐỘC LẬP" lớn (ĐỘC nghiêng, LẬP đỏ cờ) ở giữa, khẩu hiệu và nút bên dưới.
    Chỉ nạp tokens.css + file này. Mọi thành phần đứng sẵn ở vị trí cuối; landing.js chỉ animate từ ngoài vào
    bằng transform / opacity / clip-path. Tấm ảnh bay khi rời trang (.flyer, src/css/flyer.css) do landing.js tạo ra lúc bấm nút.
    ============================================================ */
@@ -35,7 +35,7 @@ body { font: 400 16px/1.5 var(--font-ui); overflow-x: hidden; }
 .flag--black { left: 18.3%; top: -11.1%; width: 45.6%; height: 110.9%; overflow: hidden; clip-path: inset(84.9% 0 0 0); }
 .flag--black img { position: absolute; width: 482.6%; height: 221.5%; left: -198%; top: -21.2%; max-width: none; }
 
-/* --- Chữ: THÁNG TÁM lớn, dòng nhỏ giãn chữ ở trên --- */
+/* --- Chữ: ĐỘC LẬP lớn, dòng nhỏ giãn chữ ở trên --- */
 .hero { position: absolute; z-index: 3; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s4); padding: 22vh var(--s3) 6vh; text-align: center; pointer-events: none; }
 .hero > * { pointer-events: auto; }
 .title { margin: 0; font-family: var(--font-display); font-weight: 400; line-height: 1; text-shadow: 0 2px 24px rgb(0 0 0 / .55); }
@@ -44,6 +44,12 @@ body { font: 400 16px/1.5 var(--font-ui); overflow-x: hidden; }
 .title span span, .t-main > span { display: inline-block; }
 .t-main em { font-style: italic; font-weight: 400; color: var(--parchment-soft); }
 .t-main b { font-weight: 500; color: var(--flag-red); }
+/* Khẩu hiệu: hai vế đối nhau, "bão lửa" đỏ cờ, "vàng lịch sử" vàng đèn (cờ đỏ sao vàng); xuống hai dòng khi hẹp */
+.motto { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .15em .9em; margin: calc(-1 * var(--s2)) 0 0; font: 500 clamp(.85rem, 1.6vw, 1.25rem)/1.4 var(--font-ui); letter-spacing: .12em; text-transform: uppercase; text-shadow: 0 2px 16px rgb(0 0 0 / .6); }
+.motto span:first-child { color: #ff6a55; }
+.motto span:last-child { color: var(--lamp); }
+.motto i { width: 5px; height: 5px; transform: rotate(45deg); background: var(--parchment-soft); }
+@media (max-width: 480px) { .motto i { display: none; } .motto { flex-direction: column; gap: .1em; } }
 
 /* --- Nút: nền đỏ son, chữ giấy, góc vuông (giữ nguyên) --- */
 .cta { display: inline-flex; align-items: center; gap: var(--s2); min-height: 48px; padding: 10px 24px; border-radius: var(--radius); background: var(--accent); color: var(--parchment); font: 500 1rem/1.4 var(--font-ui); text-decoration: none; transition: background-color .2s var(--ease); }
@@ -66,7 +72,7 @@ body { font: 400 16px/1.5 var(--font-ui); overflow-x: hidden; }
 /* Chống nháy trong lúc chờ landing.js dựng intro (xem script đầu index.html) */
 .intro-wait .stage > *, .intro-wait .controls { visibility: hidden; }
 
-/* --- Điện thoại: chữ THÁNG TÁM vừa một hàng --- */
+/* --- Điện thoại: chữ ĐỘC LẬP vừa một hàng --- */
 @media (max-width: 720px) {
   :root { --title: min(14.5vw, 22vh); }
   .hero { gap: var(--s3); padding-top: 26vh; }
