@@ -1,0 +1,80 @@
+/* ============================================================
+   Màn trùm (chặng 9): rổ bằng chứng ở giữa, 8 thẻ chia hai cột bên cạnh. Kéo thẻ vào 4 ô trong rổ rồi "Đóng hồ sơ".
+   Chỉ animate transform, opacity.
+   ============================================================ */
+.stage--boss .boss { max-width: 1040px; margin: var(--s3) auto 0; }
+.boss-card { padding: var(--s3) var(--s4) var(--s4); text-align: center; }
+.boss-kicker { margin: 0; font: 600 12px var(--font-ui); letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
+.boss-q { margin: var(--s1) 0; font: italic 700 clamp(24px, 3vw, 34px)/1.2 var(--font-display); }
+.boss-sub { margin: 0 auto var(--s3); max-width: 62ch; color: var(--ink-soft); }
+
+.boss-board { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(14px, 2.6vw, 36px); align-items: stretch; }
+.boss-col { display: grid; gap: var(--s3); margin: 0; padding: 0; list-style: none; align-content: space-between; }
+.boss-col li { rotate: var(--t, 0deg); }
+.boss-col .ev { width: 100%; min-height: 88px; text-align: left; cursor: grab; touch-action: none; }
+.boss-hole { display: block; height: 100%; min-height: 88px; border: 1.5px dashed color-mix(in srgb, var(--ink-soft) 40%, transparent); border-radius: var(--radius); opacity: .6; }
+.stage--boss .boss.is-full .boss-col .ev { opacity: .55; }
+
+/* Rổ tre: hai lớp đan chéo, miệng rổ dày, đáy cong */
+.basket {
+  position: relative; display: grid; align-content: start; justify-items: center; gap: var(--s3); padding: 0 var(--s3) var(--s5);
+  border-radius: 14px 14px 46% 46% / 14px 14px 22% 22%;
+  background:
+    repeating-linear-gradient(45deg, color-mix(in srgb, var(--stain) 26%, transparent) 0 3px, transparent 3px 11px),
+    repeating-linear-gradient(-45deg, color-mix(in srgb, var(--stain) 20%, transparent) 0 3px, transparent 3px 11px),
+    color-mix(in srgb, var(--parchment-shade) 70%, var(--stain));
+  border: 3px solid color-mix(in srgb, var(--stain) 80%, var(--ink));
+  box-shadow: inset 0 12px 0 -4px color-mix(in srgb, var(--stain) 55%, var(--parchment)), inset 0 -14px 22px -10px color-mix(in srgb, var(--ink) 35%, transparent), var(--shadow);
+  min-height: 372px;
+}
+.basket-label { margin: 0 -12px; padding: 4px 28px; font: 700 14px var(--font-ui); letter-spacing: .24em; text-transform: uppercase; color: var(--parchment); background: color-mix(in srgb, var(--stain) 85%, var(--ink)); border-radius: 0 0 10px 10px; }
+.basket-bins { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); width: 100%; margin-top: var(--s2); }
+.bin { position: relative; min-height: 104px; display: grid; border: 2px dashed color-mix(in srgb, var(--ink-soft) 55%, transparent); border-radius: var(--radius); background: color-mix(in srgb, var(--parchment) 78%, transparent); transition: background var(--dur-2), border-color var(--dur-2), transform var(--dur-2) var(--ease-soft); }
+.bin.is-over { border-style: solid; border-color: var(--accent); background: var(--parchment); transform: scale(1.03); }
+.bin.has-card { border: 0; background: none; }
+.bin .ev { width: 100%; min-height: 104px; text-align: left; cursor: grab; touch-action: none; }
+
+/* Kết quả sau khi đóng hồ sơ */
+.ev.is-ok { border-color: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 35%, transparent); }
+.ev.is-bad { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent); }
+.ev.is-miss { border-style: dashed; }
+.boss-mark { display: block; padding: 4px 10px 6px; font: 700 12px var(--font-ui); letter-spacing: .04em; text-align: left; }
+.ev.is-ok .boss-mark { color: var(--ok); } .ev.is-bad .boss-mark { color: var(--accent); }
+.is-done .bin .ev { animation: tf-in var(--dur-3) var(--ease-soft) calc(var(--i, 0) * 150ms + 500ms) backwards; }
+.boss-seal {
+  position: absolute; right: -24px; top: -30px; display: grid; place-items: center; width: 98px; height: 98px; border-radius: 50%;
+  color: var(--accent); border: 4px double currentColor; background: color-mix(in srgb, var(--parchment) 90%, transparent); rotate: -10deg;
+  animation: stamp var(--dur-3) var(--ease-press) 200ms both; pointer-events: none;
+}
+.boss-seal i { font: normal 400 15px/1 var(--font-display); }
+.boss-seal b { font: 800 13px/1.1 var(--font-display); letter-spacing: .06em; text-transform: uppercase; text-align: center; }
+
+.boss-foot { display: grid; justify-items: center; gap: var(--s2); margin-top: var(--s4); }
+.boss-count { margin: 0; font: 600 14px var(--font-ui); color: var(--ink-soft); }
+.boss-foot .primary { min-height: 52px; padding: 0 28px; font-size: 18px; }
+.boss-foot .primary:not(.is-ready) { opacity: .75; }
+
+/* Màn nhỏ: rổ nằm trên, dính đầu khi cuộn; 8 thẻ chia hai cột bên dưới */
+@media (max-width: 960px) {
+  .boss-board { grid-template-columns: 1fr 1fr; grid-template-areas: "basket basket" "l r"; }
+  .basket { grid-area: basket; position: sticky; top: 4px; z-index: 3; min-height: 0; padding-bottom: var(--s4); border-radius: 14px 14px 40px 40px / 14px 14px 24px 24px; }
+  .boss-col:first-of-type { grid-area: l; } .boss-col:last-of-type { grid-area: r; }
+  .basket-bins { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .bin, .bin .ev { min-height: 72px; }
+  .bin .ev .ev-name { font-size: 12px; }
+}
+/* Điện thoại: rổ dính đầu màn nên phải thấp; 4 ô một hàng, thẻ trong rổ chỉ hiện số + tên ngắn */
+@media (max-width: 520px) {
+  .basket { gap: var(--s2); padding: 0 8px var(--s3); }
+  .basket-bins { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+  .bin, .bin .ev { min-height: 64px; }
+  .bin .ev .ev-head { padding: 2px 4px; } .bin .ev .ev-icon, .bin .ev .ev-year { display: none; }
+  .bin .ev .ev-body { padding: 4px; } .bin .ev .ev-name { font-size: 11px; line-height: 1.25; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+  .is-done .bin, .is-done .bin .ev { min-height: 96px; } .boss-mark { padding: 2px 4px 4px; font-size: 10px; }
+  .boss-seal { width: 76px; height: 76px; right: -8px; top: -22px; } .boss-seal b { font-size: 10px; }
+  .boss-col .ev, .boss-hole { min-height: 80px; }
+}
+@media (prefers-reduced-motion: reduce) { .is-done .bin .ev, .boss-seal { animation: none; } .bin { transition: none; } }
+
+.is-done .bin, .is-done .bin .ev { min-height: 128px; }
+.is-done .basket { min-height: 0; }

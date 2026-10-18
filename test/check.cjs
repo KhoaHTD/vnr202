@@ -91,7 +91,7 @@ async function targets(){try{return await(await fetch(`http://127.0.0.1:${PORT}/
   await size(1280,900);
 
   // 4) TRANG GAME (hanh-trinh.html): ghép tình huống – sự kiện. Vào thẳng màn mở chương 1, không đọc/ghi tiến độ.
-  await call('Page.navigate',{url:GAME});await wait(700);
+  await call('Page.navigate',{url:GAME});await wait(700);await ev('GameDebug.skipVoyage=true');
   await rules('màn mở chương');
   if(await ev("!!document.querySelector('.sheet')"))fail('Màn mở chương chưa có tờ bản đồ');
   if(!await ev("!!document.querySelector('.chapter-intro')&&!!document.getElementById('mode-class')&&document.querySelectorAll('.steps li').length===3"))fail('Thiếu màn mở chương 1, 3 bước hướng dẫn hoặc công tắc Lớp học');
@@ -195,7 +195,7 @@ async function targets(){try{return await(await fetch(`http://127.0.0.1:${PORT}/
   await ev("document.getElementById('archive').close()");
 
   // 5) CHẾ ĐỘ LỚP HỌC (?mode=class): thẻ đánh số 1–4, sai không tự gợi ý (MC bấm), phiếu ghi điểm
-  await call('Page.navigate',{url:GAME+'?mode=class'});await wait(900);
+  await call('Page.navigate',{url:GAME+'?mode=class'});await wait(900);await ev('GameDebug.skipVoyage=true');
   if(await ev("document.body.dataset.mode")!=='class')fail('?mode=class không bật chế độ Lớp học');
   await ev("window.__put=async(slot,card)=>{const q=s=>document.querySelector(s),w=ms=>new Promise(r=>setTimeout(r,ms));q('.ev[data-card=\"'+card+'\"]').click();await w(40);q('.slot-drop[data-place=\"'+slot+'\"]').click();await w(40);}");
   await click('#chapter-go');await wait(1300);

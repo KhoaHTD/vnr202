@@ -1,0 +1,52 @@
+/* ============================================================
+   Chuyển cảnh "Hành quân trên bản đồ" (voyage.js). Lớp phủ toàn màn trên mọi thứ, aria-hidden.
+   Chỉ animate transform, opacity, mask. Màu lấy từ tokens.css.
+   ============================================================ */
+.voyage { position: fixed; inset: 0; z-index: 1000; overflow: hidden; pointer-events: auto; cursor: pointer; }
+.voyage-bg { position: absolute; inset: 0; background: var(--parchment); opacity: 0; }
+.voyage-bg::after { content: ''; position: absolute; inset: 0; background-image: var(--grain); opacity: .6; }
+.voyage-map { position: absolute; inset: 0; opacity: 0; }
+.voyage-map .jmap { margin: 0; width: 100%; height: 100%; flex: none; }
+.voyage-map .jmap > svg { width: 100%; height: 100%; max-height: none; margin: 0; -webkit-mask-image: none; mask-image: none; overflow: hidden; }
+.voyage-map figcaption { display: none; }
+.voyage::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, transparent 48%, color-mix(in srgb, var(--room) 72%, transparent) 100%); }
+
+/* Tờ chặng cũ bay về ghim */
+.voyage-sheet { position: fixed; z-index: 2; margin: 0; max-width: none; pointer-events: none; transform-origin: 50% 50%; will-change: transform; box-shadow: 0 18px 50px color-mix(in srgb, var(--room) 60%, transparent); }
+
+/* Ghim, nét mực và ngòi bút (cỡ trên màn hình giữ cố định nhờ voyage.js chỉnh scale mỗi khung hình) */
+.vg-trail { stroke: var(--accent); stroke-linecap: round; filter: drop-shadow(0 0 3px color-mix(in srgb, var(--accent) 55%, transparent)); }
+.vg-pen { fill: var(--accent); filter: drop-shadow(0 0 6px var(--accent)); }
+.vg-pin .jm-ring { fill: var(--parchment); stroke: var(--accent); stroke-width: 2.6; }
+.vg-pin.vg-from .jm-ring { opacity: .85; }
+.vg-to.vg-stamp > * { transform-box: fill-box; transform-origin: center; animation: vg-pop 520ms var(--ease-press) both; }
+@keyframes vg-pop { from { transform: scale(2.6) rotate(-12deg); opacity: 0; } 60% { opacity: 1; } }
+
+/* Thẻ điện tín: dải giấy có răng cưa, dấu son, chữ gõ máy */
+.voyage-card {
+  position: absolute; z-index: 3; left: 50%; bottom: max(6vh, 36px); width: min(600px, 88vw); translate: -50% 0; padding: 14px 22px 16px;
+  display: grid; gap: 4px; text-align: left; color: var(--ink); background: var(--parchment);
+  border: 1px solid color-mix(in srgb, var(--ink) 40%, var(--stain)); box-shadow: var(--shadow), 0 14px 36px -10px color-mix(in srgb, var(--room) 70%, transparent);
+  opacity: 0; transform: translateY(24px) rotate(-.6deg); transition: opacity 300ms var(--ease), transform 500ms var(--ease-soft);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), 97% 100%, 94% calc(100% - 6px), 91% 100%, 88% calc(100% - 6px), 85% 100%, 82% calc(100% - 6px), 79% 100%, 76% calc(100% - 6px), 73% 100%, 70% calc(100% - 6px), 67% 100%, 64% calc(100% - 6px), 61% 100%, 58% calc(100% - 6px), 55% 100%, 52% calc(100% - 6px), 49% 100%, 46% calc(100% - 6px), 43% 100%, 40% calc(100% - 6px), 37% 100%, 34% calc(100% - 6px), 31% 100%, 28% calc(100% - 6px), 25% 100%, 22% calc(100% - 6px), 19% 100%, 16% calc(100% - 6px), 13% 100%, 10% calc(100% - 6px), 7% 100%, 4% calc(100% - 6px), 1% 100%, 0 calc(100% - 6px));
+}
+.voyage-card.is-on { opacity: 1; transform: none; }
+.vc-stamp { justify-self: start; padding: 1px 10px; font: 700 11px var(--font-ui); letter-spacing: .26em; text-transform: uppercase; color: var(--accent); border: 2px solid var(--accent); border-radius: 2px; rotate: -2deg; }
+.vc-l1 { min-height: 1.3em; font: 700 clamp(15px, 2.2vw, 22px)/1.3 var(--font-mono); letter-spacing: .06em; }
+.vc-l2 { min-height: 1.3em; font: italic 400 clamp(15px, 2vw, 19px)/1.3 var(--font-display); color: var(--ink-soft); }
+.vc-l1::after { content: '▍'; margin-left: 2px; animation: vg-blink 700ms steps(2) infinite; color: var(--accent); }
+@keyframes vg-blink { 50% { opacity: 0; } }
+
+@media (max-width: 600px) { .voyage-card { padding: 10px 14px 14px; } }
+@media (prefers-reduced-motion: reduce) { .voyage { display: none; } }
+
+/* Bản đồ trong lớp phủ: nét và chữ tính theo --u (= 1 px màn hình đổi ra đơn vị bản đồ) nên không phình ra khi camera phóng sát */
+.voyage .jm-pin, .voyage .jm-rose, .voyage .jm-arrow { display: none; }
+.voyage .jm-vn { stroke-width: calc(var(--u, 1) * 1.8); }
+.voyage .jm-nb { stroke-width: calc(var(--u, 1) * 1.2); stroke-dasharray: calc(var(--u, 1) * 6) calc(var(--u, 1) * 3); }
+.voyage .jm-lake { stroke-width: calc(var(--u, 1) * 1); }
+.voyage .jm-river { stroke-width: calc(var(--u, 1) * 1.4); } .voyage .jm-river.is-major { stroke-width: calc(var(--u, 1) * 2.2); }
+.voyage .jm-grat { stroke-width: calc(var(--u, 1) * .8); }
+.voyage .jm-w1 path { stroke-width: calc(var(--u, 1) * 30); } .voyage .jm-w2 path { stroke-width: calc(var(--u, 1) * 18); } .voyage .jm-w3 path { stroke-width: calc(var(--u, 1) * 9); }
+.voyage .jm-sea { font-size: calc(var(--u, 1) * 30); } .voyage .jm-sea--s { font-size: calc(var(--u, 1) * 20); }
+.voyage .jm-cty { font-size: calc(var(--u, 1) * 20); } .voyage .jm-islname { font-size: calc(var(--u, 1) * 15); } .voyage .jm-tick { font-size: calc(var(--u, 1) * 12); }
