@@ -57,8 +57,9 @@ el.motion.addEventListener('click', () => {
   if (exiting) paused ? exitTl.pause() : exitTl.resume();
 });
 setPressed(el.sound, soundOn);
+window.BGM?.play('landing'); // chỉ phát nếu loa đã bật trong phiên (trình duyệt có thể chặn tự phát tới lần chạm đầu)
 el.sound.addEventListener('click', () => {
-  soundOn = !soundOn; setPressed(el.sound, soundOn); session.set('sound', soundOn ? '1' : '0');
+  soundOn = !soundOn; setPressed(el.sound, soundOn); session.set('sound', soundOn ? '1' : '0'); window.BGM?.setEnabled(soundOn);
   if (soundOn) { try { audio = audio || new (window.AudioContext || window.webkitAudioContext)(); audio.resume(); } catch { /* không có Web Audio */ } }
 });
 
@@ -142,6 +143,7 @@ function skipExit(e) {
 }
 function leaveListeners(on) { for (const t of ['pointerdown', 'keydown']) (on ? addEventListener : removeEventListener)(t, skipExit, true); }
 
+el.cta.addEventListener('click', () => window.BGM?.stop(900)); // nhạc landing tắt dần khi rời trang
 el.cta.addEventListener('click', e => {
   if (REDUCED || e.defaultPrevented) return;                                      // giảm chuyển động: liên kết tự điều hướng ngay
   if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;  // mở tab mới: để trình duyệt tự xử lý

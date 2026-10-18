@@ -8,7 +8,7 @@
 const D=window.GAME_DATA,UI=window.GameUI,E=window.GameEngine,app=document.getElementById('app');
 let run=E.newRun(/[?&]mode=class\b/.test(location.search)?'class':'solo');
 // Trạng thái giao diện của chặng đang chơi: thẻ đang chọn (chạm), thông báo gợi ý từng ô, ô đang mở "Vì sao?"
-let ui={sel:null,msg:{},why:{}},sound=false,audio;
+let ui={sel:null,msg:{},why:{}},sound=BGM.isEnabled(),audio; // nhớ lựa chọn loa từ landing trong cùng phiên
 const storyEnding=window.StoryEnding.create({onFinish:()=>endingResults()});
 // Chỉ để test (check.cjs) đọc trạng thái lượt chơi; game không lưu ở đâu cả
 window.GameDebug={state:()=>run,ui:()=>ui,ending:()=>storyEnding.state(),skipVoyage:false}; // skipVoyage = true: bỏ chuyển cảnh bản đồ (test)
@@ -16,11 +16,13 @@ window.GameDebug={state:()=>run,ui:()=>ui,ending:()=>storyEnding.state(),skipVoy
 // Tiện ích nhỏ
 const $=id=>document.getElementById(id);
 const reducedMotion=()=>!!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-// Âm thanh: chỉ phát khi người chơi bật nút loa. tone = tiếng "tích" ngắn, paperSound = tiếng lật giấy
-/* Âm ngắn (chỉ khi người chơi bật Âm thanh): snap = thẻ khớp, ok = đúng, bad = sai. Dao động đơn, 40–180ms, nhỏ tiếng. */
+// Âm thanh: chỉ phát khi người chơi bật nút loa. sfx = tiếng "tích" ngắn, bgm.js = nhạc nền, paperSound = tiếng lật giấy
+/* Âm ngắn (chỉ khi người chơi bật Âm thanh): snap = thẻ khớp, ok = đúng, bad = sai, pick = nhấc thẻ, click = nút bấm, hint = gợi ý, tick = 5 giây cuối, win = xong chương / màn kết. Dao động đơn, 40–180ms, nhỏ tiếng. */
 function sfx(kind){
   if(!sound)return;
-  const notes={snap:[[220,.04,'square',.02]],ok:[[523,.07,'sine',.05],[784,.12,'sine',.05]],bad:[[190,.14,'sawtooth',.03]]}[kind];
+  const notes={snap:[[220,.04,'square',.02]],ok:[[523,.07,'sine',.05],[784,.12,'sine',.05]],bad:[[190,.14,'sawtooth',.03]],
+    pick:[[330,.05,'triangle',.035]],click:[[420,.04,'sine',.03],[310,.06,'sine',.025]],hint:[[660,.08,'sine',.04],[880,.12,'sine',.035]],
+    tick:[[1000,.03,'square',.018]],win:[[523,.1,'sine',.05],[659,.1,'sine',.05],[784,.1,'sine',.05],[1047,.26,'sine',.055]]}[kind];
   if(!notes)return;
   try{
     audio=audio||new(window.AudioContext||window.webkitAudioContext)();
@@ -143,7 +145,9 @@ function openRecords(mode){
 }
 $('records').onclick=()=>openRecords();
 $('close').onclick=()=>$('archive').close();
-$('sound').onclick=e=>{sound=!sound;const b=e.currentTarget;b.innerHTML=UI.icon(sound?'sound':'mute');b.setAttribute('aria-pressed',sound);tone();};
+const soundBtn=()=>{const b=$('sound');b.innerHTML=UI.icon(sound?'sound':'mute');b.setAttribute('aria-pressed',sound);};
+soundBtn();
+$('sound').onclick=()=>{sound=!sound;soundBtn();BGM.setEnabled(sound);sfx('snap');};
 /* Bấm vào ảnh nhỏ trong khối "Trong lịch sử" → mở hộp xem ảnh lớn.
    FLIP: đo vị trí ảnh nhỏ và ảnh lớn, rồi cho ảnh lớn bay từ chỗ ảnh nhỏ ra giữa (chỉ animate transform).
    Đóng bằng Esc (mặc định của <dialog>), nút Đóng hoặc bấm ra ngoài; đóng xong focus quay về ảnh nhỏ. */
@@ -172,10 +176,10 @@ function voyage(fromIdx,build,o={}){
 
 /* ---------- Các màn ---------- */
 // Màn mở đầu chương: không tự chuyển; bấm nút, Enter hoặc phím → để vào chương. Chương 1 có công tắc chế độ Lớp học.
-function chapterIntro(chapter){show(()=>{
+function chapterIntro(chapter){BGM.play('chuong-'+(chapter+1));show(()=>{
   setAct(String(chapter+1));hideStrip();setBright(false);app.innerHTML=UI.chapterIntro(D,chapter,run);aimLamp(app.querySelector('.intro-media'));scroll();
   const onKey=e=>{if((e.key==='Enter'||e.key==='ArrowRight')&&!e.target.closest?.('input,button')&&!document.querySelector('dialog[open]')){e.preventDefault();go();}};
-  const go=()=>{document.removeEventListener('keydown',onKey);voyage(run.index>0?run.index-1:null,play,{chapter:true});};
+  const go=()=>{sfx('click');document.removeEventListener('keydown',onKey);voyage(run.index>0?run.index-1:null,play,{chapter:true});};
   document.addEventListener('keydown',onKey);cleanups.push(()=>document.removeEventListener('keydown',onKey));
   const sw=$('mode-class');if(sw)sw.onchange=()=>setMode(sw.checked?'class':'solo');
   $('chapter-go').onclick=e=>{e?.preventDefault?.();go();};
@@ -210,6 +214,7 @@ function paint(fresh=[]){
 
 // Màn chơi một chặng
 function play(){if(run.index>=D.scenes.length){ending();return;}
+  BGM.play(kindNow()==='boss'?'tran-dau-cuoi':'chuong-'+(D.scenes[run.index].chapter+1)); // chặng 9 đổi bài, chặng khác giữ bài của chương
   const leg=!!app.querySelector('.sheet .stage'); // đang ở một chặng khác thì đổi tờ; từ màn mở chương/tổng kết vào thì giữ cách cũ
   show(()=>{
   ui={sel:null,msg:{},why:{},tf:{started:false,left:UI.tfSecs(D.scenes[run.index]),last:null},nudge:false};const s=D.scenes[run.index];setAct(run.index===8?'finale':String(s.chapter+1));
@@ -274,6 +279,7 @@ function pointerDrag(root,{itemSel,idOf,dropSel='[data-drop]',onDrop,onMiss}){
   root.addEventListener('pointerdown',e=>{
     if(e.button>0||!e.isPrimary)return;
     const el=e.target.closest?.(itemSel);if(!el)return;
+    sfx('pick');
     drag={el,id:idOf(el),pid:e.pointerId,x:e.clientX,y:e.clientY,on:false};
     document.addEventListener('pointermove',move);document.addEventListener('pointerup',end);document.addEventListener('pointercancel',end);
   });
@@ -404,6 +410,7 @@ function paintTf(){
 }
 function startTf(){
   if(ui.tf.started||E.stageDone(run))return;
+  sfx('click');
   const secs=UI.tfSecs(D.scenes[run.index]);
   ui.tf.started=true;ui.tf.left=secs;paintTf();
   if(isClass())return; // Lớp học: không tính giờ
@@ -413,6 +420,7 @@ function startTf(){
     const clock=app.querySelector('.tf-clock'),out=$('tf-time');
     if(clock){clock.style.setProperty('--f',ui.tf.left/secs);clock.classList.toggle('is-low',ui.tf.left<=5);clock.setAttribute('aria-valuenow',Math.ceil(ui.tf.left));}
     if(out)out.textContent=Math.ceil(ui.tf.left);
+    const sec=Math.ceil(ui.tf.left);if(sec<=5&&sec>0&&ui.tf.tick!==sec){ui.tf.tick=sec;sfx('tick');}
     if(ui.tf.left<=0){stopTfTimer();E.tfExpire(run,D);sfx('bad');finishTf();}
   },100);
   cleanups.push(stopTfTimer);
@@ -549,6 +557,7 @@ function giveHint(slot){
   const before=slotIds().filter(id=>E.stageOf(run)[id].locked),rects={};
   const el=app.querySelector(`.slot[data-slot="${slot}"]`);if(el)rects[slot]=el.getBoundingClientRect();
   const h=E.hint(run,slot,D);if(!h)return;
+  sfx('hint');
   if(h.tier===3){afterLock(before,rects,true);return;}
   ui.msg[slot]={tier:h.tier,text:h.text};
   if(ui.sel&&E.isFaded(run,ui.sel))ui.sel=null;
@@ -558,6 +567,7 @@ function giveHint(slot){
 // "Tiếp tục hành trình": chỉ có tác dụng khi chặng đã xong (các ô được chấm ngay lúc thả thẻ)
 function proceed(){
   if(!E.stageDone(run))return;
+  sfx('click');
   if(run.resume!=null){const ch=D.scenes[run.index].chapter;E.finishReplay(run);summary(ch);return;} // chơi lại xong: về tổng kết chương
   next();
 }
@@ -565,6 +575,7 @@ function proceed(){
 // "Bỏ qua, ôn lại sau": mọi ô chưa đúng được khóa với 0 điểm và vào danh sách ôn ở màn kết
 function skipStage(){
   const open=slotIds().filter(id=>!E.stageOf(run)[id].locked);if(!open.length)return;
+  sfx('click');
   settle(open,()=>{open.forEach(id=>E.skip(run,id,D));return true;},true);
 }
 
@@ -578,7 +589,7 @@ function next(){
 function summary(chapter){show(()=>{
   setAct(String(chapter+1));const enter=!app.querySelector('.sheet');
   app.innerHTML=UI.chapterSummary(D,run,chapter,{enter});renderStrip();setBright(false);aimLamp(app.querySelector('.chapter-break'));
-  $('next').onclick=()=>chapterIntro(chapter+1);$('next').focus?.({preventScroll:true});scroll();
+  $('next').onclick=()=>{sfx('click');chapterIntro(chapter+1);};$('next').focus?.({preventScroll:true});scroll();sfx('win');
   bindShelf();
   // Rê chuột vào mốc ↔ ghim: cùng data-stage thì cùng sáng
   const hot=(stage,on)=>app.querySelectorAll(`[data-stage="${stage}"]`).forEach(e=>e.classList.toggle('is-hot',on));
@@ -617,11 +628,11 @@ function openScoresheet(){
 /* ---------- Màn kết: đoạn phim cờ / Tuyên ngôn / Quốc ca (bản trước merge), rồi trang điểm ---------- */
 function ending(){
   if(storyEnding.isActive())return;
-  hideStrip();setAct('finale');setBright(true);storyEnding.start();
+  BGM.stop(1500);hideStrip();setAct('finale');setBright(true);storyEnding.start();
 }
 
 function endingResults(){show(()=>{
-  setAct('finale');app.innerHTML=UI.ending(D,run,{enter:false});
+  setAct('finale');sfx('win');app.innerHTML=UI.ending(D,run,{enter:false});
   // tuyến 9 chặng sáng đủ lần lượt, quầng đèn sáng hơn, điểm chạy từ 0 lên
   renderStrip({seq:true});setBright(true);aimLamp(app.querySelector('.end-hero'));
   const out=$('final-score'),total=E.score(run);
