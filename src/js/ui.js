@@ -125,7 +125,7 @@ function scenePhoto(s){
   const pic=img.src?`<img src="${img.src}" alt="${img.alt||''}" width="${w}" height="${h}" decoding="async">`:'';
   const credit=img.src?[img.composite?'Ảnh tư liệu (ảnh ghép)':'Ảnh tư liệu',img.date,img.source&&'Nguồn: '+img.source].filter(Boolean).join(' · '):'Ảnh tư liệu sẽ được bổ sung';
   const art=img.src?'':`<div class="scene-art"><span class="scene-motif">${icon(s.motif||'flag',56)}</span></div>`;
-  return `<figure class="photo scene-photo${img.src?'':' is-blank'}"><div class="photo-media" style="aspect-ratio:${w}/${h};--focus:${img.focus||'50% 50%'}">${pic}${art}<div class="spots" id="spots"></div></div><figcaption>${credit}</figcaption></figure>`;
+  return `<figure class="photo scene-photo${img.src?'':' is-blank'}" style="--ar:${(w/h).toFixed(3)}"><div class="photo-media" style="aspect-ratio:${w}/${h};--focus:${img.focus||'50% 50%'}">${pic}${art}<div class="spots" id="spots"></div></div><figcaption>${credit}</figcaption></figure>`;
 }
 
 /* Dải bối cảnh mỏng: bản đồ nhỏ có ghim + một dòng bản tin. Không thêm thông tin nào khác để người chơi tập trung vào câu hỏi. */

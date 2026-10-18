@@ -808,3 +808,29 @@ html[data-vt=leg]::view-transition-new(sheet) { animation: sheet-land 600ms var(
 .links { max-width: 72ch; display: grid; gap: var(--s2); margin-top: var(--s4); text-align: center; }
 .links li { text-wrap: balance; line-height: 1.45; padding: var(--s2) var(--s3); border-top: 1px solid color-mix(in srgb, var(--accent) 22%, transparent); }
 .links li:first-child { border-top: 0; }
+
+/* Màn rộng nhưng thấp: ảnh cảnh hạ chiều cao để cả màn (chữ dẫn, ô, khay thẻ) vừa trang, không phải cuộn */
+@media (min-width: 821px) {
+  .scene-photo { max-width: min(100%, calc(48dvh * 1.55), calc(max(150px, 100dvh - 305px) * var(--ar, 1.5))); }
+}
+
+/* Màn rộng nhưng thấp (laptop nhỏ, cửa sổ thấp): thu gọn ô tình huống, khay thẻ và chữ dẫn để cả chặng vừa một trang */
+@media (min-width: 821px) and (max-height: 760px) {
+  .stage--match .brief { display: none; }
+  .top { padding-block: 4px; }
+  .strip { padding-block: 0 var(--s2); }
+  .sheet { padding-block: 8px 6px; }
+  main { padding-bottom: 8px; }
+  .sheet-head > div { display: flex; align-items: baseline; gap: var(--s3); flex-wrap: wrap; }
+  .sheet-head h2 { margin-top: 0; font-size: clamp(20px, 2.2vw, 28px); }
+  .col-left, .col-right { gap: 4px; }
+  .slots { gap: 6px; }
+  .slot { padding: 4px 10px 6px; }
+  .slot-band { padding-block: 3px; }
+  .slot-situation { font-size: 14px; line-height: 1.3; padding-top: 5px; }
+  .slot-drop { min-height: 30px; margin-top: 3px; }
+  .tl-cards { padding-top: 16px; }
+  .tl-slot::after { top: -4px; height: 6px; }
+  .g-lotus { top: -21px; }
+  .garland { height: 24px; }
+}
