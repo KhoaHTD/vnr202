@@ -519,17 +519,23 @@ function endingResults(){show(()=>{
   $('replay').onclick=()=>{run=E.newRun(run.mode);chapterIntro(0);};
   scroll();});}
 $('sheet-btn')&&($('sheet-btn').onclick=openScoresheet);
-/* Nút "Tua" để thử từng kiểu chơi: nhỏ, dưới điểm ở góc phải. Mỗi lần bấm chơi hoàn hảo chặng hiện tại rồi sang chặng sau (chặng cuối → màn kết).
-   Chỉ hiện khi chạy ở localhost / 127.0.0.1 hoặc thêm ?dev vào địa chỉ. */
+/* Phím tua ẩn dành cho dev: mũi tên trái/phải tua giữa các chặng.
+   Chỉ bật trên localhost / 127.0.0.1 hoặc khi URL có ?dev; phím S/D vẫn trả lời câu đúng/sai. */
 if(/^(localhost|127\.0\.0\.1)$/.test(location.hostname)||/[?&]dev\b/.test(location.search)){
-  const btn=document.createElement('button');btn.type='button';btn.id='dev-go';btn.textContent='Tua ›';btn.title='Tua sang chặng sau (chỉ để thử)';btn.setAttribute('aria-label','Tua sang chặng sau');
-  document.body.appendChild(btn);
-  btn.onclick=()=>{
+  document.addEventListener('keydown',e=>{
+    if((e.key!=='ArrowLeft'&&e.key!=='ArrowRight')||e.repeat||e.ctrlKey||e.metaKey||e.altKey)return;
+    if(document.querySelector('dialog[open]')||e.target.closest?.('input,textarea,select,[contenteditable="true"]'))return;
+    e.preventDefault();e.stopImmediatePropagation();
+    if(storyEnding.isActive())return;
+    if(e.key==='ArrowLeft'){
+      if(run.index<=0)return;
+      E.fastForward(run,D,run.index-1);play();return;
+    }
     if(run.index>=D.scenes.length)return;
-    const i=run.index+1;
-    E.fastForward(run,D,i);
-    if(i>=D.scenes.length)ending();else play();
-  };
+    const nextIndex=run.index+1;
+    E.fastForward(run,D,nextIndex);
+    if(nextIndex>=D.scenes.length)ending();else play();
+  });
 }
 
 
