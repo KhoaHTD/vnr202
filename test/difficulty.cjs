@@ -20,4 +20,12 @@ const rv=E.review(run,D);assert.ok(rv.length>=4);rv.forEach(r=>assert.ok(r.card&
 // Màn trùm: sau khi tua tới chặng 9, bể thẻ có 4 chuẩn bị + 4 thời cơ
 const r2=E.newRun('solo');E.fastForward(r2,D,8);const pool=E.bossPoolOf(r2,D);
 assert.equal(pool.filter(x=>x.prep).length,4);assert.equal(pool.filter(x=>!x.prep).length,4);
+// Rổ bằng chứng: đặt vào ô cụ thể, dời ô, thay thẻ đang chiếm ô, lấy ra, rổ đầy, chốt khi đủ 4
+{const r=E.newRun('solo');E.fastForward(r,D,8);const P=E.bossPoolOf(r,D),bk=E.stageOf(r).boss,k=P.map(x=>x.key);
+assert.ok(E.bossPlace(r,D,k[0],2));assert.deepStrictEqual([...bk.picked],[null,null,k[0],null]);
+assert.ok(E.bossPlace(r,D,k[0],0));assert.deepStrictEqual([...bk.picked],[k[0],null,null,null]);
+assert.ok(E.bossPlace(r,D,k[1],0));assert.deepStrictEqual([...bk.picked],[k[1],null,null,null]);
+assert.ok(E.bossToggle(r,D,k[1]));assert.equal(E.bossCount(r),0);
+k.slice(0,4).forEach(x=>assert.ok(E.bossToggle(r,D,x)));assert.equal(E.bossToggle(r,D,k[4]),false);
+const res=E.bossSubmit(r,D);assert.equal(res.pts,P.slice(0,4).filter(x=>x.prep).length*5);}
 console.log('difficulty OK; prep:',pool.filter(x=>x.prep).map(x=>x.card.year).join(' | '));

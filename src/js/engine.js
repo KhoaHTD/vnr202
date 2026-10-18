@@ -20,7 +20,7 @@ function newStage(scene){
   const k=kindOf(scene);
   if(k==='order')return {ids:['P1','P2','P3','P4'],P1:newSlot(),P2:newSlot(),P3:newSlot(),P4:newSlot(),faded:[],order:null};
   if(k==='tf')return {ids:[],faded:[],order:null,tf:{items:null,i:0,done:false,pts:0}};
-  if(k==='boss')return {ids:[],faded:[],order:null,boss:{pool:null,picked:[],done:false,pts:0}};
+  if(k==='boss')return {ids:[],faded:[],order:null,boss:{pool:null,picked:[null,null,null,null],done:false,pts:0}};
   return {ids:SLOT_IDS.slice(),A:newSlot(),B:newSlot(),faded:[],order:null};
 }
 function newRun(mode='solo',D=window.GAME_DATA){
@@ -267,18 +267,29 @@ function bossPoolOf(run,D){
   b.pool=[...idx.slice(0,4).map(k=>({...prep[k],prep:true})),...chance.slice(0,4).map(x=>({...x,prep:false}))].sort((x,y)=>h(x.key)-h(y.key));
   return b.pool;
 }
-// Chọn / bỏ chọn một thẻ (tối đa 4). Trả true nếu đổi được.
+/* Rổ bằng chứng: picked là 4 ô (key thẻ hoặc null), thứ tự ô do người chơi chọn.
+   bossToggle: thẻ đang trong rổ thì lấy ra, chưa có thì bỏ vào ô trống đầu tiên (rổ đầy → false).
+   bossPlace: đặt thẻ vào đúng ô idx (kéo thả). Thẻ đang ở ô khác thì dời đi; ô idx đang có thẻ khác thì thẻ đó trở về cột. */
+const bossCount=run=>stageOf(run).boss.picked.filter(Boolean).length;
 function bossToggle(run,D,key){
   const b=stageOf(run).boss;bossPoolOf(run,D);
   if(b.done)return false;
   const i=b.picked.indexOf(key);
-  if(i>=0){b.picked.splice(i,1);return true;}
-  if(b.picked.length>=BOSS_PICK)return false;
-  b.picked.push(key);return true;
+  if(i>=0){b.picked[i]=null;return true;}
+  const e=b.picked.indexOf(null);
+  if(e<0)return false;
+  b.picked[e]=key;return true;
+}
+function bossPlace(run,D,key,idx){
+  const b=stageOf(run).boss,pool=bossPoolOf(run,D);
+  if(b.done||!(idx>=0&&idx<BOSS_PICK)||!pool.some(it=>it.key===key))return false;
+  const at=b.picked.indexOf(key);if(at===idx)return false;
+  if(at>=0)b.picked[at]=null;
+  b.picked[idx]=key;return true;
 }
 function bossSubmit(run,D){
   const b=stageOf(run).boss,pool=bossPoolOf(run,D);
-  if(b.done||b.picked.length!==BOSS_PICK)return null;
+  if(b.done||b.picked.filter(Boolean).length!==BOSS_PICK)return null;
   const ok=pool.filter(it=>it.prep&&b.picked.includes(it.key)).length;
   b.pts=ok*BOSS_POINTS;b.done=true;
   run.streak=ok===BOSS_PICK?run.streak+1:0;
@@ -317,4 +328,4 @@ function dots(run,i){
 /* Số lần ô bị chấm sai trong chặng hiện tại (mỗi lần thả thẻ tăng attempts; ô đúng ngay lần chấm đó thì không tính). Dùng để quyết định khi nào hiện link "Bỏ qua". */
 function wrongs(run){const st=stageOf(run);return st.ids.reduce((n,id)=>n+st[id].attempts-(st[id].how==='first'||st[id].how==='retry'||st[id].how==='faded'?1:0),0);}
 const isDone=(run,i)=>stageIsDone(run.stages[i]);
-return {fastForward,bossPoolOf,bossToggle,bossSubmit,BOSS_PICK,kindOf,tfItemsOf,tfAnswer,tfExpire,dots,TF_COUNT,isDone,stars,retryStage,finishReplay,wrongs,SLOT_IDS,POINTS,newRun,sceneOf,stageOf,cardOf,slotOf,orderOf,tray,isFaded,place,unplace,drop,quick,hint,reveal,skip,stageDone,advance,stagePoints,score,MAX,review,timeline};})();
+return {fastForward,bossPoolOf,bossToggle,bossPlace,bossCount,bossSubmit,BOSS_PICK,kindOf,tfItemsOf,tfAnswer,tfExpire,dots,TF_COUNT,isDone,stars,retryStage,finishReplay,wrongs,SLOT_IDS,POINTS,newRun,sceneOf,stageOf,cardOf,slotOf,orderOf,tray,isFaded,place,unplace,drop,quick,hint,reveal,skip,stageDone,advance,stagePoints,score,MAX,review,timeline};})();

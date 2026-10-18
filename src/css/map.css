@@ -3,8 +3,8 @@
    Chỉ dùng màu của tokens.css. Đơn vị trong SVG là đơn vị viewBox (khung 800 rộng).
    ============================================================ */
 .jmap--full { flex: 0 0 340px; width: 340px; }
-.jmap svg { background: color-mix(in srgb, var(--parchment) 70%, var(--parchment-shade)); border-radius: 2px; box-shadow: inset 0 0 0 1px var(--line); overflow: hidden; }
-.jmap--mini svg { box-shadow: inset 0 0 0 1px var(--line), 0 1px 3px color-mix(in srgb, var(--stain) 30%, transparent); }
+.jmap > svg { background: color-mix(in srgb, var(--parchment) 70%, var(--parchment-shade)); border-radius: 2px; box-shadow: inset 0 0 0 1px var(--line); overflow: hidden; }
+.jmap--mini > svg { box-shadow: inset 0 0 0 1px var(--line), 0 1px 3px color-mix(in srgb, var(--stain) 30%, transparent); }
 
 /* Vân nước ven bờ (nhiều nét chồng mờ dần ra biển, như bản khắc đồng) */
 .jm-halo path { fill: none; stroke: var(--stain); stroke-linejoin: round; }
@@ -56,3 +56,63 @@ h2.place { animation: ink-in var(--dur-4) var(--ease-soft) both; }
 .sheet:has(.chapter-break), .sheet:has(.chapter-intro) { animation: fold-open 900ms var(--ease-soft) both; transform-origin: 50% 0; }
 @keyframes fold-open { from { clip-path: inset(0 50% 0 50%); transform: perspective(1400px) rotateX(10deg) translateY(36px); opacity: .4; } 55% { opacity: 1; } to { clip-path: inset(0 0 0 0); transform: none; } }
 @media (prefers-reduced-motion: reduce) { h2.place, .sheet:has(.chapter-break), .sheet:has(.chapter-intro) { animation: none; } }
+
+/* ===== Màn "Hoàn thành chương": bản đồ lớn bên phải, dính khi cuộn ===== */
+.chapter-break--map { max-width: 1240px; }
+.chapter-break--map .cb-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--s5); align-items: start; text-align: left; }
+.cb-map { position: sticky; top: 12px; align-self: start; }
+.cb-map .jmap--full { width: 100%; flex: none; }
+.cb-map .jmap > svg { width: 100%; height: auto; max-height: min(calc(100dvh - 150px), 820px); margin: 0 auto; }
+.jm-legend { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 8px; margin-top: var(--s2); font: 600 12px var(--font-ui); letter-spacing: .04em; color: var(--ink-soft); }
+.jm-legend .lg { display: inline-block; vertical-align: middle; }
+.jm-legend .lg-now { width: 14px; height: 14px; border-radius: 50%; background: var(--parchment); border: 2px solid var(--accent); }
+.jm-legend .lg-old { width: 9px; height: 9px; margin-left: 10px; border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--ink-soft) 60%, transparent); background: color-mix(in srgb, var(--ink-soft) 40%, transparent); }
+.jm-legend .lg-route { width: 22px; height: 0; margin-left: 10px; border-top: 3px dashed var(--accent); }
+
+.jm-num { font: 800 17px var(--font-display); fill: var(--accent); }
+.jm-pin.is-prev .jm-ring { stroke-width: 1.6; }
+.jm-pin.is-prev { opacity: .75; }
+.jm-route.is-now { stroke-width: 4.4; stroke-dasharray: 1; stroke-dashoffset: 0; animation: route-run 1000ms var(--ease) var(--d, 0ms) both; }
+.jm-pin { transition: transform var(--dur-2) var(--ease-soft); }
+.jm-pin.is-hot .jm-ring { stroke: var(--accent); stroke-width: 4; fill: color-mix(in srgb, var(--accent) 14%, var(--parchment)); }
+.jm-pin.is-hot { opacity: 1; }
+.jm-pin.is-hot .jm-label { fill: var(--accent); }
+.jm-lab.is-hot .jm-label { fill: var(--accent); } .jm-lab.is-hot .chapter-break--map li[data-stage] { transition: background var(--dur-2); }
+.chapter-break--map li[data-stage].is-hot { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+
+@media (max-width: 960px) {
+  .chapter-break--map .cb-grid { grid-template-columns: 1fr; }
+  .cb-map { position: static; order: -1; }
+  .cb-map .jmap > svg { max-height: min(110vw, 560px); }
+  .jm-lab .jm-label { font-size: 19px; }
+}
+@media (prefers-reduced-motion: reduce) { .jm-route.is-now { animation: none; } .jm-pin { transition: none; } }
+
+.jm-ln { fill: var(--accent); font-weight: 800; }
+
+/* Bản đồ lớn hòa vào tờ giấy: không còn khung nền riêng, biển nhạt dần ra mép, đất màu giấy ngả nâu nhẹ */
+.jmap--full > svg { background: none; box-shadow: none; border-radius: 0; overflow: visible;
+  -webkit-mask-image: radial-gradient(ellipse 82% 82% at 50% 50%, #000 66%, transparent 100%); mask-image: radial-gradient(ellipse 82% 82% at 50% 50%, #000 66%, transparent 100%); }
+.jmap--full .jm-vn { fill: color-mix(in srgb, var(--parchment) 74%, var(--stain)); }
+.jmap--full .jm-nb { fill: color-mix(in srgb, var(--parchment-shade) 55%, transparent); }
+.jmap--full .jm-w1 path { opacity: .035; } .jmap--full .jm-w2 path { opacity: .06; } .jmap--full .jm-w3 path { opacity: .1; }
+.jmap--full .jm-grat { opacity: .16; }
+
+/* Gọn hơn: bỏ đường dẫn chấm (số trên ghim trùng số trước tên), tuyến cũ chỉ còn nét mờ, nhãn có viền giấy nên không bị đường cắt qua */
+.jmap--full 
+/* ===== Khung phóng to cụm điểm (Việt Bắc – Bắc Bộ) ===== */
+.jm-zbox { fill: color-mix(in srgb, var(--accent) 8%, transparent); stroke: var(--accent); stroke-width: 2.2; stroke-dasharray: 6 4; transition: fill var(--dur-2); }
+.jm-zbox.is-hot { fill: color-mix(in srgb, var(--accent) 24%, transparent); }
+.jm-zbg { fill: var(--parchment); stroke: color-mix(in srgb, var(--stain) 80%, var(--ink)); stroke-width: 3.5; filter: drop-shadow(0 3px 6px color-mix(in srgb, var(--ink) 30%, transparent)); }
+.jm-zin { fill: none; stroke: var(--stain); stroke-width: 1; opacity: .65; }
+.jm-ztitle { font: 600 15px var(--font-ui); letter-spacing: .12em; text-transform: uppercase; fill: var(--ink-soft); }
+.jm-zdiv { stroke: var(--line); stroke-width: 1.2; stroke-dasharray: 3 4; fill: none; }
+.jm-zoom-map { overflow: hidden; }
+.jm-zoom-map .jm-vn { stroke-width: calc(1.5px / var(--z)); }
+.jm-zoom-map .jm-nb { stroke-width: calc(1px / var(--z)); stroke-dasharray: none; }
+.jm-zoom-map .jm-river { stroke-width: calc(1.2px / var(--z)); } .jm-zoom-map .jm-river.is-major { stroke-width: calc(1.8px / var(--z)); }
+.jm-zoom .jm-label { font-size: 19px; stroke: none; }
+.jm-lnb { fill: var(--parchment); stroke: var(--accent); stroke-width: 2; }
+.jm-lnn { font: 800 15px var(--font-display); fill: var(--accent); }
+.jm-lab.is-hot .jm-label { fill: var(--accent); } .jm-lab.is-hot .jm-lnb { fill: color-mix(in srgb, var(--accent) 14%, var(--parchment)); stroke-width: 3; }
+.jm-pin.is-zoomed .jm-shadow { display: none; }
