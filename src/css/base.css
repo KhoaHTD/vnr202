@@ -5,6 +5,10 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
+
+/* --- Thanh cuộn: ẩn hẳn, vẫn cuộn được bằng lăn chuột, vuốt cảm ứng và phím --- */
+* { scrollbar-width: none; }
+*::-webkit-scrollbar { display: none; width: 0; height: 0; }
 body {
   position: relative;
   margin: 0;
