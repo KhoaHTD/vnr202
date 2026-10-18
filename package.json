@@ -4,12 +4,7 @@
   "scripts": {
     "start": "node server.cjs",
     "vendor:gsap": "cp node_modules/gsap/{index.js,gsap-core.js,CSSPlugin.js} vendor/gsap/",
-    "test": "node --test test/story-core.test.cjs test/ending.test.cjs",
-    "test:browser": "node test/story-browser.cjs",
-    "test:legacy": "node --test test/network.test.cjs test/v2-core.test.cjs",
-    "test:august": "node --test test/august-core.test.cjs",
-    "test:ending": "node test/ending-browser.cjs",
-    "test:media": "node --test test/server-media.test.cjs"
+    "test": "node test/test-engine.cjs && node test/check.cjs"
   },
   "dependencies": {
     "gsap": "^3.15.0"

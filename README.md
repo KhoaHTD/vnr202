@@ -1,83 +1,35 @@
 # Đường đến tháng Tám
 
-Game dẫn truyện và lựa chọn cho môn Lịch sử Đảng. Màn hình máy tính có cảnh pixel bên trái, dẫn truyện và câu hỏi bên phải. Mỗi giai đoạn bắt đầu độc lập từ trang chọn; trên điện thoại, cảnh nằm trên phần đọc và lựa chọn.
+Web game tiếng Việt ghép tình huống – sự kiện lịch sử 1930–1945: 3 chương, 9 chặng. Mỗi chặng có một cảnh ảnh với **2 điểm nóng** (hai tình huống A, B) và **rổ 4 thẻ sự kiện kèm năm** (2 đúng, 2 nhiễu là sự kiện thật nhưng thuộc thời điểm khác). Người chơi kéo thẻ vào đúng tình huống; **chấm ngay khi thả**: đúng thì thẻ "cạch" vào ô, ô khóa, cảnh đổi, "+10" bay lên và thẻ lật bay vào album dòng thời gian; sai thì thẻ rung rồi về rổ kèm một dòng gợi ý ngắn như "Muộn 5 năm!". Mục tiêu: nhớ sự kiện nào diễn ra khi nào và giải quyết vấn đề gì. Chưa đo thời lượng bằng nhóm người chơi thật.
 
-## Chạy và xem
+## Luật chơi
+- **Điểm mỗi ô:** đúng ngay lần đầu 10 · đúng ở lần chọn lại sau gợi ý nấc 1 là 5 · đúng sau khi thẻ bị làm mờ, hoặc xem đáp án, hoặc bỏ qua là 0. Mỗi chặng tối đa 20, cả game 180.
+- **Kiểu chơi theo chương:** chương I ghép thẻ vào 2 tình huống (như trên); chương II **xếp 4 thẻ theo thứ tự thời gian** (5/3/0 điểm mỗi vị trí, thẻ không hiện năm); chương III **5 câu đúng/sai trong 20 giây** (4 điểm mỗi câu, câu sinh từ dữ liệu thẻ; Lớp học không tính giờ). Chặng 9 là **màn trùm** "Cách mạng Tháng Tám có phải ăn may?": chọn 4 trong 8 thẻ đã sưu tầm chứng minh chuẩn bị lâu dài (5 điểm/thẻ; thẻ có thời điểm từ 13/8/1945 được coi là "thời cơ", còn lại là "chuẩn bị"). Mỗi chặng vẫn tối đa 20 điểm.
+- **Sao, chuỗi, sưu tầm:** mỗi chặng 3 sao (20 điểm), 2 sao (từ 15), 1 sao (còn lại); huy hiệu "Chuỗi n" cho số lần đúng liên tiếp (không cộng điểm); thẻ đúng thành thẻ sưu tầm, chạm để lật xem địa danh và ý nghĩa; bản đồ hành trình sáng dần ở khối hoàn thành chặng, tổng kết chương và màn kết; tổng kết chương có "Chơi lại để đủ 3 sao" (giữ bản điểm cao hơn).
+- **Gợi ý 3 nấc (kiểu ghép):** (1) "Chưa phù hợp" + gợi ý thời điểm viết riêng cho thẻ nhiễu vừa chọn; (2) làm mờ 1 thẻ nhiễu + gợi ý nội dung; (3) hiện đáp án + nút "Vì sao?". Ô đúng khóa lại, thẻ sai quay về rổ; link "Bỏ qua, ôn lại sau" chỉ hiện sau 2 lần đặt sai trong chặng.
+- **Cuối game:** trang 1 chỉ có ảnh Bác (tờ giấy gấp ba mở ra, ảnh hiện dần, ngôi sao bừng sáng và giọng Bác đọc Tuyên ngôn `assets/audio/bac-ho-tuyen-ngon-doc-lap.mp3` vang lên; bấm/Enter để bỏ qua hiệu ứng, luôn có nút tạm dừng giọng); trang 2: điểm /180, album 1930–1945 do người chơi hoàn thành, danh sách ô cần ôn kèm lời giải.
+- **Chế độ Lớp học** (công tắc ở chương 1 hoặc `hanh-trinh.html?mode=class`): chiếu màn hình lớn, MC thao tác. Thẻ phóng to và đánh số 1–4; sai không tự gợi ý, MC bấm "Đọc gợi ý" / "Hiện đáp án"; có **Phiếu ghi điểm** in được (ban tổ chức tự ghi điểm team); chặng 9 có đồng hồ 1 phút cho câu thưởng. Cách A (cả lớp cùng giơ bảng, mỗi ô đúng +10) và Cách B (lần lượt từng team) được ghi trong phiếu.
+- Đặt thẻ bằng **kéo thả**, hoặc **chạm thẻ rồi chạm ô** (điện thoại), hoặc **bàn phím** (1–4 chọn thẻ, A/B đặt vào ô — chương II dùng A–D cho vị trí 1–4 —, Enter để tiếp tục; kiểu đúng/sai dùng ← Sai, → Đúng).
 
-Cần Node.js 22 trở lên. Không cần cài thêm thư viện.
+## Chạy
+- Mở `index.html` trong trình duyệt. Không cần cài thư viện.
+- Hoặc chạy `node server.cjs`, mở http://localhost:5173.
+- Font trực tuyến là tùy chọn; khi mất mạng dùng font hệ thống.
 
-```powershell
-npm start
-```
+## Nội dung và nguồn
+`docs/noi-dung-goc.md` lưu nguyên văn tài liệu nhóm (bao gồm phần lặp). `content.js` chứa 9 chặng (tình huống, thẻ, năm, gợi ý, lời giải) và chín hồ sơ đọc thêm. **Nội dung 9 chặng là BẢN NHÁP biên soạn từ tài liệu nhóm: mọi ngày, tên sự kiện, gợi ý cần nhóm đối chiếu giáo trình trước khi dùng thật.**
 
-- [Chọn giai đoạn](http://127.0.0.1:5173/)
-- [Xem thử đoạn kết](http://127.0.0.1:5173/ending-preview.html)
-- [1930–1935](http://127.0.0.1:5173/hanh-trinh.html?giai-doan=1930-1935)
-- [1936–1939](http://127.0.0.1:5173/hanh-trinh.html?giai-doan=1936-1939)
-- [1939–1945](http://127.0.0.1:5173/hanh-trinh.html?giai-doan=1939-1945)
+Đối chiếu: chặng 1 → thành lập Đảng, Xô viết Nghệ–Tĩnh; 2 → Chương trình hành động 1932, Đại hội I; 3–4 → phong trào dân chủ và nhận thức mới (Hội nghị 7/1936, Đông Dương Đại hội, chiến sách mới, đón phái viên); 5 → chuyển hướng 1939–1941; 6 → Đề cương văn hóa, Đội Việt Nam Tuyên truyền Giải phóng quân; 7 → Chỉ thị 12/3, phá kho thóc; 8 → Quân lệnh số 1, Đại hội Quốc dân; 9 → Hà Nội 19/8, Tuyên ngôn Độc lập.
 
-Máy chủ chỉ lắng nghe tại 127.0.0.1:5173. Đây là bản chạy tại máy, chưa xuất bản lên Internet.
+Các chi tiết không đưa vào lượt chơi nằm trong hồ sơ hoặc bản nguồn. Không tuyên bố mọi chi tiết được học trong 10 phút.
 
-## Luồng chơi hiện tại
+## Cần duyệt trước sử dụng chính thức
+- Tài liệu gốc ghi không thống nhất 1935/1936 về Mặt trận Nhân dân Pháp; bản chơi dùng 1936 theo đoạn diễn giải của chính tài liệu.
+- Mốc Hội truyền bá Quốc ngữ và một số tên tác phẩm trong bản nguồn cần đối chiếu giáo trình; bản chơi không lặp lại mốc đang nghi vấn.
+- Nhóm duyệt lại mọi ngày, thuật ngữ và thêm số trang giáo trình chính thức. Bản này chưa được kiểm chứng độc lập toàn bộ.
 
-| Giai đoạn | Câu hỏi | Điểm tối đa |
-|---|---:|---:|
-| 1930–1935 | 4 | 400 |
-| 1936–1939 | 4 | 400 |
-| 1939–1945 | 18 và một lượt đón thời cơ | 1900 |
-
-Đọc đoạn dẫn, chọn một trong bốn phương án, rồi xác nhận. Mỗi phương án có giải thích riêng. Phù hợp lần đầu được 100 điểm; sau một lựa chọn chưa phù hợp, câu ấy vẫn phải được hoàn thành nhưng nhận 0 điểm. Những lựa chọn đã thử được giữ lại và không được chọn lặp. Không chấm điểm bằng thứ tự bấm các hoạt động trong cảnh nữa.
-
-Câu hỏi có phương án nhiễu từ những thời kỳ khác, những mốc gần nhau và các cặp cơ quan–quyết định dễ nhầm. Dẫn truyện không tự nêu đáp án trước câu hỏi. Sách mở bài đọc bối cảnh tự chọn; bóng đèn mở hướng dẫn và cách tính điểm. Không hiển thị mã nguồn tư liệu hoặc ghi chú biên tập cho người chơi.
-
-Sau câu hỏi thứ hai ở Tân Trào, người chơi chủ động bấm Đón thời cơ. Thông báo nhỏ hiện trước 2,5 giây; tín hiệu bay qua đúng 5 giây hoạt động, không có vòng đếm ngược. Bắt ở lượt đầu nhận 100 điểm; bỏ lỡ được đón lại với 0 điểm. Không tính thời gian khi hộp đọc đang mở hoặc tab ở nền. Tín hiệu không tự xuất hiện trong lúc đọc câu hỏi.
-
-Kết quả có điểm, số câu phù hợp ngay lần đầu và phần xem lại: câu hỏi, lựa chọn đầu, lý do, phương án phù hợp. Giai đoạn chính luôn khép lại bằng thắng lợi tháng Tám và sự ra đời của nước Việt Nam Dân chủ Cộng hòa ngày 2/9/1945. Hai giai đoạn dẫn có lời kết riêng.
-
-## Đoạn kết điện ảnh
-
-Sau khi xác nhận phương án phù hợp ở câu cuối giai đoạn 1939–1945, điểm được lưu và đoạn kết tự chạy: tối dần 2 giây; nền video cờ hiện trong 1,8 giây với độ sáng giảm; video đọc Tuyên ngôn xuất hiện ở giữa trong 1,2 giây. Quốc ca bắt đầu từ mức 0 khi còn 3 giây video, tăng theo thời gian phát thực tế tới mức đầy đủ lúc video kết thúc. Sau đó video đọc mờ đi, cờ tiếp tục bay và quốc ca phát hết; màn hình chuyển về kết quả.
-
-Dùng nguyên ba tệp trong ending/, không sửa hoặc thay thế video/audio gốc. Video cờ lặp và luôn tắt tiếng. Có tạm dừng, bật/tắt âm thanh, nút Xem kết quả và Escape để rời đoạn kết; điều khiển tự ẩn khi không dùng. Rời tab tạm dừng. Kết quả có nút Xem lại đoạn kết. Trang ending-preview.html cho xem thử độc lập với điểm chơi.
-
-Âm thanh được mở khóa bằng thao tác xác nhận cuối hoặc nút xem thử; nếu trình duyệt từ chối phát, một nút Phát đoạn kết xuất hiện. Bộ trộn dùng Web Audio khi có hỗ trợ. Máy chủ hỗ trợ video/mp4, audio/mpeg, HEAD và HTTP Range để video dài có thể tải, tua theo từng đoạn.
-
-Xem [ghi chú triển khai đoạn kết](docs/ending-implementation.md).
-
-## Lưu tiến độ
-
-Mỗi giai đoạn dùng một khóa localStorage riêng: thang-tam:story:1:<giai-doan>. Lưu câu trả lời, lần lựa chọn đầu và thời gian tín hiệu đã qua; tải lại hoặc đóng rồi mở lại trình duyệt có thể tiếp tục trên cùng hồ sơ trình duyệt. Không có tài khoản hay đồng bộ sang máy khác. Chơi lại chỉ xóa lượt của giai đoạn đang chọn, có xác nhận trước khi thay điểm.
-
-Dữ liệu được kiểm tra và dựng lại theo luật khi khôi phục. Điểm tính từ câu trả lời đầu, không lấy tổng điểm lưu sẵn. Nếu bộ nhớ trình duyệt bị chặn, game vẫn chơi được và hiện thông báo không lưu được.
-
-## Mã đang được tải
-
-| Tệp | Vai trò |
-|---|---|
-| index.html, hanh-trinh.html | Chọn giai đoạn và chơi độc lập theo URL |
-| src/js/story-content.js | 26 câu, dẫn truyện, phương án, lý do và bài đọc bối cảnh |
-| src/js/story-core.js | Luật chọn, thử lại, điểm, thời cơ và khôi phục tiến độ |
-| src/js/story-game.js | Giao diện, phím, hộp đọc và tổng kết |
-| src/js/story-ending.js, src/css/story-ending.css | Chuyển cảnh, video, trộn quốc ca và điều khiển đoạn kết |
-| src/css/story.css | Bố cục hai cột và điện thoại |
-| src/css/story-tone.css | Màu mực/giấy, chữ, lựa chọn và không khí lịch sử |
-| src/js/august-world.js | Bộ vẽ cảnh pixel được giữ từ bản trước |
-
-Các bộ august-content/core/game, v2, network và pixel-draft được giữ để tham khảo, không điều khiển trang chơi chính. Tiến độ cũ không được chuyển thành điểm của bộ câu hỏi mới.
-
-## Nguồn và phạm vi
-
-Nội dung dựa vào ba tài liệu Word của nhóm; tệp gốc được giữ nguyên. Xem [bảng đối chiếu câu hỏi](docs/story-implementation.md), [bản trích](docs/source-extracts-v2/) và [kịch bản hình ảnh](docs/kich-ban-hinh-anh-pixel.md). Các mã đối chiếu chỉ phục vụ biên tập trong dữ liệu và tài liệu phát triển.
-
-Cảnh pixel là hình minh họa, chưa phải phục dựng chính xác kiến trúc hoặc trang phục. Độ khó được thiết kế qua phân biệt bối cảnh, chủ trương và mốc dễ nhầm; chưa được đo qua thử nghiệm với lớp sinh viên thực tế.
-
-## Kiểm tra
-
-```powershell
-npm test
-npm run test:browser
-npm run test:ending
-npm run test:media
-```
-
-Bộ kiểm tra trình duyệt cần Chrome hoặc Edge, tạo hồ sơ riêng và không gắn vào trình duyệt người dùng. Ảnh kiểm tra ở .qa/story/ (không theo dõi bằng Git). npm run test:august và npm run test:legacy dành cho các bộ luật trước.
+## Cấu trúc
+Giao diện "bàn bản đồ dưới ánh đèn": căn phòng tối phẳng (đầu trang, album dòng thời gian + điểm, tuyến 9 chặng) và tờ bản đồ giấy da (màn chơi, tổng kết chương, màn kết).
+Mã nguồn: `index.html` (landing) và `hanh-trinh.html` (game) nằm ở gốc để giữ nguyên URL. Trong `src/js/`: `content.js` dữ liệu, `engine.js` luật chơi thuần (chấm điểm, gợi ý, album; không đụng DOM), `ui.js` dựng HTML, `game.js` kéo thả, gợi ý và chuyển màn, `landing.js` intro và lật trang của landing. Trong `src/css/`: `tokens.css` (màu, chữ, chuyển động) → `base.css` (căn phòng, nút, đầu trang) → `components.css` (ảnh, tờ bản đồ, hộp thoại) → `play.css` (màn chơi, album, Lớp học, responsive) → `acts.css` (độ chìm mép tờ giấy theo hồi); `landing.css` cho landing.
+Thư mục khác: `assets/` ảnh tư liệu, `vendor/` gsap, `docs/` tài liệu nhóm, `tools/` công cụ dev, `test/` kiểm tra, `archive/` bản cũ không còn được nạp (`style.css`, `redesign.css`, `archive-paper.css`, `duong-den-thang-tam.html`, file zip, ảnh chụp cũ).
+Game không lưu tiến độ (mỗi lần mở là một lượt mới); âm thanh chỉ bật theo lựa chọn. Kiểm tra: `npm test` (chạy `test/test-engine.cjs`: dữ liệu và luật chơi; và `test/check.cjs`: chơi đủ 9 chặng và chế độ Lớp học trong Chrome thật; `check.cjs` cần `node server.cjs` đang chạy).

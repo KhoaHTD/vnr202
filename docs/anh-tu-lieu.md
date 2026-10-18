@@ -43,6 +43,10 @@ Ba ảnh dưới đây đã nằm trong `assets/img/` và đã gắn vào game. 
 - Ảnh Ba Đình là ảnh ghép: game hiển thị nguyên tỉ lệ, **không cắt** phần nào, và chú thích tự ghi "Ảnh tư liệu (ảnh ghép)" nhờ trường `composite: true`.
 - Ảnh Nhà hát lớn và ảnh Ba Đình đang được **dùng lại** ở hai chỗ. Khi có ảnh khác phù hợp hơn cho kết quả chặng 9 hoặc hồ sơ mục 9, chỉ cần thay trường `image` ở chỗ đó.
 
+## Ảnh cảnh của từng chặng (cơ chế ghép tình huống – sự kiện)
+
+Mỗi chặng giờ có một **ảnh cảnh** (`scenes[i].image`) làm nền cho 2 điểm nóng A/B. Khi chưa có ảnh, game dùng nền bản đồ tối nên vẫn chơi được. Hiện chỉ chặng 7 (ảnh `1945-giai-phong-quan-duong-pho`) và chặng 9 (ảnh Nhà hát lớn) có ảnh. **Cần bổ sung ảnh/văn kiện có nguồn và giấy phép cho chặng 1–6 và 8** (gợi ý: bản scan Cương lĩnh/trang báo cho chặng 1–4, ảnh Tân Trào/Cao Bằng cho chặng 5, 6, 8). Tọa độ điểm nóng nằm ở `slots[].x,y` (% trên ảnh): sau khi thay ảnh, kiểm tra hai điểm nóng không che chi tiết quan trọng.
+
 ## Danh sách ô ảnh
 
 | # | Vị trí trong game | Trường trong `content.js` | Khung hiển thị | Gợi ý nội dung | Trạng thái |

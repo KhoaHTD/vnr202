@@ -6,11 +6,11 @@
    Quy tắc hai lớp vật liệu: đỏ son (--accent) CHỈ trên giấy; vàng đèn (--lamp) CHỈ trên nền phòng.
    ============================================================ */
 :root {
-  /* --- Căn phòng: nền tối phẳng (viền ngoài, đầu trang, dải lực lượng) --- */
+  /* --- Căn phòng: nền tối phẳng (viền ngoài, đầu trang, album + điểm) --- */
   --room: #1a120b;
   --parchment: #efdfb8;       /* tờ bản đồ, thẻ; cũng là chữ chính trên nền phòng (14,0:1) */
   --parchment-soft: #bfa983;  /* chữ phụ trên nền phòng (8,1:1) */
-  --lamp: #d9a441;            /* ánh đèn. CHỈ trên nền phòng: sao/hướng la bàn đã sáng, mốc đang ở, viền focus (8,2:1) */
+  --lamp: #d9a441;            /* ánh đèn. CHỈ trên nền phòng: sao, mốc đang ở, điểm số, ô album, viền focus (8,2:1) */
 
   /* --- Tờ bản đồ --- */
   --ink: #2a1b0e;             /* chữ chính trên tờ bản đồ (12,6:1 trên --parchment) */
@@ -20,12 +20,8 @@
   --line: color-mix(in srgb, var(--stain) 30%, transparent); /* chỉ để trang trí: đường kẻ trên tờ bản đồ */
   --parchment-shade: color-mix(in srgb, var(--parchment) 88%, var(--stain)); /* mảng giấy thứ hai (thẻ). ink 10,7:1; ink-soft 6,5:1 */
 
-  /* --- 4 lực lượng: màu nước tô bản đồ. Mỗi màu ≥ 3:1 trên CẢ nền phòng lẫn tờ bản đồ.
-     Luôn đi kèm biểu tượng và nhãn chữ, không dùng màu một mình để phân biệt. --- */
-  --f-people: #b9552f;  /* quần chúng: đất nung      (3,9 trên phòng · 3,6 trên giấy) */
-  --f-base: #437f8d;    /* tổ chức: xanh biển        (4,1 · 3,4) */
-  --f-reach: #9a6f9a;   /* tuyên truyền: tím hoa cà  (4,5 · 3,1) */
-  --f-ready: #5f8044;   /* chuẩn bị: xanh rêu        (4,1 · 3,4) */
+  /* --- Màu loại sự kiện (dải đầu phiếu, nhãn loại); chữ --parchment trên nền đạt >= 4,5:1 --- */
+  --k-meeting: #7a2318; --k-document: #5a3a22; --k-crowd: #6e4a12; --k-flag: #8a2416; --k-star: #3d5530; --k-rice: #75561a; --k-base: #44543a;
 
   /* --- Núm điều chỉnh (ghi đè trong acts.css) --- */
   --edge: .45;                /* độ tối của mép tờ giấy */
@@ -41,9 +37,9 @@
   --rose: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none' stroke='%237a4a1e' stroke-opacity='.18' stroke-width='.5'%3E%3Cpath d='M100 100L100.0 2.0M100 100L123.7 42.7M100 100L156.6 43.4M100 100L157.3 76.3M100 100L198.0 100.0M100 100L157.3 123.7M100 100L156.6 156.6M100 100L123.7 157.3M100 100L100.0 198.0M100 100L76.3 157.3M100 100L43.4 156.6M100 100L42.7 123.7M100 100L2.0 100.0M100 100L42.7 76.3M100 100L43.4 43.4M100 100L76.3 42.7'/%3E%3Ccircle cx='100' cy='100' r='26'/%3E%3Ccircle cx='100' cy='100' r='15'/%3E%3Cpath d='M100 66l5 29 29 5-29 5-5 29-5-29-29-5 29-5z'/%3E%3C/svg%3E");
 
   /* --- Chữ: ĐÚNG 3 họ, mỗi họ một vai trò. Nạp bằng <link> trong index.html (Google Fonts, có subset tiếng Việt) --- */
-  --font-display: "Newsreader", Georgia, serif;          /* tiêu đề, chữ kể chuyện */
-  --font-ui: "Be Vietnam Pro", system-ui, sans-serif;    /* slogan, nút, nội dung */
-  --font-doc: "Space Mono", ui-monospace, monospace;     /* chỉ cho thông tin tư liệu: nhãn, chú thích, con dấu */
+  --font-display: "Playfair Display", Georgia, serif;          /* tiêu đề, chữ kể chuyện */
+  --font-ui: "Lora", Georgia, serif;    /* slogan, nút, nội dung */
+  --font-doc: "Lora", Georgia, serif;     /* chỉ cho thông tin tư liệu: nhãn, chú thích, con dấu */
   /* Tên cũ trỏ về vai trò mới (để các màn khác không phải sửa từng dòng) */
   --font-head: var(--font-display);
   --font-body: var(--font-ui);
@@ -53,7 +49,7 @@
   --radius: 2px;
 
   /* --- Chuyển động: chỉ animate transform, opacity, filter, clip-path.
-     Cả game chỉ có 3 chuyển động lớn: tờ bản đồ trượt vào, la bàn xoay, tuyến đường sáng dần. --- */
+     Cả game chỉ có 3 chuyển động lớn: tờ bản đồ trượt vào, thẻ bay vào album, tuyến đường sáng dần. --- */
   --dur-1: 160ms;
   --dur-2: 320ms;
   --dur-3: 640ms;

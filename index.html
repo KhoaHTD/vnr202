@@ -1,2 +1,36 @@
 <!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#202c32"><meta name="description" content="Một hành trình pixel về sức dân, sự chuẩn bị và thời cơ dẫn tới Cách mạng tháng Tám và ngày độc lập."><title>Đường đến tháng Tám</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23202c32'/%3E%3Cpath d='M8 24V9h16v15' fill='none' stroke='%23f2cd7d' stroke-width='3'/%3E%3C/svg%3E"><link rel="stylesheet" href="src/css/story.css"><link rel="stylesheet" href="src/css/story-tone.css"><link rel="stylesheet" href="src/css/story-ending.css"><script defer src="src/js/story-content.js"></script><script defer src="src/js/story-core.js"></script><script defer src="src/js/august-world.js"></script><script defer src="src/js/story-ending.js"></script><script defer src="src/js/story-game.js"></script></head><body data-page="home"><a class="skip" href="#app">Đến nội dung</a><header class="top" id="top"></header><main id="app" tabindex="-1"><p>Đang mở hành trình…</p></main><dialog class="reader" id="reader" aria-labelledby="reader-title"></dialog><div class="sr-only" id="announcer" role="status" aria-live="polite" aria-atomic="true"></div><noscript>Hãy bật JavaScript để chơi hành trình.</noscript></body></html>
+<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1a120b">
+<title>Đường đến tháng Tám</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500..800;1,500..800&family=Lora:ital,wght@0,400..600;1,400..600&display=swap&subset=vietnamese" rel="stylesheet">
+<link rel="stylesheet" href="src/css/tokens.css"><link rel="stylesheet" href="src/css/landing.css"><link rel="stylesheet" href="src/css/flyer.css">
+<!-- Chống nháy: ẩn cảnh intro cho tới khi landing.js đặt trạng thái đầu của intro. JS lỗi hoặc tải chậm thì sau 3 giây tự hiện trạng thái cuối. -->
+<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var r=document.documentElement;r.classList.add('intro-wait');setTimeout(function(){r.classList.remove('intro-wait')},3000)}}catch(e){}</script>
+<script type="importmap">{"imports":{"gsap":"./vendor/gsap/index.js"}}</script>
+<script type="module" src="src/js/landing.js"></script>
+</head><body>
+<!-- Bộ lọc DUOTONE cho tấm ảnh bay (giống hanh-trinh.html): chỗ tối → --ink (#2a1b0e), chỗ sáng → --parchment (#efdfb8). -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="duotone" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="table" tableValues=".165 .937"/><feFuncG type="table" tableValues=".106 .875"/><feFuncB type="table" tableValues=".055 .722"/></feComponentTransfer></filter></svg>
+<!-- Landing: chuyển cảnh Morph của intro.pptx dựng lại bằng web. Mọi thứ đứng sẵn ở vị trí cuối (slide 2); landing.js (GSAP) chỉ animate từ ngoài vào.
+     Không có JS: trang vẫn ở trạng thái cuối và nút vẫn là liên kết thường. -->
+<main class="stage">
+  <div class="backdrop"><img src="assets/img/1945-08-19-nha-hat-lon.webp" alt="Đông đảo quần chúng mít tinh trước Nhà hát lớn Hà Nội, lá cờ đỏ sao vàng lớn treo giữa mặt tiền" width="500" height="329" fetchpriority="high"></div>
+  <svg class="star" viewBox="-50 -50 100 100" aria-hidden="true" focusable="false"><polygon points="0.0,-50.0 18.9,-26.1 47.6,-15.5 30.6,10.0 29.4,40.5 0.0,32.2 -29.4,40.5 -30.6,10.0 -47.6,-15.5 -18.9,-26.1"/></svg>
+  <div class="flags" aria-hidden="true">
+    <img class="shard shard--1" src="assets/img/intro/manh-co-1.webp" alt="" width="44" height="52">
+    <img class="flag flag--red" src="assets/img/intro/co-do.webp" alt="" width="256" height="408">
+    <img class="shard shard--2" src="assets/img/intro/manh-co-2.webp" alt="" width="120" height="148">
+    <div class="flag flag--black"><img src="assets/img/intro/co-den.webp" alt="" width="500" height="329"></div>
+  </div>
+  <div class="hero">
+    <h1 class="title"><span class="t-lead"><span>Đường đến</span></span> <span class="t-main"><span><em>tháng</em> <b>Tám</b></span></span></h1>
+    <a class="cta" href="hanh-trinh.html">Bắt đầu hành trình <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+  </div>
+</main>
+
+<!-- Điều khiển (không phải nội dung): chỉ hiện khi có JS -->
+<div class="controls" hidden>
+  <button id="motion" type="button" aria-label="Tạm dừng chuyển động" aria-pressed="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="i-off" d="M9 5v14M15 5v14"/><path class="i-on" d="M8 5l11 7-11 7z"/></svg></button>
+  <button id="sound" type="button" aria-label="Âm thanh" aria-pressed="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="i-off" d="M17 9l5 6M22 9l-5 6"/><path class="i-on" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+</div>
+</body></html>
