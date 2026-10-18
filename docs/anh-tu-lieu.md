@@ -79,20 +79,3 @@ Thêm trường `image` vào đúng chặng hoặc hồ sơ nếu tìm được 
 1. Chạy `node test-logic.cjs` và `node check.cjs` (cần `node server.cjs` đang chạy).
 2. Mở game ở chiều rộng 360px và 1280px, xem ảnh không làm vỡ bố cục.
 3. Kiểm tra dung lượng: `ls -lh assets/img/` (mỗi file ≤ 150 KB).
-
-## Ảnh bổ sung (vòng 5, từ Wikimedia Commons)
-
-Nguồn là trang file trên Wikimedia Commons (tên file gốc ghi ở cột 2). Nhóm vẫn nên mở trang file để xác minh lại giấy phép trước khi phát hành.
-
-| File trong `assets/img/` | Tên file trên Commons | Giấy phép | Gắn ở |
-|---|---|---|---|
-| `1930-bao-thanh-nghe-tinh.webp` | Cộng sản Đảng chi tiễu trừ … Thanh Nghệ Tịnh Tân Văn | Phạm vi công cộng | Chương 1, hồ sơ 1 |
-| `bao-tang-xo-viet-nghe-tinh.webp` | Museum of Xo Viet Nghe Tinh.jpg (ảnh hiện đại) | Phạm vi công cộng | Chặng 1 |
-| `1930s-ban-do-ma-cao.webp` (cắt ngang từ bản đồ) | Planta geral da cidade de Macau LOC 96681282.jpg | Phạm vi công cộng | Chặng 2, hồ sơ 2 |
-| `1938-hoi-truyen-ba-quoc-ngu.webp` (cắt ngang) | Ban trị sự lâm thời của Hội Truyền bá chữ Quốc ngữ.jpg | Phạm vi công cộng | Chương 2, chặng 4, hồ sơ 4 |
-| `pac-bo-hang-coc-bo.webp` | Cốc Bó.jpg (ảnh hiện đại, Tycho) | CC BY-SA 3.0 | Chặng 5 |
-| `pac-bo-suoi-le-nin.webp` | Pác Bó.jpg (ảnh hiện đại, Tycho) | CC BY-SA 3.0 | Hồ sơ 5 |
-| `1944-doi-vntt-giai-phong-quan.webp` | Vo Nguyen Giap, Vietminh forces, 1944.jpg | Phạm vi công cộng | Chặng 6, hồ sơ 6 |
-| `tan-trao-dinh.webp` | Đình Tân Trào.jpg (ảnh hiện đại) | CC BY-SA 4.0 | Chặng 8, hồ sơ 8 |
-
-Còn trống: chặng 3 (Thượng Hải 1936) và hồ sơ 3, chưa tìm được ảnh đúng chủ đề có giấy phép rõ. Ảnh CC BY-SA đã có tên tác giả trong trường `source`.
