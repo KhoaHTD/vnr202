@@ -6,6 +6,7 @@
   anthem:'ending/QUỐC CA VIỆT NAM (Tiến Quân Ca) - Quốc ca nước Cộng Hòa Xã Hội Chủ Nghĩa Việt Nam.mp3'
  });
  const TIMING=Object.freeze({blackout:2000,flagReveal:1800,speechReveal:1200,crossfade:3,fadeOut:1500});
+ const SPEECH_START=13.96;
  function anthemLevel(remaining){if(!Number.isFinite(remaining))return 0;const x=Math.max(0,Math.min(1,1-remaining/TIMING.crossfade));return x*x*(3-2*x);}
  const icons={pause:'<path d="M8 5v14M16 5v14"/>',play:'<path d="m8 5 11 7-11 7V5Z"/>',sound:'<path d="M3 9h4l5-4v14l-5-4H3zm13-2q7 5 0 10"/>',mute:'<path d="M3 9h4l5-4v14l-5-4H3zm13 0 5 6m0-6-5 6"/>'};
  const icon=name=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name]}</svg>`;
@@ -14,7 +15,7 @@
   let root,flag,speech,anthem,message,status,controls,pauseButton,muteButton,timeline,currentTimeLabel,durationLabel;
   let active=false,phase='idle',elapsed=0,ready=false,paused=false,hiddenPause=false,blocked=false,muted=false;
   let context=null,speechGain=null,anthemGain=null,speechSource=null,anthemSource=null;
-  let musicStarted=false,musicStartedAt=null,buffering=false,priming=false,token=0,raf=0,last=0,controlsTimer=0;
+  let musicStarted=false,musicStartedAt=null,keepAnthem=false,buffering=false,priming=false,token=0,raf=0,last=0,controlsTimer=0;
   let speechLevel=0,musicLevel=0,loadingTime=0;
   const cleanupListeners=[];
   function listen(target,event,fn){target.addEventListener(event,fn);cleanupListeners.push(()=>target.removeEventListener(event,fn));}
@@ -22,10 +23,12 @@
   function formatTime(seconds){if(!Number.isFinite(seconds)||seconds<0)return '0:00';const whole=Math.floor(seconds);return `${Math.floor(whole/60)}:${String(whole%60).padStart(2,'0')}`;}
   function updateTimeline(){
    if(!timeline||!speech)return;
-   const duration=Number.isFinite(speech.duration)?speech.duration:0,current=Number.isFinite(speech.currentTime)?speech.currentTime:0;
-   if(duration>0){timeline.max=String(duration);timeline.value=String(Math.min(current,duration));timeline.style.setProperty('--progress',`${Math.min(100,current/duration*100)}%`);}
-   currentTimeLabel.textContent=formatTime(current);durationLabel.textContent=formatTime(duration);
-   timeline.disabled=!active||blocked||duration<=0||(phase!=='speech'&&phase!=='anthem');
+   const duration=Number.isFinite(speech.duration)?speech.duration:0,current=Number.isFinite(speech.currentTime)?speech.currentTime:SPEECH_START;
+   const clipDuration=Math.max(0,duration-SPEECH_START),clipTime=Math.max(0,current-SPEECH_START);
+   timeline.min=String(SPEECH_START);
+   if(duration>SPEECH_START){timeline.max=String(duration);timeline.value=String(Math.max(SPEECH_START,Math.min(current,duration)));timeline.style.setProperty('--progress',`${Math.min(100,clipTime/clipDuration*100)}%`);}
+   currentTimeLabel.textContent=formatTime(clipTime);durationLabel.textContent=formatTime(clipDuration);
+   timeline.disabled=!active||blocked||duration<=SPEECH_START||(phase!=='speech'&&phase!=='anthem');
   }
   function setPhase(value){phase=value;elapsed=0;root.dataset.phase=value;updateTimeline();root.dispatchEvent(new CustomEvent('endingphasechange',{detail:{phase:value}}));}
   function showMessage(text){status.textContent=text;message.hidden=false;}
@@ -63,18 +66,18 @@
    speechSource.connect(speechGain).connect(context.destination);anthemSource.connect(anthemGain).connect(context.destination);
   }
   function gain(node,media,value){if(node&&context){node.gain.setTargetAtTime(value,context.currentTime,.02);}else media.volume=value;}
-  function applyMix(){if(!speech)return;const master=muted?0:phase==='closing'?Math.max(0,1-elapsed/TIMING.fadeOut):1;gain(speechGain,speech,speechLevel*master);gain(anthemGain,anthem,musicLevel*master);}
+  function applyMix(){if(!speech)return;const fade=phase==='closing'?Math.max(0,1-elapsed/TIMING.fadeOut):1;gain(speechGain,speech,muted?0:speechLevel*fade);gain(anthemGain,anthem,muted?0:musicLevel*(keepAnthem?1:fade));}
   function pauseMedia(){flag.pause();speech.pause();anthem.pause();}
   function block(text){if(!active||phase==='closing')return;blocked=true;pauseMedia();showMessage(text);updateTimeline();showControls();}
   async function play(item){try{await item.play();return true;}catch(error){if(active&&error.name!=='AbortError')block(error.name==='NotAllowedError'?'Chạm để tiếp tục phát hình và âm thanh.':'Chưa phát được đoạn phim hoặc âm thanh.');return false;}}
-  async function prime(item,generation){await item.play();if(token!==generation||!active)return;item.pause();item.currentTime=0;}
+  async function prime(item,generation,startAt=0){await item.play();if(token!==generation||!active)return;item.pause();item.currentTime=startAt;}
   async function primeAll(generation){
    priming=true;
    try{
     // Both play requests are made synchronously within the final-answer/preview gesture.
     // Gains are zero, so unlocking the media never leaks the first words into the blackout.
     const resumed=context?context.resume():Promise.resolve();
-    const speechPrimed=prime(speech,generation),anthemPrimed=prime(anthem,generation),flagPlaying=flag.play();
+    const speechPrimed=prime(speech,generation,SPEECH_START),anthemPrimed=prime(anthem,generation),flagPlaying=flag.play();
     await Promise.all([resumed,speechPrimed,anthemPrimed,flagPlaying]);
     if(token!==generation||!active)return;
     ready=true;blocked=false;hideMessage();if(isPaused())pauseMedia();
@@ -82,8 +85,8 @@
    finally{if(token===generation)priming=false;}
   }
   function start(){
-   if(active)return;prepare();active=true;ready=false;paused=false;hiddenPause=document.hidden;blocked=false;buffering=false;musicStarted=false;musicStartedAt=null;speechLevel=0;musicLevel=0;loadingTime=0;elapsed=0;
-   const generation=++token;flag.currentTime=0;speech.currentTime=0;anthem.currentTime=0;hideMessage();buttons();setupAudio();applyMix();
+   if(active)return;prepare();active=true;ready=false;paused=false;hiddenPause=document.hidden;blocked=false;buffering=false;musicStarted=false;musicStartedAt=null;keepAnthem=false;speechLevel=0;musicLevel=0;loadingTime=0;elapsed=0;
+   const generation=++token;flag.currentTime=0;speech.currentTime=SPEECH_START;anthem.currentTime=0;hideMessage();buttons();setupAudio();applyMix();
    root.classList.remove('is-open','show-controls');root.dataset.phase='idle';root.showModal();root.focus({preventScroll:true});root.getBoundingClientRect();setPhase('blackout');root.classList.add('is-open');
    last=performance.now();primeAll(generation);raf=requestAnimationFrame(tick);
   }
@@ -95,7 +98,7 @@
   function seekSpeech(time){
    if(!active||phase==='closing'||!Number.isFinite(speech.duration)||phase!=='speech'&&phase!=='anthem')return;
    if(phase==='anthem'){anthem.pause();anthem.currentTime=0;musicStarted=false;musicStartedAt=null;musicLevel=0;setPhase('speech');speechLevel=1;}
-   speech.currentTime=Math.max(0,Math.min(speech.duration,time));
+   speech.currentTime=Math.max(SPEECH_START,Math.min(speech.duration,time));
    if(!isPaused())play(speech);
    syncMusic(true);applyMix();updateTimeline();showControls();
   }
@@ -120,11 +123,12 @@
    if(!ready){primeAll(token);}else{resumeMedia();}
    last=performance.now();
   }
-  function finish(){if(!active||phase==='closing')return;blocked=false;paused=false;hiddenPause=false;hideMessage();root.classList.remove('show-controls');setPhase('closing');last=performance.now();}
+  function finish(){if(!active||phase==='closing')return;keepAnthem=musicStarted&&!anthem.paused&&!anthem.ended;blocked=false;paused=false;hiddenPause=false;hideMessage();root.classList.remove('show-controls');setPhase('closing');last=performance.now();}
   function stop(notify=true){
-   if(!active)return;active=false;token++;cancelAnimationFrame(raf);clearTimeout(controlsTimer);speechLevel=0;musicLevel=0;applyMix();pauseMedia();phase='idle';root.dataset.phase='idle';root.classList.remove('is-open','show-controls');if(root.open)root.close();
+   if(!active)return;const retainAnthem=keepAnthem&&!anthem.paused&&!anthem.ended;active=false;token++;cancelAnimationFrame(raf);clearTimeout(controlsTimer);speechLevel=0;if(!retainAnthem)musicLevel=0;applyMix();flag.pause();speech.pause();if(!retainAnthem)anthem.pause();phase='idle';root.dataset.phase='idle';root.classList.remove('is-open','show-controls');if(root.open)root.close();
    if(notify)onFinish();
   }
+  function stopBackgroundMusic(){keepAnthem=false;musicStarted=false;musicStartedAt=null;musicLevel=0;if(anthem){anthem.pause();anthem.currentTime=0;}applyMix();}
   function tick(now){
    if(!active)return;const dt=Math.max(0,now-last);last=now;
    if(!isPaused()&&!document.hidden){
@@ -139,7 +143,7 @@
   }
   function state(){return {active,phase,ready,paused:isPaused(),blocked,muted,elapsed,speechTime:speech?.currentTime||0,speechDuration:Number.isFinite(speech?.duration)?speech.duration:null,anthemTime:anthem?.currentTime||0,anthemDuration:Number.isFinite(anthem?.duration)?anthem.duration:null,musicStarted,musicStartedAt,speechLevel,musicLevel,flagMuted:flag?.muted??true,audioState:context?.state||'media'};}
   function destroy(){stop(false);cleanupListeners.splice(0).forEach(fn=>fn());if(context)context.close().catch(()=>{});root?.remove();root=null;}
-  return Object.freeze({prepare,start,finish,state,isActive:()=>active,destroy});
+  return Object.freeze({prepare,start,finish,state,isActive:()=>active,stopBackgroundMusic,destroy});
  }
  return Object.freeze({MEDIA,TIMING,anthemLevel,create});
 });

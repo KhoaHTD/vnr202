@@ -73,7 +73,6 @@ body:has(.ending-screen[open]) { overflow: hidden; }
   transition: opacity .25s;
   z-index: 5;
 }
-.ending-screen:is([data-phase='speech'], [data-phase='anthem']) .ending-timeline { opacity: .72; }
 .ending-screen.show-controls .ending-controls, .ending-controls:focus-within,
 .ending-screen.show-controls .ending-timeline, .ending-timeline:focus-within { opacity: 1; }
 .ending-timeline {
@@ -151,11 +150,20 @@ body:has(.ending-screen[open]) { overflow: hidden; }
   justify-content: center;
   gap: 17px;
   padding: 28px;
-  background: #0009;
+  background: transparent;
   z-index: 4;
   text-align: center;
 }
-.ending-message p { max-width: 420px; font: 15px/1.7 Arial, sans-serif; margin: 0; }
+.ending-message[hidden] { display: none !important; }
+.ending-message p {
+  max-width: min(420px, 100%);
+  margin: 0;
+  padding: 14px 18px;
+  border: 1px solid #d7c19680;
+  background: #17110be8;
+  box-shadow: 0 8px 30px #0005;
+  font: 15px/1.7 Arial, sans-serif;
+}
 .ending-message button { padding: 12px 22px; }
 .ending-screen button:focus-visible { outline: 2px solid #f3d49b; outline-offset: 4px; }
 .ending-preview { min-height: 80svh; display: grid; align-content: center; justify-items: center; gap: 22px; }

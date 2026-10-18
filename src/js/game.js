@@ -516,7 +516,7 @@ function endingResults(){show(()=>{
   $('end-records').onclick=()=>openRecords('all');
   $('open-scoresheet')&&($('open-scoresheet').onclick=openScoresheet);
   $('replay-ending')&&($('replay-ending').onclick=()=>storyEnding.start());
-  $('replay').onclick=()=>{run=E.newRun(run.mode);chapterIntro(0);};
+  $('replay').onclick=()=>{storyEnding.stopBackgroundMusic();run=E.newRun(run.mode);chapterIntro(0);};
   scroll();});}
 $('sheet-btn')&&($('sheet-btn').onclick=openScoresheet);
 /* Phím tua ẩn dành cho dev: mũi tên trái/phải tua giữa các chặng.
