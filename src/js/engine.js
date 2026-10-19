@@ -258,7 +258,10 @@ const BOSS_T=1945.6,BOSS_PICK=4,BOSS_POINTS=5;
 function bossPoolOf(run,D){
   const b=stageOf(run).boss;
   if(b.pool)return b.pool;
-  const prep=run.album.map(a=>({key:a.scene+':'+a.card,scene:a.scene,card:cardOf(D.scenes[a.scene],a.card)})).filter(x=>x.card.t<BOSS_T&&x.scene<run.index).sort((x,y)=>x.card.t-y.card.t);
+  const prep=run.album.map(a=>({key:a.scene+':'+a.card,scene:a.scene,card:cardOf(D.scenes[a.scene],a.card)})).filter(x=>x.card.t<BOSS_T&&x.scene<run.index);
+  // Tua nhanh/bỏ qua chặng có thể khiến album thiếu thẻ: bổ sung từ các chặng trước để bể luôn đủ 4 thẻ chuẩn bị
+  if(prep.length<4)for(let si=0;si<run.index&&prep.length<4+4;si++)D.scenes[si].cards.filter(c=>c.slot&&c.t<BOSS_T).forEach(c=>{const key=si+':'+c.id;if(!prep.some(p=>p.key===key))prep.push({key,scene:si,card:c});});
+  prep.sort((x,y)=>x.card.t-y.card.t);
   const n=prep.length,idx=[...new Set([Math.floor(n/3),Math.floor(n/2),n-2,n-1])].filter(k=>k>=0); // nghiêng về các mốc gần tháng 8/1945 để khó phân biệt với thẻ thời cơ
   for(let k=n-3;idx.length<4&&k>=0;k--)if(!idx.includes(k))idx.push(k);
   const chance=[];
