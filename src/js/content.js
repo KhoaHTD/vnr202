@@ -31,7 +31,7 @@ scenes:[
  explain:'Phong trào 1930–1931 thể hiện sức mạnh công–nông và vai trò tổ chức, lãnh đạo của Đảng. Xô viết Nghệ–Tĩnh là đỉnh cao, với những hoạt động quản lý đời sống ở một số địa phương.',
  link:'Khủng hoảng và bóc lột → một chính đảng thống nhất → phong trào công–nông.'},
 {chapter:0,date:'1932–1935',title:'Giữ những mạch nối',record:1,motif:'document',place:{name:'Ma Cao',lat:22.2,lon:113.55,x:92,y:20,off:true},kind:'match',
- news:'Sau cao trào, thực dân Pháp đàn áp khốc liệt. Nhiều cơ sở bị phá vỡ, cán bộ bị bắt, phong trào gặp khó khăn.',
+ news:'Sau phong trào 1930–1931, thực dân Pháp đàn áp khốc liệt. Nhiều cơ sở bị phá vỡ, cán bộ bị bắt, phong trào gặp khó khăn.',
  image:{src:'assets/img/1930s-ban-do-ma-cao.webp',width:1000,height:650,focus:'50% 50%',alt:'Bản đồ tổng thể thành phố Ma Cao thập niên 1930',caption:'Bản đồ Planta geral da cidade de Macau, thập niên 1930 (Thư viện Quốc hội Mỹ)',date:'thập niên 1930',source:'Wikimedia Commons, Library of Congress',license:'Phạm vi công cộng'},
  slots:[
   {id:'A',situation:'Cơ sở bị phá vỡ, cán bộ bị bắt. Cần văn kiện vạch nhiệm vụ trước mắt, nhấn mạnh xây dựng một Đảng bí mật, kỷ luật sắt.',x:30,y:52,correct:'c1',fx:'route',caption:'Đường liên lạc được nối lại',
@@ -48,7 +48,7 @@ scenes:[
   {id:'c3',name:'Luận cương chính trị, Hội nghị Trung ương lần 1 tại Hương Cảng',year:'Tháng 10/1930',t:1930.8,slot:null,hint1:'Luận cương chính trị ra đời tháng 10/1930, sớm hơn giai đoạn này. Hãy tìm sự kiện trong khoảng 1932–1935.'},
   {id:'c4',name:'Ban Chỉ huy ở ngoài của Đảng được thành lập',year:'Đầu năm 1934',t:1934.1,slot:null,hint1:'Ban Chỉ huy ở ngoài thành lập đầu 1934, nằm trong giai đoạn nhưng không phải văn kiện khôi phục (1932) cũng không phải đại hội (1935).'}],
  explain:'Việc giữ vững tổ chức giúp phong trào tiếp tục sau đàn áp. Luận cương tháng 10/1930 có đóng góp nhưng còn hạn chế về nhiệm vụ dân tộc và tập hợp lực lượng; những vấn đề này cần được tiếp tục khắc phục.',
- link:'Đàn áp → khôi phục tổ chức → nền tảng cho cao trào tiếp theo.'},
+ link:'Đàn áp → khôi phục tổ chức → nền tảng cho phong trào tiếp theo.'},
 {chapter:1,date:'1936',title:'Một cánh cửa mở ra',record:2,motif:'meeting',place:{name:'Thượng Hải',lat:31.2,lon:121.5,x:92,y:6,off:true},kind:'order',
  news:'Nguy cơ phát xít gia tăng. Đại hội VII Quốc tế Cộng sản chủ trương mặt trận rộng rãi; Chính phủ Mặt trận Nhân dân Pháp lên nắm quyền năm 1936.',
  image:{src:''},
