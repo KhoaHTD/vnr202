@@ -230,8 +230,8 @@ function play(){if(run.index>=D.scenes.length){ending();return;}
 function putCard(slot,id){
   const st=E.stageOf(run),before=slotIds().filter(k=>st[k].locked);
   const from=cardEl(id),slotBox=app.querySelector(`.slot[data-slot="${slot}"] .slot-drop`);
-  const res=E.drop(run,slot,id,D);
-  if(!res)return false;
+  record();const res=E.drop(run,slot,id,D);
+  if(!res){unrecord();return false;}
   ui.sel=null;delete ui.msg[slot];
   if(res.correct){afterLock(before,{},false,{snap:true,pts:res.pts});return true;}
   const wrongBox=slotBox?.getBoundingClientRect();
@@ -346,7 +346,7 @@ function flyToAlbum(flights){
 function settle(slotsAffected,fn,openWhy){
   const st=E.stageOf(run),before=slotIds().filter(id=>st[id].locked);
   const rects={};slotsAffected.forEach(id=>{const el=app.querySelector(`.slot[data-slot="${id}"] .ev`)||app.querySelector(`.slot[data-slot="${id}"]`);if(el)rects[id]=el.getBoundingClientRect();});
-  const ok=fn();if(ok===false)return;
+  record();const ok=fn();if(ok===false){unrecord();return;}
   afterLock(before,rects,openWhy);
 }
 function afterLock(before,rects,openWhy,o={}){
@@ -428,7 +428,7 @@ function startTf(){
 function answerTf(ans){
   if(!ui.tf.started||E.stageDone(run))return;
   const top=app.querySelector('.tf-top'),box=top&&top.getBoundingClientRect(),idx=E.stageOf(run).tf.i;
-  const res=E.tfAnswer(run,D,ans);if(!res)return;
+  record();const res=E.tfAnswer(run,D,ans);if(!res){unrecord();return;}
   sfx(res.ok?'ok':'bad');
   ui.tf.last=res;
   if(res.done){stopTfTimer();finishTf();}else{paintTf();renderStrip();}
@@ -509,14 +509,14 @@ function flyBoss(key,from,intoBasket){
 }
 function bossMove(key,fn,from){
   const el=app.querySelector(`.ev[data-boss="${key}"]`);from=from||el?.getBoundingClientRect();
-  if(!fn())return false;
+  record();if(!fn()){unrecord();return false;}
   ui.nudge=false;sfx('snap');paintBoss();
   flyBoss(key,from,E.stageOf(run).boss.picked.includes(key));
   return true;
 }
 function submitBoss(){
-  const res=E.bossSubmit(run,D);
-  if(!res){ui.nudge=true;paintBoss();return;}
+  record();const res=E.bossSubmit(run,D);
+  if(!res){unrecord();ui.nudge=true;paintBoss();return;}
   sfx(res.ok===E.BOSS_PICK?'ok':'bad');paintBoss();renderStrip();
   $('feedback').innerHTML=UI.stageDone(D,run,{classMode:isClass()});
   const f=$('feedback');$('more').onclick=()=>openRecords('stage');enhance();aimLamp(f);f.scrollIntoView({behavior:reducedMotion()?'instant':'smooth',block:'nearest'});
@@ -555,7 +555,7 @@ function giveHint(slot){
   const st=E.stageOf(run)[slot];if(st.locked)return;
   const before=slotIds().filter(id=>E.stageOf(run)[id].locked),rects={};
   const el=app.querySelector(`.slot[data-slot="${slot}"]`);if(el)rects[slot]=el.getBoundingClientRect();
-  const h=E.hint(run,slot,D);if(!h)return;
+  record();const h=E.hint(run,slot,D);if(!h){unrecord();return;}
   sfx('hint');
   if(h.tier===3){afterLock(before,rects,true);return;}
   ui.msg[slot]={tier:h.tier,text:h.text};
@@ -651,7 +651,7 @@ function endingResults(){show(()=>{
   $('end-records').onclick=()=>openRecords('all');
   $('open-scoresheet')&&($('open-scoresheet').onclick=openScoresheet);
   $('replay-ending')&&($('replay-ending').onclick=()=>storyEnding.start());
-  $('replay').onclick=()=>{storyEnding.stopBackgroundMusic();run=E.newRun(run.mode);chapterIntro(0);};
+  $('replay').onclick=()=>{storyEnding.stopBackgroundMusic();run=E.newRun(run.mode);hist.back.length=hist.fwd.length=0;chapterIntro(0);};
   scroll();});}
 $('sheet-btn')&&($('sheet-btn').onclick=openScoresheet);
 /* Ctrl + ←/→: đi qua đi lại giữa các chặng chỉ để xem giao diện. Chạy ở mọi bản (kể cả bản deploy) vì không ảnh hưởng điểm. Chỉ đổi run.index, không chạm điểm, đáp án, album hay chuỗi đúng. */
@@ -664,6 +664,22 @@ document.addEventListener('keydown',e=>{
   if(to===run.index&&app.querySelector('.sheet .stage,.sheet .tf'))return;
   const cur=run.stages[run.index];if(cur?.boss&&!cur.boss.done)cur.boss.pool=null; // bộ thẻ trùm tính từ album: rời đi thì bỏ để lúc chơi thật tính lại cho đúng
   run.index=to;play();
+},true);
+/* Ctrl + Shift + ←/→ (ẩn, không có nút hay chữ nào nhắc tới): hoàn tác / làm lại một thao tác chơi (thả thẻ, gợi ý, xem đáp án,
+   bỏ qua, trả lời đúng/sai, bỏ thẻ vào rổ, đóng hồ sơ). Mỗi thao tác chụp lại toàn bộ `run` trước khi đổi; hoàn tác thì lấy lại bản chụp
+   và dựng lại chặng đó. Chỉ nhận đúng tổ hợp Ctrl+Shift (không Alt/Meta). */
+const hist={back:[],fwd:[]};
+function record(){hist.back.push(structuredClone(run));if(hist.back.length>300)hist.back.shift();hist.fwd.length=0;}
+function unrecord(){hist.back.pop();}
+document.addEventListener('keydown',e=>{
+  if((e.key!=='ArrowLeft'&&e.key!=='ArrowRight')||!e.ctrlKey||!e.shiftKey||e.metaKey||e.altKey||e.repeat)return;
+  if(document.querySelector('dialog[open]')||e.target.closest?.('input,textarea,select,[contenteditable="true"]'))return;
+  if(storyEnding.isActive())return;
+  e.preventDefault();e.stopImmediatePropagation();
+  const [from,to]=e.key==='ArrowLeft'?[hist.back,hist.fwd]:[hist.fwd,hist.back];
+  if(!from.length)return;
+  to.push(structuredClone(run));run=from.pop();
+  stopTfTimer();play();
 },true);
 /* Từ landing: tấm ảnh đang bay (index.html bấm nút → sessionStorage 'enter-photo', hanh-trinh.html dựng lại ở đầu <body>) bay nốt vào ô ảnh
    của màn mở chương. FLIP: đo ô ảnh rồi animate transform (dịch + xoay + co/giãn đều) ~0,95s; chữ và đầu trang hiện dần từ giữa chặng bay;
