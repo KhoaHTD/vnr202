@@ -160,7 +160,6 @@ async function targets(){try{return await(await fetch(`http://127.0.0.1:${PORT}/
     if(process.env.DBG)console.log('after',i,await ev("JSON.stringify(GameDebug.state().stages["+i+"])"));
     if(i===0){
       await wait(900);
-      if(!await ev("!!document.querySelector('.spot.is-lit')"))fail('Đúng mà cảnh không đổi (thiếu điểm nóng sáng)');
       await click('#more');if(await ev("document.querySelectorAll('#archive details').length")!==1)fail('Hồ sơ giai đoạn phải chỉ có hồ sơ của chặng hiện tại');
       await ev("document.getElementById('archive').close()");
       if(await ev("document.querySelector('.ab--ok,.ab--weak')===null"))fail('Thẻ đúng chưa vào album');

@@ -234,22 +234,8 @@ function hints(D,run,o={}){
 
 /* Lớp điểm nóng trên ảnh. Chưa khóa: nút A/B (cũng nhận thẻ). Đã khóa: dấu ✓ + hiệu ứng theo slot.fx
    (light = quầng sáng, seal = con dấu năm, route = đường mực nối hai điểm) + chú thích. o.fresh = các ô vừa đúng (chạy hiệu ứng một lần). */
-function spots(D,run,o={}){
-  if(E.kindOf(D.scenes[run.index])!=='match')return '';
-  const s=D.scenes[run.index],st=run.stages[run.index],fresh=o.fresh||[];
-  const [a,b]=s.slots;
-  const lines=s.slots.filter(sl=>st[sl.id].locked&&sl.fx==='route').map(sl=>`<path class="route-draw${fresh.includes(sl.id)?' is-new':''}" d="M${a.x} ${a.y}Q${(a.x+b.x)/2} ${Math.min(a.y,b.y)-14} ${b.x} ${b.y}" pathLength="1"/>`).join('');
-  const svg=lines?`<svg class="scene-route" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${lines}</svg>`:'';
-  const pts=s.slots.map(sl=>{
-    const ss=st[sl.id],pos=`left:${sl.x}%;top:${sl.y}%`;
-    if(ss.locked){
-      const c=s.cards.find(x=>x.id===sl.correct);
-      return `<div class="spot is-lit fx-${sl.fx}${fresh.includes(sl.id)?' is-new':''}" style="${pos}"><span class="fx-glow" aria-hidden="true"></span><span class="spot-pin" aria-hidden="true">${icon('check',16)}</span>${sl.fx==='seal'?`<span class="seal-mark" aria-hidden="true">${yearOf(c)}</span>`:''}<span class="spot-cap">${sl.caption}</span></div>`;
-    }
-    return ''; // chấm chờ thả đã bỏ: thả thẻ vào khung Tình huống bên cạnh ảnh
-  }).join('');
-  return svg+pts;
-}
+// Ảnh chặng ghép giữ sạch: không còn chấm, chú thích hay đường nối đè lên ảnh (đáp án hiện ở khung Tình huống)
+function spots(){return '';}
 
 
 // Hàng ba ngôi sao của một chặng (đặc = đạt). Có chữ cho trình đọc màn hình, không báo bằng màu một mình.
