@@ -1,0 +1,341 @@
+# Giai đoạn 1 · 1930–1935: Phong trào cách mạng 1930–1931 và khôi phục phong trào 1932–1935
+
+## 1. Phong trào cách mạng 1930–1931
+
+### Bối cảnh
+
+Trong thời gian 1929-1933, khi Liên Xô đang đạt được những thành quả quan trọng trong công cuộc xây dựng đất nước, thì ở các nước tư bản chủ nghĩa diễn ra một cuộc khủng hoảng kinh tế trên quy mô lớn với những hậu quả nặng nề. Phong trào cách mạng thế giới dâng cao.
+
+Cuộc khủng hoảng kinh tế 1929-1933 ảnh hưởng lớn đến các nước thuộc địa và phụ thuộc, làm cho mọi hoạt động sản xuất đình đốn. Ở Đông Dương, thực dân Pháp tăng cường bóc lột để bù đắp những hậu quả của cuộc khủng hoảng ở chính quốc, đồng thời tiến hành một chiến dịch khủng bố trắng nhằm đàn áp cuộc khởi nghĩa Yên Bái (2-1930).
+
+⇒ Đảng Cộng sản Việt Nam ra đời với hệ thống tổ chức thống nhất và cương lĩnh chính trị đúng đắn, nắm quyền lãnh đạo duy nhất đối với cách mạng Việt Nam đã “lãnh đạo ngay một cuộc đấu tranh kịch liệt chống thực dân Pháp “
+
+### Diễn biến năm 1930
+
+Từ tháng 1 đến tháng 4-1930, nổ ra một số cuộc đấu tranh của công nhân, nông dân và các tầng lớp lao động khác (tiêu biểu là cuộc bãi công của công nhân đồn điền cao su Phú Riềng, Dầu Tiếng, nhà máy Nam Định, nhà máy Diêm Bến Thủy). Cờ đỏ búa liềm xuất hiện trên các đường phố Hà Nội và nhiều địa phương.
+
+Mục tiêu đấu tranh là đòi cải thiện đời sống. Công nhân đòi tăng lương, giảm giờ làm. Nông dân đòi giảm sưu, giảm thuế. Bên cạnh đó cũng xuất hiện những khẩu hiệu chính trị như "Đả đảo chủ nghĩa đế quốc! Đả đảo phong kiến", "Thả tù chính trị" v.v...
+
+Ngày 1-5-1930, nhân dân Việt Nam kỷ niệm Ngày Quốc tế Lao động với những hình thức đấu tranh phong phú. Trong tháng 5-1930 đã nổ ra 16 cuộc bãi công của công nhân, 34 cuộc biểu tình của nông dân và 4 cuộc đấu tranh của các tầng lớp nhân dân thành thị. Từ tháng 6 đến tháng 8-1930 đã nổ ra 121 cuộc đấu tranh, nổi bật nhất là cuộc tổng bãi công của công nhân khu công nghiệp Bến Thủy-Vinh (8-1930).
+
+Ở vùng nông thôn hai tỉnh Nghệ An và Hà Tĩnh, nổ ra nhiều cuộc biểu tình lớn của nông dân. Tháng 9-1930, phong trào cách mạng phát triển đến đỉnh cao với những hình thức đấu tranh ngày càng quyết liệt, tiêu biểu là cuộc biểu tình của nông dân Hưng Nguyên (12 9-1930)
+
+Hệ thống chính quyền thực dân, phong kiến bị tê liệt, tan rã ở nhiều huyện, xã. Nhiều tên tri huyện, lí trưởng bỏ trốn hoặc đầu hàng.
+
+Trong tình hình đó, nhiều cấp uỷ Đảng ở thôn xã đã lãnh đạo nhân dân đứng ra làm chủ vận mệnh của mình, tự quản lí đời sống chính trị, kinh tế, văn hoá, xã hội ở địa phương, làm chức năng của chính quyền cách mạng theo hình thức Xô viết.
+
+Tháng 9-1930, Ban Thường vụ Trung ương Đảng gửi thông tri cho Xứ ủy Trung Kỳ vạch rõ chủ trương bạo động riêng lẻ trong vài địa phương lúc đó là quá sớm vì chưa đủ điều kiện.
+
+Từ cuối năm 1930, thực dân Pháp tập trung mọi lực lượng đàn áp khốc liệt, kết hợp thủ đoạn bạo lực với những thủ đoạn chính trị như cưỡng bức dân cày ra đầu thú, tổ chức rước cờ vàng, nhận thẻ quy thuận...
+
+Đầu năm 1931, hàng nghìn chiến sĩ cộng sản, hàng vạn người yêu nước bị bắt, bị giết hoặc bị tù đày. Tháng 4-1931, toàn bộ Ban Chấp hành Trung ương Đảng bị bắt, không còn lại một ủy viên nào.
+
+### Ý nghĩa
+
+**Ý nghĩa:** đã “khẳng định trong thực tế quyền lãnh đạo và năng lực lãnh đạo cách mạng của giai cấp vô sản mà đại biểu là Đảng ta; ở chỗ nó đem lại cho nông dân niềm tin vững chắc vào giai cấp vô sản, đồng thời đem lại cho đông đảo quần chúng công nông lòng tự tin ở sức lực cách mạng vĩ đại của mình”
+
+Đặc biệt, “Xô viết Nghệ An bị thất bại, nhưng đã có ảnh hưởng lớn. Tinh thần anh dũng của nó luôn luôn nồng nàn trong tâm hồn quần chúng, và nó đã mở đường cho thắng lợi về sau.
+
+Cao trào cũng để lại cho Đảng những kinh nghiệm quý báu “về kết hợp hai nhiệm vụ chiến lược phản đế và phản phong kiến, kết hợp phong trào đấu tranh của công nhân với phong trào đấu tranh của nông dân, thực hiện liên minh công nông dưới sự lãnh đạo của giai cấp công nhân; kết hợp phong trào cách mạng ở nông thôn với phong trào cách mạng ở thành thị, kết hợp đấu tranh chính trị với đấu tranh vũ trang v.v…
+
+### Xô viết Nghệ – Tĩnh
+
+Tại Nghệ An, Xô viết ra đời từ tháng 9 – 1930 ở các xã thuộc huyện Thanh Chương, Nam Đàn, một phần huyện Anh Sơn, Nghi Lộc, Hưng Nguyên, Diễn Châu. Ở Hà Tĩnh, Xô viết hình thành ở các xã thuộc huyện Can Lộc, Nghi Xuân, Hương Khê vào cuối năm 1930, đầu năm 1931.
+
+Các xô viết thực hiện quyền làm chủ của nhân dân lao động, điều hành mọi mặt đời sống xã hội.
+
+Về chính trị, quần chúng được tự do tham gia hoạt động trong các đoàn thể cách mạng, tự do hội họp. Các đội tự vệ đỏ và Tòa án nhân dân được thành lập.
+
+*Về kinh tế*, thi hành các biện pháp chia ruộng đất công, tiền, lúa công cho dân cày nghèo ; bãi bỏ thuế thân, thuế chợ, thuế đò, thuế muối ; xoá nợ cho người nghèo ; chú trọng đắp đê phòng lụt, tu sửa cầu cống, đường giao thông ; lập các tổ chức để nông dân giúp đỡ nhau trong sản xuất.
+
+*Về văn hoá – xã hội*, chính quyền cách mạng mở lớp dạy chữ Quốc ngữ cho các tầng lớp nhân dân, xoá bỏ các tệ nạn như mê tín, dị đoan, rượu chè, cờ bạc,... Trật tự trị an được giữ vững. Tinh thần đoàn kết, giúp đỡ nhau trong nhân dân được xây dựng.
+
+Xô viết Nghệ – Tĩnh là đỉnh cao của phong trào cách mạng 1930 – 1931. Tuy chỉ tồn tại được 4 – 5 tháng, nhưng nó là nguồn cổ vũ mạnh mẽ quần chúng nhân dân trong cả nước.
+
+Trước tình hình đó, thực dân Pháp tập trung lực lượng đàn áp, khủng bố phong trào. Chúng điều động binh lính đóng nhiều đồn bốt ở hai tỉnh Nghệ An và Hà Tĩnh. Cùng với việc cho lính đi càn quét, bắn giết nhân dân, đốt phá, triệt hạ làng mạc, chúng còn dùng nhiều thủ đoạn chia rẽ, dụ dỗ, mua chuộc. Vì vậy, nhiều cơ quan lãnh đạo của Đảng, cơ sở quần chúng bị phá vỡ ; nhiều cán bộ, đảng viên, quần chúng yêu nước bị bắt bớ, tù đày hoặc bị giết hại.
+
+Từ giữa năm 1931, phong trào cách mạng trong cả nước dần dần lắng xuống.
+## 2. Luận cương chính trị của Đảng Cộng sản Đông Dương (10-1930)
+
+14-31/10/1930, Ban Chấp hành Trung ương họp Hội nghị lần thứ nhất tại Hương Cảng tức Hồng Kông (Trung Quốc), đổi tên Đảng Cộng sản Việt Nam thành Đảng Cộng sản Đông Dương. Đồng chí Trần Phú được bầu làm Tổng Bí thư của Đảng.
+
+### Nội dung chính của Luận cương
+
+**Mâu thuẫn giai cấp:** Giao tranh giữa một bên là thợ thuyền, dân cày, người lao khổ với một bên là địa chủ, phong kiến, tư bản và đế quốc chủ nghĩa tại Việt Nam, Lào và Cao Miên.
+
+**Phương hướng chiến lược:** Là cách mạng tư sản dân quyền (có tính chất thổ địa và phản đế), sau đó bỏ qua thời kỳ tư bản để tiến thẳng lên chủ nghĩa xã hội.
+
+**Nhiệm vụ cốt yếu:** Đánh đổ đế quốc Pháp (giành độc lập hoàn toàn) và xóa bỏ tàn tích phong kiến/bóc lột tiền tư bản (thực hiện triệt để cách mạng thổ địa). Hai nhiệm vụ này có quan hệ mật thiết, khăng khít với nhau, trong đó vấn đề thổ địa là cốt lõi.
+
+**Động lực cách mạng:** Giai cấp vô sản và nông dân (vô sản là động lực chính và mạnh).
+
+**Lãnh đạo cách mạng:** Đảng Cộng sản đóng vai trò điều kiện cốt yếu, có đường lối chính trị đúng đắn, kỷ luật tập trung và gắn bó mật thiết với quần chúng.
+
+**Phương pháp cách mạng:** Chuẩn bị võ trang bạo động; khi có thời cơ, Đảng lãnh đạo quần chúng lật đổ chính quyền địch để giành chính quyền cho công nông theo nghệ thuật quân sự nghiêm ngặt.
+
+Cách mạng Đông Dương là một bộ phận của cách mạng vô sản thế giới, do đó giai cấp vô sản Đông Dương phải đoàn kết với giai cấp vô sản thế giới (đặc biệt là giai cấp vô sản Pháp) và liên hệ chặt chẽ với phong trào cách mạng ở các nước thuộc địa, nửa thuộc địa.
+
+### Đánh giá Luận cương
+
+**Mặt tích cực:** Xác định được nhiều vấn đề cơ bản về chiến lược cách mạng, về cơ bản thống nhất với Cương lĩnh tháng 2-1930.
+
+**Hạn chế:** Chưa nêu rõ mâu thuẫn chủ yếu của xã hội thuộc địa; không nhấn mạnh nhiệm vụ giải phóng dân tộc mà nặng về đấu tranh giai cấp và cách mạng ruộng đất; chưa đề ra được chiến lược liên minh dân tộc và giai cấp rộng rãi.
+
+***Nguyên nhân hạn chế:*** Do chưa nhận thức đầy đủ thực tiễn thuộc địa và chịu ảnh hưởng của tư tưởng "tả khuynh" trong Quốc tế Cộng sản thời bấy giờ.
+
+***Hệ quả:*** Những hạn chế này trong việc giải quyết mối quan hệ giữa giai cấp - dân tộc và tập hợp lực lượng vẫn còn kéo dài trong nhiều năm sau.
+
+Ngày 18-11 1930 Thường vụ Trung ương Đảng ban hành Chỉ thị Về vấn đề thành lập “Hội phản đế Đồng minh”, là tổ chức mặt trận đầu tiên để tập hợp đoàn kết các giai cấp tầng lớp dân dân tộc
+
+## 3. Khôi phục tổ chức và phong trào, Đại hội Đảng lần thứ nhất (3-1935)
+
+Cách mạng Việt Nam bước vào giai đoạn cực kỳ gian khổ do sự khủng bố dã man của thực dân Pháp. Hầu hết các đồng chí trong Trung ương bị bắt, trong đó Tổng Bí thư Trần Phú bị bắt vào ngày 18-4-1931 tại Sài Gòn.
+
+Trước sự hoang mang của một bộ phận quần chúng, Xứ ủy Trung Kỳ mắc sai lầm "tả" khuynh khi đề ra chủ trương “thanh trừ trí, phú, địa, hào, đào tận gốc trốc tận rễ”.
+
+Tháng 5-1931, Thường vụ Trung ương Đảng phê phán gay gắt sai lầm này, đề ra phương hướng "Bôn-sê-vích hóa" Đảng để duy trì cơ sở và phát triển phong trào.
+
+Ngày 11-4-1931, Quốc tế Cộng sản ra Nghị quyết công nhận Đảng Cộng sản Đông Dương là một chi bộ độc lập.
+
+### Đấu tranh kiên cường trong nhà tù đế quốc
+
+- Các chiến sĩ cộng sản giữ vững khí tiết (tiêu biểu như Lời dặn "Hãy giữ vững chí khí chiến đấu!" của Tổng Bí thư Trần Phú trước khi hy sinh, câu nói bất hủ của Lý Tự Trọng, các công trình của Nguyễn Đức Cảnh).
+- Thành lập chi bộ bí mật trong các nhà tù (Hỏa Lò, Khám Lớn, Côn Đảo, Kon Tum...) để lãnh đạo đấu tranh, tuyệt thực chống chế độ hà khắc.
+- Biến nhà tù thành trường học cách mạng: tổ chức học tập lý luận Mác - Lênin, dịch sách báo, xuất bản các tờ báo bí mật (như *Đuốc đưa đường*, *Con đường chính*, *Người tù đỏ*...).
+### Hoạt động của các lãnh tụ và khôi phục phong trào
+
+- Nguyễn Ái Quốc bị bắt tại Hồng Kông (6-6-1931), đến đầu năm 1934 ra tù và trở lại làm việc tại Quốc tế Cộng sản.
+- Đầu năm 1932, đồng chí Lê Hồng Phong cùng các đồng chí khác công bố *Chương trình hành động của Đảng Cộng sản Đông Dương* cùng các tổ chức quần chúng để từng bước khôi phục phong trào cách mạng.
+- **Chương trình hành động của Đảng (15-6-1932):** Vạch ra nhiệm vụ trước mắt nhằm khôi phục tổ chức và phong trào cách mạng, nhấn mạnh việc xây dựng một Đảng Cộng sản bí mật, kỷ luật sắt để lãnh đạo quần chúng đấu tranh.
+- **Tổng kết kinh nghiệm và khẳng định vai trò lãnh đạo:** Tháng 3-1933, đồng chí Hà Huy Tập xuất bản *Sơ thảo lần thứ nhất của Luận cương về vấn đề dân tộc và vấn đề ruộng đất*, bước đầu tổng kết kinh nghiệm lãnh đạo của Đảng và khẳng định công lao của Nguyễn Ái Quốc.
+- **Sự đàn áp của thực dân Pháp:** Từ ngày 2 đến 9-5-1933, Tòa án Đại hình Sài Gòn xử 120 chiến sĩ cộng sản (Ngô Gia Tự, Phạm Hùng, Lê Văn Lương...) và đày ra Côn Đảo.
+- **Tổ chức lãnh đạo tạm thời:** Đầu năm 1934, Ban Chỉ huy ở ngoài của Đảng được thành lập theo chỉ đạo của Quốc tế Cộng sản, đảm nhiệm chức năng như Ban Chấp hành Trung ương để chỉ đạo phong trào trong nước.
+- **Đại hội đại biểu toàn quốc lần thứ nhất của Đảng (3-1935 tại Ma Cao, Trung Quốc):**
+  - **Hệ thống tổ chức:** Đánh dấu sự phục hồi hoàn toàn hệ thống tổ chức của Đảng và phong trào quần chúng sau giai đoạn khủng bố, chuẩn bị cho cao trào mới.
+  - **Nhiệm vụ trước mắt:** (1) Củng cố và phát triển Đảng; (2) Đẩy mạnh tập hợp quần chúng; (3) Tuyên truyền chống đế quốc, chống chiến tranh, ủng hộ Liên Xô và cách mạng Trung Quốc.
+  - **Nhân sự:** Bầu Ban Chấp hành Trung ương mới do Lê Hồng Phong làm Tổng Bí thư; cử Nguyễn Ái Quốc làm đại diện của Đảng tại Quốc tế Cộng sản.
+  - **Hạn chế:** Chưa đề ra chiến lược phù hợp với thực tiễn Việt Nam (chưa đặt nhiệm vụ giải phóng dân tộc lên hàng đầu và chưa tập hợp lực lượng toàn dân); vẫn gắn chặt cách mạng phản đế với cách mạng điền địa, chính sách vạch ra chưa sát với thực tiễn lúc bấy giờ.
+
+# Giai đoạn 2 · 1936–1939: Phong trào đấu tranh dân chủ
+
+## I. Điều kiện lịch sử (Bối cảnh lịch sử)
+
+### 1. Tình hình thế giới
+
+- **Nguy cơ phát xít và chiến tranh thế giới:**
+  - Cuộc khủng hoảng kinh tế 1929–1933 đã thúc đẩy giai cấp tư sản ở một số nước như Đức, Italia, Tây Ban Nha... dùng bạo lực đàn áp phong trào trong nước và chuẩn bị phát động chiến tranh phân chia lại thị trường.
+  - Chủ nghĩa phát xít xuất hiện, tạm thời thắng thế ở một số nơi, đe dọa nghiêm trọng nền hòa bình và an ninh quốc tế.
+- **Chuyển hướng chiến lược của Quốc tế Cộng sản:** Tháng 7/1935, Đại hội lần thứ VII Quốc tế Cộng sản tại Mátxcơva xác định kẻ thù nguy hiểm trước mắt là **chủ nghĩa phát xít**; nhiệm vụ trước mắt là **chống chủ nghĩa phát xít, chống chiến tranh, bảo vệ dân chủ và hòa bình**. Quốc tế Cộng sản chủ trương các đảng cộng sản phải thống nhất hàng ngũ giai cấp công nhân và lập **Mặt trận nhân dân rộng rãi**. Đoàn đại biểu Đảng ta do đồng chí Lê Hồng Phong dẫn đầu, cùng NTMK, Hoàng Văn Nọn tham dự Đại hội, và đồng chí Lê Hồng Phong được bầu làm Ủy viên Ban Chấp hành Quốc tế Cộng sản.
+- **Thắng lợi của Mặt trận Nhân dân Pháp:** Năm 1936, Chính phủ Mặt trận Nhân dân Pháp (do Đảng Cộng sản Pháp làm nòng cốt) lên nắm quyền, ban bố nhiều quyền tự do dân chủ (có quyền áp dụng cho thuộc địa) và trả tự do cho nhiều tù chính trị cộng sản, tạo điều kiện thuận lợi cho phong trào cách mạng thuộc địa phát triển.
+
+### 2. Tình hình trong nước
+
+- **Yêu cầu bức thiết của quần chúng:** Các tầng lớp nhân dân Việt Nam sau khủng hoảng kinh tế và chính sách khủng bố trắng đều khao khát cải cách dân chủ, cải thiện đời sống.
+- **Thực lực của Đảng:** Hệ thống tổ chức của Đảng Cộng sản Đông Dương đã phục hồi sau giai đoạn đấu tranh gian khổ (1932–1935), sẵn sàng tranh thủ cơ hội mới để xây dựng, phát triển lực lượng.
+
+## II. Chủ trương và nhận thức mới của Đảng
+
+### 1. Các Hội nghị Trung ương định ra đường lối mới
+
+- **Hội nghị Ban Chấp hành Trung ương Đảng (26-7-1936) tại Thượng Hải (Trung Quốc):**
+  - Do đồng chí **Lê Hồng Phong** chủ trì (cùng Hà Huy Tập, Phùng Chí Kiên dự) nhằm sửa chữa sai lầm trước đó và định lại chính sách mới theo tinh thần Đại hội VII Quốc tế Cộng sản.
+  - **Nhiệm vụ trước mắt:** Chống phát xít, chống chiến tranh đế quốc, chống phản động thuộc địa và tay sai; đòi **tự do, dân chủ, cơm áo và hòa bình**.
+  - **Tập hợp lực lượng:** Chủ trương lập **Mặt trận nhân dân phản đế rộng rãi** bao gồm các giai cấp, đảng phái, đoàn thể chính trị, tôn giáo và các dân tộc Đông Dương.
+  - **Hình thức tổ chức và đấu tranh:** Chuyển từ tổ chức bí mật, không hợp pháp sang kết hợp các hình thức công khai, nửa công khai, hợp pháp, nửa hợp pháp với bí mật, bất hợp pháp.
+  - Đồng chí **Hà Huy Tập** giữ cương vị Tổng Bí thư từ tháng 8/1936 đến tháng 3/1938.
+- **Các Hội nghị Trung ương tiếp theo:**
+  - **Hội nghị Trung ương 3 (3-1937) và Hội nghị Trung ương 4 (9-1937):** Quyết định chuyển mạnh hơn nữa về phương pháp tổ chức và hoạt động nhằm tập hợp đông đảo quần chúng.
+  - **Hội nghị Trung ương tháng 3-1938:** Nhấn mạnh việc thành lập **Mặt trận Dân chủ thống nhất (Mặt trận Dân chủ Đông Dương)** là nhiệm vụ trung tâm của Đảng; bầu đồng chí **Nguyễn Văn Cừ** làm Tổng Bí thư.
+
+### 2. Bước phát triển mới về nhận thức lý luận
+
+- **Chỉ thị của Ban Trung ương (26-7-1936):** Nêu rõ tại xứ thuộc địa, nếu chỉ quan tâm tới đấu tranh giai cấp sẽ gây trở ngại cho việc mở rộng phong trào dân tộc.
+- **Văn kiện "Chung quanh vấn đề chiến sách mới" (10-1936):**
+  - Khẳng định: Cuộc giải phóng dân tộc không nhất thiết phải kết chặt với cách mạng điền địa.
+  - Nếu cuộc tranh đấu chia đất cản trở tranh đấu phản đế thì phải **chọn địch nhân chính, nguy hiểm nhất** để tập trung lực lượng toàn dân tộc đánh thắng trước.
+  - Đây là bước phát triển lý luận quan trọng, **bước đầu khắc phục hạn chế tả khuynh của Luận cương chính trị tháng 10-1930**, trở lại đúng tinh thần Cương lĩnh chính trị đầu tiên (2-1930) và tư tưởng cứu nước của Nguyễn Ái Quốc.
+
+## III. Các phong trào đấu tranh tiêu biểu (1936–1939)
+
+Cuộc vận động diễn ra trên quy mô rộng lớn với các hình thức đấu tranh phong phú:
+
+- **Phong trào Đông Dương Đại hội (1936):**
+  - Đảng vận động lập *Ủy ban trù bị Đông Dương đại hội* nhằm thu thập “dân nguyện”, tiến tới triệu tập Đại hội đại biểu nhân dân Đông Dương.
+  - Hàng loạt *Ủy ban hành động* được lập ra ở các nhà máy, đồn điền, thôn xóm (riêng Nam Kỳ có 600 ủy ban hành động).
+- **Phong trào đón rước phái viên và Toàn quyền (đầu năm 1937):** Nhân dịp phái viên Gôđa (Godard) và Toàn quyền Brêviê (Brévié) sang Đông Dương, Đảng tổ chức các cuộc mít tinh, biểu tình biểu dương lực lượng và đưa yêu sách dân nguyện.
+- **Đấu tranh trên mặt trận lý luận, báo chí và tư tưởng:**
+  - Xuất bản hàng loạt tờ báo công khai bằng tiếng Việt và tiếng Pháp của Đảng và Mặt trận Dân chủ.
+  - Xuất bản các tác phẩm chính trị: cuốn *Tờrốtxky và phản cách mạng* (5-1937) của Hà Huy Tập (bút danh Thanh Hương) nhằm đấu tranh chống phái Trốtkít; cuốn *Vấn đề dân cày* (1938) của Qua Ninh (Trường Chinh) và Vân Đình (Võ Nguyên Giáp); cuốn *Chủ nghĩa Các Mác* (1938) của Hải Triều; tác phẩm *Tự chỉ trích* (1939) của Tổng Bí thư Nguyễn Văn Cừ nhằm đúc kết bài học xây dựng Đảng.
+- **Đấu tranh văn hóa, giáo dục và nghị trường:**
+  - Thành lập *Hội truyền bá quốc ngữ* (phát triển mạnh từ cuối năm 1937).
+  - Tham gia tranh cử vào Viện Dân biểu Bắc Kỳ, Trung Kỳ, Hội đồng Quản hạt Nam Kỳ nhằm mở rộng tuyên truyền đường lối.
+  - Thành lập các hội ái hữu, hội tương tế và tổ chức các phong trào bãi công lớn (tiêu biểu là bãi công của công nhân vùng than ngày 12-11-1936, kỷ niệm Ngày Quốc tế Lao động 1-5).
+- **Kết thúc phong trào:** Tháng 9/1939, Chiến tranh thế giới thứ hai bùng nổ, thực dân Pháp tăng cường đàn áp, Đảng kịp thời rút vào hoạt động bí mật để chuyển sang thời kỳ cách mạng mới.
+
+## IV. Ý nghĩa lịch sử và bài học kinh nghiệm
+
+### 1. Ý nghĩa lịch sử
+
+- **Rèn luyện lực lượng chính trị hùng hậu:** Tập hợp, giác ngộ hàng triệu quần chúng nhân dân trong một đội quân chính trị rộng lớn.
+- **Củng cố và phát triển tổ chức:** Uy tín của Đảng được nâng cao rõ rệt; đến tháng 4-1938, Đảng có 1.597 đảng viên bí mật, hơn 200 đảng viên công khai và 35.009 hội viên trong các đoàn thể quần chúng.
+- **Chuẩn bị cho Tổng khởi nghĩa:** Mở rộng trận địa cách mạng ở cả nông thôn và thành thị, thực sự là bước chuẩn bị (cuộc tập dượt thứ hai) cho thắng lợi của Cách mạng Tháng Tám năm 1945.
+
+### 2. Bài học kinh nghiệm của Đảng
+
+- **Về chỉ đạo chiến lược:** Giải quyết đúng đắn mối quan hệ giữa mục tiêu chiến lược lâu dài và mục tiêu trước mắt.
+- **Về xây dựng Mặt trận thống nhất:** Tập hợp rộng rãi các lực lượng phù hợp nhiệm vụ chính trị, phân hóa và cô lập triệt để kẻ thù nguy hiểm nhất.
+- **Về phương thức hoạt động:** Kết hợp nhuần nhuyễn giữa tổ chức bí mật và công khai, giữa đấu tranh hợp pháp và bất hợp pháp.
+- **Về công tác vận động quần chúng:** Quán triệt nguyên tắc hành động: *"Việc gì đúng với nguyện vọng nhân dân thì được quần chúng nhân dân ủng hộ và hăng hái đấu tranh, và như vậy mới thật là một phong trào quần chúng"*
+
+# Giai đoạn 3 · 1939–1945: Giải phóng dân tộc dẫn đến thắng lợi của Cách mạng tháng Tám
+
+## 1. Bối cảnh lịch sử và yêu cầu chuyển hướng đấu tranh
+
+Tháng 9/1939, Chiến tranh thế giới thứ hai bùng nổ, làm thay đổi sâu sắc tình hình thế giới và tác động trực tiếp đến cách mạng Việt Nam. Tại Đông Dương, thực dân Pháp tăng cường đàn áp các tổ chức cách mạng, hạn chế các quyền tự do dân chủ và thực hiện chính sách kinh tế thời chiến nhằm huy động sức người, sức của phục vụ chiến tranh. Điều kiện hoạt động công khai, hợp pháp của phong trào dân chủ trước đó không còn phù hợp.
+
+Tháng 9/1940, quân Nhật tiến vào Đông Dương. Thực dân Pháp đầu hàng và câu kết với Nhật để tiếp tục thống trị, bóc lột nhân dân. Nhân dân Việt Nam phải chịu hai tầng áp bức Pháp – Nhật. Chính sách vơ vét lương thực, cưỡng bức nhổ lúa trồng đay và bóc lột phục vụ chiến tranh làm đời sống nhân dân ngày càng khốn khó, góp phần dẫn đến nạn đói cuối năm 1944 – đầu năm 1945.
+
+Trong hoàn cảnh đó, mâu thuẫn giữa toàn thể dân tộc Việt Nam với đế quốc xâm lược và tay sai trở nên gay gắt. **Giải phóng dân tộc trở thành yêu cầu cấp bách nhất**, đòi hỏi Đảng phải điều chỉnh chủ trương và phương pháp đấu tranh, tập trung lực lượng vào mục tiêu giành độc lập.
+
+## 2. Chuyển hướng chỉ đạo chiến lược, đặt nhiệm vụ giải phóng dân tộc lên hàng đầu (1939–1941)
+
+### Hội nghị Trung ương tháng 11/1939: mở đầu sự chuyển hướng
+
+Từ ngày 6 đến ngày 8/11/1939, Hội nghị Ban Chấp hành Trung ương Đảng họp tại Bà Điểm, Hóc Môn, Gia Định, do Tổng Bí thư Nguyễn Văn Cừ chủ trì. Hội nghị xác định nhiệm vụ trước mắt là đánh đổ đế quốc và tay sai, giải phóng các dân tộc Đông Dương, làm cho Đông Dương hoàn toàn độc lập.
+
+Để tập trung lực lượng cho nhiệm vụ đó, Hội nghị chủ trương tạm gác khẩu hiệu cách mạng ruộng đất; thay bằng những yêu cầu như tịch thu ruộng đất của đế quốc và địa chủ phản bội quyền lợi dân tộc, chống tô cao, lãi nặng. Mặt trận Thống nhất dân tộc phản đế Đông Dương được chủ trương thành lập để tập hợp rộng rãi các lực lượng yêu nước.
+
+Về phương pháp đấu tranh, Đảng chuyển từ đấu tranh đòi quyền dân sinh, dân chủ sang trực tiếp đấu tranh đánh đổ chính quyền đế quốc và tay sai; chuyển từ hoạt động hợp pháp, nửa hợp pháp sang hoạt động bí mật, bất hợp pháp.
+
+Hội nghị tháng 11/1939 đánh dấu bước chuyển hướng quan trọng, đưa phong trào cách mạng bước vào thời kỳ trực tiếp vận động giải phóng dân tộc.
+
+### Hội nghị Trung ương tháng 11/1940 và những cuộc đấu tranh mở đầu
+
+Tháng 11/1940, Trung ương Đảng họp tại Đình Bảng, Từ Sơn, Bắc Ninh. Hội nghị quyết định duy trì lực lượng du kích Bắc Sơn, hướng tới xây dựng lực lượng vũ trang và căn cứ du kích; đồng thời chủ trương đình chỉ khởi nghĩa Nam Kỳ vì điều kiện chưa chín muồi.
+
+Trong thời gian này, ba cuộc đấu tranh tiêu biểu diễn ra:
+
+| **Sự kiện**        | **Thời gian** | **Vai trò, ý nghĩa**                                                                                                     |
+| ------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Khởi nghĩa Bắc Sơn | 27/9/1940     | Mở đầu phong trào đấu tranh vũ trang trong thời kỳ mới; hình thành Đội du kích Bắc Sơn.                                  |
+| Khởi nghĩa Nam Kỳ  | 23/11/1940    | Thể hiện tinh thần đấu tranh mạnh mẽ của nhân dân Nam Bộ; để lại kinh nghiệm về chuẩn bị và lựa chọn thời cơ khởi nghĩa. |
+| Binh biến Đô Lương | 13/1/1941     | Thể hiện tinh thần phản kháng của binh lính người Việt trong quân đội Pháp.                                              |
+
+Các cuộc đấu tranh chưa giành được thắng lợi cuối cùng nhưng báo hiệu bước phát triển mới của phong trào giải phóng dân tộc, đồng thời để lại bài học về tổ chức lực lượng, phối hợp hành động và thời cơ khởi nghĩa.
+
+Điểm cần phân biệt là quá trình chuyển hướng không hoàn thành ngay trong một hội nghị. Giáo trình Lịch sử Đảng chỉ rõ Hội nghị tháng 11/1940 vẫn chưa thật sự dứt khoát trong việc đặt nhiệm vụ giải phóng dân tộc lên hàng đầu; chủ trương này được hoàn chỉnh tại Hội nghị Trung ương lần thứ tám tháng 5/1941.
+
+### Hội nghị Trung ương lần thứ tám tháng 5/1941: hoàn chỉnh chủ trương
+
+Ngày 28/1/1941, Nguyễn Ái Quốc về nước, trực tiếp lãnh đạo cách mạng. Từ ngày 10 đến ngày 19/5/1941, Người chủ trì Hội nghị Trung ương lần thứ tám tại Pác Bó, Cao Bằng.
+
+Hội nghị khẳng định nhiệm vụ cấp thiết nhất của cách mạng là giải phóng dân tộc; quyền lợi của từng bộ phận, từng giai cấp phải đặt dưới sự tồn vong của quốc gia, dân tộc. Những nội dung quan trọng gồm:
+
+- Tiếp tục tạm gác khẩu hiệu cách mạng ruộng đất; thực hiện giảm tô, giảm tức, chia lại ruộng công và tịch thu ruộng đất của đế quốc, Việt gian chia cho dân cày nghèo.
+- Giải quyết vấn đề dân tộc trong phạm vi từng nước Việt Nam, Lào và Campuchia, đồng thời đoàn kết ba dân tộc chống kẻ thù chung.
+- Thành lập Mặt trận Việt Nam Độc lập Đồng minh, gọi tắt là Việt Minh, để tập hợp rộng rãi các lực lượng yêu nước.
+- Xác định chuẩn bị khởi nghĩa vũ trang là nhiệm vụ trung tâm; dự kiến tiến từ khởi nghĩa từng phần lên tổng khởi nghĩa.
+- Chủ trương thành lập nước Việt Nam Dân chủ Cộng hòa sau khi giành độc lập.
+
+Ngày 19/5/1941, Mặt trận Việt Minh ra đời. Hội nghị Trung ương lần thứ tám hoàn chỉnh chủ trương đã mở đầu từ tháng 11/1939, tạo cơ sở chính trị cho việc đoàn kết toàn dân và chuẩn bị giành chính quyền.
+
+## 3. Chuẩn bị lực lượng và căn cứ cách mạng (1941–đầu năm 1945)
+
+Sau Hội nghị Trung ương lần thứ tám, công tác chuẩn bị khởi nghĩa được triển khai trên nhiều phương diện, nổi bật là xây dựng lực lượng chính trị, lực lượng vũ trang và căn cứ địa.
+
+**Về lực lượng chính trị**, Đảng đẩy mạnh vận động nhân dân tham gia Việt Minh thông qua các hội cứu quốc. Cao Bằng là địa bàn thí điểm, sau đó phong trào từng bước mở rộng. Công nhân, nông dân, thanh niên, phụ nữ, học sinh, trí thức và những tầng lớp yêu nước khác được tập hợp vào mặt trận cứu nước.
+
+Báo chí cách mạng góp phần tuyên truyền mục tiêu độc lập và vận động quần chúng. Đề cương về văn hóa Việt Nam năm 1943 cùng hoạt động của các tổ chức văn hóa, trí thức yêu nước góp phần mở rộng lực lượng tham gia cách mạng. Lực lượng chính trị quần chúng trở thành nền tảng quan trọng của cuộc tổng khởi nghĩa.
+
+**Về lực lượng vũ trang**, từ lực lượng du kích Bắc Sơn, các đơn vị Cứu quốc quân được hình thành và phát triển. Các đội tự vệ, du kích được tổ chức để bảo vệ cơ sở, hỗ trợ phong trào quần chúng và tiến hành đấu tranh vũ trang khi có điều kiện.
+
+Ngày 22/12/1944, Đội Việt Nam Tuyên truyền Giải phóng quân được thành lập theo chỉ thị của Hồ Chí Minh. Ngay sau khi ra đời, đội giành thắng lợi tại Phai Khắt và Nà Ngần, góp phần củng cố niềm tin và mở rộng ảnh hưởng của cách mạng. Hoạt động quân sự được kết hợp với tuyên truyền, vận động và xây dựng cơ sở chính trị.
+
+**Về căn cứ địa**, Bắc Sơn – Võ Nhai và Cao Bằng trở thành những địa bàn quan trọng để bảo toàn, phát triển lực lượng. Từ các căn cứ ban đầu, cơ sở cách mạng được mở rộng sang những vùng lân cận; các tuyến liên lạc được xây dựng nhằm kết nối lực lượng và phát triển phong trào xuống miền xuôi.
+
+Từ năm 1943, trước những chuyển biến có lợi của chiến tranh thế giới, công tác chuẩn bị khởi nghĩa được đẩy mạnh. Hội nghị Ban Thường vụ Trung ương tại Võng La tháng 2/1943 đề ra các biện pháp phát triển phong trào quần chúng và chuẩn bị khởi nghĩa. Năm 1944, các chỉ thị về sửa soạn khởi nghĩa, chuẩn bị vũ khí tiếp tục thúc đẩy quá trình này.
+
+**Nhờ sự chuẩn bị lâu dài, cách mạng từng bước có tổ chức lãnh đạo, lực lượng quần chúng, lực lượng vũ trang và địa bàn đứng chân để hành động khi thời cơ xuất hiện.**
+
+## 4. Cao trào kháng Nhật cứu nước và khởi nghĩa từng phần (tháng 3–giữa tháng 8/1945)
+
+### Nhật đảo chính Pháp và sự điều chỉnh chủ trương
+
+Đầu năm 1945, phe phát xít đứng trước nguy cơ thất bại. Tại Đông Dương, mâu thuẫn Nhật – Pháp ngày càng gay gắt. Ngày 9/3/1945, Nhật đảo chính Pháp, độc chiếm Đông Dương.
+
+Ngày 12/3/1945, Ban Thường vụ Trung ương Đảng ban hành Chỉ thị *“Nhật – Pháp bắn nhau và hành động của chúng ta”*. Chỉ thị nhận định cuộc đảo chính tạo ra cuộc khủng hoảng chính trị sâu sắc, nhưng điều kiện tổng khởi nghĩa chưa chín muồi.
+
+Đảng xác định phát xít Nhật là kẻ thù cụ thể, trước mắt và duy nhất của nhân dân Đông Dương; thay khẩu hiệu đánh đuổi Nhật – Pháp bằng khẩu hiệu đánh đuổi phát xít Nhật. Nhiệm vụ trước mắt là phát động cao trào kháng Nhật cứu nước mạnh mẽ, làm tiền đề cho tổng khởi nghĩa và sẵn sàng chuyển sang tổng khởi nghĩa khi đủ điều kiện.
+
+Sự điều chỉnh này thể hiện khả năng đánh giá tình hình và lựa chọn bước đi phù hợp: vừa tránh phát động tổng khởi nghĩa quá sớm, vừa chủ động thúc đẩy phong trào để tạo thêm điều kiện giành thắng lợi.
+
+### Khởi nghĩa từng phần và phong trào phá kho thóc
+
+Từ tháng 3/1945, khởi nghĩa từng phần diễn ra ở nhiều địa phương. Tại các vùng căn cứ Việt Bắc, lực lượng vũ trang phối hợp với quần chúng giải phóng nhiều xã, châu, huyện, thành lập chính quyền cách mạng. Ngày 11/3/1945, khởi nghĩa Ba Tơ thắng lợi, dẫn đến sự ra đời của Đội du kích Ba Tơ.
+
+Ở Bắc Bộ và Bắc Trung Bộ, phong trào **phá kho thóc, giải quyết nạn đói** phát triển mạnh. Chủ trương này gắn nhu cầu sống còn của nhân dân với nhiệm vụ chống Nhật, thu hút đông đảo quần chúng tham gia đấu tranh. Qua đó, nhân dân được tổ chức, rèn luyện và từng bước nhận thức rõ sức mạnh của mình.
+
+Trong các đô thị, hoạt động tuyên truyền, đấu tranh chính trị và xây dựng lực lượng tự vệ tiếp tục được đẩy mạnh. Nhiều cán bộ cách mạng thoát khỏi nhà tù trở về hoạt động, bổ sung lực lượng lãnh đạo cho phong trào.
+
+### Hoàn thiện những điều kiện trực tiếp cho tổng khởi nghĩa
+
+Theo sách Lịch sử 12 nâng cao, Hội nghị Quân sự cách mạng Bắc Kỳ diễn ra từ ngày 15 đến ngày 20/4/1945, quyết định thống nhất và phát triển lực lượng vũ trang, xây dựng chiến khu, đào tạo cán bộ quân sự và chính trị.
+
+Ngày 15/5/1945, Cứu quốc quân và Việt Nam Tuyên truyền Giải phóng quân thống nhất thành Việt Nam Giải phóng quân. Ngày 4/6/1945, Khu giải phóng Việt Bắc được thành lập, với Tân Trào là trung tâm. Tại đây, chính quyền cách mạng thực hiện các chính sách của Việt Minh, tạo hình ảnh bước đầu của một nước Việt Nam mới.
+
+Cao trào kháng Nhật cứu nước đã mở rộng vùng giải phóng, phát triển lực lượng, làm suy yếu chính quyền thân Nhật và rèn luyện quần chúng trong thực tiễn. Đây là **bước chuẩn bị trực tiếp**, đưa cách mạng đến trạng thái sẵn sàng tổng khởi nghĩa.
+
+## 5. Chớp thời cơ, tiến hành Tổng khởi nghĩa tháng Tám năm 1945
+
+### Thời cơ cách mạng xuất hiện
+
+Tháng 8/1945, trước những đòn tiến công của Đồng minh, Nhật Bản đi đến đầu hàng. Ngày 15/8/1945, Nhật hoàng tuyên bố đầu hàng Đồng minh không điều kiện. Quân Nhật ở Đông Dương hoang mang; chính quyền thân Nhật lâm vào khủng hoảng.
+
+Trong khi đó, lực lượng cách mạng đã trải qua quá trình chuẩn bị và phát triển mạnh trong cao trào kháng Nhật. Điều kiện khách quan thuận lợi kết hợp với sự sẵn sàng về chủ quan tạo nên thời cơ tổng khởi nghĩa.
+
+Thời cơ này diễn ra trong khoảng thời gian ngắn, trước khi quân Đồng minh vào Đông Dương giải giáp quân Nhật. Vì vậy, yêu cầu đặt ra là phải hành động nhanh chóng, giành chính quyền và xác lập vị thế độc lập của dân tộc.
+
+### Quyết định phát động tổng khởi nghĩa
+
+Ngay ngày 13/8/1945, khi nhận được thông tin Nhật sắp đầu hàng, Trung ương Đảng và Tổng bộ Việt Minh thành lập Ủy ban Khởi nghĩa toàn quốc. Đêm cùng ngày, Ủy ban ban hành Quân lệnh số 1, phát lệnh tổng khởi nghĩa.
+
+Ngày 14–15/8/1945, Hội nghị toàn quốc của Đảng tại Tân Trào quyết định phát động toàn dân giành chính quyền trước khi quân Đồng minh vào Đông Dương. Việc chỉ đạo khởi nghĩa được đặt trên các nguyên tắc tập trung, thống nhất và kịp thời.
+
+Đại hội Quốc dân khai mạc tại Tân Trào ngày 16/8/1945 tán thành chủ trương tổng khởi nghĩa, thông qua các chính sách lớn của Việt Minh và cử Ủy ban Dân tộc giải phóng Việt Nam do Hồ Chí Minh làm Chủ tịch.
+
+### Diễn biến và kết quả
+
+| **Thời gian** | **Diễn biến chính**                                                                                                 |
+| ------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Từ 14/8/1945  | Nhiều địa phương chủ động phát động khởi nghĩa theo tình hình thực tế và chủ trương đã được quán triệt.             |
+| 18/8/1945     | Bắc Giang, Hải Dương, Hà Tĩnh, Quảng Nam giành chính quyền ở tỉnh lỵ.                                               |
+| 19/8/1945     | Khởi nghĩa thắng lợi tại Hà Nội.                                                                                    |
+| 23/8/1945     | Khởi nghĩa thắng lợi tại Huế.                                                                                       |
+| 25/8/1945     | Khởi nghĩa thắng lợi tại Sài Gòn.                                                                                   |
+| 28/8/1945     | Đồng Nai Thượng và Hà Tiên giành chính quyền; tổng khởi nghĩa về cơ bản thắng lợi trên cả nước.                     |
+| 30/8/1945     | Bảo Đại thoái vị, đánh dấu sự chấm dứt chế độ quân chủ.                                                             |
+| 2/9/1945      | Hồ Chí Minh đọc Tuyên ngôn Độc lập tại Quảng trường Ba Đình, tuyên bố sự ra đời của nước Việt Nam Dân chủ Cộng hòa. |
+
+Tổng khởi nghĩa diễn ra bằng sức mạnh của đông đảo quần chúng, kết hợp đấu tranh chính trị với lực lượng vũ trang hỗ trợ. Thắng lợi tại Hà Nội, Huế và Sài Gòn có tác động quyết định, thúc đẩy phong trào giành chính quyền trên phạm vi cả nước.
+
+## 6. Những yếu tố dẫn đến thắng lợi của Cách mạng tháng Tám
+
+**Thứ nhất, đường lối giải phóng dân tộc phù hợp với yêu cầu lịch sử.** Việc đặt nhiệm vụ độc lập dân tộc lên hàng đầu đã xác định đúng mục tiêu cấp bách và tạo điều kiện tập hợp các giai cấp, tầng lớp yêu nước vào một mặt trận chung.
+
+**Thứ hai, sự chuẩn bị chủ động, lâu dài và toàn diện.** Trong giai đoạn 1939–1945, Đảng và Việt Minh từng bước xây dựng tổ chức, đào tạo cán bộ, phát triển lực lượng chính trị, lực lượng vũ trang và căn cứ địa. Đây là nền tảng để biến thời cơ thành thắng lợi thực tế.
+
+**Thứ ba, sức mạnh đoàn kết và sự tham gia của nhân dân.** Truyền thống yêu nước được phát huy thông qua các tổ chức cứu quốc và hoạt động đấu tranh cụ thể. Quần chúng trở thành lực lượng trực tiếp giành chính quyền.
+
+**Thứ tư, sự lãnh đạo linh hoạt và khả năng chớp thời cơ.** Đảng và Hồ Chí Minh điều chỉnh chủ trương theo từng biến chuyển, từ chuyển hướng chiến lược đến khởi nghĩa từng phần và tổng khởi nghĩa. Các tổ chức địa phương cũng chủ động vận dụng chỉ đạo vào hoàn cảnh cụ thể.
+
+**Thứ năm, hoàn cảnh quốc tế thuận lợi.** Thắng lợi của Đồng minh và sự đầu hàng của Nhật làm suy yếu nghiêm trọng bộ máy thống trị ở Đông Dương, tạo cơ hội thuận lợi để nhân dân Việt Nam đứng lên giành chính quyền.
+
+Như vậy, sự đầu hàng của Nhật là điều kiện khách quan quan trọng, còn khả năng tận dụng điều kiện đó bắt nguồn từ quá trình chuẩn bị và tổ chức đấu tranh của cách mạng Việt Nam.
+
+## 7. Ý nghĩa lịch sử và bài học kinh nghiệm
+
+Cách mạng tháng Tám năm 1945 đã lật đổ ách thống trị thực dân, phát xít và chấm dứt chế độ quân chủ, đưa đến sự ra đời của nước Việt Nam Dân chủ Cộng hòa. Nhân dân Việt Nam từ địa vị bị trị trở thành người làm chủ đất nước; dân tộc bước vào kỷ nguyên độc lập, tự do. Thắng lợi này đồng thời cổ vũ phong trào đấu tranh giải phóng dân tộc trên thế giới.
+
+Theo giáo trình Lịch sử Đảng, Cách mạng tháng Tám là cuộc cách mạng giải phóng dân tộc mang tính chất dân chủ mới. Cần phân biệt việc lật đổ chế độ quân chủ với việc giải quyết hoàn toàn vấn đề ruộng đất: cuộc cách mạng chưa xóa bỏ toàn bộ quan hệ chiếm hữu ruộng đất phong kiến.
+
+Quá trình 1939–1945 để lại những bài học quan trọng: xác định đúng nhiệm vụ trọng tâm; xây dựng khối đoàn kết toàn dân; chuẩn bị lực lượng thường xuyên; kết hợp đấu tranh chính trị với đấu tranh vũ trang; tiến từ khởi nghĩa từng phần lên tổng khởi nghĩa; và kết hợp sự chuẩn bị lâu dài với quyết định hành động kịp thời.
