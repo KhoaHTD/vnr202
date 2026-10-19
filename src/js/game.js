@@ -669,8 +669,25 @@ document.addEventListener('keydown',e=>{
    bỏ qua, trả lời đúng/sai, bỏ thẻ vào rổ, đóng hồ sơ). Mỗi thao tác chụp lại toàn bộ `run` trước khi đổi; hoàn tác thì lấy lại bản chụp
    và dựng lại chặng đó. Chỉ nhận đúng tổ hợp Ctrl+Shift (không Alt/Meta). */
 const hist={back:[],fwd:[]};
-function record(){hist.back.push(structuredClone(run));if(hist.back.length>300)hist.back.shift();hist.fwd.length=0;}
+// Bản chụp gồm `run` và phần trạng thái màn hình gắn với thao tác (gợi ý đang hiện, lời giải đang mở, phiếu đúng/sai vừa chấm)
+const snap=()=>structuredClone({run,msg:ui.msg,why:ui.why,last:ui.tf?.last??null,nudge:!!ui.nudge});
+function record(){hist.back.push(snap());if(hist.back.length>300)hist.back.shift();hist.fwd.length=0;}
 function unrecord(){hist.back.pop();}
+// Lấy lại một bản chụp. Cùng chặng: vẽ lại tại chỗ (không dựng lại chặng, không đổi nhạc, phiếu đúng/sai vẫn đang chạy). Khác chặng: mở chặng đó.
+function restore(h){
+  const same=h.run.index===run.index&&!!app.querySelector('.sheet .stage');
+  run=h.run;
+  if(!same){stopTfTimer();play();return;}
+  ui.sel=null;ui.msg=h.msg;ui.why=h.why;ui.nudge=h.nudge;if(ui.tf)ui.tf.last=h.last;
+  const k=kindNow(),done=E.stageDone(run);
+  if(k==='tf'){if(!done&&run.stages[run.index].tf.items)ui.tf.started=true;paintTf();}
+  else if(k==='boss')paintBoss();
+  else paint();
+  renderStrip();
+  const f=$('feedback');
+  if(done){f.innerHTML=UI.stageDone(D,run,{classMode:isClass()});$('more').onclick=()=>openRecords('stage');enhance();}
+  else f.innerHTML='';
+}
 document.addEventListener('keydown',e=>{
   if((e.key!=='ArrowLeft'&&e.key!=='ArrowRight')||!e.ctrlKey||!e.shiftKey||e.metaKey||e.altKey||e.repeat)return;
   if(document.querySelector('dialog[open]')||e.target.closest?.('input,textarea,select,[contenteditable="true"]'))return;
@@ -678,8 +695,7 @@ document.addEventListener('keydown',e=>{
   e.preventDefault();e.stopImmediatePropagation();
   const [from,to]=e.key==='ArrowLeft'?[hist.back,hist.fwd]:[hist.fwd,hist.back];
   if(!from.length)return;
-  to.push(structuredClone(run));run=from.pop();
-  stopTfTimer();play();
+  to.push(snap());restore(from.pop());
 },true);
 /* Từ landing: tấm ảnh đang bay (index.html bấm nút → sessionStorage 'enter-photo', hanh-trinh.html dựng lại ở đầu <body>) bay nốt vào ô ảnh
    của màn mở chương. FLIP: đo ô ảnh rồi animate transform (dịch + xoay + co/giãn đều) ~0,95s; chữ và đầu trang hiện dần từ giữa chặng bay;
