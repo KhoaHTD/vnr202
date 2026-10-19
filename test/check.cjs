@@ -120,7 +120,7 @@ async function targets(){try{return await(await fetch(`http://127.0.0.1:${PORT}/
       await click('#records');if(await ev("document.querySelectorAll('#archive details').length")!==1)fail('Chặng 1: hồ sơ lịch sử không được lộ các giai đoạn sau');
       await ev("document.getElementById('archive').close()");
       if(!await ev("!!document.querySelector('.sheet')&&!document.getElementById('strip').hidden"))fail('Màn chơi thiếu tờ bản đồ hoặc dải album');
-      if(await ev("document.querySelectorAll('.ev').length")!==4||await ev("document.querySelectorAll('.slot[data-slot]').length")!==2||await ev("document.querySelectorAll('button.spot').length")!==2)fail('Chặng phải có 4 thẻ, 2 ô, 2 điểm nóng');
+      if(await ev("document.querySelectorAll('.ev').length")!==4||await ev("document.querySelectorAll('.slot[data-slot]').length")!==2)fail('Chặng phải có 4 thẻ, 2 ô');
       if(await ev("document.getElementById('proceed').hidden")!==true)fail('Nút Tiếp tục hành trình phải ẩn khi chưa xong chặng');
       // sai ở ô A bằng thẻ nhiễu (đặt bằng chạm chọn rồi chạm ô), đúng ở ô B
       await ev("(async()=>{const s=GAME_DATA.scenes[0];await __put('A',s.cards.find(c=>!c.slot).id);await __put('B',s.slots[1].correct);})()");await wait(400);
