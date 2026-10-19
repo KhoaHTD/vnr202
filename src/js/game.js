@@ -620,8 +620,16 @@ function startBonus(){
 function openScoresheet(){
   const dlg=$('scoresheet');dlg.innerHTML=UI.scoresheet(D);
   const sums=()=>dlg.querySelectorAll('[data-sum]').forEach(c=>{const t=c.dataset.sum;c.textContent=[...dlg.querySelectorAll(`input[data-team="${t}"]`)].reduce((a,i)=>a+(parseInt(i.value,10)||0),0);});
-  dlg.oninput=sums;
-  $('sheet-close').onclick=()=>dlg.close();$('sheet-print').onclick=()=>window.print();
+  // Lưu điểm vào localStorage: tự lưu mỗi lần nhập, nút "Lưu phiếu" lưu và báo đã lưu
+  const KEY='vnr202-scoresheet',inputs=[...dlg.querySelectorAll('input[data-team]')],cell=i=>i.dataset.row+':'+i.dataset.team;
+  let saved={};try{saved=JSON.parse(localStorage.getItem(KEY))||{};}catch{}
+  inputs.forEach(i=>{i.value=saved[cell(i)]||'';});
+  const save=()=>{const m={};inputs.forEach(i=>{if(i.value.trim())m[cell(i)]=i.value.trim();});try{localStorage.setItem(KEY,JSON.stringify(m));return true;}catch{return false;}};
+  const saveBtn=$('sheet-save');let tm;
+  dlg.oninput=()=>{sums();save();};
+  saveBtn.onclick=()=>{const ok=save();saveBtn.textContent=ok?'Đã lưu ✓':'Không lưu được';clearTimeout(tm);tm=setTimeout(()=>{saveBtn.textContent='Lưu phiếu';},1800);};
+  sums();
+  $('sheet-close').onclick=()=>{save();dlg.close();};$('sheet-print').onclick=()=>window.print();
   dlg.showModal();paperSound();
 }
 
