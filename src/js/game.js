@@ -432,21 +432,20 @@ function answerTf(ans){
   sfx(res.ok?'ok':'bad');
   ui.tf.last=res;
   if(res.done){stopTfTimer();finishTf();}else{paintTf();renderStrip();}
-  flyTf(top,box,idx,res.ok);
+  flyTf(top,box,idx,res.ok,ans);
 }
-/* Phiếu vừa chấm đóng dấu rồi bay xuống khay "đã thẩm định" (bản sao bay, phiếu thật đã là phiếu kế tiếp) */
-function flyTf(top,box,idx,ok){
+/* Phiếu vừa chấm đóng dấu rồi bay ra theo hướng đã chọn: SAI sang trái, ĐÚNG sang phải (bản sao bay, phiếu thật đã là phiếu kế tiếp) */
+function flyTf(top,box,idx,ok,ans){
   if(!top||!box||reducedMotion()||!top.animate)return;
-  const slot=app.querySelector(`.tf-slip[data-slip="${idx}"]`);if(!slot)return;
-  const to=slot.getBoundingClientRect(),g=top.cloneNode(true);
+  const g=top.cloneNode(true);
   g.removeAttribute('id');g.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));
   g.classList.remove('is-drag');g.classList.add('tf-fly',ok?'is-ok':'is-bad');g.removeAttribute('data-top');g.setAttribute('aria-hidden','true');
   g.style.cssText=`left:${box.left}px;top:${box.top}px;width:${box.width}px;height:${box.height}px;transform:${top.style.transform||'none'}`;
   g.insertAdjacentHTML('beforeend',`<span class="tf-ink">${ok?'CHÍNH XÁC':'CHƯA ĐÚNG'}</span>`);
-  document.body.appendChild(g);slot.style.visibility='hidden';
-  const dx=to.left+to.width/2-(box.left+box.width/2),dy=to.top+to.height/2-(box.top+box.height/2),sc=Math.max(.08,to.width/box.width);
-  const a=g.animate([{transform:g.style.transform,offset:0},{transform:'none',offset:.001},{transform:'none',offset:.42},{transform:`translate(${dx}px,${dy}px) scale(${sc}) rotate(-6deg)`,opacity:.9,offset:1}],{duration:900,easing:'cubic-bezier(.5,0,.3,1)',fill:'forwards'});
-  const fin=()=>{g.remove();slot.style.visibility='';};a.finished.then(fin,fin);setTimeout(fin,1400);
+  document.body.appendChild(g);
+  const dir=ans?1:-1,dx=dir*(box.width*.9+120);
+  const a=g.animate([{transform:g.style.transform,offset:0},{transform:'none',offset:.001},{transform:'none',offset:.42},{transform:`translate(${dx}px,40px) rotate(${dir*14}deg)`,opacity:0,offset:1}],{duration:900,easing:'cubic-bezier(.5,0,.3,1)',fill:'forwards'});
+  const fin=()=>g.remove();a.finished.then(fin,fin);setTimeout(fin,1400);
 }
 function finishTf(){
   stopTfTimer();paintTf();renderStrip();
