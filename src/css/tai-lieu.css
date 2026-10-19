@@ -1,0 +1,67 @@
+/* ============================================================
+   TÀI LIỆU THAM KHẢO (tai-lieu.html): tờ giấy cũ trên nền phòng tối, mục lục bên trái.
+   Chỉ dùng biến ở tokens.css. Đỏ son (--accent) chỉ trên giấy.
+   ============================================================ */
+.doc-page { --focus: var(--lamp); }
+.doc-page .top { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); padding: 14px 20px; }
+.doc-page .top nav { display: flex; }
+.dl { color: var(--parchment); font: 600 14px/1 var(--font-ui); text-decoration: none; border: 1px solid var(--lamp); padding: 10px 14px; border-radius: var(--radius); white-space: nowrap; }
+.dl:hover, .dl:focus-visible { background: var(--lamp); color: var(--room); outline: none; }
+
+.doc-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 28px; max-width: 1180px; margin: 0 auto; padding: 8px 20px 64px; align-items: start; }
+
+/* --- Mục lục --- */
+.toc { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow: auto; color: var(--parchment); font: 400 14px/1.45 var(--font-ui); }
+.toc summary { cursor: pointer; font: 600 11px/1 var(--font-doc); letter-spacing: .2em; text-transform: uppercase; color: var(--lamp); padding: 6px 0 12px; list-style: none; }
+.toc summary::-webkit-details-marker { display: none; }
+.toc ol { margin: 0; padding: 0; list-style: none; }
+.toc ol ol { padding-left: 12px; border-left: 1px solid color-mix(in srgb, var(--lamp) 35%, transparent); margin: 4px 0 12px; }
+.toc a { display: block; padding: 5px 0; color: var(--parchment-soft); text-decoration: none; }
+.toc a:hover, .toc a:focus-visible { color: var(--parchment); text-decoration: underline; outline: none; }
+.toc .toc-phase > a { color: var(--parchment); font-weight: 600; }
+
+/* --- Tờ giấy --- */
+.paper { position: relative; background: var(--parchment); background-image: var(--rose), var(--grain); color: var(--ink); padding: 34px clamp(18px, 5vw, 56px) 40px; border-radius: var(--radius); box-shadow: var(--shadow); font: 400 17px/1.75 var(--font-ui); --focus: var(--ink); }
+.paper-topline { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font: 600 11px/1.4 var(--font-doc); letter-spacing: .16em; color: var(--ink-soft); border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 28px; }
+.doc-title { font: 700 clamp(30px, 5vw, 44px)/1.15 var(--font-display); margin: 0 0 8px; color: var(--ink); }
+.doc-sub { margin: 0 0 8px; color: var(--ink-soft); font-style: italic; }
+
+.phase { margin-top: 48px; scroll-margin-top: 16px; }
+.phase-head { border-top: 3px double var(--stain); padding-top: 20px; margin-bottom: 8px; }
+.kicker { margin: 0 0 6px; font: 600 12px/1 var(--font-doc); letter-spacing: .22em; color: var(--accent); }
+.phase h2 { font: 700 clamp(24px, 3.4vw, 32px)/1.25 var(--font-display); margin: 0; color: var(--ink); }
+.paper h3 { font: 700 clamp(20px, 2.6vw, 24px)/1.3 var(--font-display); color: var(--accent); margin: 40px 0 8px; padding-bottom: 6px; border-bottom: 1px solid var(--line); scroll-margin-top: 16px; }
+.paper h4 { font: 700 18px/1.4 var(--font-display); color: var(--ink); margin: 28px 0 4px; scroll-margin-top: 16px; }
+.paper p { margin: 0 0 14px; }
+.paper strong { color: var(--ink); font-weight: 600; }
+.paper ul, .paper ol { margin: 0 0 16px; padding-left: 1.3em; }
+.paper li { margin: 6px 0; padding-left: 4px; }
+.paper li::marker { color: var(--accent); }
+.paper li > ul { margin: 6px 0 4px; }
+
+.table-wrap { overflow-x: auto; margin: 18px 0 22px; border: 1px solid var(--line); border-radius: var(--radius); }
+.paper table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.55; min-width: 520px; }
+.paper th { background: var(--parchment-shade); text-align: left; font: 700 13px/1.4 var(--font-doc); letter-spacing: .06em; color: var(--ink); }
+.paper th, .paper td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.paper tr:last-child td { border-bottom: 0; }
+.paper td:first-child { white-space: nowrap; font-weight: 600; }
+
+.back { margin: 48px 0 0 !important; padding-top: 16px; border-top: 1px solid var(--line); font-size: 15px; }
+.back a { color: var(--accent); }
+.paper a { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .doc-layout { grid-template-columns: 1fr; gap: 12px; padding: 4px 12px 40px; }
+  .toc { position: static; max-height: none; background: color-mix(in srgb, var(--parchment) 8%, transparent); padding: 8px 14px; border-radius: var(--radius); }
+  .toc details[open] summary { padding-bottom: 8px; }
+  .paper { font-size: 16px; line-height: 1.7; padding: 22px 16px 28px; }
+  .paper td:first-child { white-space: normal; }
+}
+@media print {
+  body.doc-page { background: #fff; }
+  .doc-page .top, .toc, .back, #lamp-wrap { display: none; }
+  .doc-layout { display: block; padding: 0; max-width: none; }
+  .paper { background: none; box-shadow: none; padding: 0; color: #000; }
+  .paper h3 { color: #000; }
+  .phase { break-before: page; }
+}
