@@ -246,7 +246,7 @@ function spots(D,run,o={}){
       const c=s.cards.find(x=>x.id===sl.correct);
       return `<div class="spot is-lit fx-${sl.fx}${fresh.includes(sl.id)?' is-new':''}" style="${pos}"><span class="fx-glow" aria-hidden="true"></span><span class="spot-pin" aria-hidden="true">${icon('check',16)}</span>${sl.fx==='seal'?`<span class="seal-mark" aria-hidden="true">${yearOf(c)}</span>`:''}<span class="spot-cap">${sl.caption}</span></div>`;
     }
-    return `<button class="spot${ss.cardId?' has-card':''}${o.sel?' is-target':''}" style="${pos}" data-drop="${sl.id}" data-place="${sl.id}" aria-label="Điểm nóng ${sl.id}: ${esc(sl.situation)}"><span class="spot-pin" aria-hidden="true"></span></button>`;
+    return ''; // chấm chờ thả đã bỏ: thả thẻ vào khung Tình huống bên cạnh ảnh
   }).join('');
   return svg+pts;
 }
