@@ -624,7 +624,10 @@ function openScoresheet(){
   const KEY='vnr202-scoresheet',inputs=[...dlg.querySelectorAll('input[data-team]')],cell=i=>i.dataset.row+':'+i.dataset.team;
   let saved={};try{saved=JSON.parse(localStorage.getItem(KEY))||{};}catch{}
   inputs.forEach(i=>{i.value=saved[cell(i)]||'';});
-  const save=()=>{const m={};inputs.forEach(i=>{if(i.value.trim())m[cell(i)]=i.value.trim();});try{localStorage.setItem(KEY,JSON.stringify(m));return true;}catch{return false;}};
+  const ticks=[...dlg.querySelectorAll('input[data-tick]')],TKEY=KEY+'-tick';
+  let tsaved={};try{tsaved=JSON.parse(localStorage.getItem(TKEY))||{};}catch{}
+  ticks.forEach(c=>{c.checked=!!tsaved[c.dataset.tick];});
+  const save=()=>{const m={},tk={};inputs.forEach(i=>{if(i.value.trim())m[cell(i)]=i.value.trim();});ticks.forEach(c=>{if(c.checked)tk[c.dataset.tick]=1;});try{localStorage.setItem(KEY,JSON.stringify(m));localStorage.setItem(TKEY,JSON.stringify(tk));return true;}catch{return false;}};
   const saveBtn=$('sheet-save');let tm;
   dlg.oninput=()=>{sums();save();};
   saveBtn.onclick=()=>{const ok=save();saveBtn.textContent=ok?'Đã lưu ✓':'Không lưu được';clearTimeout(tm);tm=setTimeout(()=>{saveBtn.textContent='Lưu phiếu';},1800);};

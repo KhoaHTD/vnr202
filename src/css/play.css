@@ -223,7 +223,9 @@ body[data-mode=class] .why { font-size: 17px; }
 .scoretable th, .scoretable td { padding: 6px 8px; border: 1px solid var(--line); text-align: center; }
 .scoretable th[scope=row] { text-align: left; font-weight: 600; white-space: nowrap; }
 .scoretable th small { margin-left: 8px; font: 400 11px var(--font-mono); color: var(--ink-soft); }
-.scoretable input { width: 4ch; min-height: 32px; padding: 0 4px; text-align: center; font: 600 16px var(--font-mono); color: var(--ink); background: transparent; border: 0; border-bottom: 1px dashed var(--ink-soft); }
+.scoretable input:not(.tick) { width: 4ch; min-height: 32px; padding: 0 4px; text-align: center; font: 600 16px var(--font-mono); color: var(--ink); background: transparent; border: 0; border-bottom: 1px dashed var(--ink-soft); }
+.scoretable td { white-space: nowrap; }
+.scoretable .tick { width: 20px; height: 20px; margin: 0 0 0 8px; vertical-align: middle; accent-color: var(--accent); cursor: pointer; }
 .scoretable tfoot th, .scoretable tfoot td { font: 700 18px var(--font-head); background: var(--parchment-shade); }
 .rules { margin: var(--s3) 0 0; padding-left: 1.2em; font-size: 14px; color: var(--ink-soft); }
 @media print {
