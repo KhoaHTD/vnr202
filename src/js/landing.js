@@ -4,7 +4,7 @@
      từ dải mỏng, hai dòng chữ trồi từ đáy màn hình lên giữa màn hình.
    - Mọi thành phần đã đứng ở vị trí cuối trong HTML/CSS; timeline chỉ animate từ ngoài vào (from/fromTo), nên JS lỗi thì trang
      vẫn ở trạng thái cuối và nút vẫn là liên kết thường.
-   - Một master timeline, 5 nhãn: room → star → flags → title → cta (≈ 2,7 giây). Lần sau trong cùng phiên rút còn ≈ 1 giây.
+   - Một master timeline, 5 nhãn: room → star → title → cta (≈ 2,7 giây). Lần sau trong cùng phiên rút còn ≈ 1 giây.
    - Bấm nút: một tấm ảnh in xoay và bay vào giữa màn hình rồi nối tiếp bay vào ô ảnh của hanh-trinh.html (match move).
    - Chỉ animate transform, opacity, clip-path.
    ============================================================ */
@@ -13,8 +13,7 @@ import { gsap } from 'gsap';
 const $ = s => document.querySelector(s);
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const el = {
-  stage: $('.stage'), bg: $('.backdrop img'), star: $('.star'), flagRed: $('.flag--red'), flagBlack: $('.flag--black'),
-  shard1: $('.shard--1'), shard2: $('.shard--2'),
+  stage: $('.stage'), bg: $('.backdrop img'), star: $('.star'),
   lead: $('.t-lead > span'), main: $('.t-main > span'),
   hero: $('.hero'), cta: $('.cta'), controls: $('.controls'), motion: $('#motion'), sound: $('#sound'),
 };
@@ -73,8 +72,7 @@ el.cta.addEventListener('pointerenter', prefetch);
 el.cta.addEventListener('focus', prefetch);
 
 /* ---------- Intro ---------- */
-const animated = [el.stage, el.bg, el.star, el.flagRed, el.flagBlack, el.shard1, el.shard2, el.lead, el.main, el.cta, el.controls];
-const BLACK_FULL = 'inset(0% 0 0 0)'; // cờ đen đủ 588px; trạng thái cuối trong CSS chỉ còn dải rách ở đáy
+const animated = [el.stage, el.bg, el.star, el.lead, el.main, el.cta, el.controls];
 
 // Kết thúc intro (chạy hết hoặc bị bỏ qua): trả mọi thứ về CSS cuối, gỡ will-change, tải trước trang sau
 function finish() {
@@ -106,10 +104,6 @@ function buildIntro() {
     .from(el.bg, { scale: 1.1, duration: 2.4, ease: 'power2.out' }, 0)                                   // ảnh mít tinh lùi dần ra
     .fromTo(el.star, { scale: .02, rotation: 180 }, { scale: 1, rotation: 32, duration: 2, ease: MORPH }, .15) // star: 87px → phủ kín, xoay 180° → 32°
     .call(thud, null, 1.0)
-    .fromTo(el.flagBlack, { clipPath: BLACK_FULL, opacity: 0 }, { clipPath: 'inset(84.9% 0 0 0)', opacity: 1, duration: 1.5, ease: MORPH }, .3)
-    .from(el.flagRed, { clipPath: 'inset(0 0 94% 0)', duration: 1.4, ease: MORPH }, .5)                   // flags: cờ đỏ mở từ dải 25px xuống đủ 408px
-    .from(el.shard1, { clipPath: 'inset(93% 0 0 0)', duration: 1.3, ease: MORPH }, .6)
-    .from(el.shard2, { clipPath: 'inset(0 88% 0 0)', duration: 1.3, ease: MORPH }, .7)
     .from(el.lead, { y: '70vh', opacity: 0, duration: 1.1, ease: 'expo.out' }, .9)                        // title: hai dòng trồi từ đáy màn hình
     .from(el.main, { y: '90vh', opacity: 0, duration: 1.2, ease: 'expo.out' }, 1.05)
     .call(paper, null, 1.05)

@@ -24,17 +24,6 @@ body { font: 400 16px/1.5 var(--font-ui); overflow-x: hidden; }
 .star { position: absolute; z-index: 1; left: 58%; top: 42%; width: 226vmax; height: 226vmax; margin: -113vmax 0 0 -113vmax; transform: rotate(32deg); pointer-events: none; }
 .star polygon { fill: #000; fill-opacity: .7; }
 
-/* --- Cờ: khung 900×530 lấy từ toạ độ slide 2, mọi phần tử đặt theo % --- */
-.flags { position: absolute; z-index: 2; left: 55.6%; top: 40.5%; width: min(88vw, 900px, 150vh); aspect-ratio: 900 / 530; transform: translate(-50%, -50%); pointer-events: none; }
-.flags img { display: block; }
-.flag, .shard { position: absolute; }
-.flag--red { left: 26.3%; top: 0; width: 28.9%; height: 77%; }
-.shard--1 { left: 0; top: 44.9%; width: 23.1%; height: 46.4%; }
-.shard--2 { left: 79.9%; top: 33%; width: 20%; height: 41.9%; }
-/* Cờ đen: ban đầu cao đủ 588px (có sao trắng); cuối chỉ còn dải rách ở đáy (clip-path), khớp slide 2 */
-.flag--black { left: 18.3%; top: -11.1%; width: 45.6%; height: 110.9%; overflow: hidden; clip-path: inset(84.9% 0 0 0); }
-.flag--black img { position: absolute; width: 482.6%; height: 221.5%; left: -198%; top: -21.2%; max-width: none; }
-
 /* --- Chữ: THÁNG TÁM lớn, dòng nhỏ giãn chữ ở trên --- */
 .hero { position: absolute; z-index: 3; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s4); padding: 22vh var(--s3) 6vh; text-align: center; pointer-events: none; }
 .hero > * { pointer-events: auto; }
@@ -70,7 +59,6 @@ body { font: 400 16px/1.5 var(--font-ui); overflow-x: hidden; }
 @media (max-width: 720px) {
   :root { --title: min(14.5vw, 22vh); }
   .hero { gap: var(--s3); padding-top: 26vh; }
-  .flags { left: 50%; top: 36%; width: min(120vw, 150vh); }
 }
 
 @media (prefers-reduced-motion: reduce) { .cta, .controls button { transition: none; } }
